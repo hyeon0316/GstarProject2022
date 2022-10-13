@@ -13,9 +13,18 @@ public class SelectCharacter : MonoBehaviour, IPointerDownHandler
 
     public SelectCamera SelectCamera;
 
+    public Animator Animator;
+    
+    public bool IsClick { get; set; }
+
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        SelectCamera.LookCharacter(this);
+        if (!IsClick)
+        {
+            SelectCamera.LookCharacter(this);
+            Animator.SetTrigger(Global.SelectTrigger);
+            IsClick = true;
+        }
     }
 }

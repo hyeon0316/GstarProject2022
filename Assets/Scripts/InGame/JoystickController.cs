@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO.Pipes;
@@ -15,12 +16,15 @@ public class JoystickController : MonoBehaviour, IDragHandler, IPointerDownHandl
     [SerializeField] private RectTransform _joystick;
 
     [SerializeField] private Transform _cameraArm;
-    
+
+    [SerializeField] private Player _player;
     
     private float _radius;
     private Vector3 _playerMoveAngle;
     private bool _isTouch;
     private float _moveDistance;//조이스틱 이동거리
+    
+    
     
     private void Start()
     {
@@ -29,9 +33,9 @@ public class JoystickController : MonoBehaviour, IDragHandler, IPointerDownHandl
 
     private void FixedUpdate()
     {
-        if (_isTouch)
+        if (_isTouch && !_player.IsNomalAttack)
         {
-            DataManager.Instance.CurPlayer.Move(_playerMoveAngle, _moveDistance);
+            _player.Move(_playerMoveAngle, _moveDistance);
         }
     }
 
@@ -49,20 +53,25 @@ public class JoystickController : MonoBehaviour, IDragHandler, IPointerDownHandl
     public void OnPointerUp(PointerEventData eventData)
     {
         _joystick.localPosition = Vector3.zero;
+        _player.Move(_playerMoveAngle, 0); //애니메이션 상태를 Idle로 설정
         _isTouch = false;
+        //todo: 나중에 가능하면 멈췄을때도 부드럽게 전환
     }
+
+
+   
+    
 
     /// <summary>
     /// 조이스틱 이동에 따른 실제 플레이어 이동 처리
     /// </summary>
     private void ControlJoystcik(PointerEventData eventData)
     {
-        
         Vector2 pos = eventData.position - (Vector2)_background.position;
         pos = Vector2.ClampMagnitude(pos, _radius);
         _joystick.localPosition = pos;
         
-        _moveDistance = Vector2.Distance(_background.position, _joystick.position) / _radius;//조이스틱 기존위치에서 멀어진 거리
+        _moveDistance = Vector2.Distance(_background.position, _joystick.position) / _radius;
         
         pos = pos.normalized;
         Vector3 movePos = new Vector3(pos.x  , 0, pos.y);

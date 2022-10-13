@@ -23,6 +23,8 @@ public class SelectCamera : MonoBehaviour
    
    [SerializeField] private GameObject _selectUI;
 
+   private SelectCharacter _selectCharacter;
+   
    private void Awake()
    {
       _camera = GetComponent<Camera>();
@@ -41,6 +43,8 @@ public class SelectCamera : MonoBehaviour
       
       _selectRoom.SetCharacterInfo(selectCharacter);
       _selectUI.SetActive(true);
+
+      _selectCharacter = selectCharacter; //선택했던 캐릭터의 애니메이션을 관리하기 위해 지정
    }
    
 
@@ -53,6 +57,9 @@ public class SelectCamera : MonoBehaviour
       _camera.DOFieldOfView(_originView, _lookSpeed);
       
       _selectUI.SetActive(false);
+      
+      _selectCharacter.Animator.SetTrigger(Global.BackTrigger);
+      _selectCharacter.IsClick = false; //다시 선택 가능한 상태로 변경
    }
 
   

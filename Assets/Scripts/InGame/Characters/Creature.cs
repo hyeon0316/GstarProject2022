@@ -8,6 +8,19 @@ public abstract class Creature : MonoBehaviour
   //todo: 체력 갱신, 공격, 사망 등 기본적인 생명체에 대한 추상 함수 선언 
   public Stat Stat;
 
+  protected Animator _animator;
+
+  [Header("기본공격 범위")]
+  [SerializeField] protected float _attackRadius;
+
+  protected Transform _targets; //탐색된 적의 정보
+
+  
+  public virtual void Awake()
+  {
+      _animator = GetComponent<Animator>();
+  }
+
 
   /// <summary>
   /// 플레이어가 죽었을때 등 초기화 해야할 상황이 생길 때 사용
@@ -18,15 +31,28 @@ public abstract class Creature : MonoBehaviour
       //todo: 그외 초기 설정값 적용
   }
 
-  public void UpdateHp(int amount)
+  public void Heal(int amount)
   {
       Stat.Hp += amount;
 
-      if (Stat.Hp > Stat.MaxHp)
+      if (Stat.MaxHp > Stat.Hp)
           Stat.Hp = Stat.MaxHp;
-      else if (Stat.Hp < 0)
+  }
+  public void TakeDamage(int amount)
+  {
+      Stat.Hp -= amount;
+
+      if (Stat.Hp < 0)
+      {
           Stat.Hp = 0;
+          Die();
+      }
+  }
+  
+  
+
+  public virtual void Die()
+  {
       
-      //todo: 나중에는 회복과 데미지를 따로 나누는게 좋을 듯(TakeDamage, Heal)
   }
 }

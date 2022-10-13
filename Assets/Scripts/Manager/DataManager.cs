@@ -7,7 +7,6 @@ using UnityEngine;
 /// </summary>
 public class DataManager : Singleton<DataManager>
 {
-    public JobType SelectJobType { get; set; }
-    public Player CurPlayer { get; set; }
-    
+    public JobType SelectJobType { get; set; } = JobType.Mage;
+
 }

@@ -12,8 +12,9 @@ public class CameraMove : MonoBehaviour
 {
     [Range(0.1f,1)]
     [SerializeField] private float _lerpSpeed;
+
+    [SerializeField] private GameObject _target;
     
-    private GameObject _target;
     private Vector3 _offset;
 
     private void Awake()
@@ -21,10 +22,6 @@ public class CameraMove : MonoBehaviour
         _offset = transform.position + Vector3.down;
     }
 
-    private void Start()
-    {
-        _target = DataManager.Instance.CurPlayer.gameObject;
-    }
 
     private void FixedUpdate()
     {
