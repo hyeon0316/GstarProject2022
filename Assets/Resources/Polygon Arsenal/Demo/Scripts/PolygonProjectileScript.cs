@@ -5,7 +5,6 @@ namespace PolygonArsenal
 {
     public class PolygonProjectileScript : MonoBehaviour
     {
-       
         public GameObject impactParticle;
         public GameObject projectileParticle;
         public GameObject muzzleParticle;
@@ -15,7 +14,6 @@ namespace PolygonArsenal
         [Range(0f, 1f)]
         public float collideOffset = 0.15f;
 
-      
         void Start()
         {
             projectileParticle = Instantiate(projectileParticle, transform.position, transform.rotation) as GameObject;
@@ -26,7 +24,7 @@ namespace PolygonArsenal
                 Destroy(muzzleParticle, 1.5f); // Lifetime of muzzle effect.
             }
         }
-      
+
         void FixedUpdate()
         {
             RaycastHit hit;
@@ -50,7 +48,7 @@ namespace PolygonArsenal
 
                 GameObject impactP = Instantiate(impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, hit.normal)) as GameObject;
 
-                if (hit.transform.tag == "Player") // Projectile will destroy objects tagged as Destructible
+                if (hit.transform.tag == "Destructible") // Projectile will destroy objects tagged as Destructible
                 {
                     Destroy(hit.transform.gameObject);
                 }
@@ -79,7 +77,7 @@ namespace PolygonArsenal
                     }
                 }
             }
-        }      
+        }
 
         //private bool hasCollided = false;
 
