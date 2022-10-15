@@ -5,8 +5,8 @@ using UnityEngine;
 
 public enum PoolType
 {
-    Bullet
-    //todo: 다른 오브젝트도 풀링할때마다 여기에 추가
+    NomalAttackMissile,
+    NomalAttackEffect
 }
 public class ObjectPoolManager : Singleton<ObjectPoolManager>
 {
@@ -16,7 +16,8 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
 
     private void Awake()
     {
-        Init(PoolType.Bullet, 5);
+        Init(PoolType.NomalAttackMissile, 3);
+        Init(PoolType.NomalAttackEffect, 3);
     }
 
     /// <summary>

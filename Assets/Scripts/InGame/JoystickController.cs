@@ -42,6 +42,7 @@ public class JoystickController : MonoBehaviour, IDragHandler, IPointerDownHandl
     public void OnPointerDown(PointerEventData eventData)
     {
         _isTouch = true;
+        _player.StopMoveCo();
         ControlJoystcik(eventData);
     }
     
@@ -58,9 +59,6 @@ public class JoystickController : MonoBehaviour, IDragHandler, IPointerDownHandl
         //todo: 나중에 가능하면 멈췄을때도 부드럽게 전환
     }
 
-
-   
-    
 
     /// <summary>
     /// 조이스틱 이동에 따른 실제 플레이어 이동 처리

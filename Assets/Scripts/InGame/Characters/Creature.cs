@@ -10,8 +10,11 @@ public abstract class Creature : MonoBehaviour
 
   protected Animator _animator;
 
+  [Header("적 탐색 범위")]
+  [SerializeField] protected float _searchRadius;
+  
   [Header("기본공격 범위")]
-  [SerializeField] protected float _attackRadius;
+  [SerializeField] protected float _attackRadius; //실제 멈춰서서 공격하는 범위
 
   protected Transform _targets; //탐색된 적의 정보
 
@@ -48,11 +51,9 @@ public abstract class Creature : MonoBehaviour
           Die();
       }
   }
-  
-  
 
-  public virtual void Die()
-  {
-      
-  }
+
+
+  public abstract void Die();
+
 }

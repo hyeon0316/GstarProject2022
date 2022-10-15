@@ -764,6 +764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1e1895029c00bd4cb410f5baa42598f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _searchRadius: 15
   _attackRadius: 8
   _nomalAttackPos: {fileID: 6310364584250092177}
 --- !u!1 &4817727638322172064
