@@ -9,14 +9,16 @@ public class NomalAttackMissile : MonoBehaviour
    [SerializeField] private float _missileSpeed;
    [SerializeField] private int _damage;
    
-   private void OnEnable()
-   {
-      Invoke("DisableMissile", 0.5f);
-   }
+  
 
    private void FixedUpdate()
    {
       transform.Translate(Vector3.forward * _missileSpeed);
+   }
+
+   public void DelayDisable()
+   {
+      Invoke("DisableMissile", 0.5f);
    }
 
    private void DisableMissile()
@@ -29,7 +31,7 @@ public class NomalAttackMissile : MonoBehaviour
    {
       if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
       {
-         //collision.transform.GetComponent<Enemy>().TakeDamage(_damage);
+         other.transform.GetComponent<Enemy>().TakeDamage(_damage);
          CreateEffect();
          DisableMissile();
       }
@@ -39,5 +41,6 @@ public class NomalAttackMissile : MonoBehaviour
    {
       GameObject effect = ObjectPoolManager.Instance.GetObject(PoolType.NomalAttackEffect);
       effect.transform.position = this.transform.position;
+      effect.GetComponent<NomalAttackEffect>().DelayDisable();
    }
 }

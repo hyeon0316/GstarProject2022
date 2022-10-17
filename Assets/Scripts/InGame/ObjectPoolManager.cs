@@ -6,8 +6,11 @@ using UnityEngine;
 public enum PoolType
 {
     NomalAttackMissile,
-    NomalAttackEffect
+    NomalAttackEffect,
+    WideAreaBarrage,
+    WideAreaBarrageEffect
 }
+
 public class ObjectPoolManager : Singleton<ObjectPoolManager>
 {
     [SerializeField] private GameObject[] _objectPrefabs;
@@ -18,6 +21,8 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     {
         Init(PoolType.NomalAttackMissile, 3);
         Init(PoolType.NomalAttackEffect, 3);
+        Init(PoolType.WideAreaBarrage, 1);
+        Init(PoolType.WideAreaBarrageEffect, 1);
     }
 
     /// <summary>
@@ -82,9 +87,11 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         }
     }
     
-    /// <summary>
-    /// 사용했던 오브젝트를 다시 넣어둠
-    /// </summary>
+   /// <summary>
+   /// 사용했던 오브젝트를 Queue에 다시 넣어둠
+   /// </summary>
+   /// <param name="poolType">오브젝트를 관리하는 Queue</param>
+   /// <param name="obj">사용했던 오브젝트</param>
     public void ReturnObject(PoolType poolType, GameObject obj)
     {
         obj.gameObject.SetActive(false);

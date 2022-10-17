@@ -33,7 +33,7 @@ public class JoystickController : MonoBehaviour, IDragHandler, IPointerDownHandl
 
     private void FixedUpdate()
     {
-        if (_isTouch && !_player.IsNomalAttack)
+        if (_isTouch && !_player.IsAttack)
         {
             _player.Move(_playerMoveAngle, _moveDistance);
         }

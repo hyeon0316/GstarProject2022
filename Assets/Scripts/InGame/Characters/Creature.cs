@@ -50,6 +50,8 @@ public abstract class Creature : MonoBehaviour
           Stat.Hp = 0;
           Die();
       }
+      
+      Debug.Log(Stat.Hp);
   }
 
 

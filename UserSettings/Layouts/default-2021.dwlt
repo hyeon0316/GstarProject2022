@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 492}
   m_MaxSize: {x: 10000, y: 10000}
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 6276
+  controlID: 20074
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 6277
+  controlID: 20234
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 6244
+  controlID: 20208
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -633,7 +633,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 0
-      snapOffset: {x: 0, y: 0}
+      snapOffset: {x: 0, y: 25}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: Scene View/Particles
@@ -649,9 +649,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -8.81409, y: 8.555753, z: -8.990052}
+    m_Target: {x: -1.0934653, y: 13.536561, z: -25.392902}
     speed: 2
-    m_Value: {x: -8.81409, y: 8.555753, z: -8.990052}
+    m_Value: {x: -1.0934653, y: 13.536561, z: -25.392902}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -698,13 +698,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.2731087, y: 0.443275, z: -0.1438577, w: 0.84154516}
+    m_Target: {x: 0.3299924, y: 0.007367849, z: -0.0025857321, w: 0.943944}
     speed: 2
-    m_Value: {x: 0.27311218, y: 0.4432807, z: -0.14385955, w: 0.84155595}
+    m_Value: {x: 0.3299947, y: 0.0073678996, z: -0.00258575, w: 0.9439505}
   m_Size:
-    m_Target: 0.000013609804
+    m_Target: 2.6565413
     speed: 2
-    m_Value: 0.000013609804
+    m_Value: 2.6565413
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -827,7 +827,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 146170
+  m_LastSelectedObjectID: 69872
 --- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -860,23 +860,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 60970000
       m_LastClickedID: 0
-      m_ExpandedIDs: c6b0fcfffab1fcff0258fdff0458fdff78f7fdffd0f9fdffe801feff3806fefff40bfeff6611feff2216feff0e1dfeff1c22feff422afeff0230feff0235feff043bfeffe63ffeff7c44feff7849fefff04efeffce53feffaa58feff905dfeffb85ffeffd464feff106afeffa46ffeff5675feffe47bfeff6e82feff3486feff848bfeff0893feff169afeffb49efeff7aa3feff60a8feffb2affeff88b6feffcabbfeff98c0feff7ec4feff94e3feff6af2feff92f7feff080dfffff817ffffae1effffcc27ffff1230ffffea3bffffec42fffff846fffff24dffff2855fffffe59ffff265fffffaa65ffff4685ffff748affffb494ffffca98ffff729effff76a3ffff04a9ffffa0aeffff6eb7ffff52bdffff24c3ffff2cc3ffff74c6ffff48cdffff90d3ffff6adaffff72ecffffa4ecffff90f9ffff32fbfffff0ce00000ecf0000
+      m_ExpandedIDs: a0c9fdff9e54feff0261feff2e6efeffe08ffeffcea3feff9ed9feff2cdafeffa200fffff614ffff1c18ffff7e23ffff2430ffff8c32ffffa24bffff4452ffffba58ffff7e64ffffa0b4ffff46c9ffff4ac9ffff10f4ffff32fbfffff4ffffff944e0000b04e0000f0100100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: PolygonFireProjectile
+        m_OriginalName: PolygonFireProjectile
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: -60786
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 10}
       m_SearchString: 
@@ -957,22 +957,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/InGame/Characters
+    - Assets/Resources/FX/Polygon Arsenal/Demo/Scenes/Interactive
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/InGame/Characters
+  - Assets/Resources/FX/Polygon Arsenal/Demo/Scenes/Interactive
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\GstarProject2022
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 10}
-    m_SelectedIDs: 7c530000
-    m_LastClickedID: 21372
-    m_ExpandedIDs: 00000000525300005453000056530000585300005a5300005c5300005e53000060530000625300006453000066530000685300006a5300006c5300006e53000070530000725300007453000076530000785300007a5300007c5300007e53000080530000825300008453000086530000c8b6000010b7000012b700001ab7000032b700002839020000ca9a3b
+    scrollPos: {x: 0, y: 222}
+    m_SelectedIDs: 44b80000
+    m_LastClickedID: 47172
+    m_ExpandedIDs: 00000000525300005453000056530000585300005a5300005c5300005e53000060530000625300006453000066530000685300006a5300006c5300006e53000070530000725300007453000076530000785300007a5300007c5300007e53000080530000825300008453000086530000c4b60000c8b60000ccb60000dcb60000f0b60000f2b6000006b7000038b800009ab800009cb80000761001009620010000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1000,7 +1000,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000525300005453000056530000585300005a5300005c5300005e53000060530000625300006453000066530000685300006a5300006c5300006e53000070530000725300007453000076530000785300007a5300007c5300007e53000080530000825300008453000086530000c8b6000010b7000012b7000020b7000032b700002839020000ca9a3b
+    m_ExpandedIDs: 00000000525300005453000056530000585300005a5300005c5300005e53000060530000625300006453000066530000685300006a5300006c5300006e53000070530000725300007453000076530000785300007a5300007c5300007e53000080530000825300008453000086530000c8b60000f0b60000f2b60000fab6000010b8000038b800009ab800009cb8000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1055,7 +1055,7 @@ MonoBehaviour:
     m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 64
   m_SkipHiddenPackages: 0
-  m_DirectoriesAreaWidth: 223
+  m_DirectoriesAreaWidth: 180
 --- !u!114 &21
 MonoBehaviour:
   m_ObjectHideFlags: 52

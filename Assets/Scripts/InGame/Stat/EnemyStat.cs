@@ -9,5 +9,10 @@ public class EnemyStat : Stat
 {
    //todo:적 종류별 생성자 작성
 
+   public EnemyStat()
+   {
+      MaxHp = 100;
+      Hp = MaxHp;
+   }
     
 }

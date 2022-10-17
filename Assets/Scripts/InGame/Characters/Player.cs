@@ -5,14 +5,14 @@ using UnityEngine;
 
 public abstract class Player : Creature
 {
-   public bool IsNomalAttack { get; set; } //기본공격을 하고 있는 상태인지에 대한 bool값
-   public bool IsMoveToward { get; set; } //자동이동을 하고있는지에 대한 bool값
+   public bool IsAttack { get; set; } //공격을 하고 있는 상태인지에 대한 bool값
    private int _comboCount;
 
    private bool _canNextNomalAttack; //다음단계의 기본공격이 가능한지에 대한 bool값
    private float _nomalAttackCancelDelay; //기본공격 콤보가 끊어지는 시간
 
-   private IEnumerator _moveCo; //어떤 코루틴을 stop할것인지 알기 위한 할당 변수
+   protected IEnumerator _moveCo; //어떤 코루틴을 stop할것인지 알기 위한 할당 변수
+   protected delegate void UseAttackType();
    
    public override void Awake()
    {
@@ -61,7 +61,7 @@ public abstract class Player : Creature
    /// <summary>
    /// 공격할 우선순위 타겟을 지정
    /// </summary>
-   private void CheckAttackRange() //todo: 근접캐릭터 만들때 추상함수들로 자식에서 재정의해서 Mage랑 구분 짓기
+   protected void CheckAttackRange() //todo: 근접캐릭터 만들때 추상함수들로 자식에서 재정의해서 Mage랑 구분 짓기
    {
       if (IsOtherTarget())
       {
@@ -86,16 +86,18 @@ public abstract class Player : Creature
    /// </summary>
    public void UseNomalAttack()
    {
-      if (!IsNomalAttack)
+      if (!IsAttack)
       {
          CheckAttackRange();
-
          if (_targets != null)
          {
-            if (_attackRadius < Vector3.Distance(transform.position, _targets.transform.position))
+            if (_attackRadius < Vector3.Distance(transform.position, _targets.transform.position)) //타겟이 공격사거리 밖에있을때
             {
-               _moveCo = MoveTowardEnemyCo();
-               StartCoroutine(_moveCo);
+               if (_moveCo == null) //버튼이 여러번 눌렸을때 코루틴 중복 방지
+               {
+                  _moveCo = MoveTowardEnemyCo(NomalAttack);
+                  StartCoroutine(_moveCo);
+               }
             }
             else
             {
@@ -105,23 +107,28 @@ public abstract class Player : Creature
       }
    }
 
+
    public void StopMoveCo()
    {
-      if(_moveCo !=null)
+      if (_moveCo != null)
+      {
          StopCoroutine(_moveCo);
+         _moveCo = null;
+      }
    }
    
    /// <summary>
    /// 탐색 사거리 안의 적이 공격사거리 보다 클 때 공격 사거리 안에 들어올때까지 해당 적에게 이동
    /// </summary>
-   private IEnumerator MoveTowardEnemyCo()
+   protected IEnumerator MoveTowardEnemyCo(UseAttackType useAttackType)
    {
       while (true)
       {
          if (_attackRadius >= Vector3.Distance(transform.position, _targets.transform.position)) //공격 사거리 안에 들어왔을때
          {
-            NomalAttack();
+            useAttackType();
             Move(transform.rotation.eulerAngles, 0);
+            _moveCo = null;
             break;
          }
          transform.LookAt(new Vector3(_targets.position.x, transform.position.y, _targets.position.z));
@@ -137,8 +144,8 @@ public abstract class Player : Creature
    private void NomalAttack()
    {
       transform.LookAt(new Vector3(_targets.position.x, transform.position.y, _targets.position.z));
-      _animator.SetInteger(Global.NomalAttack, _comboCount++ % Global.MaxCombo);
-      IsNomalAttack = true;
+      _animator.SetInteger(Global.NomalAttackInteger, _comboCount++ % Global.MaxCombo);
+      IsAttack = true;
       _canNextNomalAttack = false;
    }
    
@@ -148,8 +155,8 @@ public abstract class Player : Creature
    /// </summary>
    public void InitNomalAttack()
    {
-      _animator.SetInteger(Global.NomalAttack, Global.InitCount);
-      IsNomalAttack = false;
+      _animator.SetInteger(Global.NomalAttackInteger, Global.InitCount);
+      IsAttack = false;
 
       _nomalAttackCancelDelay = 1f;
       _canNextNomalAttack = true;

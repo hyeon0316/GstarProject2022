@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class NomalAttackEffect : MonoBehaviour
 {
-   private void OnEnable()
+  
+   public void DelayDisable()
    {
       Invoke("DisableEffect", 1.5f);
    }
-
+   
    private void DisableEffect()
    {
       ObjectPoolManager.Instance.ReturnObject(PoolType.NomalAttackEffect, this.gameObject);
