@@ -16,6 +16,6 @@ public class Stat
     public int ReduceDamage { get; set; } // 받는 모든 데미지 감소량
     public int MoveSpeed { get; set; }
     public int Attack { get; set; }
-
-
+    public int SkillDamage { get; set; } //스킬데미지
+    public int AllDamge { get; set; }   //모든데미지
 }

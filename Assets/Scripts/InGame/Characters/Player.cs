@@ -16,6 +16,7 @@ public abstract class Player : Creature
    
    public override void Awake()
    {
+      
       base.Awake();
       Stat = new PlayerStat(DataManager.Instance.SelectJobType);
    }

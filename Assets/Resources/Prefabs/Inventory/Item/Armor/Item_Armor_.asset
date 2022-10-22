@@ -12,9 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 016baed56023ed74d997b55775c77b05, type: 3}
   m_Name: Item_Armor_
   m_EditorClassIdentifier: 
-  _id: 0
-  _name: 
-  _tooltip: 
-  _iconSprite: {fileID: 0}
+  _id: 22
+  _name: 22
+  _tooltip: 22
+  _iconSprite: {fileID: 21300000, guid: 0495656ea2d45364f81d06ad42829344, type: 3}
+  Damage: 0
+  Hit: 0
+  SkillDamage: 0
+  AllDamage: 0
+  Defense: 0
+  Evasion: 0
+  AllDeense: 0
+  MaxHp: 0
+  MaxMP: 0
+  MaxPostion: 0
+  HpRe: 0
+  MpRe: 0
   _maxDurability: 100
+  _equType: 2
   _defence: 1

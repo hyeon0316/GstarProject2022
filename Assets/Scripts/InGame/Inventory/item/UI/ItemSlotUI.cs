@@ -11,16 +11,8 @@ public class ItemSlotUI : MonoBehaviour
     [Tooltip("아이템 개수 텍스트")]
     [SerializeField] private Text _amountText;
 
-    [Tooltip("슬롯이 포커스될 때 나타나는 하이라이트 이미지")]
-    [SerializeField] private Image _highlightImage;
-
-    [Space]
-    [Tooltip("하이라이트 이미지 알파 값")]
-    [SerializeField] private float _highlightAlpha = 0.5f;
-
-    [Tooltip("하이라이트 소요 시간")]
-    [SerializeField] private float _highlightFadeDuration = 0.2f;
-    
+    [Tooltip("슬롯이 포커스될 때 나타나는 텍스트")]
+    [SerializeField] private GameObject _highlightText;
 
     /// <summary> 슬롯의 인덱스 </summary>
     public int Index { get; private set; }
@@ -39,19 +31,17 @@ public class ItemSlotUI : MonoBehaviour
 
     private RectTransform _slotRect;
     private RectTransform _iconRect;
-    private RectTransform _highlightRect;
 
     private GameObject _iconGo;
     private GameObject _textGo;
     private GameObject _highlightGo;
 
     private Image _slotImage;
-
-    // 현재 하이라이트 알파값
-    private float _currentHLAlpha = 0f;
+    private InventoryUI _inventoryUI;
 
     private bool _isAccessibleSlot = true; // 슬롯 접근가능 여부
     private bool _isAccessibleItem = true; // 아이템 접근가능 여부
+    private bool _isActive = false; // 활성화 되어있는지 확인
 
     /// <summary> 비활성화된 슬롯의 색상 </summary>
     private static readonly Color InaccessibleSlotColor = new Color(0.2f, 0.2f, 0.2f, 0.5f);
@@ -60,6 +50,9 @@ public class ItemSlotUI : MonoBehaviour
 
     private void ShowIcon() => _iconGo.SetActive(true);
     private void HideIcon() => _iconGo.SetActive(false);
+
+    public void ShowHigh() => _highlightText.SetActive(true);
+    public void HideHigh() => _highlightText.SetActive(false);
 
     private void ShowText() => _textGo.SetActive(true);
     private void HideText() => _textGo.SetActive(false);
@@ -79,7 +72,28 @@ public class ItemSlotUI : MonoBehaviour
             RemoveItem();
         }
     }
+    private void Awake()
+    {
+        InitComponents();
+    }
+    private void InitComponents()
+    {
+        _inventoryUI = GetComponentInParent<InventoryUI>();
 
+        // Rects
+        _slotRect = GetComponent<RectTransform>();
+        _iconRect = _iconImage.rectTransform;
+        //_highlightRect = _highlightImage.rectTransform;
+
+        // Game Objects
+        _iconGo = _iconRect.gameObject;
+        _textGo = _amountText.gameObject;
+        //_highlightGo = _highlightImage.gameObject;
+
+        // Images
+        _slotImage = GetComponent<Image>();
+        _highlightText.SetActive(_isActive);
+    }
     /// <summary> 슬롯에서 아이템 제거 </summary>
     public void RemoveItem()
     {
@@ -88,13 +102,6 @@ public class ItemSlotUI : MonoBehaviour
         HideText();
     }
 
-    /// <summary> 아이템 이미지 투명도 설정 </summary>
-    public void SetIconAlpha(float alpha)
-    {
-        _iconImage.color = new Color(
-            _iconImage.color.r, _iconImage.color.g, _iconImage.color.b, alpha
-        );
-    }
 
     /// <summary> 아이템 개수 텍스트 설정(amount가 1 이하일 경우 텍스트 미표시) </summary>
     public void SetItemAmount(int amount)
