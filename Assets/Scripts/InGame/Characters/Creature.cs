@@ -5,7 +5,6 @@ using UnityEngine;
 
 public abstract class Creature : MonoBehaviour
 {
-  //todo: 체력 갱신, 공격, 사망 등 기본적인 생명체에 대한 추상 함수 선언 
   public Stat Stat;
 
   protected Animator _animator;
@@ -40,6 +39,7 @@ public abstract class Creature : MonoBehaviour
       if (Stat.MaxHp > Stat.Hp)
           Stat.Hp = Stat.MaxHp;
   }
+  
   public void TakeDamage(int amount)
   {
       Stat.Hp -= amount;

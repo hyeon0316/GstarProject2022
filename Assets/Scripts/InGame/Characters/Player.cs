@@ -30,9 +30,9 @@ public abstract class Player : Creature
    
    public override void Awake()
    {
-      
       base.Awake();
-      Stat = new PlayerStat(DataManager.Instance.SelectJobType);
+      Stat = new Stat(DataManager.Instance.SelectJobType);
+      DataManager.Instance.Player = this;
    }
 
    private void Update()

@@ -23,25 +23,25 @@ public class WideAreaBarrageEffect : MonoBehaviour
       if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
       {
          Debug.Log(other.name);
-         TakeBarrageDamage(other.GetComponent<Enemy>());
+         TakeBarrageDamage(other.GetComponent<Creature>());
       }
    }
 
   
-   private void TakeBarrageDamage(Enemy enemy)
+   private void TakeBarrageDamage(Creature enemy)
    {
       StartCoroutine(TakeBarrageDamageCo(enemy));
    }
 
-   private IEnumerator TakeBarrageDamageCo(Enemy enemy)
+   private IEnumerator TakeBarrageDamageCo(Creature enemy)
    {
       int count = 0;
       while (count < 10)
       {
-         if (!enemy.isActiveAndEnabled)
+         yield return new WaitForSeconds(0.5f);
+         if (enemy == null)
             break;
          
-         yield return new WaitForSeconds(0.5f);
          enemy.TakeDamage(_damage);
          count++;
       }

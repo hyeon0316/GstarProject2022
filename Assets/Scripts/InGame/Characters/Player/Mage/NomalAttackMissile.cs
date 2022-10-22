@@ -31,7 +31,7 @@ public class NomalAttackMissile : MonoBehaviour
    {
       if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
       {
-         other.transform.GetComponent<Enemy>().TakeDamage(_damage);
+         other.transform.GetComponent<Creature>().TakeDamage(_damage);
          CreateEffect();
          DisableMissile();
       }

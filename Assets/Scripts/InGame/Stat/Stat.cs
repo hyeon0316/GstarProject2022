@@ -18,4 +18,43 @@ public class Stat
     public int Attack { get; set; }
     public int SkillDamage { get; set; } //스킬데미지
     public int AllDamge { get; set; }   //모든데미지
+    public int MaxMp { get; set; }
+    public int Mp { get; set; }
+    
+    
+    public Stat(JobType jobType)
+    {
+        switch (jobType)
+        {
+            case JobType.Archer:
+                SetPlayerStat(Resources.Load<PlayerStatData>("Stats/Player/ArcherStat"));
+                break;
+            case JobType.Mage:
+                SetPlayerStat(Resources.Load<PlayerStatData>("Stats/Player/MageStat"));
+                break;
+        }
+    }
+
+    public Stat(EnemyType enemyType)
+    {
+        
+    }
+    
+    /// <summary>
+    /// ScriptableObject로 관리되는 데이터값을 가져와 변수에 대입
+    /// </summary>
+    private void SetPlayerStat(PlayerStatData playerStatData)
+    {
+        MaxHp = playerStatData.MaxHp;
+        Hp = MaxHp;
+        MaxMp = playerStatData.MaxMp;
+        Mp = MaxMp;
+        Defense = playerStatData.Defense;
+        RecoveryHp = playerStatData.RecoveryHp;
+        Dodge = playerStatData.Dodge;
+        HitPercent = playerStatData.HitPercent;
+        ReduceDamage = playerStatData.ReduceDamage;
+        MoveSpeed = playerStatData.MoveSpeed;
+        Attack = playerStatData.Attack;
+    }
 }

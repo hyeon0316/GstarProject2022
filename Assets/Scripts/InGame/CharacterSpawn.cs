@@ -20,7 +20,5 @@ public class CharacterSpawn : MonoBehaviour
         GameObject player = Instantiate(CharPrefabs[(int) DataManager.Instance.SelectJobType]);
         player.transform.position = transform.position;//생성 위치
         player.name = $"{DataManager.Instance.SelectJobType}";
-
-        DataManager.Instance.Player = player.GetComponentInChildren<Player>();
     }
 }

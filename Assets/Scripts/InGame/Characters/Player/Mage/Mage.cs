@@ -10,9 +10,13 @@ public class Mage : Player
 
     [Header("범위공격 쿨타임")]
     [SerializeField] private CoolDown _wideAreaBarrageCoolDown;
-    
+
+    [Header("체인라이트닝 라인")] [SerializeField] private ChainLightningLine _chainLightningLine;
+
     [Header("체인라이트닝 쿨타임")]
     [SerializeField] private CoolDown _chainLightningCoolDown;
+    
+    
     
     /// <summary>
     /// 기본공격할때 지정 위치에 발사체 생성
@@ -99,5 +103,9 @@ public class Mage : Player
         barrage.transform.position = new Vector3(_targets[0].position.x, barrage.transform.position.y, _targets[0].position.z);
         barrage.GetComponent<WideAreaBarrage>().DelayDisable();
     }
-    
+
+    public void CreateChainLightningLine()
+    {
+        
+    }
 }
