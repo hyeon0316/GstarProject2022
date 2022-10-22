@@ -8,7 +8,7 @@ public class Test : Enemy
     public override void Awake()
     {
         base.Awake();
-        Stat = new EnemyStat();
+        Stat = new Stat();
     }
 
     public override void Die()
