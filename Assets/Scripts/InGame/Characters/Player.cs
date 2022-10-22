@@ -1,17 +1,31 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class Player : Creature
 {
-   public bool IsAttack { get; set; } //공격을 하고 있는 상태인지에 대한 bool값
+   /// <summary>
+   /// 공격을 하고 있는 상태인지에 대한 bool값(연속터치 방지)
+   /// </summary>
+   public bool IsAttack { get; set; } 
    private int _comboCount;
 
-   private bool _canNextNomalAttack; //다음단계의 기본공격이 가능한지에 대한 bool값
-   private float _nomalAttackCancelDelay; //기본공격 콤보가 끊어지는 시간
+   /// <summary>
+   /// 다음단계의 기본공격이 가능한지에 대한 bool값
+   /// </summary>
+   private bool _canNextNomalAttack;
+   
+   /// <summary>
+   /// 기본공격 콤보가 끊어지는 시간
+   /// </summary>
+   private float _nomalAttackCancelDelay; 
 
-   protected IEnumerator _moveCo; //어떤 코루틴을 stop할것인지 알기 위한 할당 변수
+   /// <summary>
+   /// 어떤 코루틴을 stop할것인지 알기 위한 할당 변수
+   /// </summary>
+   protected IEnumerator _moveCo; 
    protected delegate void UseAttackType();
    
    public override void Awake()
@@ -35,50 +49,39 @@ public abstract class Player : Creature
       Gizmos.color = Color.green;
       Gizmos.DrawSphere(transform.position, _searchRadius);
    }
+   
 
    /// <summary>
-   /// 한번 타겟을 잡은 적이 공격범위에서 벗어날때 다시 가까운 다른 적을 타겟으로 잡는다.
+   /// 공격할 우선순위 타겟들을(searchCount 수 만큼) 지정
    /// </summary>
-   private bool IsOtherTarget()
+   protected bool CheckAttackRange(int searchCount)
    {
       Collider[] colliders = Physics.OverlapSphere(transform.position, _searchRadius, LayerMask.GetMask("Enemy"));
-      if (colliders.Length != 0)
+
+      _targets.Clear();
+      
+      if (colliders.Length == 0)
       {
-         foreach (var col in colliders)
-         {
-            if (col.transform == _targets)
-               return false;
-         }
-      }
-      else //주번 적이 한명도 없을 때
-      {
-         _targets = null;
          return false;
       }
-
-      return true;
-   }
-
-   /// <summary>
-   /// 공격할 우선순위 타겟을 지정
-   /// </summary>
-   protected void CheckAttackRange() //todo: 근접캐릭터 만들때 추상함수들로 자식에서 재정의해서 Mage랑 구분 짓기
-   {
-      if (IsOtherTarget())
+      else
       {
-         Collider[] colliders = Physics.OverlapSphere(transform.position, _searchRadius, LayerMask.GetMask("Enemy"));
-         float shortDis = _searchRadius; //가장 가까운 적과의 거리
+         var searchList = colliders.OrderBy(col => Vector3.Distance(transform.position, col.transform.position)).ToList(); //가까운 순으로 정렬
 
-         foreach (var col in colliders)
+         for (int i = 0; i < searchCount; i++)
          {
-            float distance = Vector3.Distance(transform.position, col.transform.position);
-            if (shortDis > distance)
-            {
-               shortDis = distance;
-               _targets = col.transform;
-            }
+            if (i == searchList.Count) //찾고자 하는 타겟 수가 실제 존재하는 타겟 수 보다 적을 경우
+               break;
+            
+            _targets.Add(searchList[i].transform);
          }
-         Debug.Log(_targets.name);
+
+         foreach (var target in _targets)
+         {
+            Debug.Log(target);
+         }
+         
+         return true;
       }
    }
 
@@ -89,10 +92,9 @@ public abstract class Player : Creature
    {
       if (!IsAttack)
       {
-         CheckAttackRange();
-         if (_targets != null)
+         if (CheckAttackRange(1))
          {
-            if (_attackRadius < Vector3.Distance(transform.position, _targets.transform.position)) //타겟이 공격사거리 밖에있을때
+            if (_attackRadius < Vector3.Distance(transform.position, _targets[0].position)) //타겟이 공격사거리 밖에있을때
             {
                if (_moveCo == null) //버튼이 여러번 눌렸을때 코루틴 중복 방지
                {
@@ -125,14 +127,14 @@ public abstract class Player : Creature
    {
       while (true)
       {
-         if (_attackRadius >= Vector3.Distance(transform.position, _targets.transform.position)) //공격 사거리 안에 들어왔을때
+         if (_attackRadius >= Vector3.Distance(transform.position, _targets[0].position)) //공격 사거리 안에 들어왔을때
          {
             useAttackType();
             Move(transform.rotation.eulerAngles, 0);
             _moveCo = null;
             break;
          }
-         transform.LookAt(new Vector3(_targets.position.x, transform.position.y, _targets.position.z));
+         transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
          Move(transform.rotation.eulerAngles, 1);
          yield return new WaitForFixedUpdate();
       }
@@ -144,7 +146,7 @@ public abstract class Player : Creature
    /// </summary>
    private void NomalAttack()
    {
-      transform.LookAt(new Vector3(_targets.position.x, transform.position.y, _targets.position.z));
+      transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
       _animator.SetInteger(Global.NomalAttackInteger, _comboCount++ % Global.MaxCombo);
       IsAttack = true;
       _canNextNomalAttack = false;

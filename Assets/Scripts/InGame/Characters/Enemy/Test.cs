@@ -13,6 +13,7 @@ public class Test : Enemy
 
     public override void Die()
     {
-        Debug.Log($"{this.GetType().Name}사망");
+        Debug.Log($"{this.gameObject.name}사망");
+        Destroy(this.gameObject);
     }
 }

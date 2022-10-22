@@ -349,6 +349,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
+  - m_Name: ChainLightning
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -621,7 +627,7 @@ AnimatorStateMachine:
     m_Position: {x: 40, y: 60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6942734681609967271}
-    m_Position: {x: -80, y: 480, z: 0}
+    m_Position: {x: -130, y: 470, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 550530706383375996}
     m_Position: {x: 1001.73376, y: -100.303604, z: 0}

@@ -56,7 +56,6 @@ public class JoystickController : MonoBehaviour, IDragHandler, IPointerDownHandl
         _joystick.localPosition = Vector3.zero;
         _player.Move(_playerMoveAngle, 0); //애니메이션 상태를 Idle로 설정
         _isTouch = false;
-        //todo: 나중에 가능하면 멈췄을때도 부드럽게 전환
     }
 
 

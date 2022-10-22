@@ -38,6 +38,9 @@ public class WideAreaBarrageEffect : MonoBehaviour
       int count = 0;
       while (count < 10)
       {
+         if (!enemy.isActiveAndEnabled)
+            break;
+         
          yield return new WaitForSeconds(0.5f);
          enemy.TakeDamage(_damage);
          count++;

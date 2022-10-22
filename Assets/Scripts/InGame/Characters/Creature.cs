@@ -16,9 +16,8 @@ public abstract class Creature : MonoBehaviour
   [Header("기본공격 범위")]
   [SerializeField] protected float _attackRadius; //실제 멈춰서서 공격하는 범위
 
-  protected Transform _targets; //탐색된 적의 정보
+  protected List<Transform> _targets = new List<Transform>(); //탐색된 적의 정보
 
-  
   public virtual void Awake()
   {
       _animator = GetComponent<Animator>();
@@ -45,7 +44,7 @@ public abstract class Creature : MonoBehaviour
   {
       Stat.Hp -= amount;
 
-      if (Stat.Hp < 0)
+      if (Stat.Hp <= 0)
       {
           Stat.Hp = 0;
           Die();
