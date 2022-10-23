@@ -22,8 +22,11 @@ public class ChainLightningLine : MonoBehaviour
     private int _animationPingPongDirection = 1;
 
     private bool _isDone;
-
     private float _timer = 0;
+
+    [Header("스킬 유지 시간")]
+    [SerializeField] private float _keepTime;
+    
     private void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
@@ -39,7 +42,7 @@ public class ChainLightningLine : MonoBehaviour
         if (_isDone)
         {
             _timer += Time.deltaTime;
-            if(_timer >= 4 || IsAllDead())
+            if(_timer >= _keepTime || IsAllDead())
                 CloseLine();
             
             for (int i = 0; i < _targets.Count; i++)
@@ -61,10 +64,8 @@ public class ChainLightningLine : MonoBehaviour
     private IEnumerator TakeLightningDamage()
     {
         int count = 0;
-        while (count < 10)
+        while (_timer < _keepTime)
         {
-            ++count;
-
             if (IsAllDead())
                 break;
             

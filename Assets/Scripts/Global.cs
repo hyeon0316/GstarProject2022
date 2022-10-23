@@ -18,6 +18,7 @@ public static class Global
     public const string NomalAttackInteger = "NomalAttack";
     public const string WideAreaBarrageTrigger = "WideAreaBarrage";
     public const string ChainLightningTrigger = "ChainLightning";
+    public const string BulletRainTrigger = "BulletRain";
 
     
     public const int MaxCombo = 4; // 기본공격의 총 콤보 수
