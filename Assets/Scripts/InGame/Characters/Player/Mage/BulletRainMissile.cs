@@ -40,7 +40,7 @@ public class BulletRainMissile : MonoBehaviour
         
         _bezierPoints[3] = endTr.position; // 도착 지점
 
-        transform.position = startTr.position;
+        transform.position = _bezierPoints[0];
     }
 
     private void Update()

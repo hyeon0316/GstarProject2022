@@ -27,6 +27,10 @@ public class Stat
     {
         
     }
+    
+    /// <summary>
+    /// 플레이어 스탯
+    /// </summary>
     public Stat(JobType jobType)
     {
         switch (jobType)
@@ -40,6 +44,9 @@ public class Stat
         }
     }
 
+    /// <summary>
+    /// 적 스탯
+    /// </summary>
     public Stat(EnemyType enemyType)
     {
         
