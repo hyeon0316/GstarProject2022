@@ -10,6 +10,7 @@ public class Stat
     public int MaxHp { get; set; }
     public int Hp { get; set; }
     public int RecoveryHp { get; set; } //자연 Hp회복량
+    public int RecoveryMp { get; set; } //자연 Mp회복량
     public int Defense { get; set; }
     public int Dodge { get; set; }
     public int HitPercent { get; set; }

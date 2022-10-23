@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ItemStat : Stat
 {
-    public int MaxMp { get; set; }
-    public int Mp { get; set; }
+    
+    public int MaxPostion { get; set; }
+    public int RecoveryMp { get; set; }
 }

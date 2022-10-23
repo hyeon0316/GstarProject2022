@@ -64,19 +64,23 @@ public class EquipUI : MonoBehaviour
         {
             _useSlotindex = index;
             _slotUIList[index].ShowHigh();
+            _inventory.ShowActiveESlot(index);
 
         }
         else if (_useSlotindex == index)
         {
 
             _slotUIList[index].HideHigh();
+            _inventory.HideActiveESlot();
             _useSlotindex = 90;
             _inventory.UnEquip(index);
         }
         else
         {
             _slotUIList[_useSlotindex].HideHigh();
+            _inventory.HideActiveESlot();
             _slotUIList[index].ShowHigh();
+            _inventory.ShowActiveESlot(index);
             _useSlotindex = index;
         }
     }

@@ -17,10 +17,10 @@ public class Inventory : MonoBehaviour
     private Item[] _equ;
 
     [SerializeField]
-    private ActiveSlotUI _eSlot;
+    private ActiveSlotUI _activeESlot;
 
     [SerializeField]
-    private ActiveSlotUI _iSlot;
+    private ActiveSlotUI _activeISlot;
 
     public Stat InvenStat;
     private int _maxCapacity = 80;
@@ -151,14 +151,19 @@ public class Inventory : MonoBehaviour
     }
     public void ShowActiveESlot(int index)
     {
-        if(_equ[index] is EquipmentItem _uItem)
-        {
-            _eSlot.SetStat(_uItem.EquipmentData.Stat);
-        }
+        _activeESlot.UpdateUI(_equ[index]);
     }
-    public void ShowActiveSlot(int index)
+    public void ShowActiveISlot(int index)
     {
-
+        _activeISlot.UpdateUI(_items[index]);
+    }
+    public void HideActiveESlot()
+    {
+        _activeESlot.ResetUI();
+    }
+    public void HideActiveISlot()
+    {
+        _activeISlot.ResetUI();
     }
     public void Use(int index)
     {
@@ -192,9 +197,48 @@ public class Inventory : MonoBehaviour
         if (_equ[index] is EquipmentItem _uItem)
         {
             Add(_equ[index].Data);
+            UnEquPlayerStat(_uItem.EquipmentData.Stat);
             EquRemove(index);
-           
         }
+        
+    }
+    public void EquPlayerStat(ItemStat _stat)
+    {
+        
+        DataManager.Instance.Player.Stat.Attack += _stat.Attack;
+        DataManager.Instance.Player.Stat.HitPercent += _stat.HitPercent;
+        DataManager.Instance.Player.Stat.SkillDamage += _stat.SkillDamage;
+        DataManager.Instance.Player.Stat.AllDamge += _stat.AllDamge;
+
+        DataManager.Instance.Player.Stat.Defense += _stat.Defense;
+        DataManager.Instance.Player.Stat.Dodge += _stat.Dodge;
+        DataManager.Instance.Player.Stat.ReduceDamage += _stat.ReduceDamage;
+
+        DataManager.Instance.Player.Stat.MaxHp += _stat.MaxHp;
+        DataManager.Instance.Player.Stat.MaxMp += _stat.MaxMp;
+     //   DataManager.Instance.Player.Stat.+= _stat.Attack;
+        DataManager.Instance.Player.Stat.RecoveryHp += _stat.RecoveryHp;
+     //   DataManager.Instance.Player.Stat.re += _stat.Attack;
+        
+    }
+    public void UnEquPlayerStat(ItemStat _stat)
+    {
+
+        DataManager.Instance.Player.Stat.Attack -= _stat.Attack;
+        DataManager.Instance.Player.Stat.HitPercent -= _stat.HitPercent;
+        DataManager.Instance.Player.Stat.SkillDamage -= _stat.SkillDamage;
+        DataManager.Instance.Player.Stat.AllDamge -= _stat.AllDamge;
+
+        DataManager.Instance.Player.Stat.Defense -= _stat.Defense;
+        DataManager.Instance.Player.Stat.Dodge -= _stat.Dodge;
+        DataManager.Instance.Player.Stat.ReduceDamage -= _stat.ReduceDamage;
+
+        DataManager.Instance.Player.Stat.MaxHp -= _stat.MaxHp;
+        DataManager.Instance.Player.Stat.MaxMp -= _stat.MaxMp;
+        //   DataManager.Instance.Player.Stat.+= _stat.Attack;
+        DataManager.Instance.Player.Stat.RecoveryHp += _stat.RecoveryHp;
+        //   DataManager.Instance.Player.Stat.re += _stat.Attack;
+
     }
     public void Equip(Item _item)
     {
@@ -207,10 +251,12 @@ public class Inventory : MonoBehaviour
                 UnEquip(_slotNum);
             }
             _equ[_slotNum] = _item;
+            EquPlayerStat(_uItem.EquipmentData.Stat);
             UpdateEqu(_slotNum);
 
             Debug.Log(_uItem.EquipmentData.EquType);
         }
+
     }
     public bool CheckEquSlot(int _slotNum)
     {
