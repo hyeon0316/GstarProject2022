@@ -18,6 +18,7 @@ public class EquipUI : MonoBehaviour
     private PointerEventData _ped;
     private const int SIndex = 90;
     private int _useSlotindex = SIndex;
+    public Stat Stat;
 
     private void Start()
     {

@@ -18,7 +18,7 @@ public class InventoryTest : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.K))
         {
-            for(int i =0;i<6;i++)
+            for(int i =0;i<7;i++)
             _inventory.Add(_itemDataArray[i]);
             
         }

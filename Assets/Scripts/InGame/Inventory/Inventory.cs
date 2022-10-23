@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
     private InventoryUI _inventoryUI;
     [SerializeField]
     private Item[] _items;
-    
+
     [SerializeField]
     private EquipUI _equipmentUI;
     [SerializeField]
@@ -29,13 +29,13 @@ public class Inventory : MonoBehaviour
     public int USESTARTINDEX = 90;
     public int _useSlotindex;
 
-    
+
 
 
 
     private void Awake()
     {
-        
+
         _items = new Item[_maxCapacity];
         _equ = new Item[_equCount];
         Capacity = _maxCapacity;
@@ -52,24 +52,24 @@ public class Inventory : MonoBehaviour
     {
         int index;
 
-        // 1. ������ �ִ� ������
+        // 1. 수량이 있는 아이템
         if (itemData is CountableItemData ciData)
         {
             bool findNextCountable = true;
             index = -1;
             while (amount > 0)
             {
-                // 1-1. �̹� �ش� �������� �κ��丮 ���� �����ϰ�, ���� ���� �ִ��� �˻�
+                // 1-1. 이미 해당 아이템이 인벤토리 내에 존재하고, 개수 여유 있는지 검사
                 if (findNextCountable)
                 {
                     index = FindCountableItemSlotIndex(ciData, index + 1);
 
-                    // ���� �����ִ� ������ ������ ���̻� ���ٰ� �Ǵܵ� ���, �� ���Ժ��� Ž�� ����
+                    // 개수 여유있는 기존재 슬롯이 더이상 없다고 판단될 경우, 빈 슬롯부터 탐색 시작
                     if (index == -1)
                     {
                         findNextCountable = false;
                     }
-                    // ������ ������ ã�� ���, �� ������Ű�� �ʰ��� ���� �� amount�� �ʱ�ȭ
+                    // 기존재 슬롯을 찾은 경우, 양 증가시키고 초과량 존재 시 amount에 초기화
                     else
                     {
                         CountableItem ci = _items[index] as CountableItem;
@@ -78,27 +78,27 @@ public class Inventory : MonoBehaviour
                         UpdateSlot(index);
                     }
                 }
-                // 1-2. �� ���� Ž��
+                // 1-2. 빈 슬롯 탐색
                 else
                 {
                     index = FindEmptySlotIndex(index + 1);
 
-                    // �� �������� ���� ��� ����
+                    // 빈 슬롯조차 없는 경우 종료
                     if (index == -1)
                     {
                         break;
                     }
-                    // �� ���� �߰� ��, ���Կ� ������ �߰� �� �׿��� ���
+                    // 빈 슬롯 발견 시, 슬롯에 아이템 추가 및 잉여량 계산
                     else
                     {
-                        // ���ο� ������ ����
+                        // 새로운 아이템 생성
                         CountableItem ci = ciData.CreateItem() as CountableItem;
                         ci.SetAmount(amount);
 
-                        // ���Կ� �߰�
+                        // 슬롯에 추가
                         _items[index] = ci;
 
-                        // ���� ���� ���
+                        // 남은 개수 계산
                         amount = (amount > ciData.MaxAmount) ? (amount - ciData.MaxAmount) : 0;
 
                         UpdateSlot(index);
@@ -106,16 +106,16 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
-        // 2. ������ ���� ������
+        // 2. 수량이 없는 아이템
         else
         {
-            // 2-1. 1���� �ִ� ���, ������ ����
+            // 2-1. 1개만 넣는 경우, 간단히 수행
             if (amount == 1)
             {
                 index = FindEmptySlotIndex();
                 if (index != -1)
                 {
-                    // �������� �����Ͽ� ���Կ� �߰�
+                    // 아이템을 생성하여 슬롯에 추가
                     _items[index] = itemData.CreateItem();
                     amount = 0;
 
@@ -127,20 +127,20 @@ public class Inventory : MonoBehaviour
                 }
             }
 
-            // 2-2. 2�� �̻��� ���� ���� �������� ���ÿ� �߰��ϴ� ���
+            // 2-2. 2개 이상의 수량 없는 아이템을 동시에 추가하는 경우
             index = -1;
             for (; amount > 0; amount--)
             {
-                // ������ ���� �ε����� ���� �ε������� ���� Ž��
+                // 아이템 넣은 인덱스의 다음 인덱스부터 슬롯 탐색
                 index = FindEmptySlotIndex(index + 1);
 
-                // �� ���� ���� ��� ���� ����
+                // 다 넣지 못한 경우 루프 종료
                 if (index == -1)
                 {
                     break;
                 }
 
-                // �������� �����Ͽ� ���Կ� �߰�
+                // 아이템을 생성하여 슬롯에 추가
                 _items[index] = itemData.CreateItem();
 
                 UpdateSlot(index);
@@ -170,10 +170,10 @@ public class Inventory : MonoBehaviour
         if (!IsValidIndex(index)) return;
         if (_items[index] == null) return;
 
-        // ��� ������ �������� ���
+        // 사용 가능한 아이템인 경우
         if (_items[index] is IUsableItem uItem)
         {
-            // ������ ���
+            // 아이템 사용
             bool succeeded = uItem.Use();
 
             if (succeeded)
@@ -183,7 +183,7 @@ public class Inventory : MonoBehaviour
         }
         else if (_items[index] is EquipmentItem _uItem)
         {
-            
+
             Equip(_items[index]);
             Remove(index);
         }
@@ -197,14 +197,14 @@ public class Inventory : MonoBehaviour
         if (_equ[index] is EquipmentItem _uItem)
         {
             Add(_equ[index].Data);
-            UnEquPlayerStat(_uItem.EquipmentData.Stat);
+            //UnEquPlayerStat(_uItem.EquipmentData.Stat);
             EquRemove(index);
         }
-        
+
     }
     public void EquPlayerStat(ItemStat _stat)
     {
-        
+
         DataManager.Instance.Player.Stat.Attack += _stat.Attack;
         DataManager.Instance.Player.Stat.HitPercent += _stat.HitPercent;
         DataManager.Instance.Player.Stat.SkillDamage += _stat.SkillDamage;
@@ -216,10 +216,10 @@ public class Inventory : MonoBehaviour
 
         DataManager.Instance.Player.Stat.MaxHp += _stat.MaxHp;
         DataManager.Instance.Player.Stat.MaxMp += _stat.MaxMp;
-     //   DataManager.Instance.Player.Stat.+= _stat.Attack;
+        //   DataManager.Instance.Player.Stat.+= _stat.Attack;
         DataManager.Instance.Player.Stat.RecoveryHp += _stat.RecoveryHp;
-     //   DataManager.Instance.Player.Stat.re += _stat.Attack;
-        
+        //   DataManager.Instance.Player.Stat.re += _stat.Attack;
+
     }
     public void UnEquPlayerStat(ItemStat _stat)
     {
@@ -251,7 +251,7 @@ public class Inventory : MonoBehaviour
                 UnEquip(_slotNum);
             }
             _equ[_slotNum] = _item;
-            EquPlayerStat(_uItem.EquipmentData.Stat);
+            //EquPlayerStat(_uItem.EquipmentData.Stat);
             UpdateEqu(_slotNum);
 
             Debug.Log(_uItem.EquipmentData.EquType);
@@ -270,77 +270,77 @@ public class Inventory : MonoBehaviour
 
         Item item = _equ[index];
 
-        // 1. �������� ���Կ� �����ϴ� ���
+        // 1. 아이템이 슬롯에 존재하는 경우
         if (item != null)
         {
-            // ������ ���
+            // 아이콘 등록
             _equipmentUI.SetItemIcon(index, item.Data.IconSprite);
         }
-        // 2. �� ������ ��� : ������ ����
+        // 2. 빈 슬롯인 경우 : 아이콘 제거
         else
         {
             RemoveIcon();
         }
 
-        // ���� : ������ �����ϱ�
+        // 로컬 : 아이콘 제거하기
         void RemoveIcon()
         {
             _equipmentUI.RemoveItem(index);
         }
     }
-    /// <summary> �ش��ϴ� �ε����� ���� ���� �� UI ���� </summary>
+    /// <summary> 해당하는 인덱스의 슬롯 상태 및 UI 갱신 </summary>
     private void UpdateSlot(int index)
     {
         if (!IsValidIndex(index)) return;
 
         Item item = _items[index];
 
-        // 1. �������� ���Կ� �����ϴ� ���
+        // 1. 아이템이 슬롯에 존재하는 경우
         if (item != null)
         {
-            // ������ ���
-           
+            // 아이콘 등록
+
             _inventoryUI.SetItemIcon(index, item.Data.IconSprite);
 
-            // 1-1. �� �� �ִ� ������
+            // 1-1. 셀 수 있는 아이템
             if (item is CountableItem ci)
             {
-                // 1-1-1. ������ 0�� ���, ������ ����
+                // 1-1-1. 수량이 0인 경우, 아이템 제거
                 if (ci.IsEmpty)
                 {
                     _items[index] = null;
                     RemoveIcon();
                     return;
                 }
-                // 1-1-2. ���� �ؽ�Ʈ ǥ��
+                // 1-1-2. 수량 텍스트 표시
                 else
                 {
                     _inventoryUI.SetItemAmountText(index, ci.Amount);
                 }
             }
-            // 1-2. �� �� ���� �������� ��� ���� �ؽ�Ʈ ����
+            // 1-2. 셀 수 없는 아이템인 경우 수량 텍스트 제거
             else
             {
                 _inventoryUI.HideItemAmountText(index);
             }
 
-            // ���� ���� ���� ������Ʈ
+            // 슬롯 필터 상태 업데이트
             //_inventoryUI.UpdateSlotFilterState(index, item.Data);
         }
-        // 2. �� ������ ��� : ������ ����
+        // 2. 빈 슬롯인 경우 : 아이콘 제거
         else
         {
             RemoveIcon();
         }
 
-        // ���� : ������ �����ϱ�
+        // 로컬 : 아이콘 제거하기
         void RemoveIcon()
         {
             _inventoryUI.RemoveItem(index);
-            _inventoryUI.HideItemAmountText(index); // ���� �ؽ�Ʈ �����
+            _inventoryUI.HideItemAmountText(index); // 수량 텍스트 숨기기
         }
     }
-    /// <summary> �տ������� ���� ������ �ִ� Countable �������� ���� �ε��� Ž�� </summary>
+    /// <summary> 앞에서부터 개수 여유가 있는 Countable 아이템의 슬롯 인덱스 탐색 </summary>
     private int FindCountableItemSlotIndex(CountableItemData target, int startIndex = 0)
     {
         for (int i = startIndex; i < Capacity; i++)
@@ -349,7 +349,7 @@ public class Inventory : MonoBehaviour
             if (current == null)
                 continue;
 
-            // ������ ���� ��ġ, ���� ���� Ȯ��
+            // 아이템 종류 일치, 개수 여유 확인
             if (current.Data == target && current is CountableItem ci)
             {
                 if (!ci.IsMax)
@@ -366,12 +366,12 @@ public class Inventory : MonoBehaviour
                 return i;
         return -1;
     }
-    /// <summary> �ε����� ���� ���� ���� �ִ��� �˻� </summary>
+    /// <summary> 인덱스가 수용 범위 내에 있는지 검사 </summary>
     private bool IsValidIndex(int index)
     {
         return index >= 0 && index < Capacity;
     }
-    /// <summary> �ش� ������ ������ ���� </summary>
+    /// <summary> 해당 슬롯의 아이템 제거 </summary>
     public void Remove(int index)
     {
         if (!IsValidIndex(index)) return;
