@@ -9482,13 +9482,13 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 2
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.19008255
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -9547,3 +9547,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 882947b60c794de44b01e75e51806542, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damage: 10
+  _drawingSpeed: 5
+  _rows: 8
+  _columns: 1
+  _targets: []

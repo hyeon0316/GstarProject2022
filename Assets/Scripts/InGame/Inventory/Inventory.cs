@@ -22,7 +22,7 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private ActiveSlotUI _iSlot;
 
-    public PlayerStat InvenStat;
+    public Stat InvenStat;
     private int _maxCapacity = 80;
     private int _equCount = 5;
 
@@ -52,24 +52,24 @@ public class Inventory : MonoBehaviour
     {
         int index;
 
-        // 1. ¼ö·®ÀÌ ÀÖ´Â ¾ÆÀÌÅÛ
+        // 1. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (itemData is CountableItemData ciData)
         {
             bool findNextCountable = true;
             index = -1;
             while (amount > 0)
             {
-                // 1-1. ÀÌ¹Ì ÇØ´ç ¾ÆÀÌÅÛÀÌ ÀÎº¥Åä¸® ³»¿¡ Á¸ÀçÇÏ°í, °³¼ö ¿©À¯ ÀÖ´ÂÁö °Ë»ç
+                // 1-1. ï¿½Ì¹ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ä¸® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
                 if (findNextCountable)
                 {
                     index = FindCountableItemSlotIndex(ciData, index + 1);
 
-                    // °³¼ö ¿©À¯ÀÖ´Â ±âÁ¸Àç ½½·ÔÀÌ ´õÀÌ»ó ¾ø´Ù°í ÆÇ´ÜµÉ °æ¿ì, ºó ½½·ÔºÎÅÍ Å½»ö ½ÃÀÛ
+                    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½Ù°ï¿½ ï¿½Ç´Üµï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ ï¿½ï¿½ï¿½Ôºï¿½ï¿½ï¿½ Å½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                     if (index == -1)
                     {
                         findNextCountable = false;
                     }
-                    // ±âÁ¸Àç ½½·ÔÀ» Ã£Àº °æ¿ì, ¾ç Áõ°¡½ÃÅ°°í ÃÊ°ú·® Á¸Àç ½Ã amount¿¡ ÃÊ±âÈ­
+                    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Ê°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ amountï¿½ï¿½ ï¿½Ê±ï¿½È­
                     else
                     {
                         CountableItem ci = _items[index] as CountableItem;
@@ -78,27 +78,27 @@ public class Inventory : MonoBehaviour
                         UpdateSlot(index);
                     }
                 }
-                // 1-2. ºó ½½·Ô Å½»ö
+                // 1-2. ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å½ï¿½ï¿½
                 else
                 {
                     index = FindEmptySlotIndex(index + 1);
 
-                    // ºó ½½·ÔÁ¶Â÷ ¾ø´Â °æ¿ì Á¾·á
+                    // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                     if (index == -1)
                     {
                         break;
                     }
-                    // ºó ½½·Ô ¹ß°ß ½Ã, ½½·Ô¿¡ ¾ÆÀÌÅÛ Ãß°¡ ¹× À×¿©·® °è»ê
+                    // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½, ï¿½ï¿½ï¿½Ô¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ ï¿½×¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
                     else
                     {
-                        // »õ·Î¿î ¾ÆÀÌÅÛ »ý¼º
+                        // ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                         CountableItem ci = ciData.CreateItem() as CountableItem;
                         ci.SetAmount(amount);
 
-                        // ½½·Ô¿¡ Ãß°¡
+                        // ï¿½ï¿½ï¿½Ô¿ï¿½ ï¿½ß°ï¿½
                         _items[index] = ci;
 
-                        // ³²Àº °³¼ö °è»ê
+                        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
                         amount = (amount > ciData.MaxAmount) ? (amount - ciData.MaxAmount) : 0;
 
                         UpdateSlot(index);
@@ -106,16 +106,16 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
-        // 2. ¼ö·®ÀÌ ¾ø´Â ¾ÆÀÌÅÛ
+        // 2. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         else
         {
-            // 2-1. 1°³¸¸ ³Ö´Â °æ¿ì, °£´ÜÈ÷ ¼öÇà
+            // 2-1. 1ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             if (amount == 1)
             {
                 index = FindEmptySlotIndex();
                 if (index != -1)
                 {
-                    // ¾ÆÀÌÅÛÀ» »ý¼ºÇÏ¿© ½½·Ô¿¡ Ãß°¡
+                    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½Ô¿ï¿½ ï¿½ß°ï¿½
                     _items[index] = itemData.CreateItem();
                     amount = 0;
 
@@ -127,20 +127,20 @@ public class Inventory : MonoBehaviour
                 }
             }
 
-            // 2-2. 2°³ ÀÌ»óÀÇ ¼ö·® ¾ø´Â ¾ÆÀÌÅÛÀ» µ¿½Ã¿¡ Ãß°¡ÇÏ´Â °æ¿ì
+            // 2-2. 2ï¿½ï¿½ ï¿½Ì»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¿ï¿½ ï¿½ß°ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
             index = -1;
             for (; amount > 0; amount--)
             {
-                // ¾ÆÀÌÅÛ ³ÖÀº ÀÎµ¦½ºÀÇ ´ÙÀ½ ÀÎµ¦½ººÎÅÍ ½½·Ô Å½»ö
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å½ï¿½ï¿½
                 index = FindEmptySlotIndex(index + 1);
 
-                // ´Ù ³ÖÁö ¸øÇÑ °æ¿ì ·çÇÁ Á¾·á
+                // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 if (index == -1)
                 {
                     break;
                 }
 
-                // ¾ÆÀÌÅÛÀ» »ý¼ºÇÏ¿© ½½·Ô¿¡ Ãß°¡
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½Ô¿ï¿½ ï¿½ß°ï¿½
                 _items[index] = itemData.CreateItem();
 
                 UpdateSlot(index);
@@ -165,10 +165,10 @@ public class Inventory : MonoBehaviour
         if (!IsValidIndex(index)) return;
         if (_items[index] == null) return;
 
-        // »ç¿ë °¡´ÉÇÑ ¾ÆÀÌÅÛÀÎ °æ¿ì
+        // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         if (_items[index] is IUsableItem uItem)
         {
-            // ¾ÆÀÌÅÛ »ç¿ë
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
             bool succeeded = uItem.Use();
 
             if (succeeded)
@@ -224,77 +224,77 @@ public class Inventory : MonoBehaviour
 
         Item item = _equ[index];
 
-        // 1. ¾ÆÀÌÅÛÀÌ ½½·Ô¿¡ Á¸ÀçÇÏ´Â °æ¿ì
+        // 1. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ô¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
         if (item != null)
         {
-            // ¾ÆÀÌÄÜ µî·Ï
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
             _equipmentUI.SetItemIcon(index, item.Data.IconSprite);
         }
-        // 2. ºó ½½·ÔÀÎ °æ¿ì : ¾ÆÀÌÄÜ Á¦°Å
+        // 2. ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         else
         {
             RemoveIcon();
         }
 
-        // ·ÎÄÃ : ¾ÆÀÌÄÜ Á¦°ÅÇÏ±â
+        // ï¿½ï¿½ï¿½ï¿½ : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
         void RemoveIcon()
         {
             _equipmentUI.RemoveItem(index);
         }
     }
-    /// <summary> ÇØ´çÇÏ´Â ÀÎµ¦½ºÀÇ ½½·Ô »óÅÂ ¹× UI °»½Å </summary>
+    /// <summary> ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ UI ï¿½ï¿½ï¿½ï¿½ </summary>
     private void UpdateSlot(int index)
     {
         if (!IsValidIndex(index)) return;
 
         Item item = _items[index];
 
-        // 1. ¾ÆÀÌÅÛÀÌ ½½·Ô¿¡ Á¸ÀçÇÏ´Â °æ¿ì
+        // 1. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ô¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
         if (item != null)
         {
-            // ¾ÆÀÌÄÜ µî·Ï
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
            
             _inventoryUI.SetItemIcon(index, item.Data.IconSprite);
 
-            // 1-1. ¼¿ ¼ö ÀÖ´Â ¾ÆÀÌÅÛ
+            // 1-1. ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (item is CountableItem ci)
             {
-                // 1-1-1. ¼ö·®ÀÌ 0ÀÎ °æ¿ì, ¾ÆÀÌÅÛ Á¦°Å
+                // 1-1-1. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 if (ci.IsEmpty)
                 {
                     _items[index] = null;
                     RemoveIcon();
                     return;
                 }
-                // 1-1-2. ¼ö·® ÅØ½ºÆ® Ç¥½Ã
+                // 1-1-2. ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ® Ç¥ï¿½ï¿½
                 else
                 {
                     _inventoryUI.SetItemAmountText(index, ci.Amount);
                 }
             }
-            // 1-2. ¼¿ ¼ö ¾ø´Â ¾ÆÀÌÅÛÀÎ °æ¿ì ¼ö·® ÅØ½ºÆ® Á¦°Å
+            // 1-2. ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
             else
             {
                 _inventoryUI.HideItemAmountText(index);
             }
 
-            // ½½·Ô ÇÊÅÍ »óÅÂ ¾÷µ¥ÀÌÆ®
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
             //_inventoryUI.UpdateSlotFilterState(index, item.Data);
         }
-        // 2. ºó ½½·ÔÀÎ °æ¿ì : ¾ÆÀÌÄÜ Á¦°Å
+        // 2. ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         else
         {
             RemoveIcon();
         }
 
-        // ·ÎÄÃ : ¾ÆÀÌÄÜ Á¦°ÅÇÏ±â
+        // ï¿½ï¿½ï¿½ï¿½ : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
         void RemoveIcon()
         {
             _inventoryUI.RemoveItem(index);
-            _inventoryUI.HideItemAmountText(index); // ¼ö·® ÅØ½ºÆ® ¼û±â±â
+            _inventoryUI.HideItemAmountText(index); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½
         }
     }
-    /// <summary> ¾Õ¿¡¼­ºÎÅÍ °³¼ö ¿©À¯°¡ ÀÖ´Â Countable ¾ÆÀÌÅÛÀÇ ½½·Ô ÀÎµ¦½º Å½»ö </summary>
+    /// <summary> ï¿½Õ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ Countable ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ Å½ï¿½ï¿½ </summary>
     private int FindCountableItemSlotIndex(CountableItemData target, int startIndex = 0)
     {
         for (int i = startIndex; i < Capacity; i++)
@@ -303,7 +303,7 @@ public class Inventory : MonoBehaviour
             if (current == null)
                 continue;
 
-            // ¾ÆÀÌÅÛ Á¾·ù ÀÏÄ¡, °³¼ö ¿©À¯ È®ÀÎ
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
             if (current.Data == target && current is CountableItem ci)
             {
                 if (!ci.IsMax)
@@ -320,12 +320,12 @@ public class Inventory : MonoBehaviour
                 return i;
         return -1;
     }
-    /// <summary> ÀÎµ¦½º°¡ ¼ö¿ë ¹üÀ§ ³»¿¡ ÀÖ´ÂÁö °Ë»ç </summary>
+    /// <summary> ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ </summary>
     private bool IsValidIndex(int index)
     {
         return index >= 0 && index < Capacity;
     }
-    /// <summary> ÇØ´ç ½½·ÔÀÇ ¾ÆÀÌÅÛ Á¦°Å </summary>
+    /// <summary> ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ </summary>
     public void Remove(int index)
     {
         if (!IsValidIndex(index)) return;

@@ -9,6 +9,7 @@ public class Test : Enemy
     {
         base.Awake();
         Stat = new Stat();
+        Stat.Hp = 100;
     }
 
     public override void Die()

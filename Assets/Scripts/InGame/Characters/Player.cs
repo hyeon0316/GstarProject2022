@@ -54,7 +54,7 @@ public abstract class Player : Creature
    /// <summary>
    /// 공격할 우선순위 타겟들을(searchCount 수 만큼) 지정
    /// </summary>
-   protected bool CheckAttackRange(int searchCount)
+   protected bool IsAttackRange(int searchCount) 
    {
       Collider[] colliders = Physics.OverlapSphere(transform.position, _searchRadius, LayerMask.GetMask("Enemy"));
 
@@ -92,7 +92,7 @@ public abstract class Player : Creature
    {
       if (!IsAttack)
       {
-         if (CheckAttackRange(1))
+         if (IsAttackRange(1))
          {
             if (_attackRadius < Vector3.Distance(transform.position, _targets[0].position)) //타겟이 공격사거리 밖에있을때
             {

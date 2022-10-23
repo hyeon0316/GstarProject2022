@@ -34,16 +34,19 @@ public class Mage : Player
     {
         if (!_chainLightningCoolDown.IsCoolDown)
         {
-            if (CheckAttackRange(2))
+            if (IsAttackRange(4))
             {
-                if (_attackRadius < Vector3.Distance(transform.position, _targets[0].position))
+                if (_targets.Count >= 2) //체인 라이트닝은 최소 2명이상 부터 발동하도록 함
                 {
-                    _moveCo = MoveTowardEnemyCo(ChainLightning);
-                    StartCoroutine(_moveCo);
-                }
-                else
-                {
-                    ChainLightning();
+                    if (_attackRadius < Vector3.Distance(transform.position, _targets[0].position))
+                    {
+                        _moveCo = MoveTowardEnemyCo(ChainLightning);
+                        StartCoroutine(_moveCo);
+                    }
+                    else
+                    {
+                        ChainLightning();
+                    }
                 }
             }
         }
@@ -64,7 +67,7 @@ public class Mage : Player
     {
         if (!_wideAreaBarrageCoolDown.IsCoolDown) 
         {
-            if (CheckAttackRange(1))
+            if (IsAttackRange(1))
             {
                 if (_attackRadius < Vector3.Distance(transform.position, _targets[0].position))
                 {
@@ -106,6 +109,7 @@ public class Mage : Player
 
     public void CreateChainLightningLine()
     {
-        
+        _chainLightningLine._targets = _targets;
+        _chainLightningLine.CreateLine();
     }
 }
