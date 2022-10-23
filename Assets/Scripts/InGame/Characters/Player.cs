@@ -33,6 +33,7 @@ public abstract class Player : Creature
       base.Awake();
       Stat = new Stat(DataManager.Instance.SelectJobType);
       DataManager.Instance.Player = this;
+        
    }
 
    private void Update()

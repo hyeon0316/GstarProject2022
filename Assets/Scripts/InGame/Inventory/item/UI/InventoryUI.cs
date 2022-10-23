@@ -69,6 +69,7 @@ public class InventoryUI : MonoBehaviour
         if (_inventory._useSlotindex == startIndex)
         {
             _inventory._useSlotindex = index;
+            _inventory.ShowActiveISlot(index);
             _slotUIList[index].ShowHigh();
 
         }
@@ -76,12 +77,15 @@ public class InventoryUI : MonoBehaviour
         {
 
             _slotUIList[index].HideHigh();
+            _inventory.HideActiveISlot();
             _inventory._useSlotindex = 90;
             _inventory.Use(index);
         }
         else
         {
             _slotUIList[_inventory._useSlotindex].HideHigh();
+            _inventory.HideActiveISlot();
+            _inventory.ShowActiveISlot(index);
             _slotUIList[index].ShowHigh();
             _inventory._useSlotindex = index;
         }
