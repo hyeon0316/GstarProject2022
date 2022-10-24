@@ -64,22 +64,22 @@ public class JoystickController : MonoBehaviour, IDragHandler, IPointerDownHandl
     /// </summary>
     private void ControlJoystcik(PointerEventData eventData)
     {
-        if (!_player.IsDead)
-        {
+       
             Vector2 pos = eventData.position - (Vector2) _background.position;
             pos = Vector2.ClampMagnitude(pos, _radius);
             _joystick.localPosition = pos;
+            if (!_player.IsDead)
+            {
+                _moveDistance = Vector2.Distance(_background.position, _joystick.position) / _radius;
 
-            _moveDistance = Vector2.Distance(_background.position, _joystick.position) / _radius;
+                pos = pos.normalized;
+                Vector3 movePos = new Vector3(pos.x, 0, pos.y);
 
-            pos = pos.normalized;
-            Vector3 movePos = new Vector3(pos.x, 0, pos.y);
+                //기존 방향 + 갈려고 하는 방향 = 최종적으로 움직여야 할 각도
+                Vector3 camAngle = _cameraArm.rotation.eulerAngles;
+                Vector3 camDirAngle = Quaternion.LookRotation(movePos).eulerAngles;
 
-            //기존 방향 + 갈려고 하는 방향 = 최종적으로 움직여야 할 각도
-            Vector3 camAngle = _cameraArm.rotation.eulerAngles;
-            Vector3 camDirAngle = Quaternion.LookRotation(movePos).eulerAngles;
-
-            _playerMoveAngle = Vector3.up * (camAngle.y + camDirAngle.y); //y축 기준 회전
-        }
+                _playerMoveAngle = Vector3.up * (camAngle.y + camDirAngle.y); //y축 기준 회전
+            }
     }
 }
