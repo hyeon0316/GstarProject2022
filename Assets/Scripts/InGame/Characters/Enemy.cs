@@ -10,7 +10,7 @@ public enum EnemyType
     Spider
 }
 
-public abstract class Enemy : Creature, IPointerDownHandler
+public abstract class Enemy : Creature
 {
     protected enum PublicAnimState
     {
@@ -139,6 +139,7 @@ public abstract class Enemy : Creature, IPointerDownHandler
     {
         base.Die();
         _animator.SetTrigger(Global.EnemyDeadTrigger);
+        DataManager.Instance.Player.Targets.Clear();
         Invoke("DestroyObject",1.5f); 
     }
 
@@ -157,14 +158,5 @@ public abstract class Enemy : Creature, IPointerDownHandler
         }
     }
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        Debug.Log("터치");
-        if (DataManager.Instance.Player.SearchRadius > Vector3.Distance(transform.position, DataManager.Instance.Player.transform.position))
-        {
-            DataManager.Instance.Player.Targets.Clear();
-            DataManager.Instance.Player.Targets.Add(this.transform);
-            Debug.Log(gameObject.name);
-        }
-    }
+    
 }

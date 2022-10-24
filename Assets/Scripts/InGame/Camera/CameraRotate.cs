@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 /// <summary>
 /// 카메라 상하좌우 회전 담당
@@ -26,10 +27,15 @@ public class CameraRotate : MonoBehaviour, IBeginDragHandler, IDragHandler
     private float _xAngleTemp;
     private float _yAngleTemp;
 
+    private Image _image;
+
+    private bool _isRotate;
+
     private void Start()
     {
         _xAngle = _cameraArm.rotation.eulerAngles.x;
         _yAngle = _cameraArm.rotation.eulerAngles.y;
+
     }
 
 

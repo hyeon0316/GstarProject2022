@@ -24,6 +24,7 @@ public abstract class Creature : MonoBehaviour
   protected List<Transform> _targets = new List<Transform>(); //탐색된 적의 정보
 
   public List<Transform> Targets => _targets;
+
   public bool IsDead { get; private set; }
   
   

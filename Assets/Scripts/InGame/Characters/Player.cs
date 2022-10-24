@@ -16,7 +16,6 @@ public abstract class Player : Creature
     [Header("적 탐색 범위")]
     [SerializeField] protected float _searchRadius;
 
-    public float SearchRadius => _searchRadius;
 
     /// <summary>
     /// 다음단계의 기본공격이 가능한지에 대한 bool값
@@ -48,6 +47,27 @@ public abstract class Player : Creature
         if (_canNextNormalAttack)
         {
             CheckInitCombo(); //코루틴 대신 사용
+        }
+
+        TouchGetTarget();
+    }
+
+    private void TouchGetTarget()
+    {
+        if (Input.GetMouseButtonDown(0)) //PC
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray.origin, ray.direction, out hit, 1000 ,LayerMask.GetMask("Enemy")))
+            {
+                if (_searchRadius > Vector3.Distance(transform.position, hit.transform.position))
+                {
+                    _targets.Clear();
+                    _targets.Add(hit.transform);
+                    Debug.Log(hit.transform.gameObject.name);
+                }
+            }
         }
     }
 
