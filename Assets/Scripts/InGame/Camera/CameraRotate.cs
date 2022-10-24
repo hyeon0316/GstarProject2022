@@ -48,10 +48,12 @@ public class CameraRotate : MonoBehaviour, IBeginDragHandler, IDragHandler
         _yAngle = _yAngleTemp + (_dragPos.x - _beginPos.x) * 180 / Screen.width * _rotateSpeed;
         _xAngle = _xAngleTemp + (_dragPos.y - _beginPos.y) * 90 / Screen.height * _rotateSpeed;
         
-        if (_xAngle > _xRotateMax) _xAngle = _xRotateMax;
-        if (_xAngle < _xRotateMin) _xAngle = _xRotateMin;
+        if (_xAngle > _xRotateMax) 
+            _xAngle = _xRotateMax;
+        if (_xAngle < _xRotateMin) 
+            _xAngle = _xRotateMin;
 
-        _cameraArm.rotation = Quaternion.Euler(_xAngle, _yAngle, 0);
+        _cameraArm.rotation = Quaternion.Euler(-_xAngle, _yAngle, 0);
     }
 
 
