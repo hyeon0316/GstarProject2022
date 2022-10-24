@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NomalAttackMissile : MonoBehaviour
+public class NormalAttackMissile : MonoBehaviour
 {
    
    [SerializeField] private float _missileSpeed;
@@ -23,7 +23,7 @@ public class NomalAttackMissile : MonoBehaviour
 
    private void DisableMissile()
    {
-      ObjectPoolManager.Instance.ReturnObject(PoolType.NomalAttackMissile, this.gameObject);
+      ObjectPoolManager.Instance.ReturnObject(PoolType.NormalAttackMissile, this.gameObject);
    }
 
 
@@ -39,8 +39,8 @@ public class NomalAttackMissile : MonoBehaviour
 
    private void CreateEffect()
    {
-      GameObject effect = ObjectPoolManager.Instance.GetObject(PoolType.NomalAttackEffect);
+      GameObject effect = ObjectPoolManager.Instance.GetObject(PoolType.NormalAttackEffect);
       effect.transform.position = this.transform.position;
-      effect.GetComponent<NomalAttackEffect>().DelayDisable();
+      effect.GetComponent<NormalAttackEffect>().DelayDisable();
    }
 }

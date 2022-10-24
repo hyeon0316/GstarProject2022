@@ -466,7 +466,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6310364584250092177}
   m_Layer: 0
-  m_Name: NomalAttackPos
+  m_Name: NormalAttackPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1634,7 +1634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _searchRadius: 15
   _attackRadius: 8
-  _nomalAttackPos: {fileID: 6310364584250092177}
+  _normalAttackPos: {fileID: 6310364584250092177}
   _bulletRain: {fileID: 7891702713259035445}
   _wideAreaBarrageCoolDown: {fileID: 6562556723852630916}
   _chainLightningLine: {fileID: 7655725701498427776}

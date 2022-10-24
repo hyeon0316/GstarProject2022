@@ -17,6 +17,9 @@ public abstract class Creature : MonoBehaviour
 
   protected List<Transform> _targets = new List<Transform>(); //탐색된 적의 정보
 
+  public bool IsDead { get; private set; }
+  
+  
   public virtual void Awake()
   {
       _animator = GetComponent<Animator>();
@@ -55,6 +58,9 @@ public abstract class Creature : MonoBehaviour
 
 
 
-  public abstract void Die();
+  protected virtual void Die()
+  {
+      this.gameObject.layer = LayerMask.NameToLayer("Dead");
+  }
 
 }

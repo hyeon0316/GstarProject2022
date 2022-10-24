@@ -49,7 +49,13 @@ public class Stat
     /// </summary>
     public Stat(EnemyType enemyType)
     {
-        
+        //todo: scriptableobject로 관리하여 로드
+        switch (enemyType)
+        {
+            case EnemyType.Spider:
+                Hp = 100;
+                break;
+        }
     }
     
     /// <summary>

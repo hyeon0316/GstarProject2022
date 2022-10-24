@@ -5,8 +5,8 @@ using UnityEngine;
 
 public enum PoolType
 {
-    NomalAttackMissile,
-    NomalAttackEffect,
+    NormalAttackMissile,
+    NormalAttackEffect,
     WideAreaBarrage,
     WideAreaBarrageEffect,
     BulletRainMissile,
@@ -21,8 +21,8 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
 
     private void Awake()
     {
-        Init(PoolType.NomalAttackMissile, 3);
-        Init(PoolType.NomalAttackEffect, 3);
+        Init(PoolType.NormalAttackMissile, 3);
+        Init(PoolType.NormalAttackEffect, 3);
         Init(PoolType.WideAreaBarrage, 1);
         Init(PoolType.WideAreaBarrageEffect, 1);
         Init(PoolType.BulletRainMissile, 10);

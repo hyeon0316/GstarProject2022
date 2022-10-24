@@ -6,7 +6,7 @@ using UnityEngine;
 public class Mage : Player
 {
     [Header("기본공격 발사체 위치")]
-    [SerializeField] private Transform _nomalAttackPos;
+    [SerializeField] private Transform _normalAttackPos;
 
     [Header("불렛레인")]
     [SerializeField] private BulletRain _bulletRain;
@@ -27,13 +27,13 @@ public class Mage : Player
     /// <summary>
     /// 기본공격할때 지정 위치에 발사체 생성
     /// </summary>
-    public void CreateNomalAttackMissile()
+    public void CreateNormalAttackMissile()
     {
-        var obj = ObjectPoolManager.Instance.GetObject(PoolType.NomalAttackMissile);
-        obj.transform.position = _nomalAttackPos.position;
-        obj.transform.rotation = _nomalAttackPos.rotation;
+        var obj = ObjectPoolManager.Instance.GetObject(PoolType.NormalAttackMissile);
+        obj.transform.position = _normalAttackPos.position;
+        obj.transform.rotation = _normalAttackPos.rotation;
         
-        obj.GetComponent<NomalAttackMissile>().DelayDisable();
+        obj.GetComponent<NormalAttackMissile>().DelayDisable();
     }
 
     /// <summary>

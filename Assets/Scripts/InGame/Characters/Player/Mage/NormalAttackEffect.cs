@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NomalAttackEffect : MonoBehaviour
+public class NormalAttackEffect : MonoBehaviour
 {
   
    public void DelayDisable()
@@ -13,6 +13,6 @@ public class NomalAttackEffect : MonoBehaviour
    
    private void DisableEffect()
    {
-      ObjectPoolManager.Instance.ReturnObject(PoolType.NomalAttackEffect, this.gameObject);
+      ObjectPoolManager.Instance.ReturnObject(PoolType.NormalAttackEffect, this.gameObject);
    }
 }

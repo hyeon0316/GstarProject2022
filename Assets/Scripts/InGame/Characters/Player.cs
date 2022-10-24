@@ -33,8 +33,8 @@ public abstract class Player : Creature
       base.Awake();
       Stat = new Stat(DataManager.Instance.SelectJobType);
       DataManager.Instance.Player = this;
-        
    }
+
 
    private void Update()
    {
@@ -79,7 +79,7 @@ public abstract class Player : Creature
 
          foreach (var target in _targets)
          {
-            Debug.Log(target);
+            Debug.Log($"타겟:{target}");
          }
          
          return true;
@@ -148,7 +148,7 @@ public abstract class Player : Creature
    private void NomalAttack()
    {
       transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
-      _animator.SetInteger(Global.NomalAttackInteger, _comboCount++ % Global.MaxCombo);
+      _animator.SetInteger(Global.NormalAttackInteger, _comboCount++ % Global.MaxComboAttack);
       IsAttack = true;
       _canNextNomalAttack = false;
    }
@@ -157,9 +157,9 @@ public abstract class Player : Creature
    /// <summary>
    /// 기본 공격의 애니메이션 단계를 처음으로 초기화
    /// </summary>
-   public void InitNomalAttack()
+   public void InitNormalAttack()
    {
-      _animator.SetInteger(Global.NomalAttackInteger, Global.InitCount);
+      _animator.SetInteger(Global.NormalAttackInteger, Global.InitAttackCount);
       IsAttack = false;
 
       _nomalAttackCancelDelay = 1f;
@@ -191,7 +191,7 @@ public abstract class Player : Creature
       _animator.SetFloat(Global.MoveBlend, moveDistance);
    }
 
-   public override void Die()
+   protected override void Die()
    {
       //todo: 플레이어가 죽었을때 처리(마을 부활, 체력 회복 등)
    }

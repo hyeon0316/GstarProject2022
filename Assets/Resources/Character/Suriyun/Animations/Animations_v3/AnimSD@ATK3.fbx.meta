@@ -543,7 +543,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.6721854
-        functionName: CreateNomalAttackMissile
+        functionName: CreateNormalAttackMissile
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: b1e1895029c00bd4cb410f5baa42598f,
           type: 3}
@@ -551,7 +551,7 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 1
-        functionName: InitNomalAttack
+        functionName: InitNormalAttack
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: b1e1895029c00bd4cb410f5baa42598f,
           type: 3}
