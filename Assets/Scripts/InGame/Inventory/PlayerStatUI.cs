@@ -13,26 +13,26 @@ public class PlayerStatUI : MonoBehaviour
     }
     void Update()
     {
-        //UpdateStat(DataManager.Instance.Player.Stat);
+        UpdateStat(DataManager.Instance.Player.Stat);
         PlayerStatText.text = _str;
     }
     private void UpdateStat(Stat _stat)
     {
         _str = "";
-        _str += "--------°ø°Ý ------\n";
-        _str += "°ø°Ý·Â : " + _stat.Attack + "\n";
-        _str += "¸íÁß : " + _stat.HitPercent + "\n";
-        _str += "½ºÅ³µ¥¹ÌÁö : " + _stat.SkillDamage + "%\n";
-        _str += "¸ðµçµ¥¹ÌÁö : " + _stat.AllDamge + "%\n";
-        _str += "--------¹æ¾î ------\n";
-        _str += "¹æ¾î·Â : " + _stat.Defense + "\n";
-        _str += "È¸ÇÇ : " + _stat.Dodge + "\n";
-        _str += "¹Þ´Â ¸ðµç µ¥¹ÌÁö °¨¼Ò : " + _stat.ReduceDamage + "%\n";
-        _str += "--------±âÅ¸ ------\n";
-        _str += "ÃÖ´ë Ã¤·Â : " + _stat.MaxHp + "\n";
-        _str += "ÃÖ´ë ¿¥ÇÇ : " + _stat.MaxMp + "\n";
-        _str += "¹°¾à ¼ÒÁö °³¼ö : " + _stat.MaxPostion + "\n";
-        _str += "HPÈ¸º¹·® : " + _stat.RecoveryHp + "\n";
-        _str += "MPÈ¸º¹·® : " + _stat.RecoveryMp + "\n";
+        _str += "--------ï¿½ï¿½ï¿½ï¿½ ------\n";
+        _str += "ï¿½ï¿½ï¿½Ý·ï¿½ : " + _stat.Attack + "\n";
+        _str += "ï¿½ï¿½ï¿½ï¿½ : " + _stat.HitPercent + "\n";
+        _str += "ï¿½ï¿½Å³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : " + _stat.SkillDamage + "%\n";
+        _str += "ï¿½ï¿½çµ¥ï¿½ï¿½ï¿½ï¿½ : " + _stat.AllDamge + "%\n";
+        _str += "--------ï¿½ï¿½ï¿½ ------\n";
+        _str += "ï¿½ï¿½ï¿½ï¿½ : " + _stat.Defense + "\n";
+        _str += "È¸ï¿½ï¿½ : " + _stat.Dodge + "\n";
+        _str += "ï¿½Þ´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : " + _stat.ReduceDamage + "%\n";
+        _str += "--------ï¿½ï¿½Å¸ ------\n";
+        _str += "ï¿½Ö´ï¿½ Ã¤ï¿½ï¿½ : " + _stat.MaxHp + "\n";
+        _str += "ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ : " + _stat.MaxMp + "\n";
+        _str += "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : " + _stat.MaxPostion + "\n";
+        _str += "HPÈ¸ï¿½ï¿½ï¿½ï¿½ : " + _stat.RecoveryHp + "\n";
+        _str += "MPÈ¸ï¿½ï¿½ï¿½ï¿½ : " + _stat.RecoveryMp + "\n";
     }
 }
