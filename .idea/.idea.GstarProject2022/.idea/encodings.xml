@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/Assets/Scripts/InGame/Inventory/item/CountableItem.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/Scripts/InGame/Inventory/item/IUsableItem.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/Scripts/InGame/Inventory/item/PortionItem.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/Scripts/InGame/Inventory/item/base/CountableItemData.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/Scripts/InGame/Inventory/item/base/IngredientItemData.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/Scripts/InGame/Inventory/item/base/ItemData.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/Scripts/InGame/Inventory/item/base/PortionItemData.cs" charset="x-windows-949" />
+  </component>
+</project>
