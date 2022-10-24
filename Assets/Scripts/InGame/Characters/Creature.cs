@@ -2,6 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using UnityEditor.UIElements;
+
+public enum LayerType
+{
+    Player,
+    Enemy
+}
 
 public abstract class Creature : MonoBehaviour
 {
@@ -9,8 +17,6 @@ public abstract class Creature : MonoBehaviour
 
   protected Animator _animator;
 
-  [Header("적 탐색 범위")]
-  [SerializeField] protected float _searchRadius;
   
   [Header("기본공격 범위")]
   [SerializeField] protected float _attackRadius; //실제 멈춰서서 공격하는 범위
@@ -20,7 +26,7 @@ public abstract class Creature : MonoBehaviour
   public bool IsDead { get; private set; }
   
   
-  public virtual void Awake()
+  protected virtual void Awake()
   {
       _animator = GetComponent<Animator>();
   }
@@ -43,7 +49,7 @@ public abstract class Creature : MonoBehaviour
           Stat.Hp = Stat.MaxHp;
   }
   
-  public void TakeDamage(int amount)
+  public virtual void TakeDamage(int amount)
   {
       Stat.Hp -= amount;
 
@@ -56,10 +62,11 @@ public abstract class Creature : MonoBehaviour
       Debug.Log(Stat.Hp);
   }
 
-
+  
 
   protected virtual void Die()
   {
+      IsDead = true;
       this.gameObject.layer = LayerMask.NameToLayer("Dead");
   }
 

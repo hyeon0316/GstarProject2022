@@ -19,6 +19,7 @@ public static class Global
     public const string WideAreaBarrageTrigger = "WideAreaBarrage";
     public const string ChainLightningTrigger = "ChainLightning";
     public const string BulletRainTrigger = "BulletRain";
+    public const string DeadTrigger = "Dead";
     
     public const int MaxComboAttack = 4; // 기본공격의 총 콤보 수
     public const int InitAttackCount = -1; // 기본공격의 처음단계 상태

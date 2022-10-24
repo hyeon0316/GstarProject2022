@@ -41,7 +41,7 @@ public class Mage : Player
     /// </summary>
     public void UseBulletRain()
     {
-        if (!_bulletRainCoolDown.IsCoolDown)
+        if (!_bulletRainCoolDown.IsCoolDown && !IsDead)
         {
             if (IsAttackRange(1))
             {
@@ -77,7 +77,7 @@ public class Mage : Player
     /// </summary>
     public void UseChainLightning()
     {
-        if (!_chainLightningCoolDown.IsCoolDown)
+        if (!_chainLightningCoolDown.IsCoolDown && !IsDead)
         {
             if (IsAttackRange(4))
             {
@@ -110,7 +110,7 @@ public class Mage : Player
     /// </summary>
     public void UseWideAreaBarrage()
     {
-        if (!_wideAreaBarrageCoolDown.IsCoolDown) 
+        if (!_wideAreaBarrageCoolDown.IsCoolDown && !IsDead) 
         {
             if (IsAttackRange(1))
             {
