@@ -21,6 +21,7 @@ public class Stat
     public int AllDamge { get; set; }   //모든데미지
     public int MaxMp { get; set; }
     public int Mp { get; set; }
+    public int MaxPostion { get; set; }
 
 
     public Stat()

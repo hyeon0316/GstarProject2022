@@ -20,11 +20,11 @@ MonoBehaviour:
   _hit: 0
   _skillDamage: 0
   _allDamage: 0
-  _defense: 0
-  _evasion: 0
-  _allDefense: 0
-  _hp: 0
-  _mp: 0
+  _defense: 50
+  _evasion: 10
+  _allDefense: 10
+  _hp: 10
+  _mp: 10
   _postion: 0
   _hpRe: 0
   _mpRe: 0

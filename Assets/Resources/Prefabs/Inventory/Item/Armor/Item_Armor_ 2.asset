@@ -20,7 +20,7 @@ MonoBehaviour:
   _hit: 0
   _skillDamage: 0
   _allDamage: 0
-  _defense: 10
+  _defense: 50
   _evasion: 10
   _allDefense: 10
   _hp: 50

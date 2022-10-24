@@ -33,14 +33,18 @@ public class Inventory : MonoBehaviour
     public int _useSlotindex;
 
     private int _activeSlotNum;
+    public GameObject InvenUI;
+    public GameObject StatUI;
 
 
     public void ButtonEnforce()
     {
         ItemStat _data;
+        _data = _enforce.GetStat(_activeSlotNum);
+        UnEquPlayerStat(_data);
         _enforce.OnButton(_activeSlotNum);
         _data = _enforce.GetStat(_activeSlotNum);
-        //플레이어 한테 값넣어주기
+        EquPlayerStat(_data);
         _activeESlot.UpdateEnforceStat(_data,_enforce.EnforceNum[_activeSlotNum]);
     }
 
@@ -210,7 +214,7 @@ public class Inventory : MonoBehaviour
         if (_equ[index] is EquipmentItem _uItem)
         {
             Add(_equ[index].Data);
-            //UnEquPlayerStat(_uItem.EquipmentData.Stat);
+            UnEquPlayerStat(_uItem.EquipmentData.Stat);
             EquRemove(index);
         }
 
@@ -229,9 +233,9 @@ public class Inventory : MonoBehaviour
 
         DataManager.Instance.Player.Stat.MaxHp += _stat.MaxHp;
         DataManager.Instance.Player.Stat.MaxMp += _stat.MaxMp;
-        //   DataManager.Instance.Player.Stat.+= _stat.Attack;
+        DataManager.Instance.Player.Stat.MaxPostion += _stat.MaxPostion;
         DataManager.Instance.Player.Stat.RecoveryHp += _stat.RecoveryHp;
-        //   DataManager.Instance.Player.Stat.re += _stat.Attack;
+        DataManager.Instance.Player.Stat.RecoveryMp += _stat.RecoveryMp;
 
     }
     public void UnEquPlayerStat(ItemStat _stat)
@@ -248,9 +252,9 @@ public class Inventory : MonoBehaviour
 
         DataManager.Instance.Player.Stat.MaxHp -= _stat.MaxHp;
         DataManager.Instance.Player.Stat.MaxMp -= _stat.MaxMp;
-        //   DataManager.Instance.Player.Stat.+= _stat.Attack;
+        DataManager.Instance.Player.Stat.MaxPostion += _stat.MaxPostion;
         DataManager.Instance.Player.Stat.RecoveryHp += _stat.RecoveryHp;
-        //   DataManager.Instance.Player.Stat.re += _stat.Attack;
+        DataManager.Instance.Player.Stat.RecoveryMp += _stat.RecoveryMp;
 
     }
     public void Equip(Item _item)
@@ -264,7 +268,7 @@ public class Inventory : MonoBehaviour
                 UnEquip(_slotNum);
             }
             _equ[_slotNum] = _item;
-            //EquPlayerStat(_uItem.EquipmentData.Stat);
+            EquPlayerStat(_uItem.EquipmentData.Stat);
             UpdateEqu(_slotNum);
 
         }
@@ -398,5 +402,20 @@ public class Inventory : MonoBehaviour
         _equ[index] = null;
         _equipmentUI.RemoveItem(index);
     }
+    
 
+    public void InvenButton()
+    {
+        StatUI.SetActive(false);
+        InvenUI.SetActive(true);
+    }
+    public void StatButton()
+    {
+        StatUI.SetActive(true);
+        InvenUI.SetActive(false);
+    }
+    public void ExitButton()
+    {
+        this.gameObject.SetActive(false);
+    }
 }
