@@ -117,12 +117,10 @@ public class Enforce : MonoBehaviour
     }
     public ItemStat GetStat(int _index)
     {
-        ItemStat _stat = new ItemStat();
-        _stat = EStat[_index];
+        ItemStat _stat;
+        _stat = EStat[_index].DeepCopy();
         Debug.Log(EStat[_index].Attack);
-        _stat.Attack++;
-        Debug.Log(EStat[_index].Attack);
-        //SetStat(EnforceNum[_index],ref _stat);
+        SetStat(EnforceNum[_index],ref _stat);
         return _stat;
     }
 
