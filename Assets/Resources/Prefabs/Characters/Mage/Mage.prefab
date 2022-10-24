@@ -10408,11 +10408,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: InventorySystem
       objectReference: {fileID: 0}
-    - target: {fileID: 2454793690877587106, guid: 6336ad2f943e9e8439f079547597c3eb,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2454793690877587107, guid: 6336ad2f943e9e8439f079547597c3eb,
         type: 3}
       propertyPath: m_RootOrder
@@ -10441,17 +10436,17 @@ PrefabInstance:
     - target: {fileID: 2454793690877587107, guid: 6336ad2f943e9e8439f079547597c3eb,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2454793690877587107, guid: 6336ad2f943e9e8439f079547597c3eb,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2454793690877587107, guid: 6336ad2f943e9e8439f079547597c3eb,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2454793690877587107, guid: 6336ad2f943e9e8439f079547597c3eb,
         type: 3}
@@ -10481,7 +10476,7 @@ PrefabInstance:
     - target: {fileID: 2454793691648748592, guid: 6336ad2f943e9e8439f079547597c3eb,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.55
+      value: 0.775
       objectReference: {fileID: 0}
     - target: {fileID: 2454793692038770224, guid: 6336ad2f943e9e8439f079547597c3eb,
         type: 3}
@@ -10503,27 +10498,13 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: -17
       objectReference: {fileID: 0}
+    - target: {fileID: 2454793692464573555, guid: 6336ad2f943e9e8439f079547597c3eb,
+        type: 3}
+      propertyPath: m_Size
+      value: 0.225
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6336ad2f943e9e8439f079547597c3eb, type: 3}
---- !u!1 &1471042680610002708 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2454793690877587106, guid: 6336ad2f943e9e8439f079547597c3eb,
-    type: 3}
-  m_PrefabInstance: {fileID: 3925762686990842294}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4784305209514702962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1471042680610002708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f8bb86fd4aed4d46b43c06ece0c1bd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _inventoryWindow: {fileID: 0}
 --- !u!4 &1471042680610002709 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2454793690877587107, guid: 6336ad2f943e9e8439f079547597c3eb,
