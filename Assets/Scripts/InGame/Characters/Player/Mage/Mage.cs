@@ -43,17 +43,14 @@ public class Mage : Player
     {
         if (!_bulletRainCoolDown.IsCoolDown && !IsDead)
         {
-            if (IsAttackRange(1))
+            if (_targets.Count != 0)
             {
-                if (_attackRadius < Vector3.Distance(transform.position, _targets[0].position))
-                {
-                    _moveCo = MoveTowardEnemyCo(BulletRain);
-                    StartCoroutine(_moveCo);
-                }
-                else
-                {
-                    BulletRain();
-                }
+                AttackFromDistance(BulletRain);
+            }
+            else
+            {
+                CheckAttackRange(1);
+                AttackFromDistance(BulletRain);
             }
         }
     }
@@ -79,21 +76,16 @@ public class Mage : Player
     {
         if (!_chainLightningCoolDown.IsCoolDown && !IsDead)
         {
-            if (IsAttackRange(4))
+            if (_targets.Count >= 2) //체인 라이트닝은 최소 2명이상 부터 발동하도록 함
             {
-                if (_targets.Count >= 2) //체인 라이트닝은 최소 2명이상 부터 발동하도록 함
-                {
-                    if (_attackRadius < Vector3.Distance(transform.position, _targets[0].position))
-                    {
-                        _moveCo = MoveTowardEnemyCo(ChainLightning);
-                        StartCoroutine(_moveCo);
-                    }
-                    else
-                    {
-                        ChainLightning();
-                    }
-                }
+                AttackFromDistance(ChainLightning);
             }
+            else
+            {
+                CheckAttackRange(4);
+                AttackFromDistance(ChainLightning);
+            }
+
         }
     }
 
@@ -112,17 +104,14 @@ public class Mage : Player
     {
         if (!_wideAreaBarrageCoolDown.IsCoolDown && !IsDead) 
         {
-            if (IsAttackRange(1))
+            if (_targets.Count != 0)
             {
-                if (_attackRadius < Vector3.Distance(transform.position, _targets[0].position))
-                {
-                    _moveCo = MoveTowardEnemyCo(WideAreaBarrage);
-                    StartCoroutine(_moveCo);
-                }
-                else
-                {
-                    WideAreaBarrage();
-                }
+                AttackFromDistance(WideAreaBarrage);
+            }
+            else
+            {
+                CheckAttackRange(1);
+                AttackFromDistance(WideAreaBarrage);
             }
         }
     }

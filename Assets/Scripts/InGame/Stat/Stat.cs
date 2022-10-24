@@ -54,7 +54,7 @@ public class Stat
         switch (enemyType)
         {
             case EnemyType.Spider:
-                Hp = 100;
+                Hp = 200;
                 break;
         }
     }

@@ -16,6 +16,8 @@ public abstract class Player : Creature
     [Header("적 탐색 범위")]
     [SerializeField] protected float _searchRadius;
 
+    public float SearchRadius => _searchRadius;
+
     /// <summary>
     /// 다음단계의 기본공격이 가능한지에 대한 bool값
     /// </summary>
@@ -49,26 +51,22 @@ public abstract class Player : Creature
         }
     }
 
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawSphere(transform.position, _searchRadius);
     }
+    
     /// <summary>
     /// 공격할 우선순위 타겟들을(searchCount 수 만큼) 지정
     /// </summary>
-    protected bool IsAttackRange(int searchCount)
+    protected void CheckAttackRange(int searchCount)
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, _searchRadius, LayerMask.GetMask("Enemy"));
 
         _targets.Clear();
 
-        if (colliders.Length == 0)
-        {
-            return false;
-        }
-        else
+        if (colliders.Length != 0)
         {
             var searchList = colliders.OrderBy(col => Vector3.Distance(transform.position, col.transform.position))
                 .ToList(); //가까운 순으로 정렬
@@ -80,8 +78,6 @@ public abstract class Player : Creature
 
                 _targets.Add(searchList[i].transform);
             }
-
-            return true;
         }
     }
     
@@ -93,21 +89,34 @@ public abstract class Player : Creature
     {
         if (!IsAttack && !IsDead)
         {
-            if (IsAttackRange(1))
+            if (_targets.Count != 0)
             {
-                if (_attackRadius < Vector3.Distance(transform.position, _targets[0].position)) //타겟이 공격사거리 밖에있을때
-                {
-                    if (_moveCo == null) //버튼이 여러번 눌렸을때 코루틴 중복 방지
-                    {
-                        _moveCo = MoveTowardEnemyCo(NormalAttack);
-                        StartCoroutine(_moveCo);
-                    }
-                }
-                else
-                {
-                    NormalAttack();
-                }
+                AttackFromDistance(NormalAttack);
             }
+            else
+            {
+                CheckAttackRange(1);
+                AttackFromDistance(NormalAttack);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 적과의 거리에 따른 행동패턴
+    /// </summary>
+    protected void AttackFromDistance(UseAttackType useAttackType)
+    {
+        if (_attackRadius < Vector3.Distance(transform.position, _targets[0].position)) //타겟이 공격사거리 밖에있을때
+        {
+            if (_moveCo == null) //버튼이 여러번 눌렸을때 코루틴 중복 방지
+            {
+                _moveCo = MoveTowardEnemyCo(useAttackType);
+                StartCoroutine(_moveCo);
+            }
+        }
+        else
+        {
+            useAttackType();
         }
     }
 

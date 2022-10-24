@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 public enum EnemyType
 {
     Spider
 }
 
-public abstract class Enemy : Creature
+public abstract class Enemy : Creature, IPointerDownHandler
 {
     protected enum PublicAnimState
     {
@@ -153,6 +154,17 @@ public abstract class Enemy : Creature
         {
             _isOutArea = true;
             _outVector = transform.position;
+        }
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        Debug.Log("터치");
+        if (DataManager.Instance.Player.SearchRadius > Vector3.Distance(transform.position, DataManager.Instance.Player.transform.position))
+        {
+            DataManager.Instance.Player.Targets.Clear();
+            DataManager.Instance.Player.Targets.Add(this.transform);
+            Debug.Log(gameObject.name);
         }
     }
 }

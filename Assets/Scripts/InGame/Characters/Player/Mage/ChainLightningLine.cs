@@ -23,6 +23,7 @@ public class ChainLightningLine : MonoBehaviour
 
     private bool _isDone;
     private float _timer = 0;
+    
 
     [Header("스킬 유지 시간")]
     [SerializeField] private float _keepTime;
@@ -49,7 +50,7 @@ public class ChainLightningLine : MonoBehaviour
             {
                 if (_targets[i] != null)
                 {
-                    _lineRenderer.SetPosition(i, _targets[i].transform.position);
+                    _lineRenderer.SetPosition(i, _targets[i].transform.position + Vector3.up);
                 }
                 else
                 {
@@ -103,7 +104,7 @@ public class ChainLightningLine : MonoBehaviour
     /// </summary>
     private IEnumerator CreateLineCo()
     {
-        _lineRenderer.SetPosition(0, _targets[0].transform.position);
+        _lineRenderer.SetPosition(0, _targets[0].transform.position + Vector3.up);
 
         int index = 1;
         int duration = 1;
@@ -122,7 +123,7 @@ public class ChainLightningLine : MonoBehaviour
                 }
             }
             time += Time.deltaTime * _drawingSpeed;
-            _lineRenderer.SetPosition(index, Vector3.Lerp(_targets[index - 1].transform.position, _targets[index].transform.position, Mathf.Clamp01(time)));
+            _lineRenderer.SetPosition(index, Vector3.Lerp(_targets[index - 1].transform.position + Vector3.up, _targets[index].transform.position + Vector3.up, Mathf.Clamp01(time)));
             SelectOffset();
             yield return null;
         }
