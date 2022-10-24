@@ -18,9 +18,15 @@ public class InventoryTest : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.K))
         {
-            for(int i =0;i<7;i++)
+            for(int i =0;i<6;i++)
             _inventory.Add(_itemDataArray[i]);
             
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            for (int i = 6; i < 9; i++)
+                _inventory.Add(_itemDataArray[i],100);
+
         }
         if (Input.GetKeyDown(KeyCode.J))
         {

@@ -23,19 +23,30 @@ public class Inventory : MonoBehaviour
     private ActiveSlotUI _activeISlot;
 
     public Stat InvenStat;
+
+    [SerializeField]
+    private Enforce _enforce;
     private int _maxCapacity = 80;
-    private int _equCount = 5;
+    private int _equCount = 6;
 
     public int USESTARTINDEX = 90;
     public int _useSlotindex;
 
+    private int _activeSlotNum;
 
 
+    public void ButtonEnforce()
+    {
+        ItemStat _data;
+        _enforce.OnButton(_activeSlotNum);
+        _data = _enforce.GetStat(_activeSlotNum);
+        //플레이어 한테 값넣어주기
+        _activeESlot.UpdateEnforceStat(_data,_enforce.EnforceNum[_activeSlotNum]);
+    }
 
 
     private void Awake()
     {
-
         _items = new Item[_maxCapacity];
         _equ = new Item[_equCount];
         Capacity = _maxCapacity;
@@ -151,7 +162,9 @@ public class Inventory : MonoBehaviour
     }
     public void ShowActiveESlot(int index)
     {
+        _activeSlotNum = index;
         _activeESlot.UpdateUI(_equ[index]);
+        _activeESlot.UpdateEnforceStat(_enforce.GetStat(index),_enforce.EnforceNum[index]);
     }
     public void ShowActiveISlot(int index)
     {
@@ -254,7 +267,6 @@ public class Inventory : MonoBehaviour
             //EquPlayerStat(_uItem.EquipmentData.Stat);
             UpdateEqu(_slotNum);
 
-            Debug.Log(_uItem.EquipmentData.EquType);
         }
 
     }

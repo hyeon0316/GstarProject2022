@@ -53,7 +53,6 @@ public class EquipUI : MonoBehaviour
             EquipSlotUI slot = RaycastFrist<EquipSlotUI>();
             if (slot != null && slot.HasItem && slot.IsAccessible)
             {
-                Debug.Log(slot.Index);
                 TryUseItem(slot.Index);
             }
         }
