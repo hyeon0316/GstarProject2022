@@ -52,14 +52,17 @@ public class ActiveSlotUI : MonoBehaviour
             SetMainStat(_itemStat.Defense, 1);
             SetSubStat();
         }
-        else if(_item is IUsableItem _use)
+        else if(_item.Data is PortionItemData _use)
         {
-            
+            SetMainStat(_use.Value, 3);
+            SubStat.text = _item.Data.Tooltip;
         }
-        else
+        else 
         {
-
+            SetMainStat(0, 4);
+            SubStat.text = _item.Data.Tooltip;
         }
+        Name.text = _item.Data.Name;
         SetIcon(_item.Data.IconSprite);
         
         ShowUI();
@@ -67,9 +70,9 @@ public class ActiveSlotUI : MonoBehaviour
     public void UpdateEnforceStat(ItemStat _stat,int _num)
     {
         EnforceNum.text = "+" + _num.ToString();
-        if (_num > 10)
+        if (_num >= 10)
             EnforceNum.color = Color.blue;
-        if (_num > 15)
+        else if (_num >= 15)
             EnforceNum.color = Color.red;
         else
             EnforceNum.color = Color.yellow;
@@ -86,7 +89,9 @@ public class ActiveSlotUI : MonoBehaviour
     public void SetMainStat(int _stat,int _i)
     {
         string _str = "";
-        if(_i == 1)
+        string _mainStat = "";
+        _mainStat = _stat.ToString();
+        if (_i == 1)
         {
             _str = "방어력";
         }
@@ -97,13 +102,17 @@ public class ActiveSlotUI : MonoBehaviour
         if(_i == 3)
         {
             _str = "소모품";
+            _mainStat = "HP 회복 :" + _stat.ToString();
+
         }
         if (_i == 4)
         {
             _str = "재료";
+
+            
         }
         MainStatName.text = _str;
-        MainStat.text = _stat.ToString();
+        MainStat.text = _mainStat;
        
     }
     public void SetSubStat()

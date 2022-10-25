@@ -6,8 +6,8 @@ using UnityEngine;
 public class PortionItemData : CountableItemData
 {
     /// <summary> 효과량(회복량 등) </summary>
-    public float Value => _value;
-    [SerializeField] private float _value;
+    public int Value => _value;
+    [SerializeField] private int _value;
     public override Item CreateItem()
     {
         return new PortionItem(this);

@@ -84,7 +84,7 @@ public class Enforce : MonoBehaviour
         {
             if (_ran < 20)
                 return 1;
-            if (_ran < 80)
+            if (_ran < 70)
                 return 2;
             if (_ran < 90)
                 return 3;

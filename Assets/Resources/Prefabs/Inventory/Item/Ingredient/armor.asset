@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 0
   _name: "\uBC29\uC5B4\uAD6C \uC219\uB828\uB3C4 \uAC15\uD654\uC11D"
-  _tooltip: 
+  _tooltip: "\uBC29\uC5B4\uAD6C \uC219\uB828\uB3C4\uB97C \uAC15\uD654\uD560\uB54C
+    \uC0AC\uC6A9\uB41C\uB2E4"
   _iconSprite: {fileID: 21300000, guid: 0ef8e8bb688cda341a4cd23b8e88434d, type: 3}
   _maxAmount: 9999

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Item_Weapon_ 1
   m_EditorClassIdentifier: 
   _id: 0
-  _name: 
+  _name: "\uC77C\uBC18 \uBB34\uAE30"
   _tooltip: 
   _iconSprite: {fileID: 21300000, guid: 79ce2650debce8c4099daf6d1c543fb1, type: 3}
   _damage: 100

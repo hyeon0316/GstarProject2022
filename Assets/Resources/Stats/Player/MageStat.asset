@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2e91ef18cf8a0a4fa079cdf17362f7c, type: 3}
   m_Name: MageStat
   m_EditorClassIdentifier: 
-  MaxHp: 100
+  MaxHp: 10000
   MaxMp: 50
   RecoveryHp: 10
   Defense: 10
