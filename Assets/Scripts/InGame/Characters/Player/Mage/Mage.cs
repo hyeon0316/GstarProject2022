@@ -75,11 +75,11 @@ public class Mage : Player
     {
         if (!_chainLightningCoolDown.IsCoolDown && !IsDead)
         {
-            if (_targets.Count != 0) //체인 라이트닝은 최소 2명이상 부터 발동하도록 함
+            if (_targets.Count >= 2) //todo 타겟을 지정하고 하면 체인라이트닝 안댐
             {
                 AttackFromDistance(ChainLightning);
             }
-            else
+            else //타겟을 모두 처치하여 없거나 원래 없었던 경우 다시 주변 검사하여 타겟을 지정하도록 함
             {
                 CheckAttackRange(4, ChainLightning);
             }
@@ -89,7 +89,7 @@ public class Mage : Player
 
     private void ChainLightning()
     {
-        if (_targets.Count >= 2)
+        if (_targets.Count >= 2) //체인 라이트닝은 최소 2명이상 부터 발동하도록 함
         {
             Debug.Log("체인 라이트닝");
             _chainLightningCoolDown.SetCoolDown();
