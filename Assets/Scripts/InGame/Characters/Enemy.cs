@@ -37,6 +37,7 @@ public abstract class Enemy : Creature
         _isFollow = false;
         _isAttack = false;
         _isGoBack = false;
+        _isOutArea = false;
     }
     
     

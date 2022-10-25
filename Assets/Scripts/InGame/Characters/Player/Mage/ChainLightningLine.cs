@@ -16,6 +16,7 @@ public class ChainLightningLine : MonoBehaviour
     private LineRenderer _lineRenderer;
 
     public List<Transform> _targets = new List<Transform>();
+    
     private Vector2 _textureSize;
     private Vector2[] _offsets;
     private int _animationOffsetIndex;
@@ -23,6 +24,8 @@ public class ChainLightningLine : MonoBehaviour
 
     private bool _isDone;
     private float _timer = 0;
+
+    private int _targetCount;
     
 
     [Header("스킬 유지 시간")]
@@ -36,6 +39,7 @@ public class ChainLightningLine : MonoBehaviour
     private void Start()
     {
         _lineRenderer.enabled = false;
+        _targetCount = _targets.Count;
     }
 
     private void Update()
@@ -45,19 +49,12 @@ public class ChainLightningLine : MonoBehaviour
             _timer += Time.deltaTime;
             if(_timer >= _keepTime || IsAllDead())
                 CloseLine();
-            
+
             for (int i = 0; i < _targets.Count; i++)
             {
-                if (_targets[i] != null)
-                {
-                    _lineRenderer.SetPosition(i, _targets[i].transform.position + Vector3.up);
-                }
-                else
-                {
-                    _targets.RemoveAt(i);
-                    _lineRenderer.positionCount--;
-                }
+                _lineRenderer.SetPosition(i, _targets[i].transform.position + Vector3.up);
             }
+
             SelectOffset();
         }
     }
@@ -69,8 +66,14 @@ public class ChainLightningLine : MonoBehaviour
         {
             if (IsAllDead())
                 break;
+
+            List<Transform> tempTargets = new List<Transform>();
+            foreach (var t in _targets) //깊은복사 
+            {
+                tempTargets.Add(t);
+            }
             
-            foreach (var target in _targets)
+            foreach (var target in tempTargets)
             {
                 if (target != null)
                     target.GetComponent<Creature>().TakeDamage(_damage);
@@ -82,13 +85,9 @@ public class ChainLightningLine : MonoBehaviour
 
     private bool IsAllDead()
     {
-        foreach (var target in _targets)
-        {
-            if (target != null)
-            {
-                return false; 
-            }
-        }
+        if (_targets.Count != 0)
+            return false;
+        
         return true;
     }
 

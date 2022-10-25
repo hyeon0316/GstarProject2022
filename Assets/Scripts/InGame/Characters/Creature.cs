@@ -54,15 +54,18 @@ public abstract class Creature : MonoBehaviour
   
   public virtual void TakeDamage(int amount)
   {
-      Stat.Hp -= amount;
-
-      if (Stat.Hp <= 0)
+      if (!IsDead)
       {
-          Stat.Hp = 0;
-          Die();
+          Stat.Hp -= amount;
+
+          if (Stat.Hp <= 0)
+          {
+              Stat.Hp = 0;
+              Die();
+          }
+
+          Debug.Log(Stat.Hp);
       }
-      
-      Debug.Log(Stat.Hp);
   }
 
   

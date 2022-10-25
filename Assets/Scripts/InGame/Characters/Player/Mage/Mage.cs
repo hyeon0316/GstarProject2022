@@ -75,7 +75,7 @@ public class Mage : Player
     {
         if (!_chainLightningCoolDown.IsCoolDown && !IsDead)
         {
-            if (_targets.Count >= 2) //체인 라이트닝은 최소 2명이상 부터 발동하도록 함
+            if (_targets.Count != 0) //체인 라이트닝은 최소 2명이상 부터 발동하도록 함
             {
                 AttackFromDistance(ChainLightning);
             }
@@ -89,10 +89,13 @@ public class Mage : Player
 
     private void ChainLightning()
     {
-        Debug.Log("체인 라이트닝");
-        _chainLightningCoolDown.SetCoolDown();
-        transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
-        _animator.SetTrigger(Global.ChainLightningTrigger);
+        if (_targets.Count >= 2)
+        {
+            Debug.Log("체인 라이트닝");
+            _chainLightningCoolDown.SetCoolDown();
+            transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
+            _animator.SetTrigger(Global.ChainLightningTrigger);
+        }
     }
 
     /// <summary>
