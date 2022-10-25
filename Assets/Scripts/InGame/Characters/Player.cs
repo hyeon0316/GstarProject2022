@@ -80,7 +80,7 @@ public abstract class Player : Creature
     /// <summary>
     /// 공격할 우선순위 타겟들을(searchCount 수 만큼) 지정
     /// </summary>
-    protected void CheckAttackRange(int searchCount)
+    protected void CheckAttackRange(int searchCount, UseAttackType useAttackType)
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, _searchRadius, LayerMask.GetMask("Enemy"));
 
@@ -98,7 +98,9 @@ public abstract class Player : Creature
 
                 _targets.Add(searchList[i].transform);
             }
+            AttackFromDistance(useAttackType);
         }
+        
     }
     
 
@@ -115,8 +117,7 @@ public abstract class Player : Creature
             }
             else
             {
-                CheckAttackRange(1);
-                AttackFromDistance(NormalAttack);
+                CheckAttackRange(1, NormalAttack);
             }
         }
     }

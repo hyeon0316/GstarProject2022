@@ -40,6 +40,7 @@ public abstract class Creature : MonoBehaviour
   public void Init()
   {
       Stat.Hp = Stat.MaxHp;
+      Debug.Log(Stat.Hp);
       //todo: 그외 초기 설정값 적용
   }
 

@@ -140,7 +140,8 @@ public abstract class Enemy : Creature
         base.Die();
         _animator.SetTrigger(Global.EnemyDeadTrigger);
         DataManager.Instance.Player.Targets.Clear();
-        Invoke("DestroyObject",1.5f); 
+        Invoke("DestroyObject",1.5f);
+        DataManager.Instance.Player.Targets.Remove(this.transform);
     }
 
     private void DestroyObject()

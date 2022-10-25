@@ -49,8 +49,7 @@ public class Mage : Player
             }
             else
             {
-                CheckAttackRange(1);
-                AttackFromDistance(BulletRain);
+                CheckAttackRange(1, BulletRain);
             }
         }
     }
@@ -82,8 +81,7 @@ public class Mage : Player
             }
             else
             {
-                CheckAttackRange(4);
-                AttackFromDistance(ChainLightning);
+                CheckAttackRange(4, ChainLightning);
             }
 
         }
@@ -110,8 +108,7 @@ public class Mage : Player
             }
             else
             {
-                CheckAttackRange(1);
-                AttackFromDistance(WideAreaBarrage);
+                CheckAttackRange(1, WideAreaBarrage);
             }
         }
     }
