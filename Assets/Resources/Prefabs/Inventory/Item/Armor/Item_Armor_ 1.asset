@@ -16,11 +16,11 @@ MonoBehaviour:
   _name: "\uC77C\uBC18 \uD5EC\uBA67"
   _tooltip: 
   _iconSprite: {fileID: 21300000, guid: 770d06e7b8bd291469fac94a44d23e7c, type: 3}
-  _damage: 50
+  _damage: 0
   _hit: 0
   _skillDamage: 0
   _allDamage: 0
-  _defense: 0
+  _defense: 100
   _evasion: 2
   _allDefense: 1
   _hp: 50
