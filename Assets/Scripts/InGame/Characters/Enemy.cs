@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
 public enum EnemyType
@@ -26,7 +25,6 @@ public abstract class Enemy : Creature
     private bool _isOutArea; //스폰 지점에서 나왔는지
     private bool _isGoBack; //되돌아 가는 중인지
     
-    protected NavMeshAgent _nav;
     protected Rigidbody _rigid;
     protected bool _isFollow; //플레이어를 쫓아야 하는지에 대한 변수
     protected bool _isAttack;
@@ -128,6 +126,8 @@ public abstract class Enemy : Creature
 
     public override void TakeDamage(int amount)
     {
+        //todo: 적 전용 텍스트 플로팅
+        
         base.TakeDamage(amount);
         if (!_isFollow && !_isGoBack) //피격 당했을 때, 되돌아 가는 중이 아닐 때 추적 시작
         {

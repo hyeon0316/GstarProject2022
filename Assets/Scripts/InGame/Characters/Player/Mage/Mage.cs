@@ -21,6 +21,45 @@ public class Mage : Player
 
     [Header("불렛레인 쿨타임")] 
     [SerializeField] private CoolDown _bulletRainCoolDown;
+
+
+    public void AutoMode()
+    {
+        StartCoroutine(AutoModeCo());
+    }
+
+    /// <summary>
+    /// 자동사냥
+    /// </summary>
+    private IEnumerator AutoModeCo()
+    {
+        while (true)
+        {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, _searchRadius * 2, LayerMask.GetMask("Enemy"));
+            if (colliders.Length != 0)
+            {
+                break;
+            }
+
+            if (!_wideAreaBarrageCoolDown.IsCoolDown)
+            {
+                UseWideAreaBarrage();
+            }
+            else if (!_bulletRainCoolDown.IsCoolDown)
+            {
+                UseBulletRain();
+            }
+            else if (!_chainLightningCoolDown.IsCoolDown)
+            {
+                UseChainLightning();
+            }
+            else
+            {
+                UseNormalAttack();
+            }
+            yield return null;
+        }
+    }
     
     
     

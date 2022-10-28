@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEditor.UIElements;
+using UnityEngine.AI;
 
 public enum LayerType
 {
@@ -16,11 +17,13 @@ public abstract class Creature : MonoBehaviour
   public Stat Stat;
 
   protected Animator _animator;
-
+  protected NavMeshAgent _nav;
   
   [Header("기본공격 범위")]
   [SerializeField] protected float _attackRadius; //실제 멈춰서서 공격하는 범위
 
+  [SerializeField] protected FloatingText _floatingText;
+  
   protected List<Transform> _targets = new List<Transform>(); //탐색된 적의 정보
 
   public List<Transform> Targets => _targets;
@@ -31,6 +34,7 @@ public abstract class Creature : MonoBehaviour
   protected virtual void Awake()
   {
       _animator = GetComponent<Animator>();
+      _nav = GetComponent<NavMeshAgent>();
   }
 
 
@@ -57,6 +61,7 @@ public abstract class Creature : MonoBehaviour
       if (!IsDead)
       {
           Stat.Hp -= amount;
+          _floatingText.CreateFloatingText(amount);
 
           if (Stat.Hp <= 0)
           {
@@ -64,7 +69,7 @@ public abstract class Creature : MonoBehaviour
               Die();
           }
 
-          Debug.Log(Stat.Hp);
+          //Debug.Log(Stat.Hp);
       }
   }
 
@@ -72,6 +77,7 @@ public abstract class Creature : MonoBehaviour
 
   protected virtual void Die()
   {
+      _floatingText.ClearText();
       IsDead = true;
       this.gameObject.layer = LayerMask.NameToLayer("Dead");
   }

@@ -10,7 +10,8 @@ public enum PoolType
     WideAreaBarrage,
     WideAreaBarrageEffect,
     BulletRainMissile,
-    BulletRainEffect
+    BulletRainEffect,
+    DamageText
 }
 
 public class ObjectPoolManager : Singleton<ObjectPoolManager>
@@ -27,6 +28,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         Init(PoolType.WideAreaBarrageEffect, 1);
         Init(PoolType.BulletRainMissile, 10);
         Init(PoolType.BulletRainEffect, 10);
+        Init(PoolType.DamageText, 10);
     }
 
     /// <summary>

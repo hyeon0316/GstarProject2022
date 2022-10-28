@@ -52,6 +52,9 @@ public abstract class Player : Creature
         TouchGetTarget();
     }
 
+    /// <summary>
+    /// 직접 선택하여 타겟지정
+    /// </summary>
     private void TouchGetTarget()
     {
         if (Input.GetMouseButtonDown(0)) //PC
@@ -66,6 +69,24 @@ public abstract class Player : Creature
                     _targets.Clear();
                     _targets.Add(hit.transform);
                     Debug.Log(hit.transform.gameObject.name);
+                }
+            }
+        }
+        else if(Input.touchCount > 0)
+        {
+            if (Input.GetTouch(0).phase == TouchPhase.Began) //Mobile
+            {
+                RaycastHit hit;
+                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+
+                if (Physics.Raycast(ray.origin, ray.direction, out hit, 1000, LayerMask.GetMask("Enemy")))
+                {
+                    if (_searchRadius > Vector3.Distance(transform.position, hit.transform.position))
+                    {
+                        _targets.Clear();
+                        _targets.Add(hit.transform);
+                        Debug.Log(hit.transform.gameObject.name);
+                    }
                 }
             }
         }

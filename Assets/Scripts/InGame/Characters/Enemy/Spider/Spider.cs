@@ -12,7 +12,6 @@ public class Spider : Enemy
     {
         base.Awake();
         Stat = new Stat(EnemyType.Spider);
-        _nav = GetComponent<NavMeshAgent>();
         _rigid = GetComponent<Rigidbody>();
     }
 
