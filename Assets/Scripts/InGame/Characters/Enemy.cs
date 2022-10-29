@@ -28,7 +28,7 @@ public abstract class Enemy : Creature
     private bool _isOutArea; //스폰 지점에서 나왔는지
     private bool _isGoBack; //되돌아 가는 중인지
     [SerializeField]
-    private EnemyType _enemyType;
+    public EnemyType _enemyType;
     protected Rigidbody _rigid;
     protected bool _isFollow; //플레이어를 쫓아야 하는지에 대한 변수
     protected bool _isAttack;

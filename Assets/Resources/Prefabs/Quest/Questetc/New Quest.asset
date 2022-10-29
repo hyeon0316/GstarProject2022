@@ -17,8 +17,9 @@ MonoBehaviour:
   ID: 1
   Name: Hello
   Content: "\uC548\uB155\uD558\uC138\uC694 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  Target: "\uAC70\uBBF8"
   collectObjectives:
-    EnemyID: 15
+    EnemyID: 03000000
     amount: 30
     NpcId: 0
   rewards:

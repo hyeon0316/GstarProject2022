@@ -7,13 +7,28 @@ public class QuestManager : Singleton<QuestManager>
     public QuestData[] quests;
     public Inventory _inventory;
     public QuestUI questUI;
-
+    private QuestData _quset; 
+    public QuestInGameUI questInGameUI;
     private int _mainId;
     // Start is called before the first frame update
     void Start()
     {
+        
+        _mainId = 0;
+        Init();
+    }
+    private void Init()
+    {
         questUI.SetQuest(quests);
-        _mainId = 1;
+        questInGameUI.UpdateUI(quests[0]);
+    }
+    public void InGameQuestUI()
+    {
+        _quset = quests[_mainId];
+    }
+    public void ExitButton()
+    {
+        questUI.gameObject.SetActive(false);
     }
     /// <summary> Äù½ºÆ® EnemyÃ¼Å© _id </summary>
     public void CheckEnemyQuest(EnemyType _id)

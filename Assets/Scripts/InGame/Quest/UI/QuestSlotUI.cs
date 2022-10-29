@@ -8,7 +8,7 @@ public class QuestSlotUI : MonoBehaviour
 {
     public QuestData questData;
     public TextMeshProUGUI Name;
-    public QusetContentUI ContentUI;
+    public QuestContentUI ContentUI;
     // Start is called before the first frame update
     public void OnClick()
     {

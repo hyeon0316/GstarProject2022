@@ -25,7 +25,7 @@ public class QuestData : ScriptableObject
     public string Name;
     [TextArea(2, 6)]
     public string Content;
-    
+    public string Target;
     public CollectObjective collectObjectives;
     public Rewards[] rewards;
 
