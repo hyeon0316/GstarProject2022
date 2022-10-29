@@ -7,7 +7,6 @@ using UnityEngine;
     [CreateAssetMenu(fileName = "Item_Armor_", menuName = "Inventory System/Item Data/Armor", order = 2)]
     public class ArmorItemData : EquipmentItemData
     {
-       
         public override Item CreateItem()
         {
             return new ArmorItem(this);

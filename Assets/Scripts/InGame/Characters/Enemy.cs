@@ -6,6 +6,9 @@ using UnityEngine.EventSystems;
 
 public enum EnemyType
 {
+    Enemy1,
+    Enemy2,
+    Enemy3,
     Spider
 }
 
@@ -24,7 +27,8 @@ public abstract class Enemy : Creature
 
     private bool _isOutArea; //스폰 지점에서 나왔는지
     private bool _isGoBack; //되돌아 가는 중인지
-    
+    [SerializeField]
+    private EnemyType _enemyType;
     protected Rigidbody _rigid;
     protected bool _isFollow; //플레이어를 쫓아야 하는지에 대한 변수
     protected bool _isAttack;
@@ -165,6 +169,7 @@ public abstract class Enemy : Creature
     {
         base.Die();
         _animator.SetTrigger(Global.EnemyDeadTrigger);
+        QuestManager.Instance.CheckEnemyQuest(_enemyType);
         Invoke("DestroyObject",1.5f);
         DataManager.Instance.Player.Targets.Remove(this.transform);
     }

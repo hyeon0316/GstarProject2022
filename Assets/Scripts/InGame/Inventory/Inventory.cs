@@ -192,7 +192,7 @@ public class Inventory : MonoBehaviour
         {
             // 아이템 사용
             bool succeeded = uItem.Use();
-
+                
             if (succeeded)
             {
                 UpdateSlot(index);
