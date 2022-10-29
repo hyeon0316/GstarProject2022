@@ -35,7 +35,7 @@ public class Mage : Player
     {
         while (true)
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, _searchRadius * 2, LayerMask.GetMask("Enemy"));
+            Collider[] colliders = Physics.OverlapSphere(transform.position, _searchRadius * 4, LayerMask.GetMask("Enemy"));
             if (colliders.Length != 0)
             {
                 break;

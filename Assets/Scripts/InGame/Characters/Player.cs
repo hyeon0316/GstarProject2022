@@ -41,6 +41,10 @@ public abstract class Player : Creature
         DataManager.Instance.Player = this;
     }
 
+    private void Start()
+    {
+        _nav.enabled = false;
+    }
 
     private void Update()
     {

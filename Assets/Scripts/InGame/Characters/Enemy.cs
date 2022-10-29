@@ -50,13 +50,19 @@ public abstract class Enemy : Creature
     {
         if (_isOutArea)
         {
-            if (_backDistance < Vector3.Distance(transform.position, _outVector))
+            if (_backDistance < Vector3.Distance(transform.position, _outVector)) //일정 거리 이상 스폰지역 밖으로 나왔을때
             {
-                _isFollow = false;
-                _isOutArea = false;
                 StartCoroutine(BackToArea());
             }
+            else //추적하던 적이 사라졌을때
+            {
+                if(IsNullPlayer())
+                {
+                    StartCoroutine(BackToArea());
+                }
+            }
         }
+        
     }
 
     private void FixedUpdate()
@@ -66,10 +72,12 @@ public abstract class Enemy : Creature
     }
 
     /// <summary>
-    /// 스폰지역에서 멀어질때 다시 제자리로 돌아감
+    /// 스폰지역에서 멀어질때 OR 적이 없어질때 다시 제자리로 돌아감
     /// </summary>
     private IEnumerator BackToArea()
     {
+        _isFollow = false;
+        _isOutArea = false;
         while (true)
         {
             if (_nav.remainingDistance <= 0.5f) //도착했을때
@@ -117,17 +125,34 @@ public abstract class Enemy : Creature
                     _animator.SetInteger(Global.EnemyStateInteger,1);
                     Attack();
                 }
+                
+                if(IsNullPlayer())
+                {
+                    _isFollow = false;
+                    _animator.SetInteger(Global.EnemyStateInteger,0);
+                }
             }
         }
     }
 
+    /// <summary>
+    /// 플레이어가 없는지 체크
+    /// </summary>
+    protected bool IsNullPlayer()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _attackRadius * 3, LayerMask.GetMask("Player"));
+        if (colliders.Length == 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
     protected abstract void Attack();
   
 
     public override void TakeDamage(int amount)
     {
-        //todo: 적 전용 텍스트 플로팅
-        
         base.TakeDamage(amount);
         if (!_isFollow && !_isGoBack) //피격 당했을 때, 되돌아 가는 중이 아닐 때 추적 시작
         {
@@ -140,7 +165,6 @@ public abstract class Enemy : Creature
     {
         base.Die();
         _animator.SetTrigger(Global.EnemyDeadTrigger);
-        DataManager.Instance.Player.Targets.Clear();
         Invoke("DestroyObject",1.5f);
         DataManager.Instance.Player.Targets.Remove(this.transform);
     }
