@@ -372,6 +372,7 @@ MonoBehaviour:
   MainStat: {fileID: 7337751868707657683}
   SubStat: {fileID: 7337751870121882489}
   EnforceStat: {fileID: 7337751870316298651}
+  EnforceNum: {fileID: 0}
 --- !u!1 &7337751868707657693
 GameObject:
   m_ObjectHideFlags: 0

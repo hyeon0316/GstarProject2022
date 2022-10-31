@@ -35,19 +35,125 @@ public class Inventory : MonoBehaviour
     private int _activeSlotNum;
     public GameObject InvenUI;
     public GameObject StatUI;
-
+    public EnforceUI enforceUI;
 
     public void ButtonEnforce()
     {
-        ItemStat _data;
-        _data = _enforce.GetStat(_activeSlotNum);
-        UnEquPlayerStat(_data);
-        _enforce.OnButton(_activeSlotNum);
-        _data = _enforce.GetStat(_activeSlotNum);
-        EquPlayerStat(_data);
-        _activeESlot.UpdateEnforceStat(_data,_enforce.EnforceNum[_activeSlotNum]);
-    }
+        Debug.Log(_activeSlotNum);
+        if (enforceUI.gameObject.activeSelf)
+        {
 
+            if (_activeSlotNum < 1)
+            {
+                if (SetEnforceUI(102))
+                {
+                    for (int i = 0; i < _items.Length; i++)
+                    {
+                        if (_items[i] != null)
+                        {
+                            if (_items[i].Data.ID == 102)
+                            {
+                                CountableItem asCount = _items[i] as CountableItem;
+                                asCount.SetAmount(asCount.Amount - _enforce.EnforceNum[_activeSlotNum] * 2);
+                                UpdateSlot(i);
+                            }
+                        }
+                    }
+                    ItemStat _data;
+                    _data = _enforce.GetStat(_activeSlotNum);
+                    UnEquPlayerStat(_data);
+                    _enforce.OnButton(_activeSlotNum);
+                    _data = _enforce.GetStat(_activeSlotNum);
+                    EquPlayerStat(_data);
+                    _activeESlot.UpdateEnforceStat(_data, _enforce.EnforceNum[_activeSlotNum]);
+                    enforceUI.gameObject.SetActive(false);
+                }
+
+            }
+            else
+            {
+                if(SetEnforceUI(101))
+                {
+                    for(int i = 0; i < _items.Length; i++)
+                    {
+                        if (_items[i] != null)
+                        {
+                            if (_items[i].Data.ID == 101)
+                            {
+                                CountableItem asCount = _items[i] as CountableItem;
+                                asCount.SetAmount(asCount.Amount - _enforce.EnforceNum[_activeSlotNum] * 2);
+                                UpdateSlot(i);
+                            }
+                        }
+                    }
+                    ItemStat _data;
+                    _data = _enforce.GetStat(_activeSlotNum);
+                    UnEquPlayerStat(_data);
+                    _enforce.OnButton(_activeSlotNum);
+                    _data = _enforce.GetStat(_activeSlotNum);
+                    EquPlayerStat(_data);
+                    _activeESlot.UpdateEnforceStat(_data, _enforce.EnforceNum[_activeSlotNum]);
+                    enforceUI.gameObject.SetActive(false);
+                }
+            }
+        }
+        else
+        {
+            if (_activeSlotNum < 1)
+            {
+                SetEnforceUI(102);
+            }
+            else
+            {
+                SetEnforceUI(101);
+            }
+        }
+    }
+    private bool SetEnforceUI(int _id)
+    {
+        int NeedObj = _enforce.EnforceNum[_activeSlotNum] * 2;
+        if (GetItemSlot(102) != null)
+        {
+            enforceUI.gameObject.SetActive(true);
+            enforceUI.Item = GetItemSlot(_id);
+            enforceUI.SetSlot(GetItemAmout(_id), NeedObj);
+        }
+        else
+        {
+            enforceUI.gameObject.SetActive(true);
+            enforceUI.SetSlot();
+        }
+        return GetItemAmout(_id) > NeedObj;
+    }
+    public Item GetItemSlot(int _id)
+    {
+        for (int i = 0; i < _items.Length; i++)
+        {
+            if (_items[i] != null)
+            {
+                if (_items[i].Data.ID == _id)
+                {
+                    return _items[i];
+                }
+            }
+        }
+        return null;
+    }
+    public int GetItemAmout(int _id)
+    {
+        for(int i=0;i<_items.Length;i++)
+        {
+            if (_items[i] != null)
+            {
+                if (_items[i].Data.ID == _id)
+                {
+                    CountableItem asCout = _items[i] as CountableItem;
+                    return asCout.Amount;
+                }
+            }
+        }
+        return 0;
+    }
 
     private void Awake()
     {
@@ -59,7 +165,10 @@ public class Inventory : MonoBehaviour
         _inventoryUI.SetInventoryReference(this);
         _useSlotindex = USESTARTINDEX;
     }
+    public void CountItem(int _num)
+    {
 
+    }
     public int Capacity { get; private set; }
     public int ECapacity { get; private set; }
 
@@ -169,6 +278,7 @@ public class Inventory : MonoBehaviour
         _activeSlotNum = index;
         _activeESlot.UpdateUI(_equ[index]);
         _activeESlot.UpdateEnforceStat(_enforce.GetStat(index),_enforce.EnforceNum[index]);
+        enforceUI.gameObject.SetActive(false);
     }
     public void ShowActiveISlot(int index)
     {
@@ -177,6 +287,7 @@ public class Inventory : MonoBehaviour
     public void HideActiveESlot()
     {
         _activeESlot.ResetUI();
+        enforceUI.gameObject.SetActive(false);
     }
     public void HideActiveISlot()
     {
