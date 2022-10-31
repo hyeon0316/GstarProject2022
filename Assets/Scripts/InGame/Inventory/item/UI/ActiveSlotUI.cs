@@ -70,10 +70,10 @@ public class ActiveSlotUI : MonoBehaviour
     public void UpdateEnforceStat(ItemStat _stat,int _num)
     {
         EnforceNum.text = "+" + _num.ToString();
-        if (_num >= 10)
-            EnforceNum.color = Color.blue;
-        else if (_num >= 15)
+        if (_num >= 15)
             EnforceNum.color = Color.red;
+        else if (_num >= 10)
+            EnforceNum.color = Color.blue;
         else
             EnforceNum.color = Color.yellow;
         EnforceStat.text = SetEnforceStr(_stat);
