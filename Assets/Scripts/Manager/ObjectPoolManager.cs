@@ -11,7 +11,9 @@ public enum PoolType
     WideAreaBarrageEffect,
     BulletRainMissile,
     BulletRainEffect,
-    DamageText
+    DamageText,
+    SnowFootPrint,
+    FrightFlyMissile
 }
 
 public class ObjectPoolManager : Singleton<ObjectPoolManager>
@@ -29,6 +31,8 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         Init(PoolType.BulletRainMissile, 10);
         Init(PoolType.BulletRainEffect, 10);
         Init(PoolType.DamageText, 10);
+        Init(PoolType.SnowFootPrint, 5);
+        Init(PoolType.FrightFlyMissile, 5);
     }
 
     /// <summary>

@@ -10,12 +10,19 @@ public abstract class Player : Creature
     /// 공격을 하고 있는 상태인지에 대한 bool값(연속터치 방지)
     /// </summary>
     public bool IsAttack { get; set; }
+    
+    public bool IsAutoMode { get; set; }
 
     private int _comboCount;
     
     [Header("적 탐색 범위")]
     [SerializeField] protected float _searchRadius;
 
+    [Header("오토모드일때 탐색 범위에 곱해지는 값")]
+    [SerializeField] protected float _autoModeSearch;
+
+    [Header("캐릭터가 이동할때마다 발자국을 남길 오브젝트")]
+    [SerializeField] private FootPrinter[] _foots;
 
     /// <summary>
     /// 다음단계의 기본공격이 가능한지에 대한 bool값
@@ -46,7 +53,7 @@ public abstract class Player : Creature
         _nav.enabled = false;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (_canNextNormalAttack)
         {
@@ -55,33 +62,33 @@ public abstract class Player : Creature
 
         TouchGetTarget();
     }
+    
+    /// <summary>
+    /// 버튼을 눌렀을때 실행될 오토모드 셋팅
+    /// </summary>
+    public void SetAutoMode()
+    {
+        _searchRadius *= _autoModeSearch;
+        IsAutoMode = true;
+    }
+
+    public void CancelAutoMode()
+    {
+        _searchRadius /= _autoModeSearch;
+        IsAutoMode = false;
+    }
 
     /// <summary>
     /// 직접 선택하여 타겟지정
     /// </summary>
     private void TouchGetTarget()
     {
-        if (Input.GetMouseButtonDown(0)) //PC
+        if (!IsAutoMode)
         {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray.origin, ray.direction, out hit, 1000 ,LayerMask.GetMask("Enemy")))
-            {
-                if (_searchRadius > Vector3.Distance(transform.position, hit.transform.position))
-                {
-                    _targets.Clear();
-                    _targets.Add(hit.transform);
-                    Debug.Log(hit.transform.gameObject.name);
-                }
-            }
-        }
-        else if(Input.touchCount > 0)
-        {
-            if (Input.GetTouch(0).phase == TouchPhase.Began) //Mobile
+            if (Input.GetMouseButtonDown(0)) //PC
             {
                 RaycastHit hit;
-                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                 if (Physics.Raycast(ray.origin, ray.direction, out hit, 1000, LayerMask.GetMask("Enemy")))
                 {
@@ -90,6 +97,24 @@ public abstract class Player : Creature
                         _targets.Clear();
                         _targets.Add(hit.transform);
                         Debug.Log(hit.transform.gameObject.name);
+                    }
+                }
+            }
+            else if (Input.touchCount > 0)
+            {
+                if (Input.GetTouch(0).phase == TouchPhase.Began) //Mobile
+                {
+                    RaycastHit hit;
+                    Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+
+                    if (Physics.Raycast(ray.origin, ray.direction, out hit, 1000, LayerMask.GetMask("Enemy")))
+                    {
+                        if (_searchRadius > Vector3.Distance(transform.position, hit.transform.position))
+                        {
+                            _targets.Clear();
+                            _targets.Add(hit.transform);
+                            Debug.Log(hit.transform.gameObject.name);
+                        }
                     }
                 }
             }
@@ -216,10 +241,15 @@ public abstract class Player : Creature
     public void InitNormalAttack()
     {
         _animator.SetInteger(Global.NormalAttackInteger, Global.InitAttackCount);
-        IsAttack = false;
+        InitAttack();
 
         _normalAttackCancelDelay = 1f;
         _canNextNormalAttack = true;
+    }
+
+    public void InitAttack()
+    {
+        IsAttack = false;
     }
 
     /// <summary>
@@ -247,6 +277,14 @@ public abstract class Player : Creature
             transform.rotation = Quaternion.Euler(angle);
             transform.Translate(Vector3.forward * moveDistance * Stat.MoveSpeed * Time.fixedDeltaTime);
             _animator.SetFloat(Global.MoveBlend, moveDistance);
+        }
+    }
+
+    public void ActiveFootPrinters(bool active)
+    {
+        foreach (var foot in _foots)
+        {
+            foot.ActiveFoot(active);
         }
     }
 

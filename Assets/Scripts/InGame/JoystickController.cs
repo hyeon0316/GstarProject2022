@@ -41,9 +41,13 @@ public class JoystickController : MonoBehaviour, IDragHandler, IPointerDownHandl
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        _player.ActiveFootPrinters(true);
         _isTouch = true;
         _player.StopMoveCo();
         ControlJoystcik(eventData);
+
+        if (_player.IsAutoMode)
+            _player.CancelAutoMode();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -53,6 +57,7 @@ public class JoystickController : MonoBehaviour, IDragHandler, IPointerDownHandl
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        _player.ActiveFootPrinters(false);
         _joystick.localPosition = Vector3.zero;
         _player.Move(_playerMoveAngle, 0); //애니메이션 상태를 Idle로 설정
         _isTouch = false;

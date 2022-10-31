@@ -9,16 +9,13 @@ public enum EnemyType
     Enemy1,
     Enemy2,
     Enemy3,
-    Spider
+    Spider,
+    FrightFly,
+    ForestGolem
 }
 
 public abstract class Enemy : Creature
 {
-    protected enum PublicAnimState
-    {
-        //todo: 적마다 공통적인 애니메이션 상태가 있을 경우 추가하여 매직넘버 대신 사용
-    }
-    
     [SerializeField] private Transform _spawnArea;
     
     [Header("스폰지점으로 돌아가기 전 까지 거리")]
@@ -82,6 +79,9 @@ public abstract class Enemy : Creature
     {
         _isFollow = false;
         _isOutArea = false;
+        _nav.SetDestination(_spawnArea.transform.position); //todo: 돌아가는 목적지에 랜덤성 부여
+        _nav.isStopped = false;
+        _isGoBack = true;
         while (true)
         {
             if (_nav.remainingDistance <= 0.5f) //도착했을때
@@ -92,10 +92,20 @@ public abstract class Enemy : Creature
                 //todo: 체력 전체 회복
                 break;
             }
-            _animator.SetInteger(Global.EnemyStateInteger,4);
-            _nav.SetDestination(_spawnArea.transform.position);
-            _nav.isStopped = false;
-            _isGoBack = true;
+
+            switch (_enemyType)
+            {
+                case EnemyType.Spider:
+                    _animator.SetInteger(Global.EnemyStateInteger,4);
+                    break;
+                case EnemyType.FrightFly:
+                    _animator.SetInteger(Global.EnemyStateInteger,0);
+                    break;
+                case EnemyType.ForestGolem:
+                    _animator.SetInteger(Global.EnemyStateInteger,1);
+                    break;
+            }
+            
             yield return null;
         }
         
@@ -119,14 +129,34 @@ public abstract class Enemy : Creature
                 transform.LookAt(_targets[0]);
                 if (_attackRadius < Vector3.Distance(transform.position, _targets[0].position)) //타겟이 공격사거리 밖에있을때
                 {
+                    switch (_enemyType)
+                    {
+                        case EnemyType.Spider:
+                            _animator.SetInteger(Global.EnemyStateInteger,2);
+                            break;
+                        case EnemyType.FrightFly:
+                        case EnemyType.ForestGolem:
+                            _animator.SetInteger(Global.EnemyStateInteger,1);
+                            break;
+                    }
                     _nav.isStopped = false;
                     _nav.SetDestination(_targets[0].transform.position);
-                    _animator.SetInteger(Global.EnemyStateInteger,2);
+                    
                 }
                 else
                 {
+                    switch (_enemyType)
+                    {
+                        case EnemyType.Spider:
+                            _animator.SetInteger(Global.EnemyStateInteger,1);
+                            break;
+                        case EnemyType.FrightFly:
+                        case EnemyType.ForestGolem:
+                            _animator.SetInteger(Global.EnemyStateInteger,0);
+                            break;
+                    }
+                    
                     _nav.isStopped = true;
-                    _animator.SetInteger(Global.EnemyStateInteger,1);
                     Attack();
                 }
                 

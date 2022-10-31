@@ -36,8 +36,8 @@ public class Stat
     {
         switch (jobType)
         {
-            case JobType.Archer:
-                SetPlayerStat(Resources.Load<PlayerStatData>("Stats/Player/ArcherStat"));
+            case JobType.Knight:
+                SetPlayerStat(Resources.Load<PlayerStatData>("Stats/Player/KnightStat"));
                 break;
             case JobType.Mage:
                 SetPlayerStat(Resources.Load<PlayerStatData>("Stats/Player/MageStat"));
@@ -50,10 +50,16 @@ public class Stat
     /// </summary>
     public Stat(EnemyType enemyType)
     {
-        //todo: scriptableobject로 관리하여 로드
+        //todo: ScriptableObject로 관리하여 로드
         switch (enemyType)
         {
             case EnemyType.Spider:
+                Hp = 100;
+                break;
+            case EnemyType.FrightFly:
+                Hp = 100;
+                break;
+            case EnemyType.ForestGolem:
                 Hp = 100;
                 break;
         }
@@ -75,5 +81,13 @@ public class Stat
         ReduceDamage = playerStatData.ReduceDamage;
         MoveSpeed = playerStatData.MoveSpeed;
         Attack = playerStatData.Attack;
+    }
+
+    /// <summary>
+    /// ScriptableObject로 관리되는 데이터값을 가져와 변수에 대입
+    /// </summary>
+    private void SetEnemyStat()
+    {
+        
     }
 }

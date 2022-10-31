@@ -22,34 +22,21 @@ public class Mage : Player
     [Header("불렛레인 쿨타임")] 
     [SerializeField] private CoolDown _bulletRainCoolDown;
 
-
-    public void AutoMode()
+    
+    protected override void Update()
     {
-        StartCoroutine(AutoModeCo());
-    }
-
-    /// <summary>
-    /// 자동사냥
-    /// </summary>
-    private IEnumerator AutoModeCo()
-    {
-        while (true)
+        base.Update();
+        if (IsAutoMode)
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, _searchRadius * 4, LayerMask.GetMask("Enemy"));
-            if (colliders.Length != 0)
-            {
-                break;
-            }
-
-            if (!_wideAreaBarrageCoolDown.IsCoolDown)
+            if (!_wideAreaBarrageCoolDown.IsCoolDown && !IsAttack)
             {
                 UseWideAreaBarrage();
             }
-            else if (!_bulletRainCoolDown.IsCoolDown)
+            else if (!_bulletRainCoolDown.IsCoolDown && !IsAttack)
             {
                 UseBulletRain();
             }
-            else if (!_chainLightningCoolDown.IsCoolDown)
+            else if (!_chainLightningCoolDown.IsCoolDown && !IsAttack)
             {
                 UseChainLightning();
             }
@@ -57,12 +44,11 @@ public class Mage : Player
             {
                 UseNormalAttack();
             }
-            yield return null;
+            
         }
     }
-    
-    
-    
+
+
     /// <summary>
     /// 기본공격할때 지정 위치에 발사체 생성
     /// </summary>
@@ -95,6 +81,7 @@ public class Mage : Player
 
     private void BulletRain()
     {
+        IsAttack = true;
         Debug.Log("불렛 레인");
         _bulletRainCoolDown.SetCoolDown();
         transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
@@ -114,7 +101,7 @@ public class Mage : Player
     {
         if (!_chainLightningCoolDown.IsCoolDown && !IsDead)
         {
-            if (_targets.Count >= 2) //todo 타겟을 지정하고 하면 체인라이트닝 안댐
+            if (_targets.Count != 0) 
             {
                 AttackFromDistance(ChainLightning);
             }
@@ -128,13 +115,11 @@ public class Mage : Player
 
     private void ChainLightning()
     {
-        if (_targets.Count >= 2) //체인 라이트닝은 최소 2명이상 부터 발동하도록 함
-        {
-            Debug.Log("체인 라이트닝");
-            _chainLightningCoolDown.SetCoolDown();
-            transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
-            _animator.SetTrigger(Global.ChainLightningTrigger);
-        }
+        IsAttack = true;
+        Debug.Log("체인 라이트닝");
+        _chainLightningCoolDown.SetCoolDown();
+        transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
+        _animator.SetTrigger(Global.ChainLightningTrigger);
     }
 
     /// <summary>
@@ -157,6 +142,7 @@ public class Mage : Player
 
     private void WideAreaBarrage()
     {
+        IsAttack = true;
         Debug.Log("범위공격");
         _wideAreaBarrageCoolDown.SetCoolDown();
         IsAttack = true;
@@ -164,25 +150,30 @@ public class Mage : Player
         _animator.SetTrigger(Global.WideAreaBarrageTrigger);
     }
 
-    public void DelayMove()
-    {
-        IsAttack = false;
-    }
     
     public void CreateWideAreaBarrageEffect()
     {
-        var effect = ObjectPoolManager.Instance.GetObject(PoolType.WideAreaBarrageEffect);
-        effect.transform.position = new Vector3(_targets[0].position.x, effect.transform.position.y, _targets[0].position.z);
-        effect.GetComponent<WideAreaBarrageEffect>().DelayDisable();
-        
-        var barrage = ObjectPoolManager.Instance.GetObject(PoolType.WideAreaBarrage);
-        barrage.transform.position = new Vector3(_targets[0].position.x, barrage.transform.position.y, _targets[0].position.z);
-        barrage.GetComponent<WideAreaBarrage>().DelayDisable();
+        if (_targets.Count != 0)
+        {
+            var effect = ObjectPoolManager.Instance.GetObject(PoolType.WideAreaBarrageEffect);
+            effect.transform.position =
+                new Vector3(_targets[0].position.x, effect.transform.position.y, _targets[0].position.z);
+            effect.GetComponent<WideAreaBarrageEffect>().DelayDisable();
+
+            var barrage = ObjectPoolManager.Instance.GetObject(PoolType.WideAreaBarrage);
+            barrage.transform.position = new Vector3(_targets[0].position.x, barrage.transform.position.y,
+                _targets[0].position.z);
+            barrage.GetComponent<WideAreaBarrage>().DelayDisable();
+        }
     }
 
     public void CreateChainLightningLine()
     {
-        _chainLightningLine._targets = _targets;
+        _chainLightningLine._targets.Add(_chainLightningLine.transform); //시작점
+        foreach (var target in _targets)
+        {
+            _chainLightningLine._targets.Add(target);
+        }
         _chainLightningLine.CreateLine();
     }
 }

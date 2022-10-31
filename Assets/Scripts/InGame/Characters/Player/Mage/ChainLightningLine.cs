@@ -25,8 +25,6 @@ public class ChainLightningLine : MonoBehaviour
     private bool _isDone;
     private float _timer = 0;
 
-    private int _targetCount;
-    
 
     [Header("스킬 유지 시간")]
     [SerializeField] private float _keepTime;
@@ -39,7 +37,6 @@ public class ChainLightningLine : MonoBehaviour
     private void Start()
     {
         _lineRenderer.enabled = false;
-        _targetCount = _targets.Count;
     }
 
     private void Update()
@@ -75,8 +72,8 @@ public class ChainLightningLine : MonoBehaviour
             
             foreach (var target in tempTargets)
             {
-                if (target != null)
-                    target.GetComponent<Creature>().TakeDamage(_damage);
+                if (target.TryGetComponent(out Creature enemy))
+                    enemy.TakeDamage(_damage);
             }
 
             yield return new WaitForSeconds(0.5f);
@@ -93,9 +90,12 @@ public class ChainLightningLine : MonoBehaviour
 
     public void CreateLine()
     {
-        _lineRenderer.enabled = true;
-        SetFromMaterialChange();
-        StartCoroutine(CreateLineCo());
+        if (_targets.Count != 0)
+        {
+            _lineRenderer.enabled = true;
+            SetFromMaterialChange();
+            StartCoroutine(CreateLineCo());
+        }
     }
 
     /// <summary>

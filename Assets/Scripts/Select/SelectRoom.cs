@@ -6,7 +6,7 @@ using UnityEngine;
 
 public enum JobType
 {
-    Archer,
+    Knight,
     Mage
 }
 public class SelectRoom : MonoBehaviour
