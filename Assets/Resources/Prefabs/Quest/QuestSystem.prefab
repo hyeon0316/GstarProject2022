@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 49.7}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1470239965
@@ -172,8 +172,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -824, y: 498}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -825.99036, y: 471.24048}
+  m_SizeDelta: {x: 156.0192, y: 83.519}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2146412337
 CanvasRenderer:
@@ -303,7 +303,7 @@ RectTransform:
   - {fileID: 1549662547114923025}
   - {fileID: 7892663497828484588}
   m_Father: {fileID: 7475118086088207918}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -738,9 +738,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'EXP : 150
-
-    GOLD : 100000'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a900a62177ebefe45a138e4264c072da, type: 2}
   m_sharedMaterial: {fileID: -4722817721386642634, guid: a900a62177ebefe45a138e4264c072da,
@@ -1104,7 +1102,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC758\uBB38\uC758 \uC544\uC774\uD15C\n"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a900a62177ebefe45a138e4264c072da, type: 2}
   m_sharedMaterial: {fileID: -4722817721386642634, guid: a900a62177ebefe45a138e4264c072da,
@@ -1538,8 +1536,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -471.92175, y: 353.74377}
-  m_SizeDelta: {x: 268.1566, y: 86.5125}
+  m_AnchoredPosition: {x: -72.705, y: 363.243}
+  m_SizeDelta: {x: 1066.6, y: 67.5141}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7475118085250970328
 CanvasRenderer:
@@ -1569,7 +1567,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD018\uC2A4\uD2B8\uC774\uB984"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a900a62177ebefe45a138e4264c072da, type: 2}
   m_sharedMaterial: {fileID: -4722817721386642634, guid: a900a62177ebefe45a138e4264c072da,
@@ -1809,7 +1807,7 @@ RectTransform:
   - {fileID: 7475118084504893117}
   - {fileID: 2146412334}
   m_Father: {fileID: 7475118086088207918}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2039,8 +2037,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD018\uC2A4\uD2B8 \uC124\uBA85\uACF5\uAC04 Test Test Test Test Test Test
-    Test Test Test Test Test Test Test Test Test Test "
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a900a62177ebefe45a138e4264c072da, type: 2}
   m_sharedMaterial: {fileID: -4722817721386642634, guid: a900a62177ebefe45a138e4264c072da,
@@ -2141,8 +2138,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7475118085632985410}
   - {fileID: 7585524431771154848}
+  - {fileID: 7475118085632985410}
   m_Father: {fileID: 7475118086603679015}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2278,7 +2275,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD018\uC2A4\uD2B8 \uBAA9\uD45C :\n"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a900a62177ebefe45a138e4264c072da, type: 2}
   m_sharedMaterial: {fileID: -4722817721386642634, guid: a900a62177ebefe45a138e4264c072da,
@@ -2540,21 +2537,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quests:
-  - {fileID: 11400000, guid: eac95b16109ecbb4388f7db7cef4e034, type: 2}
-  - {fileID: 11400000, guid: eac95b16109ecbb4388f7db7cef4e034, type: 2}
-  - {fileID: 11400000, guid: eac95b16109ecbb4388f7db7cef4e034, type: 2}
-  - {fileID: 11400000, guid: eac95b16109ecbb4388f7db7cef4e034, type: 2}
-  - {fileID: 11400000, guid: eac95b16109ecbb4388f7db7cef4e034, type: 2}
-  - {fileID: 11400000, guid: eac95b16109ecbb4388f7db7cef4e034, type: 2}
-  - {fileID: 11400000, guid: eac95b16109ecbb4388f7db7cef4e034, type: 2}
-  - {fileID: 11400000, guid: eac95b16109ecbb4388f7db7cef4e034, type: 2}
-  - {fileID: 11400000, guid: eac95b16109ecbb4388f7db7cef4e034, type: 2}
-  - {fileID: 11400000, guid: eac95b16109ecbb4388f7db7cef4e034, type: 2}
-  - {fileID: 11400000, guid: eac95b16109ecbb4388f7db7cef4e034, type: 2}
-  - {fileID: 11400000, guid: eac95b16109ecbb4388f7db7cef4e034, type: 2}
-  - {fileID: 11400000, guid: eac95b16109ecbb4388f7db7cef4e034, type: 2}
-  - {fileID: 11400000, guid: eac95b16109ecbb4388f7db7cef4e034, type: 2}
-  - {fileID: 11400000, guid: eac95b16109ecbb4388f7db7cef4e034, type: 2}
+  - {fileID: 11400000, guid: 3cf8af206201de34997547bfab9df259, type: 2}
+  - {fileID: 11400000, guid: 856253a98f118ab429fef865cfdb5a1e, type: 2}
+  - {fileID: 11400000, guid: ae0c6991e8604a84881fed81b3aa29d5, type: 2}
+  - {fileID: 11400000, guid: 9ea37a86837aa804c98547ec0dd4e9e5, type: 2}
+  - {fileID: 11400000, guid: d608487f6ed148043b083222f6566891, type: 2}
+  - {fileID: 11400000, guid: 262df04b382a2e94f8202075a6f0c899, type: 2}
+  - {fileID: 11400000, guid: 64b3ab6b52435764f90601282b13eb6d, type: 2}
+  - {fileID: 11400000, guid: 107255f08c36e6a4b8cc8a5289463b54, type: 2}
+  - {fileID: 11400000, guid: 3180a3db8a76afa49ae52791617aaaae, type: 2}
+  - {fileID: 11400000, guid: e15dcf21c58c0af4e8993b75026b2890, type: 2}
+  - {fileID: 11400000, guid: 5b7cc2a9130642749b49ab18530923e2, type: 2}
+  - {fileID: 11400000, guid: e9b9076975bb3ac42bba470f0618901d, type: 2}
+  - {fileID: 11400000, guid: 8b3983faf53a0004194060480ee00fa9, type: 2}
+  - {fileID: 11400000, guid: 17de9a9af9196e049b75e1254d2c172f, type: 2}
+  - {fileID: 11400000, guid: aab197dfafaa7744092d9ac412050cb2, type: 2}
+  - {fileID: 11400000, guid: 643e378efbe43914ab4bc1b73d78ff50, type: 2}
+  - {fileID: 11400000, guid: 7564e6dafe8259246a276ca2d4af8599, type: 2}
   _inventory: {fileID: 0}
   questUI: {fileID: 7475118085632985421}
   questInGameUI: {fileID: 3752776069293113883}
