@@ -2827,6 +2827,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7475118086603679015}
   - component: {fileID: 7475118086603679008}
+  - component: {fileID: 1421346456801610449}
   m_Layer: 0
   m_Name: QuestSystem
   m_TagString: Untagged
@@ -2883,6 +2884,19 @@ MonoBehaviour:
   _inventory: {fileID: 0}
   questUI: {fileID: 7475118085632985421}
   questInGameUI: {fileID: 3752776069293113883}
+  TalkData: {fileID: 1421346456801610449}
+--- !u!114 &1421346456801610449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7475118086603679014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7b53fa53ef1aaf4dae913f4e62a0451, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &839602814080996
 PrefabInstance:
   m_ObjectHideFlags: 0

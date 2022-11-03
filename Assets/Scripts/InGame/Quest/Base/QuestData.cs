@@ -38,10 +38,6 @@ public class QuestData : ScriptableObject
             return true;
         }
     }
-    private void Awake()
-    {
-        collectObjectives.amount = 0;
-    }
 }
 
 
@@ -52,7 +48,7 @@ public abstract class Objective
     
     public EnemyType[] EnemyID;
     public int amount;
-    public int currentAmount { get; set; }
+    public int currentAmount  { get; set; }
 
     public bool IsComplete { get { return currentAmount >= amount; } }//재료를 다 모을 시
 

@@ -10,6 +10,8 @@ public class QuestManager : Singleton<QuestManager>
     private QuestData _quset; 
     public QuestInGameUI questInGameUI;
     private int _mainId;
+
+    public TalkData TalkData;
     // Start is called before the first frame update
     public void NextQuest()
     {
@@ -21,6 +23,10 @@ public class QuestManager : Singleton<QuestManager>
     {
         _mainId = 0;
         Init();
+        for(int i=0;i< quests.Length;i++)
+        {
+            quests[i].collectObjectives.currentAmount = 0;
+        }
     }
     private void Init()
     {
