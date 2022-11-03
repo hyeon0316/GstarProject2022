@@ -109,6 +109,24 @@ public class Inventory : MonoBehaviour
             }
         }
     }
+    public int HavePostion()
+    {
+        int HavePostion=0;
+
+        for (int i = 0; i < _items.Length; i++)
+        {
+            if (_items[i] != null)
+            {
+                if (_items[i] is IUsableItem _use)
+                {
+                    CountableItem asCout = _items[i] as CountableItem;
+                    HavePostion += asCout.Amount;
+                }
+            }
+        }
+
+        return HavePostion;
+    }
     private bool SetEnforceUI(int _id)
     {
         int NeedObj = _enforce.EnforceNum[_activeSlotNum] * 2;
@@ -165,10 +183,7 @@ public class Inventory : MonoBehaviour
         _inventoryUI.SetInventoryReference(this);
         _useSlotindex = USESTARTINDEX;
     }
-    public void CountItem(int _num)
-    {
-
-    }
+    
     public int Capacity { get; private set; }
     public int ECapacity { get; private set; }
 

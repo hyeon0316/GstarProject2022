@@ -20,6 +20,6 @@ MonoBehaviour:
   Target: "\uBCF4\uC2A4"
   collectObjectives:
     EnemyID: 
-    amount: 0
-    NpcId: 2
+    amount: 1
+    NpcId: 0
   rewards: []

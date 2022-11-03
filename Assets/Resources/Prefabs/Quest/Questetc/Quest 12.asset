@@ -20,6 +20,6 @@ MonoBehaviour:
   Target: '@@@'
   collectObjectives:
     EnemyID: 
-    amount: 0
-    NpcId: 2
+    amount: 50
+    NpcId: 0
   rewards: []
