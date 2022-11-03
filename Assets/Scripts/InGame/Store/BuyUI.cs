@@ -14,15 +14,21 @@ public class BuyUI : MonoBehaviour
     public ItemData Item;
     public int Gold;
     public int BuyCount=1;
-    private int canPostion=1908;
+    private int canPortion=999;
     private Inventory inventory;
 
     public void SetBuyUI(StoreSlotUI _slot)
     {
         Gold = _slot.Gold;
-       // canPostion = DataManager.Instance.Player.Stat.MaxPostion - _slot.HavePostion;
-        MaxCount.text = canPostion.ToString();
         Item = _slot.Item;
+        if (Item is PortionItemData uItem)
+        {
+            Debug.Log("dd");
+            canPortion = DataManager.Instance.Player.Stat.MaxPostion - _slot.HavePortion;
+            if (canPortion <= 0)
+                canPortion = 0;
+        }
+        MaxCount.text = canPortion.ToString();
         Icon.sprite = _slot.Icon.sprite;
         Name.text = _slot.Name.text;
         BuyCountText.text = BuyCount.ToString();
@@ -31,27 +37,44 @@ public class BuyUI : MonoBehaviour
     }
     public void Button50()
     {
-        if (BuyCount + 50 < canPostion)
+        if (BuyCount + 50 < canPortion)
             BuyCount += 50;
         else
-            BuyCount = canPostion;
+            BuyCount = canPortion;
         BuyCountText.text = BuyCount.ToString();
         int resultGold = BuyCount * Gold;
         Price.text = resultGold.ToString();
     }
     public void Button100()
     {
-        if (BuyCount + 100 < canPostion)
+        if (BuyCount + 100 < canPortion)
             BuyCount += 100;
         else
-            BuyCount = canPostion;
+            BuyCount = canPortion;
         BuyCountText.text = BuyCount.ToString();
         int resultGold = BuyCount * Gold;
         Price.text = resultGold.ToString();
     }
     public void ButtonMAX()
     {
-        BuyCount = canPostion;
+        BuyCount = canPortion;
+        BuyCountText.text = BuyCount.ToString();
+        int resultGold = BuyCount * Gold;
+        Price.text = resultGold.ToString();
+    }
+    public void ButtonP()
+    {
+        if (BuyCount + 1 < canPortion)
+            BuyCount++;
+        else
+            BuyCount = canPortion;
+        BuyCountText.text = BuyCount.ToString();
+        int resultGold = BuyCount * Gold;
+        Price.text = resultGold.ToString();
+    }
+    public void ButtonM()
+    {
+        BuyCount--;
         BuyCountText.text = BuyCount.ToString();
         int resultGold = BuyCount * Gold;
         Price.text = resultGold.ToString();
@@ -59,6 +82,7 @@ public class BuyUI : MonoBehaviour
     public void ButtonCancel()
     {
         BuyCount = 0;
+        canPortion = 999;
         Price.text = 0.ToString();
         gameObject.SetActive(false);
     }

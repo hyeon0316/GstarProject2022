@@ -40,6 +40,8 @@ public class QuestManager : Singleton<QuestManager>
                 if (quests[_mainId].collectObjectives.EnemyID[a] == _id)
                 {
                     quests[_mainId].collectObjectives.UpdateCount();
+
+                    questInGameUI.UpdateUI(quests[_mainId]);
                     if (quests[_mainId].IsCompleteObjectives)
                     {
                         //Äù½ºÆ®¿Ï·á

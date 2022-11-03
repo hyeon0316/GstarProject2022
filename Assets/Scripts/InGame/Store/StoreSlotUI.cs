@@ -11,7 +11,7 @@ public class StoreSlotUI : MonoBehaviour
     public TextMeshProUGUI Price;
     public ItemData Item;
     public BuyUI BuyUI;
-    public int HavePostion;
+    public int HavePortion;
     public int Gold;
     
     public void Start()
@@ -20,10 +20,11 @@ public class StoreSlotUI : MonoBehaviour
         Name.text = Item.Name;
         Price.text = Gold.ToString();
     }
-    public void SetCount(int _postionCount)
+    public void SetCount(int _portionCount)
     {
-        HavePostion = _postionCount;
-        MaxCount.text = _postionCount + "/" + DataManager.Instance.Player.Stat.MaxPostion;
+        
+        HavePortion = _portionCount;
+        MaxCount.text = _portionCount + "/" + DataManager.Instance.Player.Stat.MaxPostion;
     }
     public void OnClickButton()
     {

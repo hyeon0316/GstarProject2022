@@ -9,6 +9,4 @@ public class NpcData : MonoBehaviour
     public GameObject Questing;
     public void OnQeust() => Questing.SetActive(true);
     public void OffQeust() => Questing.SetActive(false);
-
-
 }

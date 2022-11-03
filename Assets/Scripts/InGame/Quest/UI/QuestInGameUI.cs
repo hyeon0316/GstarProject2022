@@ -11,6 +11,10 @@ public class QuestInGameUI : MonoBehaviour
     
     public void UpdateUI(QuestData data)
     {
+        if (data.IsCompleteObjectives)
+        {
+            Name.text = "¿Ï·á";
+        }
         Name.text = data.Name;
         if(data.type == QuestType.FindNpc)
         {
