@@ -15,8 +15,8 @@ MonoBehaviour:
   state: 0
   type: 1
   ID: 4
-  Name: "@@@\uCC98\uCE58\uD558\uAE30"
-  Content: "\uB9C8\uC744\uC5D0\uC55E\uC5D0\uC788\uB294 @@@ \uCC98\uCE58\uD558\uAE30"
+  Name: "\uAC70\uBBF8 \uCC98\uCE58\uD558\uAE30"
+  Content: "\uB9C8\uC744\uC5D0\uC55E\uC5D0\uC788\uB294 \uAC70\uBBF8 \uCC98\uCE58\uD558\uAE30"
   Target: "\uAC70\uBBF8"
   collectObjectives:
     EnemyID: 00000000

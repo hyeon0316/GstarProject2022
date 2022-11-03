@@ -38,7 +38,12 @@ public class QuestData : ScriptableObject
             return true;
         }
     }
+    private void Awake()
+    {
+        collectObjectives.amount = 0;
+    }
 }
+
 
 
 [Serializable]
