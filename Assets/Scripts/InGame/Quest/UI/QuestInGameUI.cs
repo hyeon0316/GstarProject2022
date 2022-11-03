@@ -31,6 +31,13 @@ public class QuestInGameUI : MonoBehaviour
             NeedObject.text = data.Target + " óġ(" + data.collectObjectives.currentAmount + "/" + data.collectObjectives.amount + ")";
         }
     }
+    public void OnMoveSpawn()
+    {
+
+    }
+    public void OnClickQuest()
+    {
+    }
     public void OnFin()
     {
         QuestManager.Instance.NextQuest();
