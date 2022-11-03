@@ -20,6 +20,4 @@ public class UIController : MonoBehaviour
         _questWindow.SetActive(true);
     }
 
-   
-    
 }
