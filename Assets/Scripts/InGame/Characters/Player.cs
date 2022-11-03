@@ -72,6 +72,7 @@ public abstract class Player : Creature
     {
         _searchRadius *= _autoModeSearch;
         _isAutoHunt = true;
+        ActiveAutoCancelButton(true);
     }
 
     public void CancelAutoHunt()
@@ -161,7 +162,7 @@ public abstract class Player : Creature
     }
 
     /// <summary>
-    /// 퀘스트 자동진행
+    /// 거리 상관없이 퀘스트 자동진행
     /// </summary>
     public void SetAutoQuest(Transform target)
     {
@@ -181,7 +182,7 @@ public abstract class Player : Creature
 
     private void TalkNpc()
     {
-        QuestManager.Instance.CheckNpcQuest(DataManager.Instance.TargetNpc.ID);
+        QuestManager.Instance.CheckNpcQuest(MapManager.Instance.TargetNpc.ID);
     }
 
     /// <summary>
@@ -333,7 +334,7 @@ public abstract class Player : Creature
     /// <summary>
     /// 자동사냥 취소 버튼 생성
     /// </summary>
-    public void ActiveAutoCancelButton(bool isActive)
+    private void ActiveAutoCancelButton(bool isActive)
     {
         _autoCancelButton.SetActive(isActive);
     }

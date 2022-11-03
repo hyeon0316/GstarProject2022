@@ -98,6 +98,11 @@ public abstract class Enemy : Creature
                     }
                 }
             }
+
+            if (_isWait)
+            {
+                
+            }
         }
 
     }

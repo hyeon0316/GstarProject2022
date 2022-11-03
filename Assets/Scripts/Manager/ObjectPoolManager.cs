@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 풀링 할 오브젝트
+/// </summary>
 public enum PoolType
 {
     NormalAttackMissile,
@@ -15,7 +18,13 @@ public enum PoolType
     SnowFootPrint,
     FrightFlyMissile,
     WindAttackEffect,
-    VolcanicSpike
+    VolcanicSpike,
+    Spider,
+    FrightFly,
+    ForestGolem1,
+    ForestGolem2,
+    ForestGolem3,
+    SpecialGolem
 }
 
 public class ObjectPoolManager : Singleton<ObjectPoolManager>
@@ -37,6 +46,12 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         Init(PoolType.FrightFlyMissile, 5);
         Init(PoolType.WindAttackEffect, 1);
         Init(PoolType.VolcanicSpike, 1);
+        Init(PoolType.Spider, 5);
+        Init(PoolType.FrightFly, 5);
+        Init(PoolType.ForestGolem1, 5);
+        Init(PoolType.ForestGolem2, 5);
+        Init(PoolType.ForestGolem3, 5);
+        Init(PoolType.SpecialGolem, 1);
     }
 
     /// <summary>
