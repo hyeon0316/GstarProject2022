@@ -9,7 +9,11 @@ public class QuestInGameUI : MonoBehaviour
     public TextMeshProUGUI NeedObject;
     public GameObject Fin;
     // Start is called before the first frame update
-    
+
+    private void Start()
+    {
+        Fin.SetActive(false);
+    }
     public void UpdateUI(QuestData data)
     {
         if (data.IsCompleteObjectives)

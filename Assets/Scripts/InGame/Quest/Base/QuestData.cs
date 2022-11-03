@@ -74,11 +74,14 @@ public class Rewards
     public void Reward()
     {
         if (ItemReward != null)
-        { }
+        {
+            GameObject.Find("");
+        }
          //Inventory.inst.AcquireItem(ItemReward, ItemRewardCount);
 
         if (EXPReward != 0)
-        { }
+        { 
+        }
             //Player.inst.ExpPlus(EXPReward);
     }
 }

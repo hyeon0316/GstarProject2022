@@ -56,14 +56,15 @@ public class QuestManager : Singleton<QuestManager>
         }
     }
     /// <summary> 퀘스트 NPC체크 </summary><param name="_id"></param>
-    public void CheckNpcQuest(int _id)
+    public bool CheckNpcQuest(int _id)
     {
         if (quests[_mainId].type == QuestType.FindNpc)
         {
             if (quests[_mainId].collectObjectives.NpcId == _id)
             {
-                //퀘스트완료
+                return true;
             }
         }
+        return false;
     }
 }

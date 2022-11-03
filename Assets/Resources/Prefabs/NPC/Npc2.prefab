@@ -1479,9 +1479,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5993810050892813044}
   - component: {fileID: 5993810050892813045}
+  - component: {fileID: -8053518754673413947}
   m_Layer: 0
   m_Name: Npc2
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1582,6 +1583,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-8053518754673413947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5993810050892813046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b840366cc5ba324b896e14554c2f68a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 2
+  Name: "\uB9B4\uB9AC"
+  Questing: {fileID: 0}
 --- !u!1 &5993810050909379487
 GameObject:
   m_ObjectHideFlags: 0
