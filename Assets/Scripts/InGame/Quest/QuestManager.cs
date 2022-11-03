@@ -62,7 +62,9 @@ public class QuestManager : Singleton<QuestManager>
         {
             if (quests[_mainId].collectObjectives.NpcId == _id)
             {
-               //대화창
+                quests[_mainId].collectObjectives.UpdateCount();
+                questInGameUI.UpdateUI(quests[_mainId]);
+                //대화창
             }
         }
     }
