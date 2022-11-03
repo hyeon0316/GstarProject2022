@@ -17,8 +17,10 @@ public static class Global
     public const string MoveBlend = "Move";
     public const string NormalAttackInteger = "NormalAttack";
     public const string WideAreaBarrageTrigger = "WideAreaBarrage";
+    public const string WindAttackTrigger = "WindAttack";
     public const string ChainLightningTrigger = "ChainLightning";
     public const string BulletRainTrigger = "BulletRain";
+    public const string SpikeAttackTrigger = "SpikeAttack";
     public const string DeadTrigger = "Dead";
     
     public const int MaxComboAttack = 4; // 기본공격의 총 콤보 수
@@ -29,5 +31,8 @@ public static class Global
     /// </summary>
     public const string EnemyDeadTrigger = "Dead";
     public const string EnemyStateInteger = "State";
+    public const string EnemyAttackInteger = "Attack";
+
+    public const int GolemMaxComboAttack = 3;
 
 }

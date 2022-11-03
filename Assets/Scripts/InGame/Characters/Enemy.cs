@@ -6,12 +6,10 @@ using UnityEngine.EventSystems;
 
 public enum EnemyType
 {
-    Enemy1,
-    Enemy2,
-    Enemy3,
     Spider,
     FrightFly,
-    ForestGolem
+    ForestGolem,
+    SpecialGolem
 }
 
 public abstract class Enemy : Creature
@@ -24,8 +22,8 @@ public abstract class Enemy : Creature
 
     private bool _isOutArea; //스폰 지점에서 나왔는지
     private bool _isGoBack; //되돌아 가는 중인지
-    [SerializeField]
-    public EnemyType _enemyType;
+    
+    public EnemyType _curEnemyType;
     protected Rigidbody _rigid;
     protected bool _isFollow; //플레이어를 쫓아야 하는지에 대한 변수
     protected bool _isAttack;
@@ -39,6 +37,13 @@ public abstract class Enemy : Creature
         _isOutArea = false;
     }
     
+    protected override void Awake()
+    {
+        base.Awake();
+        Stat = new Stat(_curEnemyType);
+        _rigid = GetComponent<Rigidbody>();
+    }
+    
     
     // Start is called before the first frame update
     protected virtual void Start()
@@ -49,27 +54,33 @@ public abstract class Enemy : Creature
 
     private void Update()
     {
-        if (_isOutArea)
+        if (!IsDead)
         {
-            if (_backDistance < Vector3.Distance(transform.position, _outVector)) //일정 거리 이상 스폰지역 밖으로 나왔을때
+            if (_isOutArea)
             {
-                StartCoroutine(BackToArea());
-            }
-            else //추적하던 적이 사라졌을때
-            {
-                if(IsNullPlayer())
+                if (_backDistance < Vector3.Distance(transform.position, _outVector)) //일정 거리 이상 스폰지역 밖으로 나왔을때
                 {
                     StartCoroutine(BackToArea());
                 }
+                else //추적하던 적이 사라졌을때
+                {
+                    if (IsNullPlayer())
+                    {
+                        StartCoroutine(BackToArea());
+                    }
+                }
             }
         }
-        
+
     }
 
     private void FixedUpdate()
     {
-        DoPattern();
-        FreezeVelocity();
+        if (!IsDead)
+        {
+            DoPattern();
+            FreezeVelocity();
+        }
     }
 
     /// <summary>
@@ -86,14 +97,17 @@ public abstract class Enemy : Creature
         {
             if (_nav.remainingDistance <= 0.5f) //도착했을때
             {
+                if(_curEnemyType is EnemyType.ForestGolem or EnemyType.SpecialGolem)
+                    _animator.SetInteger(Global.EnemyAttackInteger, -1);
+                
                 _animator.SetInteger(Global.EnemyStateInteger,0);
                 _nav.isStopped = true;
                 _isGoBack = false;
-                //todo: 체력 전체 회복
+                Stat.Hp = Stat.MaxHp; //복귀시 체력 전체회복
                 break;
             }
 
-            switch (_enemyType)
+            switch (_curEnemyType)
             {
                 case EnemyType.Spider:
                     _animator.SetInteger(Global.EnemyStateInteger,4);
@@ -102,6 +116,7 @@ public abstract class Enemy : Creature
                     _animator.SetInteger(Global.EnemyStateInteger,0);
                     break;
                 case EnemyType.ForestGolem:
+                case EnemyType.SpecialGolem:
                     _animator.SetInteger(Global.EnemyStateInteger,1);
                     break;
             }
@@ -129,29 +144,30 @@ public abstract class Enemy : Creature
                 transform.LookAt(_targets[0]);
                 if (_attackRadius < Vector3.Distance(transform.position, _targets[0].position)) //타겟이 공격사거리 밖에있을때
                 {
-                    switch (_enemyType)
+                    switch (_curEnemyType)
                     {
                         case EnemyType.Spider:
                             _animator.SetInteger(Global.EnemyStateInteger,2);
                             break;
                         case EnemyType.FrightFly:
                         case EnemyType.ForestGolem:
+                        case EnemyType.SpecialGolem:
                             _animator.SetInteger(Global.EnemyStateInteger,1);
                             break;
                     }
                     _nav.isStopped = false;
                     _nav.SetDestination(_targets[0].transform.position);
-                    
                 }
                 else
                 {
-                    switch (_enemyType)
+                    switch (_curEnemyType)
                     {
                         case EnemyType.Spider:
                             _animator.SetInteger(Global.EnemyStateInteger,1);
                             break;
                         case EnemyType.FrightFly:
                         case EnemyType.ForestGolem:
+                        case EnemyType.SpecialGolem:
                             _animator.SetInteger(Global.EnemyStateInteger,0);
                             break;
                     }
@@ -199,7 +215,7 @@ public abstract class Enemy : Creature
     {
         base.Die();
         _animator.SetTrigger(Global.EnemyDeadTrigger);
-        QuestManager.Instance.CheckEnemyQuest(_enemyType);
+        QuestManager.Instance.CheckEnemyQuest(_curEnemyType);
         Invoke("DestroyObject",1.5f);
         DataManager.Instance.Player.Targets.Remove(this.transform);
     }
@@ -218,6 +234,7 @@ public abstract class Enemy : Creature
             _outVector = transform.position;
         }
     }
+    
 
     
 }

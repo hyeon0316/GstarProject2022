@@ -15,8 +15,6 @@ public class ChainLightningLine : MonoBehaviour
     
     private LineRenderer _lineRenderer;
 
-    public List<Transform> _targets = new List<Transform>();
-    
     private Vector2 _textureSize;
     private Vector2[] _offsets;
     private int _animationOffsetIndex;
@@ -46,12 +44,12 @@ public class ChainLightningLine : MonoBehaviour
             _timer += Time.deltaTime;
             if(_timer >= _keepTime || IsAllDead())
                 CloseLine();
-
-            for (int i = 0; i < _targets.Count; i++)
+            
+            _lineRenderer.SetPosition(0, transform.position + Vector3.up);
+            for (int i = 0; i < DataManager.Instance.Player.Targets.Count; i++)
             {
-                _lineRenderer.SetPosition(i, _targets[i].transform.position + Vector3.up);
+                _lineRenderer.SetPosition(i + 1, DataManager.Instance.Player.Targets[i].transform.position + Vector3.up);
             }
-
             SelectOffset();
         }
     }
@@ -65,7 +63,7 @@ public class ChainLightningLine : MonoBehaviour
                 break;
 
             List<Transform> tempTargets = new List<Transform>();
-            foreach (var t in _targets) //깊은복사 
+            foreach (var t in DataManager.Instance.Player.Targets) //깊은복사, foreach로 탐색 중 target이 사라졌을때 오류발생에 대한 방지
             {
                 tempTargets.Add(t);
             }
@@ -82,7 +80,7 @@ public class ChainLightningLine : MonoBehaviour
 
     private bool IsAllDead()
     {
-        if (_targets.Count != 0)
+        if (DataManager.Instance.Player.Targets.Count != 0)
             return false;
         
         return true;
@@ -90,7 +88,7 @@ public class ChainLightningLine : MonoBehaviour
 
     public void CreateLine()
     {
-        if (_targets.Count != 0)
+        if (DataManager.Instance.Player.Targets.Count != 0)
         {
             _lineRenderer.enabled = true;
             SetFromMaterialChange();
@@ -103,9 +101,9 @@ public class ChainLightningLine : MonoBehaviour
     /// </summary>
     private IEnumerator CreateLineCo()
     {
-        _lineRenderer.SetPosition(0, _targets[0].transform.position + Vector3.up);
-
-        int index = 1;
+        _lineRenderer.SetPosition(0, transform.position + Vector3.up);
+        
+        int index = 0;
         int duration = 1;
         float time = 0;
         while (true)
@@ -115,14 +113,25 @@ public class ChainLightningLine : MonoBehaviour
                 index++;
                 time = 0;
                 _lineRenderer.positionCount++;
-                if (index == _targets.Count)
+                if (index == DataManager.Instance.Player.Targets.Count)
                 {
-                    _lineRenderer.positionCount--;
                     break;
                 }
             }
             time += Time.deltaTime * _drawingSpeed;
-            _lineRenderer.SetPosition(index, Vector3.Lerp(_targets[index - 1].transform.position + Vector3.up, _targets[index].transform.position + Vector3.up, Mathf.Clamp01(time)));
+            if (index == 0)
+            {
+                _lineRenderer.SetPosition(index + 1, Vector3.Lerp(
+                    transform.position + Vector3.up, 
+                    DataManager.Instance.Player.Targets[index].transform.position + Vector3.up, Mathf.Clamp01(time)));
+            }
+            else
+            {
+                _lineRenderer.SetPosition(index + 1, Vector3.Lerp(
+                    DataManager.Instance.Player.Targets[index - 1].transform.position + Vector3.up,
+                    DataManager.Instance.Player.Targets[index].transform.position + Vector3.up, Mathf.Clamp01(time)));
+            }
+
             SelectOffset();
             yield return null;
         }
@@ -134,7 +143,7 @@ public class ChainLightningLine : MonoBehaviour
     private void CloseLine()
     {
         _isDone = false;
-        _targets.Clear();
+        DataManager.Instance.Player.Targets.Clear();
         _lineRenderer.positionCount = 2;
         _lineRenderer.enabled = false;
         _timer = 0;

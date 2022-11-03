@@ -24574,6 +24574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 10
+  _dealTime: 0.5
 --- !u!136 &7130384105156257005
 CapsuleCollider:
   m_ObjectHideFlags: 0

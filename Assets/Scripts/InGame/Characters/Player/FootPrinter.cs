@@ -23,6 +23,7 @@ public class FootPrinter : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Snow"))
         {
+            Debug.Log("sdf");
             GameObject foot = ObjectPoolManager.Instance.GetObject(PoolType.SnowFootPrint);
             foot.transform.position = transform.position;
             foot.GetComponent<FootPrint>().Print();

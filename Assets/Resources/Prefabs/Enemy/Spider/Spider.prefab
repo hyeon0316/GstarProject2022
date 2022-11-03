@@ -963,6 +963,7 @@ MonoBehaviour:
   _floatingText: {fileID: 6556677796353788244}
   _spawnArea: {fileID: 0}
   _backDistance: 4
+  _curEnemyType: 0
   _attackArea: {fileID: 366163801}
 --- !u!54 &3389083359470081152
 Rigidbody:
@@ -988,7 +989,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1462720695320296}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 3.5, y: 2, z: 3}

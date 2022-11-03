@@ -11,28 +11,28 @@ public class ForestGolem : Enemy
     /// </summary>
     private int _attackCount;
     
-    protected override void Awake()
-    {
-        base.Awake();
-        Stat = new Stat(EnemyType.ForestGolem);
-        _rigid = GetComponent<Rigidbody>();
-    }
-    
     protected override void Start()
     {
         base.Start();
+        _attackCount = -1;
         _attackArea.enabled = false;
     }
 
     protected override void Attack()
     {
-        StartCoroutine(AttackCo());
-    }
-
-    private IEnumerator AttackCo()
-    {
         _isAttack = true;
-        yield return new WaitForSeconds(1f);
+        _animator.SetInteger(Global.EnemyAttackInteger, ++_attackCount % Global.GolemMaxComboAttack);
+        Debug.Log(_attackCount);
+    }
+    
+    public void ActiveAttackCollider()
+    {
         _attackArea.enabled = true;
+    }
+    
+    public void InActiveAttackCollider()
+    {
+        _attackArea.enabled = false;
+        _isAttack = false;
     }
 }

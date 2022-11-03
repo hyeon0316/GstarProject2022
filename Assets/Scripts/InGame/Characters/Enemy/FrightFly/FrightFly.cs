@@ -5,12 +5,6 @@ using UnityEngine;
 public class FrightFly : Enemy
 {
     [SerializeField] private Transform _attackPos;
-    protected override void Awake()
-    {
-        base.Awake();
-        Stat = new Stat(EnemyType.FrightFly);
-        _rigid = GetComponent<Rigidbody>();
-    }
 
     protected override void Attack()
     {

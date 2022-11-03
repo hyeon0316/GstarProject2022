@@ -8,12 +8,6 @@ public class Spider : Enemy
 {
     [SerializeField] private BoxCollider _attackArea;
     
-    protected override void Awake()
-    {
-        base.Awake();
-        Stat = new Stat(EnemyType.Spider);
-        _rigid = GetComponent<Rigidbody>();
-    }
 
     protected override void Start()
     {
@@ -24,16 +18,18 @@ public class Spider : Enemy
 
     protected override void Attack()
     {
-        StartCoroutine(AttackCo());
-    }
-
-    private IEnumerator AttackCo()
-    {
         _isAttack = true;
-        yield return new WaitForSeconds(1f);
         _animator.SetInteger(Global.EnemyStateInteger, 3);
+    }
+    
+    
+    public void ActiveAttackCollider()
+    {
         _attackArea.enabled = true;
-        yield return new WaitForSeconds(0.5f);
+    }
+    
+    public void InActiveAttackCollider()
+    {
         _attackArea.enabled = false;
         _isAttack = false;
     }

@@ -62,6 +62,9 @@ public class Stat
             case EnemyType.ForestGolem:
                 Hp = 100;
                 break;
+            case EnemyType.SpecialGolem:
+                Hp = 100;
+                break;
         }
     }
     

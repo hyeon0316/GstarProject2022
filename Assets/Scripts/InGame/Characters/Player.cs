@@ -23,6 +23,8 @@ public abstract class Player : Creature
 
     [Header("캐릭터가 이동할때마다 발자국을 남길 오브젝트")]
     [SerializeField] private FootPrinter[] _foots;
+    
+    [SerializeField] private GameObject _autoCancelButton;
 
     /// <summary>
     /// 다음단계의 기본공격이 가능한지에 대한 bool값
@@ -50,7 +52,7 @@ public abstract class Player : Creature
 
     private void Start()
     {
-        _nav.enabled = false;
+        _nav.enabled = false; //충돌이 활성화 되기 때문에 꺼줌, 사용할때만 활성화
     }
 
     protected virtual void Update()
@@ -74,8 +76,14 @@ public abstract class Player : Creature
 
     public void CancelAutoMode()
     {
-        _searchRadius /= _autoModeSearch;
-        IsAutoMode = false;
+        if (IsAutoMode)
+        {
+            _animator.SetFloat(Global.MoveBlend, 0);
+            ActiveAutoCancelButton(false);
+            _searchRadius /= _autoModeSearch;
+            IsAutoMode = false;
+        }
+        StopMoveCo();
     }
 
     /// <summary>
@@ -192,10 +200,12 @@ public abstract class Player : Creature
     }
 
 
-    public void StopMoveCo()
+    private void StopMoveCo()
     {
         if (_moveCo != null)
         {
+            _nav.isStopped = false;
+            _nav.enabled = false;
             StopCoroutine(_moveCo);
             _moveCo = null;
         }
@@ -206,18 +216,21 @@ public abstract class Player : Creature
     /// </summary>
     protected IEnumerator MoveTowardEnemyCo(UseAttackType useAttackType)
     {
+        _nav.enabled = true;
+        _nav.SetDestination(_targets[0].transform.position);
+        _animator.SetFloat(Global.MoveBlend, 1);
+        transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
         while (true)
         {
             if (_attackRadius >= Vector3.Distance(transform.position, _targets[0].position)) //공격 사거리 안에 들어왔을때
             {
                 useAttackType();
-                Move(transform.rotation.eulerAngles, 0);
+                _animator.SetFloat(Global.MoveBlend, 0);
+                _nav.isStopped = true;
+                _nav.enabled = false;
                 _moveCo = null;
                 break;
             }
-
-            transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
-            Move(transform.rotation.eulerAngles, 1);
             yield return new WaitForFixedUpdate();
         }
     }
@@ -293,5 +306,10 @@ public abstract class Player : Creature
         //todo: 플레이어가 죽었을때 처리(페이드인 아웃 ->마을 부활, 체력 회복 등)
         base.Die();
         _animator.SetTrigger(Global.DeadTrigger);
+    }
+    
+    public void ActiveAutoCancelButton(bool isActive)
+    {
+        _autoCancelButton.SetActive(isActive);
     }
 }
