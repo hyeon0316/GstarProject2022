@@ -17,9 +17,9 @@ MonoBehaviour:
   ID: 5
   Name: "@@@\uCC98\uCE58\uD558\uAE30"
   Content: "\uB9C8\uC744\uC5D0\uC55E\uC5D0\uC788\uB294 @@@ \uCC98\uCE58\uD558\uAE30"
-  Target: '@@@'
+  Target: "\uACE8\uB818"
   collectObjectives:
-    EnemyID: 
+    EnemyID: 02000000
     amount: 30
     NpcId: 0
   rewards: []

@@ -56,6 +56,7 @@ public class QuestInGameUI : MonoBehaviour
         else
         {
             _tr = DataManager.Instance.GetEnemySpwan(questNum);
+            DataManager.Instance.Player.SetAutoQuest(_tr);
         }
         
     }

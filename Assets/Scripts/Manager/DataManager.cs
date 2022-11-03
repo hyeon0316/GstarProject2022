@@ -33,9 +33,9 @@ public class DataManager : Singleton<DataManager>
         switch(_id)
         {
             case 4:
-               return EnemyTransfom[0];
+               return EnemyTransfom[1];
             case 5:
-                return EnemyTransfom[1];
+                return EnemyTransfom[0];
         }
         return null;
     }    
