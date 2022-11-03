@@ -30,7 +30,7 @@ public class Mage : Player
     protected override void Update()
     {
         base.Update();
-        if (IsAutoMode)
+        if (_isAutoHunt)
         {
             if (!_skiilCoolDown[(int)SkillCoolType.WideAreaBarrage].IsCoolDown && !IsAttack)
             {
@@ -79,7 +79,7 @@ public class Mage : Player
         {
             if (_targets.Count != 0)
             {
-                AttackFromDistance(SpikeAttack);
+                ActionFromDistance(SpikeAttack, _targets[0]);
             }
             else
             {
@@ -115,7 +115,7 @@ public class Mage : Player
         {
             if (_targets.Count != 0)
             {
-                AttackFromDistance(BulletRain);
+                ActionFromDistance(BulletRain, _targets[0]);
             }
             else
             {
@@ -173,7 +173,7 @@ public class Mage : Player
         {
             if (_targets.Count != 0)
             {
-                AttackFromDistance(WideAreaBarrage);
+                ActionFromDistance(WideAreaBarrage, _targets[0]);
             }
             else
             {
@@ -188,7 +188,7 @@ public class Mage : Player
         {
             if (_targets.Count != 0)
             {
-                AttackFromDistance(WindAttack);
+                ActionFromDistance(WindAttack, _targets[0]);
             }
             else
             {

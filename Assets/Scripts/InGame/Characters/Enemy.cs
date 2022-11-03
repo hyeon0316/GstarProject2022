@@ -18,7 +18,11 @@ public abstract class Enemy : Creature
     
     [Header("스폰지점으로 돌아가기 전 까지 거리")]
     [SerializeField] private float _backDistance;
-    private Vector3 _outVector; //스폰 지점에서 나왔을때의 지점
+    
+    /// <summary>
+    /// 스폰 지점에서 나왔을때의 지점
+    /// </summary>
+    private Vector3 _outVector; 
 
     /// <summary>
     /// 스폰 지점에서 나왔는지
@@ -37,9 +41,12 @@ public abstract class Enemy : Creature
     /// 플레이어를 추적해야 하는지에 대한 변수
     /// </summary>
     protected bool _isFollow; 
+    
     protected bool _isAttack;
 
-    
+    /// <summary>
+    /// 플레이어가 공격하지 않았을때 상태
+    /// </summary>
     private bool _isWait; 
 
     private void OnEnable()
@@ -55,6 +62,7 @@ public abstract class Enemy : Creature
         _isAttack = false;
         _isGoBack = false;
         _isOutArea = false;
+        _isWait = true;
     }
     
     protected override void Awake()

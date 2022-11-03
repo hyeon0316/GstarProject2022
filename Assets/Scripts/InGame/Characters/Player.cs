@@ -10,8 +10,8 @@ public abstract class Player : Creature
     /// 공격을 하고 있는 상태인지에 대한 bool값(연속터치 방지)
     /// </summary>
     public bool IsAttack { get; set; }
-    
-    public bool IsAutoMode { get; set; }
+
+    protected bool _isAutoHunt;
 
     private int _comboCount;
     
@@ -41,7 +41,7 @@ public abstract class Player : Creature
     /// </summary>
     protected IEnumerator _moveCo;
 
-    protected delegate void UseAttackType();
+    protected delegate void UseActionType();
 
     protected override void Awake()
     {
@@ -66,22 +66,22 @@ public abstract class Player : Creature
     }
     
     /// <summary>
-    /// 버튼을 눌렀을때 실행될 오토모드 셋팅
+    /// 버튼을 눌렀을때 실행될 자동사냥 모드 셋팅
     /// </summary>
-    public void SetAutoMode()
+    public void SetAutoHunt()
     {
         _searchRadius *= _autoModeSearch;
-        IsAutoMode = true;
+        _isAutoHunt = true;
     }
 
-    public void CancelAutoMode()
+    public void CancelAutoHunt()
     {
-        if (IsAutoMode)
+        if (_isAutoHunt)
         {
             _animator.SetFloat(Global.MoveBlend, 0);
             ActiveAutoCancelButton(false);
             _searchRadius /= _autoModeSearch;
-            IsAutoMode = false;
+            _isAutoHunt = false;
         }
         StopMoveCo();
     }
@@ -91,7 +91,7 @@ public abstract class Player : Creature
     /// </summary>
     private void TouchGetTarget()
     {
-        if (!IsAutoMode)
+        if (!_isAutoHunt)
         {
             if (Input.GetMouseButtonDown(0)) //PC
             {
@@ -138,7 +138,7 @@ public abstract class Player : Creature
     /// <summary>
     /// 공격할 우선순위 타겟들을(searchCount 수 만큼) 지정
     /// </summary>
-    protected void CheckAttackRange(int searchCount, UseAttackType useAttackType)
+    protected void CheckAttackRange(int searchCount, UseActionType useActionType)
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, _searchRadius, LayerMask.GetMask("Enemy"));
 
@@ -156,11 +156,33 @@ public abstract class Player : Creature
 
                 _targets.Add(searchList[i].transform);
             }
-            AttackFromDistance(useAttackType);
+            ActionFromDistance(useActionType , _targets[0]);
         }
-        
     }
-    
+
+    /// <summary>
+    /// 퀘스트 자동진행
+    /// </summary>
+    public void SetAutoQuest(Transform target)
+    {
+        if (!IsAttack && !IsDead)
+        {
+            CancelAutoHunt(); //중간에 다른 행동을 하고 있었을때 캔슬
+            if (target.gameObject.layer == LayerMask.NameToLayer("NPC")) //NPC일때
+            {
+                ActionFromDistance(TalkNpc, target);
+            }
+            else //적 일때
+            {
+                ActionFromDistance(SetAutoHunt, target);
+            }
+        }
+    }
+
+    private void TalkNpc()
+    {
+        QuestManager.Instance.CheckNpcQuest(DataManager.Instance.TargetNpc.ID);
+    }
 
     /// <summary>
     /// 기본 공격 사용
@@ -171,7 +193,7 @@ public abstract class Player : Creature
         {
             if (_targets.Count != 0)
             {
-                AttackFromDistance(NormalAttack);
+                ActionFromDistance(NormalAttack, _targets[0]);
             }
             else
             {
@@ -181,21 +203,21 @@ public abstract class Player : Creature
     }
 
     /// <summary>
-    /// 적과의 거리에 따른 행동패턴
+    /// 타겟(NPC or Enemy)과의 거리에 따른 행동패턴
     /// </summary>
-    protected void AttackFromDistance(UseAttackType useAttackType)
+    protected void ActionFromDistance(UseActionType useActionType, Transform target)
     {
-        if (_attackRadius < Vector3.Distance(transform.position, _targets[0].position)) //타겟이 공격사거리 밖에있을때
+        if (_attackRadius < Vector3.Distance(transform.position, target.position)) //타겟이 공격사거리 밖에있을때
         {
             if (_moveCo == null) //버튼이 여러번 눌렸을때 코루틴 중복 방지
             {
-                _moveCo = MoveTowardEnemyCo(useAttackType);
+                _moveCo = MoveTowardTargetCo(useActionType, target);
                 StartCoroutine(_moveCo);
             }
         }
         else
         {
-            useAttackType();
+            useActionType();
         }
     }
 
@@ -214,17 +236,17 @@ public abstract class Player : Creature
     /// <summary>
     /// 탐색 사거리 안의 적이 공격사거리 보다 클 때 공격 사거리 안에 들어올때까지 해당 적에게 이동
     /// </summary>
-    protected IEnumerator MoveTowardEnemyCo(UseAttackType useAttackType)
+    protected IEnumerator MoveTowardTargetCo(UseActionType useActionType, Transform target)
     {
         _nav.enabled = true;
-        _nav.SetDestination(_targets[0].transform.position);
+        _nav.SetDestination(target.transform.position);
         _animator.SetFloat(Global.MoveBlend, 1);
-        transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
+        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
         while (true)
         {
-            if (_attackRadius >= Vector3.Distance(transform.position, _targets[0].position)) //공격 사거리 안에 들어왔을때
+            if (_attackRadius >= Vector3.Distance(transform.position, target.position)) //공격 사거리 안에 들어왔을때
             {
-                useAttackType();
+                useActionType();
                 _animator.SetFloat(Global.MoveBlend, 0);
                 _nav.isStopped = true;
                 _nav.enabled = false;
@@ -308,6 +330,9 @@ public abstract class Player : Creature
         _animator.SetTrigger(Global.DeadTrigger);
     }
     
+    /// <summary>
+    /// 자동사냥 취소 버튼 생성
+    /// </summary>
     public void ActiveAutoCancelButton(bool isActive)
     {
         _autoCancelButton.SetActive(isActive);

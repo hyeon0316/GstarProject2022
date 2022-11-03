@@ -44,7 +44,7 @@ public class JoystickController : MonoBehaviour, IDragHandler, IPointerDownHandl
         _player.ActiveFootPrinters(true);
         _isTouch = true;
         ControlJoystcik(eventData);
-        _player.CancelAutoMode();
+        _player.CancelAutoHunt();
     }
 
     public void OnDrag(PointerEventData eventData)
