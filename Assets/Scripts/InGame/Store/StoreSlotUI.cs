@@ -30,4 +30,5 @@ public class StoreSlotUI : MonoBehaviour
         BuyUI.gameObject.SetActive(true);
         BuyUI.SetBuyUI(this);
     }
+    
 }
