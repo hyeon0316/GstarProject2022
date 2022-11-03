@@ -11,9 +11,14 @@ public class QuestManager : Singleton<QuestManager>
     public QuestInGameUI questInGameUI;
     private int _mainId;
     // Start is called before the first frame update
+    public void NextQuest()
+    {
+        _mainId++;
+        questInGameUI.UpdateUI(quests[_mainId]);
+
+    }
     void Start()
     {
-        
         _mainId = 0;
         Init();
     }
