@@ -49,13 +49,13 @@ public class QuestInGameUI : MonoBehaviour
         Transform _tr;
         if(questType)
         {
-            _tr = DataManager.Instance.GetNpcData(questNum);
+            _tr = MapManager.Instance.GetNpcData(questNum);
             DataManager.Instance.Player.SetAutoQuest(_tr);
-            DataManager.Instance.TargetNpc = _tr.GetComponent<NpcData>();
+            MapManager.Instance.TargetNpc = _tr.GetComponent<NpcData>();
         }
         else
         {
-            _tr = DataManager.Instance.GetEnemySpwan(questNum);
+            _tr = MapManager.Instance.GetEnemySpwan(questNum);
             DataManager.Instance.Player.SetAutoQuest(_tr);
         }
         
