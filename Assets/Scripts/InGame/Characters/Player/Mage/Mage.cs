@@ -201,7 +201,7 @@ public class Mage : Player
     {
         var windAttack = ObjectPoolManager.Instance.GetObject(PoolType.WindAttackEffect);
         windAttack.transform.position =
-            new Vector3(_targets[0].position.x, _targets[0].transform.position.y + windAttack.transform.position.y,
+            new Vector3(_targets[0].position.x, _targets[0].transform.position.y,
                 _targets[0].position.z);
         windAttack.GetComponent<WindAttack>().DelayDisable();
     }

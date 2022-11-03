@@ -41,9 +41,9 @@ public abstract class Creature : MonoBehaviour
   /// <summary>
   /// 플레이어가 죽었을때 등 초기화 해야할 상황이 생길 때 사용
   /// </summary>
-  public void Init()
+  protected virtual void Init()
   {
-      Stat.Hp = Stat.MaxHp;
+      //Stat.Hp = Stat.MaxHp;
       Debug.Log(Stat.Hp);
       //todo: 그외 초기 설정값 적용
   }

@@ -20,16 +20,36 @@ public abstract class Enemy : Creature
     [SerializeField] private float _backDistance;
     private Vector3 _outVector; //스폰 지점에서 나왔을때의 지점
 
-    private bool _isOutArea; //스폰 지점에서 나왔는지
-    private bool _isGoBack; //되돌아 가는 중인지
+    /// <summary>
+    /// 스폰 지점에서 나왔는지
+    /// </summary>
+    private bool _isOutArea; 
+    
+    /// <summary>
+    /// 되돌아 가는 중인지
+    /// </summary>
+    private bool _isGoBack; 
     
     public EnemyType _curEnemyType;
     protected Rigidbody _rigid;
-    protected bool _isFollow; //플레이어를 쫓아야 하는지에 대한 변수
+    
+    /// <summary>
+    /// 플레이어를 추적해야 하는지에 대한 변수
+    /// </summary>
+    protected bool _isFollow; 
     protected bool _isAttack;
+
+    
+    private bool _isWait; 
 
     private void OnEnable()
     {
+        Init();
+    }
+
+    protected override void Init()
+    {
+        base.Init();
         this.gameObject.layer = LayerMask.NameToLayer("Enemy");
         _isFollow = false;
         _isAttack = false;
@@ -104,6 +124,12 @@ public abstract class Enemy : Creature
                 _nav.isStopped = true;
                 _isGoBack = false;
                 Stat.Hp = Stat.MaxHp; //복귀시 체력 전체회복
+                break;
+            }
+
+            if (IsDead) //도착하기 전에 죽게되는 경우
+            {
+                _nav.isStopped = true;
                 break;
             }
 

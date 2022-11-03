@@ -12000,7 +12000,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: db99378546970474d8e54ba6db10a9c4, type: 2}
+  - {fileID: 2100000, guid: 7268ba59c34b9a64794cc48ae907e452, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12026,7 +12026,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 3
+    widthMultiplier: 0.5
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -12094,7 +12094,7 @@ MonoBehaviour:
   _damage: 10
   _drawingSpeed: 5
   _rows: 8
-  _columns: 2
+  _columns: 1
   _keepTime: 4
 --- !u!1 &9126277439205939762
 GameObject:
