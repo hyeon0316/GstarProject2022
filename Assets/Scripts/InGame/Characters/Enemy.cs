@@ -255,14 +255,14 @@ public abstract class Enemy : Creature
         base.Die();
         _animator.SetTrigger(Global.EnemyDeadTrigger);
         QuestManager.Instance.CheckEnemyQuest(_curEnemyType);
-        Invoke("DestroyObject",1.5f);
+        Invoke("DisableEnemy",1.5f);
         DataManager.Instance.Player.Targets.Remove(this.transform);
     }
 
-    private void DestroyObject()
-    {
-        Destroy(this.gameObject);//todo: 나중에는 오브젝트풀링으로 관리
-    }
+    /// <summary>
+    /// 죽었을때 풀링 반환
+    /// </summary>
+    public abstract void DisableEnemy();
 
 
     private void OnTriggerExit(Collider other)

@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 350}
   m_MaxSize: {x: 10000, y: 10000}
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 1
-  controlID: 108456
+  controlID: 194
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 108457
+  controlID: 195
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 108379
+  controlID: 31
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 108389
+  controlID: 87
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -675,9 +675,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 11.923333, y: -3.9682412, z: 6.3313956}
+    m_Target: {x: 0.687332, y: 13.224953, z: -14.5471115}
     speed: 2
-    m_Value: {x: 11.923333, y: -3.9682412, z: 6.3313956}
+    m_Value: {x: 0.687332, y: 13.224953, z: -14.5471115}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -724,13 +724,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.44648805, y: 0.18646614, z: -0.095381066, w: 0.8695139}
+    m_Target: {x: 0.36222002, y: 0.01089269, z: -0.003932986, w: 0.93162405}
     speed: 2
-    m_Value: {x: 0.44534504, y: 0.18667665, z: -0.095136225, w: 0.87049913}
+    m_Value: {x: 0.36235943, y: 0.009498754, z: -0.003390905, w: 0.9319838}
   m_Size:
-    m_Target: 10.618381
+    m_Target: 1.415594
     speed: 2
-    m_Value: 2.598076
+    m_Value: 305.06378
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -814,7 +814,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 1075956
+  m_LastSelectedObjectID: 89416
 --- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1135,9 +1135,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: ca401000
-      m_LastClickedID: 1065162
-      m_ExpandedIDs: 7e97d9ff3a4edaff5a64daff6667daffbe6adaff1c96daff7aa7daff1ab4ddfff8a2deff56b4deffe6c0deff44d2deffd290dfff30a2dffff809e1ffc010e1ff1285e1ff7e0ae3fffca6e3ff0ab1e3ff0af1e3ff4a1de4ff6080e4fff069e5ffea6de5ff5870e5ff7478e5ff8478e5ffa678e5ffd821e7ff7050ebff88bcebffc0daebff90a0edff9662f5ff3acaf5ffaeeef5ffa406f6ff6228f7ff1e24f8ff2224f8ff2624f8ff4224f8ff6a24f8ffec24f8ff3836f8ffc45ef8fff261f8ff0462f8ff5073f8ffd47ff8ffd87ff8ffdc7ff8fff87ff8ffa280f8ffee91f8ffe821f9ff8033f9ff1039fcff5085fcff1e8afcff3e8ffcff2c94fcff7e9bfcff14a0fcff76a6fcff3cacfcffd8affcff84b5fcff14b9fcff4cbffcff7cc5fcfffac8fcff32fbfffff4ffffffa81a010022c5010066c50100be380b00c4380b00ee4e0b00f44e0b0058750b00
+      m_SelectedIDs: 46a0fcff
+      m_LastClickedID: -221114
+      m_ExpandedIDs: bcb1fcff202efdff3667fdff92b2fdff3234feff32fbfffff4ffffff34500000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1232,22 +1232,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/InGame/Characters/Player/Mage
+    - Assets/Resources/Prefabs/Characters/Mage
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/InGame/Characters/Player/Mage
+  - Assets/Resources/Prefabs/Characters/Mage
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\GstarProject2022
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 262}
-    m_SelectedIDs: 56d80000
-    m_LastClickedID: 55382
-    m_ExpandedIDs: 00000000647d0000667d0000687d00006a7d00006c7d00006e7d0000727d0000747d0000767d0000787d00007a7d00007c7d00007e7d0000807d0000827d0000847d0000867d0000887d00008a7d00008c7d00008e7d0000907d0000927d0000947d0000967d0000987d00009a7d00009c7d00009e7d0000a07d0000a47d0000a67d0000a87d0000aa7d0000ac7d0000ae7d0000b07d0000b67d0000b87d0000ba7d0000bc7d0000be7d0000c07d0000c27d0000c47d0000c67d0000c87d0000ca7d0000cc7d0000ce7d0000d07d0000d27d0000d47d0000d67d0000d87d0000da7d0000b2d70000c2d70000343209006aef0a0076ef0a0000ca9a3b
+    scrollPos: {x: 0, y: 434}
+    m_SelectedIDs: 08df0000
+    m_LastClickedID: 57096
+    m_ExpandedIDs: 000000009481000096810000988100009a8100009c8100009e810000a0810000a2810000a4810000a6810000a8810000aa810000ac810000ae810000b0810000b2810000b4810000b6810000b8810000ba810000bc810000be810000c0810000c2810000c4810000c6810000c8810000ca810000cc810000ce810000d0810000d2810000d4810000d6810000d8810000da810000dc810000de810000e0810000e2810000e4810000e6810000e8810000ea810000ec810000ee810000f0810000f2810000f4810000f6810000f8810000fa810000fc810000fe81000000820000028200000482000006820000088200000a8200002adf000078f8000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1275,7 +1275,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000647d0000667d0000687d00006a7d00006c7d00006e7d0000727d0000747d0000767d0000787d00007a7d00007c7d00007e7d0000807d0000827d0000847d0000867d0000887d00008a7d00008c7d00008e7d0000907d0000927d0000947d0000967d0000987d00009a7d00009c7d00009e7d0000a07d0000a47d0000a67d0000aa7d0000ac7d0000ae7d0000b07d0000b67d0000b87d0000ba7d0000bc7d0000be7d0000c07d0000c27d0000c47d0000c67d0000c87d0000ca7d0000cc7d0000ce7d0000d07d0000d27d0000d47d0000d67d0000d87d0000da7d0000b2d70000c2d70000343209006aef0a0076ef0a0000ca9a3b
+    m_ExpandedIDs: 000000009481000096810000988100009a8100009c8100009e810000a0810000a2810000a4810000a6810000a8810000aa810000ac810000ae810000b0810000b2810000b4810000b6810000b8810000ba810000bc810000be810000c0810000c2810000c4810000c6810000c8810000ca810000cc810000ce810000d0810000d2810000d4810000d6810000d8810000da810000dc810000de810000e0810000e2810000e4810000e6810000e8810000ea810000ec810000ee810000f0810000f2810000f4810000f6810000f8810000fa810000fc810000fe81000000820000028200000482000006820000088200000a820000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1367,7 +1367,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 363
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:

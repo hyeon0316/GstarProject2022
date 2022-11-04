@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.AI;
+using Object = System.Object;
 
 public class Spider : Enemy
 {
@@ -21,8 +22,13 @@ public class Spider : Enemy
         _isAttack = true;
         _animator.SetInteger(Global.EnemyStateInteger, 3);
     }
-    
-    
+
+    public override void DisableEnemy()
+    {
+        ObjectPoolManager.Instance.ReturnObject(PoolType.Spider,this.gameObject);
+    }
+
+
     public void ActiveAttackCollider()
     {
         _attackArea.enabled = true;

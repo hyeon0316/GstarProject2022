@@ -72,6 +72,7 @@ public abstract class Player : Creature
     {
         _searchRadius *= _autoModeSearch;
         _isAutoHunt = true;
+        Debug.Log(_searchRadius);
         ActiveAutoCancelButton(true);
     }
 
@@ -82,6 +83,7 @@ public abstract class Player : Creature
             _animator.SetFloat(Global.MoveBlend, 0);
             ActiveAutoCancelButton(false);
             _searchRadius /= _autoModeSearch;
+            Debug.Log(_searchRadius);
             _isAutoHunt = false;
         }
         StopMoveCo();
@@ -192,14 +194,7 @@ public abstract class Player : Creature
     {
         if (!IsAttack && !IsDead)
         {
-            if (_targets.Count != 0)
-            {
-                ActionFromDistance(NormalAttack, _targets[0]);
-            }
-            else
-            {
-                CheckAttackRange(1, NormalAttack);
-            }
+            CheckAttackRange(1, NormalAttack);
         }
     }
 

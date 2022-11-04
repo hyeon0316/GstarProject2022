@@ -35,4 +35,9 @@ public class ForestGolem : Enemy
         _attackArea.enabled = false;
         _isAttack = false;
     }
+    
+    public override void DisableEnemy()
+    {
+        ObjectPoolManager.Instance.ReturnObject(PoolType.ForestGolem1,this.gameObject);
+    }
 }

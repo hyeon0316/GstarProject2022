@@ -28,4 +28,9 @@ public class FrightFly : Enemy
         
         missile.GetComponent<FrightFlyMissile>().DelayDisable();
     }
+    
+    public override void DisableEnemy()
+    {
+        ObjectPoolManager.Instance.ReturnObject(PoolType.FrightFly,this.gameObject);
+    }
 }

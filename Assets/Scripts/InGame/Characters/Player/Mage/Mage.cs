@@ -75,16 +75,9 @@ public class Mage : Player
 
     public void UseSpikeAttack()
     {
-        if (!_skiilCoolDown[(int)SkillCoolType.SpikeAttack].IsCoolDown && !IsDead)
+        if (!_skiilCoolDown[(int) SkillCoolType.SpikeAttack].IsCoolDown && !IsDead)
         {
-            if (_targets.Count != 0)
-            {
-                ActionFromDistance(SpikeAttack, _targets[0]);
-            }
-            else
-            {
-                CheckAttackRange(1, SpikeAttack);
-            }
+            CheckAttackRange(1, SpikeAttack);
         }
     }
 
@@ -113,14 +106,7 @@ public class Mage : Player
     {
         if (!_skiilCoolDown[(int)SkillCoolType.BulletRain].IsCoolDown && !IsDead)
         {
-            if (_targets.Count != 0)
-            {
-                ActionFromDistance(BulletRain, _targets[0]);
-            }
-            else
-            {
-                CheckAttackRange(1, BulletRain);
-            }
+            CheckAttackRange(1, BulletRain);
         }
     }
 
@@ -171,14 +157,7 @@ public class Mage : Player
     {
         if (!_skiilCoolDown[(int)SkillCoolType.WideAreaBarrage].IsCoolDown && !IsDead) 
         {
-            if (_targets.Count != 0)
-            {
-                ActionFromDistance(WideAreaBarrage, _targets[0]);
-            }
-            else
-            {
-                CheckAttackRange(1, WideAreaBarrage);
-            }
+            CheckAttackRange(1, WideAreaBarrage);
         }
     }
 
@@ -186,14 +165,7 @@ public class Mage : Player
     {
         if (!_skiilCoolDown[(int)SkillCoolType.WideAreaBarrage].IsCoolDown && !IsDead) 
         {
-            if (_targets.Count != 0)
-            {
-                ActionFromDistance(WindAttack, _targets[0]);
-            }
-            else
-            {
-                CheckAttackRange(1, WindAttack);
-            }
+            CheckAttackRange(1, WindAttack);
         }
     }
 
