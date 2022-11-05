@@ -959,6 +959,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6019358762433080829}
   - component: {fileID: 6019358762436033679}
+  - component: {fileID: 8410208411293148561}
   m_Layer: 0
   m_Name: Golem_01_PA
   m_TagString: Untagged
@@ -1065,6 +1066,19 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.09234929, y: -0.0027404428, z: 0.12941778}
     m_Extent: {x: 0.65722835, y: 1.5835235, z: 1.733333}
   m_DirtyAABB: 0
+--- !u!114 &8410208411293148561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6019358762432917981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 586648314aa05d949b1965557b44a429, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _doSpeed: 1
 --- !u!1 &6019358762432917983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1141,6 +1155,7 @@ MonoBehaviour:
   _floatingText: {fileID: 1983750205}
   _spawnArea: {fileID: 0}
   _backDistance: 4
+  _dissolve: {fileID: 8410208411293148561}
   _curEnemyType: 2
   _attackArea: {fileID: 1265799010}
 --- !u!54 &261183351

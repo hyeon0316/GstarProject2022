@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 [System.Serializable]
@@ -36,7 +37,8 @@ public class EnemySpawnArea : MonoBehaviour
             for (int i = 0; i < _spawnEnemyDics[dic.Key]; i++)
             {
                 GameObject enemy = ObjectPoolManager.Instance.GetObject(dic.Key);
-                enemy.transform.position = transform.position;
+                enemy.GetComponent<Enemy>().SpawnArea = this.transform;
+                enemy.transform.position = RandomSpawnPos();
             }
         }
     }
@@ -48,9 +50,17 @@ public class EnemySpawnArea : MonoBehaviour
     /// <returns></returns>
     private Vector3 RandomSpawnPos()
     {
-        float width = _boxCollider.size.x;
-        float height = _boxCollider.size.z;
-        return Vector3.zero;
+        Vector3 originPos = transform.position;
+        
+        float width = _boxCollider.bounds.size.x;
+        float height = _boxCollider.bounds.size.z;
+
+        float randomX = Random.Range((width / 2) * -1, width / 2);
+        float randomZ = Random.Range((height / 2) * -1, height / 2);
+        Vector3 randomPos = new Vector3(randomX, 0, randomZ);
+
+        Vector3 spawnPos = originPos + randomPos;
+        return spawnPos;
     }
    
 }

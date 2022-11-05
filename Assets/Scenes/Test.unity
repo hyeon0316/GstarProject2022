@@ -538,8 +538,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnEnemyDics:
-    m_keys: 0b0000000c000000
-    m_values: 0200000001000000
+    m_keys: 0e000000
+    m_values: 02000000
 --- !u!1001 &1734154820
 PrefabInstance:
   m_ObjectHideFlags: 0

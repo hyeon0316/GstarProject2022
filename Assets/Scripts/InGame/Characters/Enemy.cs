@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Random = UnityEngine.Random;
 
 public enum EnemyType
 {
@@ -14,13 +15,16 @@ public enum EnemyType
 
 public abstract class Enemy : Creature
 {
-    [SerializeField] private Transform _spawnArea;
+    public Transform SpawnArea { get; set; }
     
     [Header("스폰지점으로 돌아가기 전 까지 거리")]
     [SerializeField] private float _backDistance;
+
+    [Header("스폰이나 사망때 사용 될 디졸브")]
+    [SerializeField] private Dissolve _dissolve;
     
     /// <summary>
-    /// 스폰 지점에서 나왔을때의 지점
+    /// 스폰 지점에서 나왔을때의 위치
     /// </summary>
     private Vector3 _outVector; 
 
@@ -49,7 +53,7 @@ public abstract class Enemy : Creature
     /// </summary>
     private bool _isWait; 
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         Init();
     }
@@ -73,8 +77,7 @@ public abstract class Enemy : Creature
     }
     
     
-    // Start is called before the first frame update
-    protected virtual void Start()
+    private void Start()
     {
         _targets.Add(DataManager.Instance.Player.transform);
         _animator.SetInteger(Global.EnemyStateInteger,0);
@@ -101,11 +104,13 @@ public abstract class Enemy : Creature
 
             if (_isWait)
             {
-                
+                SetRandomMove();
+                _isWait = false;
             }
         }
-
     }
+    
+    
 
     private void FixedUpdate()
     {
@@ -117,13 +122,48 @@ public abstract class Enemy : Creature
     }
 
     /// <summary>
+    /// 대기상태일때 랜덤 패턴 설정(이동, 멈춤)
+    /// </summary>
+    private void SetRandomMove()
+    {
+        int state = Random.Range(1, 3);
+        switch (state)
+        {
+            case 1:
+                _nav.isStopped = true;
+                break;
+            case 2:
+                _nav.isStopped = false;
+                _nav.SetDestination(RandomBackPos());
+                break;
+        }
+        
+        Invoke("SetRandomMove",3);
+    }
+
+    /// <summary>
+    /// 스폰지점 안의 범위에서 랜덤 위치 반환
+    /// </summary>
+    private Vector3 RandomBackPos()
+    {
+        float width = SpawnArea.transform.position.x;
+        float height = SpawnArea.transform.position.z;
+
+        float randomX = Random.Range((width / 2) * -1, width / 2);
+        float randomZ = Random.Range((height / 2) * -1, height / 2);
+
+        Vector3 backPos = new Vector3(randomX, 0, randomZ);
+        return backPos;
+    }
+
+    /// <summary>
     /// 스폰지역에서 멀어질때 OR 적이 없어질때 다시 제자리로 돌아감
     /// </summary>
     private IEnumerator BackToArea()
     {
         _isFollow = false;
         _isOutArea = false;
-        _nav.SetDestination(_spawnArea.transform.position); //todo: 돌아가는 목적지에 랜덤성 부여
+        _nav.SetDestination(RandomBackPos()); 
         _nav.isStopped = false;
         _isGoBack = true;
         while (true)
@@ -134,6 +174,7 @@ public abstract class Enemy : Creature
                     _animator.SetInteger(Global.EnemyAttackInteger, -1);
                 
                 _animator.SetInteger(Global.EnemyStateInteger,0);
+                _isWait = true;
                 _nav.isStopped = true;
                 _isGoBack = false;
                 Stat.Hp = Stat.MaxHp; //복귀시 체력 전체회복
@@ -162,7 +203,6 @@ public abstract class Enemy : Creature
             
             yield return null;
         }
-        
     }
     
     /// <summary>
@@ -214,12 +254,6 @@ public abstract class Enemy : Creature
                     _nav.isStopped = true;
                     Attack();
                 }
-                
-                if(IsNullPlayer())
-                {
-                    _isFollow = false;
-                    _animator.SetInteger(Global.EnemyStateInteger,0);
-                }
             }
         }
     }
@@ -229,7 +263,7 @@ public abstract class Enemy : Creature
     /// </summary>
     protected bool IsNullPlayer()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, _attackRadius * 3, LayerMask.GetMask("Player"));
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _attackRadius * 6, LayerMask.GetMask("Player"));
         if (colliders.Length == 0)
         {
             return true;
@@ -245,6 +279,7 @@ public abstract class Enemy : Creature
         base.TakeDamage(amount);
         if (!_isFollow && !_isGoBack) //피격 당했을 때, 되돌아 가는 중이 아닐 때 추적 시작
         {
+            CancelInvoke("SetRandomMove");
             _isFollow = true;
             _animator.SetInteger(Global.EnemyStateInteger,1);
         }
@@ -255,7 +290,6 @@ public abstract class Enemy : Creature
         base.Die();
         _animator.SetTrigger(Global.EnemyDeadTrigger);
         QuestManager.Instance.CheckEnemyQuest(_curEnemyType);
-        Invoke("DisableEnemy",1.5f);
         DataManager.Instance.Player.Targets.Remove(this.transform);
     }
 
@@ -263,6 +297,12 @@ public abstract class Enemy : Creature
     /// 죽었을때 풀링 반환
     /// </summary>
     public abstract void DisableEnemy();
+
+    public void ActiveDeadEffect()
+    {
+        _dissolve.FadeOut();
+        Invoke("DisableEnemy", 1);
+    }
 
 
     private void OnTriggerExit(Collider other)

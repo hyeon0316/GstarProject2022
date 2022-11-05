@@ -10,14 +10,15 @@ public class ForestGolem : Enemy
     /// 공격콤보 카운트
     /// </summary>
     private int _attackCount;
-    
-    protected override void Start()
-    {
-        base.Start();
-        _attackCount = -1;
-        _attackArea.enabled = false;
-    }
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        _attackArea.enabled = false;
+        _attackCount = -1;
+    }
+    
+    
     protected override void Attack()
     {
         _isAttack = true;
@@ -38,6 +39,11 @@ public class ForestGolem : Enemy
     
     public override void DisableEnemy()
     {
-        ObjectPoolManager.Instance.ReturnObject(PoolType.ForestGolem1,this.gameObject);
+        if(gameObject.name.Contains("ForestGolem1"))
+            ObjectPoolManager.Instance.ReturnObject(PoolType.ForestGolem1,this.gameObject);
+        else if(gameObject.name.Contains("ForestGolem2"))
+            ObjectPoolManager.Instance.ReturnObject(PoolType.ForestGolem2,this.gameObject);
+        else if(gameObject.name.Contains("ForestGolem3"))
+            ObjectPoolManager.Instance.ReturnObject(PoolType.ForestGolem3,this.gameObject);
     }
 }

@@ -1683,6 +1683,7 @@ MonoBehaviour:
   _floatingText: {fileID: 1397698793}
   _spawnArea: {fileID: 0}
   _backDistance: 4
+  _dissolve: {fileID: 8371870971638337822}
   _curEnemyType: 1
   _attackPos: {fileID: 3977212842452078532}
 --- !u!65 &704953269789647945
@@ -2625,6 +2626,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4513350362091110}
   - component: {fileID: 137713385450466654}
+  - component: {fileID: 8371870971638337822}
   m_Layer: 0
   m_Name: Polygonal Frightfly
   m_TagString: Untagged
@@ -2739,6 +2741,19 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.03171867, y: -0.20285839, z: 0.00000047683716}
     m_Extent: {x: 0.53947026, y: 0.72442234, z: 0.7701833}
   m_DirtyAABB: 0
+--- !u!114 &8371870971638337822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978351403643742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 586648314aa05d949b1965557b44a429, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _doSpeed: 1
 --- !u!1 &1594786040704523980
 GameObject:
   m_ObjectHideFlags: 0

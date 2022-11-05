@@ -2,14 +2,16 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Golem Polyart Ice
-  m_Shader: {fileID: 4800000, guid: 64ce74c36ec896d42a70b7451202a4da, type: 3}
-  m_ShaderKeywords: _EMISSION
+  m_Shader: {fileID: 4800000, guid: 8842c84d9ff79e24abe4295f91ae4a7a, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _EMISSION
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -56,11 +58,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 9099b924166a6764b91e4fb1b7745c82, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0e90178a9c0b464408857a81b53fc7ac, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 2800000, guid: 39a00f3a4d887cc448b5d165b19938eb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -83,11 +89,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _BumpScale: 1
-    - _Cutoff: 0.5
+    - _Cull: 2
+    - _Cutoff: 0
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _EdgeWidth: 0.05
     - _EmissionHue: 1
     - _EmissionPower: 1
     - _GlossMapScale: 1
@@ -121,6 +130,7 @@ Material:
     - _Color7: {r: 0.11347455, g: 0.24438833, b: 0.3207547, a: 1}
     - _Color8: {r: 0.1803922, g: 0.1254902, b: 0.06666667, a: 1}
     - _Color9: {r: 0.24265754, g: 0.33261418, b: 0.38679248, a: 1}
+    - _EdgeColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 2, g: 1.625178, b: 0, a: 1}
     - _Emissive1: {r: 0, g: 2, b: 1.5372549, a: 1}
     - _Emissive2: {r: 0, g: 1.2470589, b: 2, a: 1}
@@ -132,3 +142,4 @@ Material:
     - _color31: {r: 0.5849056, g: 0.35774887, b: 0.33383763, a: 0}
     - _color32: {r: 0.14150941, g: 0.016172502, b: 0, a: 0}
     - _eqwe: {r: 0.2352941, g: 0.1764706, b: 0.1019608, a: 1}
+  m_BuildTextureStacks: []

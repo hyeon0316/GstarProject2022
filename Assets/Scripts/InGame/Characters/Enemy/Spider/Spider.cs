@@ -8,14 +8,13 @@ using Object = System.Object;
 public class Spider : Enemy
 {
     [SerializeField] private BoxCollider _attackArea;
-    
 
-    protected override void Start()
+
+    protected override void OnEnable()
     {
-        base.Start();
+        base.OnEnable();
         _attackArea.enabled = false;
     }
-
 
     protected override void Attack()
     {

@@ -963,6 +963,7 @@ MonoBehaviour:
   _floatingText: {fileID: 6556677796353788244}
   _spawnArea: {fileID: 0}
   _backDistance: 4
+  _dissolve: {fileID: 1688248241}
   _curEnemyType: 0
   _attackArea: {fileID: 366163801}
 --- !u!54 &3389083359470081152
@@ -1057,6 +1058,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4114354663921650}
   - component: {fileID: 137102451305175528}
+  - component: {fileID: 1688248241}
   m_Layer: 0
   m_Name: Polygonal Metalon
   m_TagString: Untagged
@@ -1088,7 +1090,7 @@ SkinnedMeshRenderer:
   m_GameObject: {fileID: 1557458575403366}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -1159,6 +1161,19 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.5955523, y: 0.47306192, z: 0.000007748604}
     m_Extent: {x: 2.277113, y: 1.2932206, z: 2.1682854}
   m_DirtyAABB: 0
+--- !u!114 &1688248241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557458575403366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 586648314aa05d949b1965557b44a429, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _doSpeed: 1
 --- !u!1 &1570757768016902
 GameObject:
   m_ObjectHideFlags: 0

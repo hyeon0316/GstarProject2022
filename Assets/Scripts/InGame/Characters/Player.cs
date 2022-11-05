@@ -278,6 +278,9 @@ public abstract class Player : Creature
         _canNextNormalAttack = true;
     }
 
+    /// <summary>
+    /// 공격 가능한 상태로 초기화
+    /// </summary>
     public void InitAttack()
     {
         IsAttack = false;
