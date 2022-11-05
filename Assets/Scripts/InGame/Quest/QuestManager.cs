@@ -9,6 +9,7 @@ public class QuestManager : Singleton<QuestManager>
     public QuestUI questUI;
     private QuestData _quset; 
     public QuestInGameUI questInGameUI;
+    public GameObject _test;
     private int _mainId;
 
     public TalkData TalkData;
@@ -70,7 +71,7 @@ public class QuestManager : Singleton<QuestManager>
             {
                 quests[_mainId].collectObjectives.UpdateCount();
                 questInGameUI.UpdateUI(quests[_mainId]);
-                //¥Î»≠√¢
+                _test.SetActive(true);
             }
         }
     }
