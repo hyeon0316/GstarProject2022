@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "EnemyStat", menuName = "New Stat/EnemyStat")]
-public class EnemyStatData : MonoBehaviour
+[CreateAssetMenu(fileName = "EnemyStat", menuName = "New Stat/EnemyStat",order = 1)]
+public class EnemyStatData : ScriptableObject
 {
     [Header("최대 체력")]
     public int MaxHp;

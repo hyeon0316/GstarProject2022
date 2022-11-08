@@ -43,6 +43,7 @@ public class QuestInGameUI : MonoBehaviour
     public void OnMoveSpawn()
     {
 
+        OnClickQuest();
     }
     public void OnClickQuest()
     {

@@ -787,6 +787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackRadius: 3.7
   _floatingText: {fileID: 8365641312671980188}
+  _enemyStatData: {fileID: 11400000, guid: d46991f1cd222fc4498285bbc735da20, type: 2}
   _backDistance: 4
   _dissolve: {fileID: 5114559417783968056}
   _curEnemyType: 2
