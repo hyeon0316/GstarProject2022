@@ -98,8 +98,18 @@ public class Stat
     /// <summary>
     /// ScriptableObject로 관리되는 데이터값을 가져와 변수에 대입
     /// </summary>
-    private void SetEnemyStat()
+    public void SetEnemyStat(EnemyStatData enemyStatData)
     {
-        
+        MaxHp = enemyStatData.MaxHp;
+        Hp = MaxHp;
+        Defense = enemyStatData.Defense;
+        Dodge = enemyStatData.Dodge;
+        HitPercent = enemyStatData.HitPercent;
+        ReduceDamage = enemyStatData.ReduceDamage;
+        MoveSpeed = enemyStatData.MoveSpeed;
+        Attack = enemyStatData.Attack;
     }
+    /// <summary>
+    /// ScriptableObject로 관리되는 데이터값을 가져와 변수에 대입
+    /// </summary>
 }

@@ -13,12 +13,17 @@ public class ActiveSlotUI : MonoBehaviour
     public TextMeshProUGUI EnforceStat;
     public TextMeshProUGUI EnforceNum;
     private ItemStat _itemStat;
+    [SerializeField]
+    private Button button; 
     public void ShowUI() => gameObject.SetActive(true);
     public void HideUI() => gameObject.SetActive(false);
+    public bool PlayFade;
 
     // Start is called before the first frame update
     void Start()
     {
+        PlayFade = false;
+
         HideUI();
     }
     public void SetStat(ItemStat _stat)
@@ -69,6 +74,9 @@ public class ActiveSlotUI : MonoBehaviour
     }
     public void UpdateEnforceStat(ItemStat _stat,int _num)
     {
+        StopCoroutine("Fade");
+        SetFade();
+
         EnforceNum.text = "+" + _num.ToString();
         if (_num >= 15)
             EnforceNum.color = Color.red;
@@ -113,7 +121,6 @@ public class ActiveSlotUI : MonoBehaviour
         }
         MainStatName.text = _str;
         MainStat.text = _mainStat;
-       
     }
     public void SetSubStat()
     {
@@ -180,5 +187,51 @@ public class ActiveSlotUI : MonoBehaviour
 
         return _str;
 
+    }
+    private void SetFade()
+    {
+        Color cl = EnforceStat.color;
+        cl.a = 1;
+        Color cl1 = EnforceNum.color;
+        cl1.a = 1;
+        EnforceStat.color = cl;
+        EnforceNum.color = cl1;
+        PlayFade = false;
+        button.interactable = true;
+    }
+    IEnumerator Fade()
+    {
+        PlayFade = true;
+        button.interactable = false;
+        float currentTime = 0f;
+        float percent = 0f;
+        Color cl = EnforceStat.color;
+        cl.a = 0;
+        Color cl1 = EnforceNum.color;
+        cl1.a = 0;
+        EnforceStat.color = cl;
+        EnforceNum.color = cl1;
+        while (percent < 1)
+        {
+            currentTime += Time.deltaTime;
+            percent = currentTime / 1.5f;
+
+            Color color = EnforceStat.color;
+            color.a = Mathf.Lerp(0f, 1f, percent);
+            Color color1 = EnforceNum.color;
+            color1.a = Mathf.Lerp(0f, 1f, percent);
+
+            EnforceStat.color = color;
+            EnforceNum.color = color1;
+            yield return null;
+
+        }
+        button.interactable = true;
+        PlayFade = false;
+    }
+    public void FadeInOut()
+    {
+        if(!PlayFade)
+            StartCoroutine("Fade");
     }
 }

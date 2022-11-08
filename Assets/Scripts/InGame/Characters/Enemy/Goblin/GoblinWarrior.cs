@@ -9,6 +9,7 @@ public class GoblinWarrior : Enemy
     protected override void OnEnable()
     {
         base.OnEnable();
+        
         _attackArea.enabled = false;
     }
 

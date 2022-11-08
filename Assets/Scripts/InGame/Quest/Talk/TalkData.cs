@@ -10,16 +10,25 @@ public class TalkData : MonoBehaviour
     {
         talkData = new Dictionary<int, string[]>();
         GenerateData();
-        string[] _s;
-        _s = talkData[100];
-        for(int i=0;i<_s.Length;i++)
-        {
-            Debug.Log(_s[i]);
-        }    
     }
     void GenerateData()
     {
-        talkData.Add(100, new string[] { "들어가기에는 너무 깊어 보인다.", "들어가기에는 너무 깊어 보인다2.", "들어가기에는 너무 깊어 보인다3." });
+        talkData.Add(1, new string[] { "벨라1","들어가기에는 너무 깊어 보인다.", 
+            "들어가기에는 너무 깊어 보인다2.", "들어가기에는 너무 깊어 보인다3." });
+        talkData.Add(2, new string[] { "헬라2","들어가기에는 너무 깊어2 보인다.",
+            "들어가기에는 너무 깊어 보인3다2.", "들어가기에는 너4무 깊어 보인다3." });
+        talkData.Add(3, new string[] { "헬라3","들어가기에는 너무 깊어2 보인다.",
+            "들어가기에는 너무 깊어 보인3다2.", "들어가기에는 너4무 깊어 보인다3." });
+        talkData.Add(4, new string[] { "헬라3","들어가기에는 너무 깊어2 보인다.",
+            "들어가기에는 너무 깊어 보인3다2.", "들어가기에는 너4무 깊어 보인다3." });
+        talkData.Add(101, new string[] { "헬라3","들어가기에는 너무 깊어2 보인다.",
+            "들어가기에는 너무 깊어 보인3다2.", "들어가기에는 너4무 깊어 보인다3." });
+
+
+    }
+    public string[] GetStr(int _s)
+    {
+        return talkData[_s];
     }
     /*
     public string GetTalk(int id, int talkIndex)

@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEditor.UIElements;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public enum LayerType
 {
@@ -65,6 +66,8 @@ public abstract class Creature : MonoBehaviour
   /// <param name="pureDamage">상대방의 순수 데미지</param>
   public virtual void TakeDamage(int amount , int pureDamage)
   {
+        
+
       if (!IsDead)
       {
           int resultDamage = Mathf.Clamp((pureDamage - Stat.Defense) / 2, 0, 100) * amount / 100;
@@ -79,6 +82,17 @@ public abstract class Creature : MonoBehaviour
 
       }
   }
+
+    public bool HitDamage(int _hitpercent)
+    {
+        int n = _hitpercent - Stat.Dodge + 10;
+        n = Math.Clamp(n, 0, 60);
+        double result = Math.Pow(0.91f, n);
+        result = result * -1;
+        result = (result + 1) * 100;
+        Debug.Log(result);
+        return Random.Range(0f, 100f) < result;
+    }
 
   
 

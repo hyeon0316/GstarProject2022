@@ -55,7 +55,7 @@ public class Enforce : MonoBehaviour
         _ran = Random.Range(0, 100);
         if (_num < 5 )
         {
-            if (_ran < 50)
+            if (_ran < 70)
                 return 1;
             else
                 return 2;
@@ -95,6 +95,7 @@ public class Enforce : MonoBehaviour
     
     public void OnButton(int _index)
     {
+        
         int _i;
         _i = EnforceSlot(EnforceNum[_index]);
         switch(_i)
@@ -105,6 +106,11 @@ public class Enforce : MonoBehaviour
             case 2:
                 break;
             case 3:
+                if (EnforceNum[_index] == 5 || EnforceNum[_index] == 10 || EnforceNum[_index] == 15)
+                {
+                    Debug.Log(EnforceNum[_index] + " / " +_i);
+                    break;
+                }
                 EnforceNum[_index]--;
                 break;
             case 4:
@@ -125,28 +131,30 @@ public class Enforce : MonoBehaviour
 
     public void SetStat(int _num , ref ItemStat _stat)
     {
+        int _enforce = _num / 5;
+        _enforce++;
         if (CheckZero(_stat.Attack))
         {
-            _stat.Attack += _num * ATTACK;
+            _stat.Attack += _num * ATTACK* _enforce;
         }
         if (CheckZero(_stat.HitPercent))
-            _stat.HitPercent += _num * HIT;
+            _stat.HitPercent += _num * HIT* _enforce;
         if (CheckZero(_stat.SkillDamage))
-            _stat.SkillDamage += _num * SKILLD;
+            _stat.SkillDamage += _num * SKILLD* _enforce;
         if (CheckZero(_stat.AllDamge))
-            _stat.AllDamge += _num * ALLD;
+            _stat.AllDamge += _num * ALLD* _enforce;
 
         if (CheckZero(_stat.Defense))
-            _stat.Defense += _num * DEF;
+            _stat.Defense += _num * DEF* _enforce;
         if (CheckZero(_stat.Dodge))
-            _stat.Dodge += _num * DODGE;
+            _stat.Dodge += _num * DODGE* _enforce;
         if (CheckZero(_stat.ReduceDamage))
-            _stat.ReduceDamage += _num * REDEF;
+            _stat.ReduceDamage += _num * REDEF* _enforce;
 
         if (CheckZero(_stat.MaxHp))
-            _stat.MaxHp += _num * HP;
+            _stat.MaxHp += _num * HP* _enforce;
         if (CheckZero(_stat.MaxMp))
-            _stat.MaxMp += _num * MP;
+            _stat.MaxMp += _num * MP* _enforce;
 
         /* 포션 개수
         if (CheckZero(_stat.Max))
@@ -161,10 +169,5 @@ public class Enforce : MonoBehaviour
     private bool CheckZero(int _a)
     {
         return _a != 0;
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

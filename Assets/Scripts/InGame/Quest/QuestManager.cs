@@ -9,10 +9,10 @@ public class QuestManager : Singleton<QuestManager>
     public QuestUI questUI;
     private QuestData _quset; 
     public QuestInGameUI questInGameUI;
-    public GameObject _test;
+    public TalkUI TalkUI;
+    public TalkData TalkData;
     private int _mainId;
 
-    public TalkData TalkData;
     // Start is called before the first frame update
     public void NextQuest()
     {
@@ -71,7 +71,8 @@ public class QuestManager : Singleton<QuestManager>
             {
                 quests[_mainId].collectObjectives.UpdateCount();
                 questInGameUI.UpdateUI(quests[_mainId]);
-                _test.SetActive(true);
+                TalkUI.gameObject.SetActive(true);
+                TalkUI.SetText(TalkData.GetStr(_id));
             }
         }
     }

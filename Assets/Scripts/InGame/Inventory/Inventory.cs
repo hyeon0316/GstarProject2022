@@ -39,7 +39,6 @@ public class Inventory : MonoBehaviour
 
     public void ButtonEnforce()
     {
-        Debug.Log(_activeSlotNum);
         if (enforceUI.gameObject.activeSelf)
         {
 
@@ -67,6 +66,7 @@ public class Inventory : MonoBehaviour
                     EquPlayerStat(_data);
                     _activeESlot.UpdateEnforceStat(_data, _enforce.EnforceNum[_activeSlotNum]);
                     enforceUI.gameObject.SetActive(false);
+                    _activeESlot.FadeInOut();
                 }
 
             }
@@ -94,6 +94,7 @@ public class Inventory : MonoBehaviour
                     EquPlayerStat(_data);
                     _activeESlot.UpdateEnforceStat(_data, _enforce.EnforceNum[_activeSlotNum]);
                     enforceUI.gameObject.SetActive(false);
+                    _activeESlot.FadeInOut();
                 }
             }
         }

@@ -55,7 +55,11 @@ public class WideAreaBarrageEffect : MonoBehaviour
 
    private IEnumerator TakeBarrageDamageCo(Creature enemy)
    {
-      int count = 0;
+        if (enemy.HitDamage())
+            enemy.TakeDamage(GetDamage());
+
+
+        int count = 0;
       while (count < 10)
       {
          if (enemy == null)
