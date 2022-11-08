@@ -26,6 +26,10 @@ public abstract class Player : Creature
     
     [SerializeField] private GameObject _autoCancelButton;
 
+    [SerializeField] private VariableJoystick _joystick;
+
+    [SerializeField] private Transform _cameraArm;
+
     /// <summary>
     /// 다음단계의 기본공격이 가능한지에 대한 bool값
     /// </summary>
@@ -42,6 +46,12 @@ public abstract class Player : Creature
     protected IEnumerator _moveCo;
 
     protected delegate void UseActionType();
+    protected Queue<UseActionType> _autoSkill = new Queue<UseActionType>();
+    
+    /// <summary>
+    /// 오토 모드일때 스킬들의 사용 간격을 나누기 위한 변수
+    /// </summary>
+    protected bool _isNextSkill;
 
     protected override void Awake()
     {
@@ -50,7 +60,7 @@ public abstract class Player : Creature
         DataManager.Instance.Player = this;
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         _nav.enabled = false; //충돌이 활성화 되기 때문에 꺼줌, 사용할때만 활성화
     }
@@ -62,7 +72,39 @@ public abstract class Player : Creature
             CheckInitCombo(); //코루틴 대신 사용
         }
 
-        TouchGetTarget();
+        TouchGetTarget(); 
+    }
+
+    private void FixedUpdate()
+    {
+        Move();
+    }
+
+    private void Move()
+    {
+        if (!IsDead && !IsAttack)
+        {
+            float x = _joystick.Horizontal;
+            float z = _joystick.Vertical;
+
+            Vector3 moveVec = new Vector3(x, 0, z);
+            transform.Translate(Vector3.forward * _joystick.Direction.magnitude * Stat.MoveSpeed * Time.fixedDeltaTime);
+
+            if (moveVec.sqrMagnitude == 0)
+                return;
+
+            Vector3 camAngle = _cameraArm.rotation.eulerAngles;
+            Vector3 camDirAngle = Quaternion.LookRotation(moveVec).eulerAngles;
+            Vector3 resultAngle = Vector3.up * (camAngle.y + camDirAngle.y);
+            transform.rotation = Quaternion.Euler(resultAngle);
+            
+            SetMoveAnim(_joystick.Direction.magnitude);
+        }
+    }
+
+    public void SetMoveAnim(float blend)
+    {
+        _animator.SetFloat(Global.MoveBlend, blend);
     }
     
     /// <summary>
@@ -70,21 +112,31 @@ public abstract class Player : Creature
     /// </summary>
     public void SetAutoHunt()
     {
-        _searchRadius *= _autoModeSearch;
-        _isAutoHunt = true;
-        Debug.Log(_searchRadius);
-        ActiveAutoCancelButton(true);
+        if (!_isAutoHunt)
+        {
+            _searchRadius *= _autoModeSearch;
+            _isAutoHunt = true;
+            _isNextSkill = true;
+            ActiveAutoCancelButton(true);
+        }
+        else
+        {
+            CancelAutoHunt();
+        }
     }
 
+    /// <summary>
+    /// 오토모드 취소 버튼
+    /// </summary>
     public void CancelAutoHunt()
     {
         if (_isAutoHunt)
         {
-            _animator.SetFloat(Global.MoveBlend, 0);
+            SetMoveAnim(0);
             ActiveAutoCancelButton(false);
             _searchRadius /= _autoModeSearch;
-            Debug.Log(_searchRadius);
             _isAutoHunt = false;
+            _autoSkill.Clear();
         }
         StopMoveCo();
     }
@@ -143,6 +195,7 @@ public abstract class Player : Creature
     /// </summary>
     protected void CheckAttackRange(int searchCount, UseActionType useActionType)
     {
+        SetMoveAnim(0);
         Collider[] colliders = Physics.OverlapSphere(transform.position, _searchRadius, LayerMask.GetMask("Enemy"));
 
         _targets.Clear();
@@ -160,6 +213,10 @@ public abstract class Player : Creature
                 _targets.Add(searchList[i].transform);
             }
             ActionFromDistance(useActionType , _targets[0]);
+        }
+        else
+        {
+            CancelAutoHunt();
         }
     }
 
@@ -194,7 +251,14 @@ public abstract class Player : Creature
     {
         if (!IsAttack && !IsDead)
         {
-            CheckAttackRange(1, NormalAttack);
+            if (_targets.Count != 0)
+            {
+                ActionFromDistance(NormalAttack, _targets[0]);
+            }
+            else
+            {
+                CheckAttackRange(1, NormalAttack);
+            }
         }
     }
 
@@ -205,18 +269,36 @@ public abstract class Player : Creature
     {
         if (_attackRadius < Vector3.Distance(transform.position, target.position)) //타겟이 공격사거리 밖에있을때
         {
-            if (_moveCo == null) //버튼이 여러번 눌렸을때 코루틴 중복 방지
+            if (_searchRadius < Vector3.Distance(transform.position, target.position)) // 만약 그 사거리가 탐색범위 보다는 클 경우
             {
-                _moveCo = MoveTowardTargetCo(useActionType, target);
-                StartCoroutine(_moveCo);
+                if (target.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+                {
+                    CheckAttackRange(1, useActionType); //근처 적으로 다시 타겟팅
+                }
+                else //타겟이 Npc일때는 그대로 타겟을 향해 이동 후 함수 실행
+                {
+                    MoveTowardTarget(useActionType, target);
+                }
+            }
+            else
+            {
+                MoveTowardTarget(useActionType, target);
             }
         }
-        else
+        else //공격 사거리 안에 있을때
         {
             useActionType();
         }
     }
 
+    private void MoveTowardTarget(UseActionType useActionType, Transform target)
+    {
+        if (_moveCo == null) //버튼이 여러번 눌렸을때 코루틴 중복 방지
+        {
+            _moveCo = MoveTowardTargetCo(useActionType, target);
+            StartCoroutine(_moveCo);
+        } 
+    }
 
     private void StopMoveCo()
     {
@@ -236,14 +318,14 @@ public abstract class Player : Creature
     {
         _nav.enabled = true;
         _nav.SetDestination(target.transform.position);
-        _animator.SetFloat(Global.MoveBlend, 1);
+        SetMoveAnim(1);
         transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
         while (true)
         {
             if (_attackRadius >= Vector3.Distance(transform.position, target.position)) //공격 사거리 안에 들어왔을때
             {
                 useActionType();
-                _animator.SetFloat(Global.MoveBlend, 0);
+                SetMoveAnim(0);
                 _nav.isStopped = true;
                 _nav.enabled = false;
                 _moveCo = null;
@@ -284,6 +366,7 @@ public abstract class Player : Creature
     public void InitAttack()
     {
         IsAttack = false;
+        _isNextSkill = true;
     }
 
     /// <summary>
@@ -298,21 +381,7 @@ public abstract class Player : Creature
             _canNextNormalAttack = false;
         }
     }
-
-    /// <summary>
-    /// 플레이어 이동
-    /// </summary>
-    /// <param name="angle">이동방향각도</param>
-    /// <param name="moveDistance">조이스틱 이동거리</param>
-    public void Move(Vector3 angle, float moveDistance)
-    {
-        if (!IsDead)
-        {
-            transform.rotation = Quaternion.Euler(angle);
-            transform.Translate(Vector3.forward * moveDistance * Stat.MoveSpeed * Time.fixedDeltaTime);
-            _animator.SetFloat(Global.MoveBlend, moveDistance);
-        }
-    }
+    
 
     public void ActiveFootPrinters(bool active)
     {

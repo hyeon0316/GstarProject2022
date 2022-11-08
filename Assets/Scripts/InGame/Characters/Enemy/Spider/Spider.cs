@@ -19,7 +19,7 @@ public class Spider : Enemy
     protected override void Attack()
     {
         _isAttack = true;
-        _animator.SetInteger(Global.EnemyStateInteger, 3);
+        _animator.SetInteger(Global.EnemyStateInteger, 2);
     }
 
     public override void DisableEnemy()

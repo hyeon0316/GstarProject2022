@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -25,7 +26,7 @@ public class DamageText : MonoBehaviour
 
     private void Start()
     {
-        _cameraArm = FindObjectOfType<CameraMove>().transform;
+        _cameraArm = FindObjectOfType<Camera>().transform;
     }
 
     private void Update()

@@ -24,7 +24,11 @@ public enum PoolType
     ForestGolem1,
     ForestGolem2,
     ForestGolem3,
-    SpecialGolem
+    SpecialGolem,
+    GoblinWarrior,
+    GoblinArcher,
+    GoblinArcherArrow,
+    Goblin
 }
 
 public class ObjectPoolManager : Singleton<ObjectPoolManager>
@@ -52,6 +56,10 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         Init(PoolType.ForestGolem2, 5);
         Init(PoolType.ForestGolem3, 5);
         Init(PoolType.SpecialGolem, 1);
+        Init(PoolType.GoblinWarrior, 5);
+        Init(PoolType.GoblinArcher, 5);
+        Init(PoolType.GoblinArcherArrow, 5);
+        Init(PoolType.Goblin, 5);
     }
 
     /// <summary>

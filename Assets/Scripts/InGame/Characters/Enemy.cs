@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
@@ -10,12 +11,15 @@ public enum EnemyType
     Spider,
     FrightFly,
     ForestGolem,
-    SpecialGolem
+    SpecialGolem,
+    GoblinWarrior,
+    GoblinArcher,
+    Goblin
 }
 
 public abstract class Enemy : Creature
 {
-    public Transform SpawnArea { get; set; }
+    public BoxCollider SpawnArea { get; set; }
     
     [Header("스폰지점으로 돌아가기 전 까지 거리")]
     [SerializeField] private float _backDistance;
@@ -39,7 +43,6 @@ public abstract class Enemy : Creature
     private bool _isGoBack; 
     
     public EnemyType _curEnemyType;
-    protected Rigidbody _rigid;
     
     /// <summary>
     /// 플레이어를 추적해야 하는지에 대한 변수
@@ -73,14 +76,12 @@ public abstract class Enemy : Creature
     {
         base.Awake();
         Stat = new Stat(_curEnemyType);
-        _rigid = GetComponent<Rigidbody>();
     }
     
     
     private void Start()
     {
         _targets.Add(DataManager.Instance.Player.transform);
-        _animator.SetInteger(Global.EnemyStateInteger,0);
     }
 
     private void Update()
@@ -131,14 +132,30 @@ public abstract class Enemy : Creature
         {
             case 1:
                 _nav.isStopped = true;
+                SetAnimations(0, 0, 0, 0,0,0);
+                Invoke("SetRandomMove", Random.Range(3, 7));
                 break;
             case 2:
-                _nav.isStopped = false;
-                _nav.SetDestination(RandomBackPos());
+                StartCoroutine(NextMoveCo());
                 break;
         }
-        
-        Invoke("SetRandomMove",3);
+    }
+
+    private IEnumerator NextMoveCo()
+    {
+        _nav.isStopped = false;
+        _nav.SetDestination(RandomBackPos());
+        SetAnimations(3, 1, 1, 1,1,1);
+        while (true)
+        {
+            if (_nav.remainingDistance <= 0.1f)
+            {
+                Invoke("SetRandomMove", 1);
+                SetAnimations(0, 0, 0, 0,0,0);
+                break;
+            }
+            yield return null;
+        }
     }
 
     /// <summary>
@@ -146,13 +163,16 @@ public abstract class Enemy : Creature
     /// </summary>
     private Vector3 RandomBackPos()
     {
-        float width = SpawnArea.transform.position.x;
-        float height = SpawnArea.transform.position.z;
+        Vector3 originPos = SpawnArea.transform.position;
+        float width = SpawnArea.bounds.size.x;
+        float height = SpawnArea.bounds.size.z;
 
         float randomX = Random.Range((width / 2) * -1, width / 2);
         float randomZ = Random.Range((height / 2) * -1, height / 2);
 
-        Vector3 backPos = new Vector3(randomX, 0, randomZ);
+        Vector3 randomPos = new Vector3(randomX, 0, randomZ);
+
+        Vector3 backPos = randomPos + originPos;
         return backPos;
     }
 
@@ -172,8 +192,8 @@ public abstract class Enemy : Creature
             {
                 if(_curEnemyType is EnemyType.ForestGolem or EnemyType.SpecialGolem)
                     _animator.SetInteger(Global.EnemyAttackInteger, -1);
-                
-                _animator.SetInteger(Global.EnemyStateInteger,0);
+
+                SetAnimations(0, 0, 0, 0,0,0);
                 _isWait = true;
                 _nav.isStopped = true;
                 _isGoBack = false;
@@ -187,20 +207,7 @@ public abstract class Enemy : Creature
                 break;
             }
 
-            switch (_curEnemyType)
-            {
-                case EnemyType.Spider:
-                    _animator.SetInteger(Global.EnemyStateInteger,4);
-                    break;
-                case EnemyType.FrightFly:
-                    _animator.SetInteger(Global.EnemyStateInteger,0);
-                    break;
-                case EnemyType.ForestGolem:
-                case EnemyType.SpecialGolem:
-                    _animator.SetInteger(Global.EnemyStateInteger,1);
-                    break;
-            }
-            
+            SetAnimations(3, 0, 1, 1,1,1);
             yield return null;
         }
     }
@@ -223,34 +230,13 @@ public abstract class Enemy : Creature
                 transform.LookAt(_targets[0]);
                 if (_attackRadius < Vector3.Distance(transform.position, _targets[0].position)) //타겟이 공격사거리 밖에있을때
                 {
-                    switch (_curEnemyType)
-                    {
-                        case EnemyType.Spider:
-                            _animator.SetInteger(Global.EnemyStateInteger,2);
-                            break;
-                        case EnemyType.FrightFly:
-                        case EnemyType.ForestGolem:
-                        case EnemyType.SpecialGolem:
-                            _animator.SetInteger(Global.EnemyStateInteger,1);
-                            break;
-                    }
+                    SetAnimations(1, 1, 1, 1,1,1);
                     _nav.isStopped = false;
                     _nav.SetDestination(_targets[0].transform.position);
                 }
                 else
                 {
-                    switch (_curEnemyType)
-                    {
-                        case EnemyType.Spider:
-                            _animator.SetInteger(Global.EnemyStateInteger,1);
-                            break;
-                        case EnemyType.FrightFly:
-                        case EnemyType.ForestGolem:
-                        case EnemyType.SpecialGolem:
-                            _animator.SetInteger(Global.EnemyStateInteger,0);
-                            break;
-                    }
-                    
+                    SetAnimations(0, 0, 0, 0,0,0);
                     _nav.isStopped = true;
                     Attack();
                 }
@@ -261,7 +247,7 @@ public abstract class Enemy : Creature
     /// <summary>
     /// 플레이어가 없는지 체크
     /// </summary>
-    protected bool IsNullPlayer()
+    private bool IsNullPlayer()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, _attackRadius * 6, LayerMask.GetMask("Player"));
         if (colliders.Length == 0)
@@ -281,13 +267,13 @@ public abstract class Enemy : Creature
         {
             CancelInvoke("SetRandomMove");
             _isFollow = true;
-            _animator.SetInteger(Global.EnemyStateInteger,1);
         }
     }
 
     protected override void Die()
     {
         base.Die();
+        _nav.isStopped = true;
         _animator.SetTrigger(Global.EnemyDeadTrigger);
         QuestManager.Instance.CheckEnemyQuest(_curEnemyType);
         DataManager.Instance.Player.Targets.Remove(this.transform);
@@ -304,6 +290,35 @@ public abstract class Enemy : Creature
         Invoke("DisableEnemy", 1);
     }
 
+    /// <summary>
+    /// 각 적 타입마다 애니메이션 셋팅
+    /// </summary>
+    private void SetAnimations(int spider, int frightFly, int forestGolem, int specialGolem, int goblinWarrior, int goblinArcher)
+    {
+        switch (_curEnemyType)
+        {
+            case EnemyType.Spider:
+                _animator.SetInteger(Global.EnemyStateInteger,spider);
+                break;
+            case EnemyType.FrightFly:
+                _animator.SetInteger(Global.EnemyStateInteger,frightFly);
+                break;
+            case EnemyType.ForestGolem:
+                _animator.SetInteger(Global.EnemyStateInteger,forestGolem);
+                break;
+            case EnemyType.SpecialGolem:
+                _animator.SetInteger(Global.EnemyStateInteger,specialGolem);
+                break;
+            case EnemyType.GoblinWarrior:
+            case EnemyType.Goblin:
+                _animator.SetInteger(Global.EnemyStateInteger,goblinWarrior);
+                break;
+            case EnemyType.GoblinArcher:
+                _animator.SetInteger(Global.EnemyStateInteger,goblinWarrior);
+                break;
+        }
+    }
+    
 
     private void OnTriggerExit(Collider other)
     {

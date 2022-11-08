@@ -24,42 +24,62 @@ public class Mage : Player
     [SerializeField] private BulletRain _bulletRain;
     
     [Header("체인라이트닝 라인")] [SerializeField] private ChainLightningLine _chainLightningLine;
-    
 
-    
+    private UseActionType[] _useSkills = new UseActionType[5];
+
+    protected override void Start()
+    {
+        base.Start();
+        _useSkills[0] = UseWideAreaBarrage;
+        _useSkills[1] = ChainLightning;
+        _useSkills[2] = UseBulletRain;
+        _useSkills[3] = WindAttack;
+        _useSkills[4] = UseSpikeAttack;
+    }
+
     protected override void Update()
     {
         base.Update();
         if (_isAutoHunt)
         {
-            if (!_skiilCoolDown[(int)SkillCoolType.WideAreaBarrage].IsCoolDown && !IsAttack)
+            if (_isNextSkill)
             {
-                UseWideAreaBarrage();
+                SetPrioritySkill();
+                if (_autoSkill.Count == 0) //사용할 스킬이 없을때는 일반공격 사용
+                    UseNormalAttack();
+                else
+                {
+                    UseAutoSkill(_autoSkill.Dequeue());
+                }
+
+                _isNextSkill = false;
             }
-            else if (!_skiilCoolDown[(int)SkillCoolType.BulletRain].IsCoolDown && !IsAttack)
-            {
-                UseBulletRain();
-            }
-            else if (!_skiilCoolDown[(int)SkillCoolType.ChainLightning].IsCoolDown && !IsAttack)
-            {
-                UseChainLightning();
-            }
-            else if (_skiilCoolDown[(int)SkillCoolType.WindAttack].IsCoolDown && !IsAttack)
-            {
-                UseWindAttack();
-            }
-            else if (_skiilCoolDown[(int) SkillCoolType.SpikeAttack].IsCoolDown && !IsAttack)
-            {
-                UseSpikeAttack();
-            }
-            else
-            {
-                UseNormalAttack();
-            }
-            
         }
     }
 
+    /// <summary>
+    /// Queue에서 꺼낸 함수를 사용
+    /// </summary>
+    private void UseAutoSkill(UseActionType useActionType)
+    {
+        useActionType();
+    }
+    
+
+    /// <summary>
+    /// 오토모드때 우선적으로 사용할 스킬들을 셋팅
+    /// </summary>
+    private void SetPrioritySkill()
+    {
+        for (int i = 0; i < _useSkills.Length; i++)
+        {
+            if(_skiilCoolDown[i].IsCoolDown) //쿨다운 중인 스킬은 담지 않는다.
+                continue;
+            
+            if(!_autoSkill.Contains(_useSkills[i])) //중복 방지
+                _autoSkill.Enqueue(_useSkills[i]);
+        }
+    }
 
     /// <summary>
     /// 기본공격할때 지정 위치에 발사체 생성
@@ -77,7 +97,14 @@ public class Mage : Player
     {
         if (!_skiilCoolDown[(int) SkillCoolType.SpikeAttack].IsCoolDown && !IsDead)
         {
-            CheckAttackRange(1, SpikeAttack);
+            if (_targets.Count != 0)
+            {
+                ActionFromDistance(SpikeAttack, _targets[0]);
+            }
+            else
+            {
+                CheckAttackRange(1, SpikeAttack);
+            }
         }
     }
 
@@ -106,7 +133,14 @@ public class Mage : Player
     {
         if (!_skiilCoolDown[(int)SkillCoolType.BulletRain].IsCoolDown && !IsDead)
         {
-            CheckAttackRange(1, BulletRain);
+            if (_targets.Count != 0)
+            {
+                ActionFromDistance(BulletRain, _targets[0]);
+            }
+            else
+            {
+                CheckAttackRange(1, BulletRain);
+            }
         }
     }
 
@@ -132,7 +166,14 @@ public class Mage : Player
     {
         if (!_skiilCoolDown[(int)SkillCoolType.ChainLightning].IsCoolDown && !IsDead)
         {
-            CheckAttackRange(4, ChainLightning);
+            if (_targets.Count != 0)
+            {
+                ActionFromDistance(ChainLightning, _targets[0]);
+            }
+            else
+            {
+                CheckAttackRange(1, ChainLightning);
+            }
         }
     }
 
@@ -157,7 +198,14 @@ public class Mage : Player
     {
         if (!_skiilCoolDown[(int)SkillCoolType.WideAreaBarrage].IsCoolDown && !IsDead) 
         {
-            CheckAttackRange(1, WideAreaBarrage);
+            if (_targets.Count != 0)
+            {
+                ActionFromDistance(WideAreaBarrage, _targets[0]);
+            }
+            else
+            {
+                CheckAttackRange(1, WideAreaBarrage);
+            }
         }
     }
 
@@ -165,7 +213,14 @@ public class Mage : Player
     {
         if (!_skiilCoolDown[(int)SkillCoolType.WideAreaBarrage].IsCoolDown && !IsDead) 
         {
-            CheckAttackRange(1, WindAttack);
+            if (_targets.Count != 0)
+            {
+                ActionFromDistance(WindAttack, _targets[0]);
+            }
+            else
+            {
+                CheckAttackRange(1, WindAttack);
+            }
         }
     }
 
@@ -190,7 +245,7 @@ public class Mage : Player
     private void WideAreaBarrage()
     {
         Debug.Log("범위공격");
-        _skiilCoolDown[(int)SkillCoolType.WindAttack].SetCoolDown();
+        _skiilCoolDown[(int)SkillCoolType.WideAreaBarrage].SetCoolDown();
         IsAttack = true;
         transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
         _animator.SetTrigger(Global.WideAreaBarrageTrigger);

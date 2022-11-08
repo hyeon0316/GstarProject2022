@@ -30,11 +30,13 @@ public abstract class Creature : MonoBehaviour
 
   public bool IsDead { get; private set; }
   
+  protected Rigidbody _rigid;
   
   protected virtual void Awake()
   {
       _animator = GetComponent<Animator>();
       _nav = GetComponent<NavMeshAgent>();
+      _rigid = GetComponent<Rigidbody>();
   }
 
 

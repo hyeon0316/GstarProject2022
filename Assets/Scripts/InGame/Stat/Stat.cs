@@ -60,9 +60,18 @@ public class Stat
                 Hp = 100;
                 break;
             case EnemyType.ForestGolem:
-                Hp = 100;
+                Hp = 50;
                 break;
             case EnemyType.SpecialGolem:
+                Hp = 100;
+                break;
+            case EnemyType.GoblinWarrior:
+                Hp = 100;
+                break;
+            case EnemyType.GoblinArcher:
+                Hp = 100;
+                break;
+            case EnemyType.Goblin:
                 Hp = 100;
                 break;
         }

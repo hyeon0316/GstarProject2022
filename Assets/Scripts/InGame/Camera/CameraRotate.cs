@@ -8,59 +8,60 @@ using UnityEngine.UI;
 /// <summary>
 /// 카메라 상하좌우 회전 담당
 /// </summary>
-public class CameraRotate : MonoBehaviour, IBeginDragHandler, IDragHandler
+public class CameraRotate : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
-    [SerializeField]
-    private Transform _cameraArm;
+    private Vector2 _playerTouchVectorOutput;
+    private bool _isPlayerTouchingPanel;
+    private Touch _myTouch;
+    private int _touchID;
     
-    [SerializeField] private float _rotateSpeed;
-
-    [Header("카메라 x축 최대 회전값")]
-    [SerializeField] private int _xRotateMax;
-    [Header("카메라 x축 최소 회전값")]
-    [SerializeField] private int _xRotateMin;
-
-    private Vector3 _beginPos;
-    private Vector3 _dragPos;
-    private float _xAngle;
-    private float _yAngle;
-    private float _xAngleTemp;
-    private float _yAngleTemp;
-
-    private Image _image;
-
-    private bool _isRotate;
-
-    private void Start()
+    private void FixedUpdate()
     {
-        _xAngle = _cameraArm.rotation.eulerAngles.x;
-        _yAngle = _cameraArm.rotation.eulerAngles.y;
-
+        if (Input.touchCount > 0)
+        {
+            for (int i = 0; i < Input.touchCount; i++)
+            {
+                _myTouch = Input.GetTouch(i);
+                if (_isPlayerTouchingPanel)
+                {
+                    if (_myTouch.fingerId == _touchID)
+                    {
+                        if (_myTouch.phase != TouchPhase.Moved) // 터치드래그가 아닐때
+                            OutputVectorValue(Vector2.zero);
+                    }
+                }
+            }
+        }
+    }
+    
+    private void OutputVectorValue(Vector2 outputValue)
+    {
+        _playerTouchVectorOutput = outputValue;
+    }
+    
+    /// <summary>
+    /// 플레이어가 터치한 벡터값을 반환
+    /// </summary>
+    public Vector2 PlayerJoystickOutputVector()
+    {
+        return _playerTouchVectorOutput;
+    }
+    
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        OnDrag(eventData);
+        _touchID = _myTouch.fingerId;
+        _isPlayerTouchingPanel = true;
     }
 
-
-    public void OnBeginDrag(PointerEventData eventData)
+    public void OnPointerUp(PointerEventData eventData)
     {
-        _beginPos = eventData.position;
-
-        _xAngleTemp = _xAngle;
-        _yAngleTemp = _yAngle;
+        OutputVectorValue(Vector2.zero);
+        _isPlayerTouchingPanel = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        _dragPos = eventData.position;
-
-        _yAngle = _yAngleTemp + (_dragPos.x - _beginPos.x) * 180 / Screen.width * _rotateSpeed;
-        _xAngle = _xAngleTemp + (_dragPos.y - _beginPos.y) * 90 / Screen.height * _rotateSpeed;
-        
-        if (_xAngle > _xRotateMax) 
-            _xAngle = _xRotateMax;
-        if (_xAngle < _xRotateMin) 
-            _xAngle = _xRotateMin;
-
-        _cameraArm.rotation = Quaternion.Euler(-_xAngle, _yAngle, 0);
+        OutputVectorValue(new Vector2(eventData.delta.normalized.x, eventData.delta.normalized.y));
     }
-
-
 }

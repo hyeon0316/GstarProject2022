@@ -37,7 +37,7 @@ public class EnemySpawnArea : MonoBehaviour
             for (int i = 0; i < _spawnEnemyDics[dic.Key]; i++)
             {
                 GameObject enemy = ObjectPoolManager.Instance.GetObject(dic.Key);
-                enemy.GetComponent<Enemy>().SpawnArea = this.transform;
+                enemy.GetComponent<Enemy>().SpawnArea = _boxCollider;
                 enemy.transform.position = RandomSpawnPos();
             }
         }
