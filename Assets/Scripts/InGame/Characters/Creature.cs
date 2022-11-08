@@ -66,8 +66,6 @@ public abstract class Creature : MonoBehaviour
   /// <param name="pureDamage">상대방의 순수 데미지</param>
   public virtual void TakeDamage(int amount , int pureDamage)
   {
-        
-
       if (!IsDead)
       {
           int resultDamage = Mathf.Clamp((pureDamage - Stat.Defense) / 2, 0, 100) * amount / 100;
@@ -79,13 +77,12 @@ public abstract class Creature : MonoBehaviour
               Stat.Hp = 0;
               Die();
           }
-
       }
   }
 
-    public bool HitDamage(int _hitpercent)
+    public bool HitDamage(int hitPercent)
     {
-        int n = _hitpercent - Stat.Dodge + 10;
+        int n = hitPercent - Stat.Dodge + 10;
         n = Math.Clamp(n, 0, 60);
         double result = Math.Pow(0.91f, n);
         result = result * -1;
