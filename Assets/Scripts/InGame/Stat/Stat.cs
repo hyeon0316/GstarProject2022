@@ -18,7 +18,7 @@ public class Stat
     public int MoveSpeed { get; set; }
     public int Attack { get; set; }
     public int SkillDamage { get; set; } //스킬데미지
-    public int AllDamge { get; set; }   //모든데미지
+    public int AllDamge { get; set; } //모든데미지
     public int MaxMp { get; set; }
     public int Mp { get; set; }
     public int MaxPostion { get; set; }
@@ -28,59 +28,11 @@ public class Stat
     {
         
     }
-    
-    /// <summary>
-    /// 플레이어 스탯
-    /// </summary>
-    public Stat(JobType jobType)
-    {
-        switch (jobType)
-        {
-            case JobType.Knight:
-                SetPlayerStat(Resources.Load<PlayerStatData>("Stats/Player/KnightStat"));
-                break;
-            case JobType.Mage:
-                SetPlayerStat(Resources.Load<PlayerStatData>("Stats/Player/MageStat"));
-                break;
-        }
-    }
 
-    /// <summary>
-    /// 적 스탯
-    /// </summary>
-    public Stat(EnemyType enemyType)
-    {
-        //todo: ScriptableObject로 관리하여 로드
-        switch (enemyType)
-        {
-            case EnemyType.Spider:
-                Hp = 100;
-                break;
-            case EnemyType.FrightFly:
-                Hp = 100;
-                break;
-            case EnemyType.ForestGolem:
-                Hp = 50;
-                break;
-            case EnemyType.SpecialGolem:
-                Hp = 100;
-                break;
-            case EnemyType.GoblinWarrior:
-                Hp = 100;
-                break;
-            case EnemyType.GoblinArcher:
-                Hp = 100;
-                break;
-            case EnemyType.Goblin:
-                Hp = 100;
-                break;
-        }
-    }
-    
     /// <summary>
     /// ScriptableObject로 관리되는 데이터값을 가져와 변수에 대입
     /// </summary>
-    private void SetPlayerStat(PlayerStatData playerStatData)
+    public void SetPlayerStat(PlayerStatData playerStatData)
     {
         MaxHp = playerStatData.MaxHp;
         Hp = MaxHp;
@@ -109,7 +61,4 @@ public class Stat
         MoveSpeed = enemyStatData.MoveSpeed;
         Attack = enemyStatData.Attack;
     }
-    /// <summary>
-    /// ScriptableObject로 관리되는 데이터값을 가져와 변수에 대입
-    /// </summary>
 }

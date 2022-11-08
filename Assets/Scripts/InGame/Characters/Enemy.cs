@@ -19,7 +19,8 @@ public enum EnemyType
 
 public abstract class Enemy : Creature
 {
-    public EnemyStatData enemyStatData;
+    
+    [SerializeField] private EnemyStatData _enemyStatData;
     public BoxCollider SpawnArea { get; set; }
     
     [Header("스폰지점으로 돌아가기 전 까지 거리")]
@@ -76,9 +77,8 @@ public abstract class Enemy : Creature
     protected override void Awake()
     {
         base.Awake();
-        Stat.SetEnemyStat(enemyStatData);
-
-        
+        Stat = new Stat();
+        Stat.SetEnemyStat(_enemyStatData);
     }
     
     

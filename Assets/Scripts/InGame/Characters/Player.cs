@@ -6,6 +6,7 @@ using System.Linq;
 
 public abstract class Player : Creature
 {
+    [SerializeField] private PlayerStatData _playerStatData;
     /// <summary>
     /// 공격을 하고 있는 상태인지에 대한 bool값(연속터치 방지)
     /// </summary>
@@ -56,7 +57,8 @@ public abstract class Player : Creature
     protected override void Awake()
     {
         base.Awake();
-        Stat = new Stat(DataManager.Instance.SelectJobType);
+        Stat = new Stat();
+        Stat.SetPlayerStat(_playerStatData);
         DataManager.Instance.Player = this;
     }
 
