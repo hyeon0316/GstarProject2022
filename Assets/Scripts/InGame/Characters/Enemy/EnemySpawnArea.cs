@@ -22,15 +22,16 @@ public class EnemySpawnArea : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        SpawnEnemys();
+        SpawnDicsEnemy();
     }
+    
 
     /// <summary>
     /// 딕셔너리에 저장된 적들을 생성
     /// </summary>
-    private void SpawnEnemys()
+    private void SpawnDicsEnemy()
     {
         foreach (var dic in _spawnEnemyDics)
         {
@@ -43,6 +44,19 @@ public class EnemySpawnArea : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 딕셔너리에 있는 적 종류 중 랜덤한 적을 스폰
+    /// </summary>
+    public void SpawnRandomEnemy()
+    {
+        int index = Random.Range(0, _spawnEnemyDics.Count);
+        KeyValuePair<PoolType, int> randomDic = _spawnEnemyDics.ElementAt(index);
+        GameObject enemy = ObjectPoolManager.Instance.GetObject(randomDic.Key);
+        enemy.GetComponent<Enemy>().SpawnArea = _boxCollider;
+        enemy.GetComponent<Enemy>().ShowAppearance();
+        enemy.transform.position = RandomSpawnPos();
+    }
+    
     
     /// <summary>
     /// 적들이 스폰지점 안의 범위에서 랜덤위치 생성

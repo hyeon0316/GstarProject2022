@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Random = UnityEngine.Random;
 
 public class ChainLightningLine : MonoBehaviour
 {
-    [SerializeField] private int _damage;
+    [SerializeField] private int _percentDamage;
     [SerializeField] private float _drawingSpeed;
     
     private LineRenderer _lineRenderer;
@@ -50,6 +51,7 @@ public class ChainLightningLine : MonoBehaviour
     private IEnumerator TakeLightningDamage()
     {
         int count = 0;
+        Stat playerStat = DataManager.Instance.Player.Stat;
         while (_timer < _keepTime)
         {
             if (IsAllDead())
@@ -64,7 +66,11 @@ public class ChainLightningLine : MonoBehaviour
             foreach (var target in tempTargets)
             {
                 if (target.TryGetComponent(out Creature enemy))
-                    enemy.TakeDamage(_damage);
+                {
+                    float resultDamage = playerStat.Attack * _percentDamage / 100 * playerStat.SkillDamage / 100 *
+                        playerStat.AllDamge / 100 * Random.Range(0.8f, 1f);
+                    enemy.TakeDamage((int) resultDamage, playerStat.Attack);
+                }
             }
 
             yield return new WaitForSeconds(0.5f);

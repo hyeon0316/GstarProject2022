@@ -11,15 +11,15 @@ public class BulletRainMissile : MonoBehaviour
     private float _speed;
     private float _endTime = 0;
     private float _curTime = 0;
-    private int _damage;
+    private int _percentDamage;
     
     /// <summary>
     /// 미사일의 초기값 설정
     /// </summary>
-    public void Init(int damage, Transform startTr,Transform endTr, float speed, float distanceFromStart, float distanceFromEnd)
+    public void Init(int percentDamage, Transform startTr,Transform endTr, float speed, float distanceFromStart, float distanceFromEnd)
     {
         _curTime = 0;
-        _damage = damage;
+        _percentDamage = percentDamage;
         _speed = speed;
         
         _endTime = Random.Range(0.8f, 1.0f); //도착 시간을 랜덤으로 설정
@@ -86,7 +86,10 @@ public class BulletRainMissile : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            other.transform.GetComponent<Creature>().TakeDamage(_damage);
+            Stat playerStat = DataManager.Instance.Player.Stat;
+            float resultDamage = playerStat.Attack * _percentDamage / 100 * playerStat.SkillDamage / 100 *
+                playerStat.AllDamge / 100 * Random.Range(0.8f, 1f);
+            other.transform.GetComponent<Creature>().TakeDamage((int)resultDamage, playerStat.Attack);
             CreateMissileEffect();
             DisableMissile();
         }

@@ -21,7 +21,7 @@ public class GoblinArcherArrow : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            other.transform.GetComponent<Creature>().TakeDamage(_damage);
+            other.transform.GetComponent<Creature>().TakeDamage(_damage, _damage);
             DisableMissile();
         }
     }

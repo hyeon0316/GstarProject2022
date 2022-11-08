@@ -58,12 +58,18 @@ public abstract class Creature : MonoBehaviour
           Stat.Hp = Stat.MaxHp;
   }
   
-  public virtual void TakeDamage(int amount)
+  /// <summary>
+  /// 
+  /// </summary>
+  /// <param name="amount">상대방의 최종 데미지</param>
+  /// <param name="pureDamage">상대방의 순수 데미지</param>
+  public virtual void TakeDamage(int amount , int pureDamage)
   {
       if (!IsDead)
       {
-          Stat.Hp -= amount;
-          _floatingText.CreateFloatingText(amount);
+          int resultDamage = Mathf.Clamp((pureDamage - Stat.Defense) / 2, 0, 100) * amount / 100;
+          Stat.Hp -= resultDamage;
+          _floatingText.CreateFloatingText(resultDamage);
 
           if (Stat.Hp <= 0)
           {
@@ -71,7 +77,6 @@ public abstract class Creature : MonoBehaviour
               Die();
           }
 
-          //Debug.Log(Stat.Hp);
       }
   }
 

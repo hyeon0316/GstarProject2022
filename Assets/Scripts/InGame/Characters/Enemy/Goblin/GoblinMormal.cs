@@ -20,7 +20,7 @@ public class GoblinMormal : Enemy
 
     public override void DisableEnemy()
     {
-        ObjectPoolManager.Instance.ReturnObject(PoolType.GoblinWarrior,this.gameObject);
+        ObjectPoolManager.Instance.ReturnObject(PoolType.Goblin,this.gameObject);
     }
 
 

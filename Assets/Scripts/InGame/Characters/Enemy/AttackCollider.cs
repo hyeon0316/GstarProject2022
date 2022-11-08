@@ -11,7 +11,7 @@ public class AttackCollider : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            other.GetComponent<Creature>().TakeDamage(_damage);
+            other.GetComponent<Creature>().TakeDamage(_damage, _damage);
         }
     }
 }

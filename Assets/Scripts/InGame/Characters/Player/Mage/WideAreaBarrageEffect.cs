@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Object = System.Object;
+using Random = UnityEngine.Random;
 
 public class WideAreaBarrageEffect : MonoBehaviour
 {
-   [SerializeField] private int _damage;
+   [SerializeField] private int _percentDamage;
 
    [Header("데미지가 적용되기 까지 시간")]
    [SerializeField] private float _dealTime;
@@ -61,7 +62,10 @@ public class WideAreaBarrageEffect : MonoBehaviour
             break;
          
          yield return new WaitForSeconds(_dealTime);
-         enemy.TakeDamage(_damage);
+         Stat playerStat = DataManager.Instance.Player.Stat;
+         float resultDamage = playerStat.Attack * _percentDamage / 100 * playerStat.SkillDamage / 100 *
+            playerStat.AllDamge / 100 * Random.Range(0.8f, 1f);
+         enemy.TakeDamage((int)resultDamage, playerStat.Attack);
          count++;
       }
    }

@@ -2,12 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class NormalAttackMissile : MonoBehaviour
 {
    
    [SerializeField] private float _missileSpeed;
-   [SerializeField] private int _damage;
+   [SerializeField] private int _percentDamage;
    
   
 
@@ -31,7 +32,10 @@ public class NormalAttackMissile : MonoBehaviour
    {
       if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
       {
-         other.transform.GetComponent<Creature>().TakeDamage(_damage);
+         Stat playerStat = DataManager.Instance.Player.Stat;
+         float resultDamage = playerStat.Attack * _percentDamage / 100 * playerStat.SkillDamage / 100 *
+            playerStat.AllDamge / 100 * Random.Range(0.8f, 1f);
+         other.transform.GetComponent<Creature>().TakeDamage((int)resultDamage, playerStat.Attack);
          CreateEffect();
          DisableMissile();
       }

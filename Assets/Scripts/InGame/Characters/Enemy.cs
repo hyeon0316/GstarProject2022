@@ -123,6 +123,14 @@ public abstract class Enemy : Creature
     }
 
     /// <summary>
+    /// 스폰될때 모습을 서서히 나타냄
+    /// </summary>
+    public void ShowAppearance()
+    {
+        _dissolve.FadeIn();
+    }
+    
+    /// <summary>
     /// 대기상태일때 랜덤 패턴 설정(이동, 멈춤)
     /// </summary>
     private void SetRandomMove()
@@ -260,9 +268,9 @@ public abstract class Enemy : Creature
     protected abstract void Attack();
   
 
-    public override void TakeDamage(int amount)
+    public override void TakeDamage(int amount, int pureAttack)
     {
-        base.TakeDamage(amount);
+        base.TakeDamage(amount, pureAttack);
         if (!_isFollow && !_isGoBack) //피격 당했을 때, 되돌아 가는 중이 아닐 때 추적 시작
         {
             CancelInvoke("SetRandomMove");
@@ -273,6 +281,7 @@ public abstract class Enemy : Creature
     protected override void Die()
     {
         base.Die();
+        SpawnArea.GetComponent<EnemySpawnArea>().SpawnRandomEnemy();
         _nav.isStopped = true;
         _animator.SetTrigger(Global.EnemyDeadTrigger);
         QuestManager.Instance.CheckEnemyQuest(_curEnemyType);

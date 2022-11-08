@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class WindAttack : MonoBehaviour
 {
-   [SerializeField] private int _damage;
+   [SerializeField] private int _percentDamage;
    [SerializeField] private float _moveSpeed;
 
    [Header("데미지가 적용되기 까지 시간")] [SerializeField]
@@ -72,7 +72,10 @@ public class WindAttack : MonoBehaviour
             break;
 
          yield return new WaitForSeconds(_dealTime);
-         enemy.TakeDamage(_damage);
+         Stat playerStat = DataManager.Instance.Player.Stat;
+         float resultDamage = playerStat.Attack * _percentDamage / 100 * playerStat.SkillDamage / 100 *
+            playerStat.AllDamge / 100 * Random.Range(0.8f, 1f);
+         enemy.TakeDamage((int)resultDamage, playerStat.Attack);
          count++;
       }
    }
