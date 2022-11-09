@@ -7,7 +7,7 @@ public class QuestManager : Singleton<QuestManager>
     public QuestData[] quests;
     public Inventory _inventory;
     public QuestUI questUI;
-    private QuestData _quset; 
+    public QuestData _quset {get;set;}
     public QuestInGameUI questInGameUI;
     public TalkUI TalkUI;
     public TalkData TalkData;
@@ -17,6 +17,7 @@ public class QuestManager : Singleton<QuestManager>
     public void NextQuest()
     {
         _mainId++;
+        FinishQuest();
         questInGameUI.UpdateUI(quests[_mainId]);
 
     }
@@ -43,7 +44,7 @@ public class QuestManager : Singleton<QuestManager>
         questUI.gameObject.SetActive(false);
     }
     /// <summary> Äù½ºÆ® EnemyÃ¼Å© _id </summary>
-    public void CheckEnemyQuest(EnemyType _id)
+    public void CheckEnemyQuest(PoolType _id)
     {
         if (quests[_mainId].type == QuestType.KillEnemy)
         {
@@ -54,10 +55,6 @@ public class QuestManager : Singleton<QuestManager>
                     quests[_mainId].collectObjectives.UpdateCount();
 
                     questInGameUI.UpdateUI(quests[_mainId]);
-                    if (quests[_mainId].IsCompleteObjectives)
-                    {
-                        FinishQuest();
-                    }
                 }
             }
         }
@@ -73,7 +70,7 @@ public class QuestManager : Singleton<QuestManager>
                 questInGameUI.UpdateUI(quests[_mainId]);
                 TalkUI.gameObject.SetActive(true);
                 TalkUI.SetText(TalkData.GetStr(_id));
-                FinishQuest();
+                
             }
         }
     }
@@ -87,7 +84,6 @@ public class QuestManager : Singleton<QuestManager>
     }
     public void SetInventoryReference(Inventory inventory)
     {
-        Debug.Log(inventory.name);
         _inventory = inventory;
     }
 }

@@ -16,6 +16,7 @@ public class QuestContentUI : MonoBehaviour
     {
         Name.text = data.Name;
         Content.text = data.Content;
+        if(!data.IsCompleteObjectives)
         if (data.type == QuestType.KillEnemy)
         {
             
@@ -26,7 +27,9 @@ public class QuestContentUI : MonoBehaviour
             NeedObject.text = "@@@찾아가기";
         }
         if (data.rewards[0].ItemReward == null)
+        {
             Reward1.text = "";
+        }
         else
         {
             Reward1.text = "수상한 아이템";

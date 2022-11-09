@@ -36,7 +36,7 @@ public class Inventory : MonoBehaviour
     public GameObject InvenUI;
     public GameObject StatUI;
     public EnforceUI enforceUI;
-
+    public GameObject Inven;
     public void ButtonEnforce()
     {
         if (enforceUI.gameObject.activeSelf)
@@ -545,6 +545,6 @@ public class Inventory : MonoBehaviour
     }
     public void ExitButton()
     {
-        this.gameObject.SetActive(false);
+        Inven.gameObject.SetActive(false);
     }
 }

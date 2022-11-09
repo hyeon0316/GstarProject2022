@@ -46,7 +46,7 @@ public class QuestData : ScriptableObject
 public abstract class Objective
 {
     
-    public EnemyType[] EnemyID;
+    public PoolType[] EnemyID;
     public int amount;
     public int currentAmount  { get; set; }
 
@@ -77,6 +77,7 @@ public class Rewards
         if (ItemReward != null)
         {
             GameObject.Find("");
+            QuestManager.Instance._inventory.Add(ItemReward, ItemRewardCount);
         }
          //Inventory.inst.AcquireItem(ItemReward, ItemRewardCount);
 

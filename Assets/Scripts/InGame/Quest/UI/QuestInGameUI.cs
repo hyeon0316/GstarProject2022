@@ -10,7 +10,6 @@ public class QuestInGameUI : MonoBehaviour
     public GameObject Fin;
     private int questNum;
     private bool questType;
-    private EnemyType enemyType;
     // Start is called before the first frame update
 
     private void Start()

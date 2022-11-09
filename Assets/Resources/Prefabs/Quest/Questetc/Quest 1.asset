@@ -22,4 +22,16 @@ MonoBehaviour:
     EnemyID: 
     amount: 0
     NpcId: 1
-  rewards: []
+  rewards:
+  - ItemReward: {fileID: 11400000, guid: 45f0f69357e0b9c4297642d9bebb4c6f, type: 2}
+    ItemRewardCount: 1
+    EXPReward: 0
+  - ItemReward: {fileID: 11400000, guid: cf75241e3485bab4d85619b5167c4bbb, type: 2}
+    ItemRewardCount: 1
+    EXPReward: 0
+  - ItemReward: {fileID: 11400000, guid: 2337a0fbbc34d474ea0b1e3cbbe47393, type: 2}
+    ItemRewardCount: 100
+    EXPReward: 0
+  - ItemReward: {fileID: 11400000, guid: 46938045e1d5ffc4fa3805ff3e0e033c, type: 2}
+    ItemRewardCount: 1
+    EXPReward: 0
