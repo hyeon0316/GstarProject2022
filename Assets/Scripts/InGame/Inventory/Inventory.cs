@@ -182,7 +182,9 @@ public class Inventory : MonoBehaviour
         ECapacity = _equCount;
         _equipmentUI.SetInventoryReference(this);
         _inventoryUI.SetInventoryReference(this);
+        QuestManager.Instance.SetInventoryReference(this);
         _useSlotindex = USESTARTINDEX;
+        
     }
     
     public int Capacity { get; private set; }
@@ -332,7 +334,7 @@ public class Inventory : MonoBehaviour
             Remove(index);
         }
     }
-
+    
     public void UnEquip(int index)
     {
         if (!IsValidIndex(index)) return;

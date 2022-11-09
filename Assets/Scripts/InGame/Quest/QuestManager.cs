@@ -56,7 +56,7 @@ public class QuestManager : Singleton<QuestManager>
                     questInGameUI.UpdateUI(quests[_mainId]);
                     if (quests[_mainId].IsCompleteObjectives)
                     {
-                        //Äù½ºÆ®¿Ï·á
+                        FinishQuest();
                     }
                 }
             }
@@ -73,7 +73,21 @@ public class QuestManager : Singleton<QuestManager>
                 questInGameUI.UpdateUI(quests[_mainId]);
                 TalkUI.gameObject.SetActive(true);
                 TalkUI.SetText(TalkData.GetStr(_id));
+                FinishQuest();
             }
         }
+    }
+
+    private void FinishQuest()
+    {
+        foreach (var qu in quests[_mainId].rewards)
+        {
+            qu.Reward();
+        }
+    }
+    public void SetInventoryReference(Inventory inventory)
+    {
+        Debug.Log(inventory.name);
+        _inventory = inventory;
     }
 }
