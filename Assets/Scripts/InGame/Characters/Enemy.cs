@@ -6,20 +6,9 @@ using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
-public enum EnemyType
-{
-    Spider,
-    FrightFly,
-    ForestGolem,
-    SpecialGolem,
-    GoblinWarrior,
-    GoblinArcher,
-    Goblin
-}
 
 public abstract class Enemy : Creature
 {
-    
     [SerializeField] private EnemyStatData _enemyStatData;
     public BoxCollider SpawnArea { get; set; }
     
@@ -44,7 +33,7 @@ public abstract class Enemy : Creature
     /// </summary>
     private bool _isGoBack; 
     
-    public EnemyType _curEnemyType;
+    public PoolType _curEnemyType;
     
     /// <summary>
     /// 플레이어를 추적해야 하는지에 대한 변수
@@ -82,7 +71,7 @@ public abstract class Enemy : Creature
     }
     
     
-    private void Start()
+    protected virtual void Start()
     {
         _targets.Add(DataManager.Instance.Player.transform);
     }
@@ -201,7 +190,7 @@ public abstract class Enemy : Creature
         {
             if (_nav.remainingDistance <= 0.5f) //도착했을때
             {
-                if(_curEnemyType is EnemyType.ForestGolem or EnemyType.SpecialGolem)
+                if(_curEnemyType is PoolType.ForestGolem1 or PoolType.ForestGolem2 or  PoolType.ForestGolem3 or PoolType.SpecialGolem)
                     _animator.SetInteger(Global.EnemyAttackInteger, -1);
 
                 SetAnimations(0, 0, 0, 0,0,0);
@@ -269,11 +258,11 @@ public abstract class Enemy : Creature
         return false;
     }
     protected abstract void Attack();
-  
+    
 
-    public override void TakeDamage(int amount, int pureAttack)
+    public override void TryGetDamage(Stat stat, Attack attack)
     {
-        base.TakeDamage(amount, pureAttack);
+        base.TryGetDamage(stat, attack);
         if (!_isFollow && !_isGoBack) //피격 당했을 때, 되돌아 가는 중이 아닐 때 추적 시작
         {
             CancelInvoke("SetRandomMove");
@@ -309,23 +298,25 @@ public abstract class Enemy : Creature
     {
         switch (_curEnemyType)
         {
-            case EnemyType.Spider:
+            case PoolType.Spider:
                 _animator.SetInteger(Global.EnemyStateInteger,spider);
                 break;
-            case EnemyType.FrightFly:
+            case PoolType.FrightFly:
                 _animator.SetInteger(Global.EnemyStateInteger,frightFly);
                 break;
-            case EnemyType.ForestGolem:
-                _animator.SetInteger(Global.EnemyStateInteger,forestGolem);
+            case PoolType.ForestGolem1:
+            case PoolType.ForestGolem2:
+            case PoolType.ForestGolem3:
+                _animator.SetInteger(Global.EnemyStateInteger, forestGolem);
                 break;
-            case EnemyType.SpecialGolem:
-                _animator.SetInteger(Global.EnemyStateInteger,specialGolem);
+            case PoolType.SpecialGolem:
+                _animator.SetInteger(Global.EnemyStateInteger, specialGolem);
                 break;
-            case EnemyType.GoblinWarrior:
-            case EnemyType.Goblin:
+            case PoolType.GoblinWarrior:
+            case PoolType.Goblin:
                 _animator.SetInteger(Global.EnemyStateInteger,goblinWarrior);
                 break;
-            case EnemyType.GoblinArcher:
+            case PoolType.GoblinArcher:
                 _animator.SetInteger(Global.EnemyStateInteger,goblinWarrior);
                 break;
         }

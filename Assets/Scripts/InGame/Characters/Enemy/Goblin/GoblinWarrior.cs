@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class GoblinWarrior : Enemy
 {
-    [SerializeField] private BoxCollider _attackArea;
-    
+    [SerializeField] private ShortAttack _shortAttackArea;
+    [SerializeField] private BoxCollider _attackCollider;
     protected override void OnEnable()
     {
         base.OnEnable();
-        
-        _attackArea.enabled = false;
+        _attackCollider.enabled = false;
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        _shortAttackArea.SetStat(Stat);
     }
 
     protected override void Attack()
@@ -27,12 +32,12 @@ public class GoblinWarrior : Enemy
 
     public void ActiveAttackCollider()
     {
-        _attackArea.enabled = true;
+        _attackCollider.enabled = true;
     }
     
     public void InActiveAttackCollider()
     {
-        _attackArea.enabled = false;
+        _attackCollider.enabled = false;
         _isAttack = false;
     }
 }

@@ -791,7 +791,8 @@ MonoBehaviour:
   _backDistance: 4
   _dissolve: {fileID: 5114559417783968056}
   _curEnemyType: 2
-  _attackArea: {fileID: 3187980785814790563}
+  _shortAttackArea: {fileID: 4747530407303869140}
+  _attackCollider: {fileID: 3187980785814790563}
 --- !u!54 &7031741995507835054
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1729,4 +1730,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c196318bbb5bf4983005703ecc5ea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 10
+  _curPoolType: 20

@@ -2,32 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FrightFlyMissile : MonoBehaviour
+public class FrightFlyMissile : NormalAttack
 {
     [SerializeField] private float _missileSpeed;
-    [SerializeField] private int _damage;
+
+    private Stat _stat;
+    
+    public void SetStat(Stat stat)
+    {
+        _stat = stat;
+        DelayDisable();
+    }
    
     private void FixedUpdate()
     {
         transform.Translate(Vector3.forward * _missileSpeed);
     }
     
-    public void DelayDisable()
+    private void DelayDisable()
     {
-        Invoke("DisableMissile", 0.5f);
+        Invoke("DisableObject", 0.5f);
     }
     
     private void OnTriggerEnter(Collider other) 
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            other.transform.GetComponent<Creature>().TakeDamage(_damage, _damage);
-            DisableMissile();
+            other.transform.GetComponent<Creature>().TryGetDamage(_stat, this);
+            DisableObject();
         }
     }
     
-    private void DisableMissile()
-    {
-        ObjectPoolManager.Instance.ReturnObject(PoolType.FrightFlyMissile, this.gameObject);
-    }
 }

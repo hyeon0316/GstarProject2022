@@ -254,17 +254,11 @@ public class Mage : Player
 
     public void CreateWideAreaBarrageEffect()
     {
-        var effect = ObjectPoolManager.Instance.GetObject(PoolType.WideAreaBarrageEffect);
+        var effect = ObjectPoolManager.Instance.GetObject(PoolType.WideAreaBarrage);
         effect.transform.position =
             new Vector3(_targets[0].position.x, _targets[0].transform.position.y + effect.transform.position.y,
                 _targets[0].position.z);
         effect.GetComponent<WideAreaBarrageEffect>().DelayDisable();
-
-        var barrage = ObjectPoolManager.Instance.GetObject(PoolType.WideAreaBarrage);
-        barrage.transform.position = new Vector3(_targets[0].position.x,
-            _targets[0].transform.position.y + barrage.transform.position.y,
-            _targets[0].position.z);
-        barrage.GetComponent<WideAreaBarrage>().DelayDisable();
     }
 
 

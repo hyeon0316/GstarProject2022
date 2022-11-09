@@ -11,7 +11,6 @@ public enum PoolType
     NormalAttackMissile,
     NormalAttackEffect,
     WideAreaBarrage,
-    WideAreaBarrageEffect,
     BulletRainMissile,
     BulletRainEffect,
     DamageText,
@@ -28,7 +27,8 @@ public enum PoolType
     GoblinWarrior,
     GoblinArcher,
     GoblinArcherArrow,
-    Goblin
+    Goblin,
+    None
 }
 
 public class ObjectPoolManager : Singleton<ObjectPoolManager>
@@ -42,7 +42,6 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         Init(PoolType.NormalAttackMissile, 3);
         Init(PoolType.NormalAttackEffect, 3);
         Init(PoolType.WideAreaBarrage, 1);
-        Init(PoolType.WideAreaBarrageEffect, 1);
         Init(PoolType.BulletRainMissile, 10);
         Init(PoolType.BulletRainEffect, 10);
         Init(PoolType.DamageText, 10);

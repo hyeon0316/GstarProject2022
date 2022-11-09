@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GoblinArcher : Enemy
 {
-    [SerializeField] private Transform _attackPos;
+    [SerializeField] private LongAttack _attackPos;
     
     protected override void Attack()
     {
@@ -22,11 +22,7 @@ public class GoblinArcher : Enemy
     
     public void CreateArrow()
     {
-        var arrow = ObjectPoolManager.Instance.GetObject(PoolType.GoblinArcherArrow);
-        arrow.transform.position = _attackPos.position;
-        arrow.transform.rotation = _attackPos.rotation;
-        
-        arrow.GetComponent<GoblinArcherArrow>().DelayDisable();
+        _attackPos.CreateProjectile(PoolType.GoblinArcherArrow, Stat);
     }
 
     public override void DisableEnemy()

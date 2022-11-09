@@ -4,14 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class NormalAttackMissile : MonoBehaviour
+public class NormalAttackMissile : NormalAttack
 {
    
    [SerializeField] private float _missileSpeed;
-   [SerializeField] private int _percentDamage;
    
-  
-
    private void FixedUpdate()
    {
       transform.Translate(Vector3.forward * _missileSpeed);
@@ -19,25 +16,17 @@ public class NormalAttackMissile : MonoBehaviour
 
    public void DelayDisable()
    {
-      Invoke("DisableMissile", 0.5f);
+      Invoke("DisableObject", 0.5f);
    }
-
-   private void DisableMissile()
-   {
-      ObjectPoolManager.Instance.ReturnObject(PoolType.NormalAttackMissile, this.gameObject);
-   }
-
+   
 
    private void OnTriggerEnter(Collider other) 
    {
       if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
       {
-         Stat playerStat = DataManager.Instance.Player.Stat;
-         float resultDamage = playerStat.Attack * _percentDamage / 100 * playerStat.SkillDamage / 100 *
-            playerStat.AllDamge / 100 * Random.Range(0.8f, 1f);
-         other.transform.GetComponent<Creature>().TakeDamage((int)resultDamage, playerStat.Attack);
+         other.transform.GetComponent<Creature>().TryGetDamage(DataManager.Instance.Player.Stat, this);
          CreateEffect();
-         DisableMissile();
+         DisableObject();
       }
    }
 

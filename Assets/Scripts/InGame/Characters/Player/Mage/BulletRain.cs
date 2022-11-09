@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// BulletRain의 발사체 생성기
+/// </summary>
 public class BulletRain : MonoBehaviour
 {
    [Header("미사일 기능 관련")]
@@ -16,8 +19,6 @@ public class BulletRain : MonoBehaviour
    [Range(0, 1)] 
    [SerializeField] private float _interval = 0.15f;
    [SerializeField] private int _shotCountEveryInterval = 2; // 한번에 몇 개씩 발사할건지.
-
-   [SerializeField] private int _missileDamage;
 
    public void CreateMissile(Transform target)
    {
@@ -39,7 +40,7 @@ public class BulletRain : MonoBehaviour
             
             GameObject missile = ObjectPoolManager.Instance.GetObject(PoolType.BulletRainMissile);
             BulletRainMissile bulletRainMissile = missile.GetComponent<BulletRainMissile>();
-            bulletRainMissile.Init(_missileDamage, this.transform, target, _missileSpeed, _distanceFromStart, _distanceFromEnd);
+            bulletRainMissile.Init(this.transform, target, _missileSpeed, _distanceFromStart, _distanceFromEnd);
             shotCount--;
          }
       }

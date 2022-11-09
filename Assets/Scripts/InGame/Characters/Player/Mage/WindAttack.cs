@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class WindAttack : MonoBehaviour
+public class WindAttack : SkillAttack
 {
-   [SerializeField] private int _percentDamage;
    [SerializeField] private float _moveSpeed;
 
-   [Header("데미지가 적용되기 까지 시간")] [SerializeField]
-   private float _dealTime;
+   [Header("데미지가 적용되기 까지 시간")] 
+   [SerializeField] private float _dealTime;
 
    /// <summary>
    /// 적들이 장판안에 들어올때 각 적마다의 정보와 데미지 발생을 위함과 장판에 나갔을때 데미지 발생을 중단하기 위한 데이터 저장 변수
@@ -32,10 +31,10 @@ public class WindAttack : MonoBehaviour
       }
    }
 
-   private void DisableEffect()
+   protected override void DisableObject()
    {
+      base.DisableObject();
       StopCoroutine(MoveCo());
-      ObjectPoolManager.Instance.ReturnObject(PoolType.WindAttackEffect, this.gameObject);
    }
 
    private void OnTriggerEnter(Collider other)
@@ -72,10 +71,7 @@ public class WindAttack : MonoBehaviour
             break;
 
          yield return new WaitForSeconds(_dealTime);
-         Stat playerStat = DataManager.Instance.Player.Stat;
-         float resultDamage = playerStat.Attack * _percentDamage / 100 * playerStat.SkillDamage / 100 *
-            playerStat.AllDamge / 100 * Random.Range(0.8f, 1f);
-         enemy.TakeDamage((int)resultDamage, playerStat.Attack);
+         enemy.TryGetDamage(DataManager.Instance.Player.Stat, this);
          count++;
       }
    }

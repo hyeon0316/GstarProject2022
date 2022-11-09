@@ -5,10 +5,8 @@ using UnityEngine;
 using Object = System.Object;
 using Random = UnityEngine.Random;
 
-public class WideAreaBarrageEffect : MonoBehaviour
+public class WideAreaBarrageEffect : SkillAttack
 {
-   [SerializeField] private int _percentDamage;
-
    [Header("데미지가 적용되기 까지 시간")]
    [SerializeField] private float _dealTime;
 
@@ -19,14 +17,9 @@ public class WideAreaBarrageEffect : MonoBehaviour
 
    public void DelayDisable()
    {
-      Invoke("DisableEffect", 7f);
+      Invoke("DisableObject", 7f);
    }
    
-
-   private void DisableEffect()
-   {
-      ObjectPoolManager.Instance.ReturnObject(PoolType.WideAreaBarrageEffect, this.gameObject);
-   }
 
    private void OnTriggerEnter(Collider other)
    {
@@ -55,21 +48,14 @@ public class WideAreaBarrageEffect : MonoBehaviour
 
    private IEnumerator TakeBarrageDamageCo(Creature enemy)
    {
-        /*if (enemy.HitDamage())
-            enemy.TakeDamage(GetDamage());*/
-
-
-        int count = 0;
+      int count = 0;
       while (count < 10)
       {
          if (enemy == null)
             break;
          
          yield return new WaitForSeconds(_dealTime);
-         Stat playerStat = DataManager.Instance.Player.Stat;
-         float resultDamage = playerStat.Attack * _percentDamage / 100 * playerStat.SkillDamage / 100 *
-            playerStat.AllDamge / 100 * Random.Range(0.8f, 1f);
-         enemy.TakeDamage((int)resultDamage, playerStat.Attack);
+         enemy.TryGetDamage(DataManager.Instance.Player.Stat, this);
          count++;
       }
    }

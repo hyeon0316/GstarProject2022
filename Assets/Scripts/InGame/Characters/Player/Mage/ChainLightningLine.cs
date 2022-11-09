@@ -5,9 +5,8 @@ using UnityEngine;
 using System.Linq;
 using Random = UnityEngine.Random;
 
-public class ChainLightningLine : MonoBehaviour
+public class ChainLightningLine : SkillAttack
 {
-    [SerializeField] private int _percentDamage;
     [SerializeField] private float _drawingSpeed;
     
     private LineRenderer _lineRenderer;
@@ -67,9 +66,7 @@ public class ChainLightningLine : MonoBehaviour
             {
                 if (target.TryGetComponent(out Creature enemy))
                 {
-                    float resultDamage = playerStat.Attack * _percentDamage / 100 * playerStat.SkillDamage / 100 *
-                        playerStat.AllDamge / 100 * Random.Range(0.8f, 1f);
-                    enemy.TakeDamage((int) resultDamage, playerStat.Attack);
+                    enemy.TryGetDamage(DataManager.Instance.Player.Stat, this);
                 }
             }
 

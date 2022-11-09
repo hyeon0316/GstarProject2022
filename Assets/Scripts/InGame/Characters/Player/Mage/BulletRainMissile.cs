@@ -4,22 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class BulletRainMissile : MonoBehaviour
+public class BulletRainMissile : SkillAttack
 {
     private Vector3[] _bezierPoints = new Vector3[4];
 
     private float _speed;
     private float _endTime = 0;
     private float _curTime = 0;
-    private int _percentDamage;
     
     /// <summary>
     /// 미사일의 초기값 설정
     /// </summary>
-    public void Init(int percentDamage, Transform startTr,Transform endTr, float speed, float distanceFromStart, float distanceFromEnd)
+    public void Init(Transform startTr,Transform endTr, float speed, float distanceFromStart, float distanceFromEnd)
     {
         _curTime = 0;
-        _percentDamage = percentDamage;
         _speed = speed;
         
         _endTime = Random.Range(0.8f, 1.0f); //도착 시간을 랜덤으로 설정
@@ -47,7 +45,7 @@ public class BulletRainMissile : MonoBehaviour
     {
         if (_curTime > _endTime)
         {
-            DisableMissile();
+            DisableObject();
             return;
         }
 
@@ -86,12 +84,9 @@ public class BulletRainMissile : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            Stat playerStat = DataManager.Instance.Player.Stat;
-            float resultDamage = playerStat.Attack * _percentDamage / 100 * playerStat.SkillDamage / 100 *
-                playerStat.AllDamge / 100 * Random.Range(0.8f, 1f);
-            other.transform.GetComponent<Creature>().TakeDamage((int)resultDamage, playerStat.Attack);
+            other.transform.GetComponent<Creature>().TryGetDamage(DataManager.Instance.Player.Stat, this);
             CreateMissileEffect();
-            DisableMissile();
+            DisableObject();
         }
     }
 
@@ -101,8 +96,5 @@ public class BulletRainMissile : MonoBehaviour
         effect.transform.position = transform.position;
         effect.GetComponent<BulletRainEffect>().DelayDisable();
     }
-    private void DisableMissile()
-    {
-        ObjectPoolManager.Instance.ReturnObject(PoolType.BulletRainMissile, this.gameObject);
-    }
+   
 }

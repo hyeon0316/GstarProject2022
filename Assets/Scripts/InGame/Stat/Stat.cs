@@ -60,5 +60,6 @@ public class Stat
         ReduceDamage = enemyStatData.ReduceDamage;
         MoveSpeed = enemyStatData.MoveSpeed;
         Attack = enemyStatData.Attack;
+        AllDamge = 100;
     }
 }

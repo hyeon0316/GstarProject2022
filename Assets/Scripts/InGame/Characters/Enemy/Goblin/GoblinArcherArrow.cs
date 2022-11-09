@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoblinArcherArrow : MonoBehaviour
+public class GoblinArcherArrow : NormalAttack
 {
     [SerializeField] private float _missileSpeed;
-    [SerializeField] private int _damage;
-   
+    private Stat _stat;
+    
     private void FixedUpdate()
     {
         transform.Translate(Vector3.forward * _missileSpeed);
     }
+    public void SetStat(Stat stat)
+    {
+        _stat = stat;
+        DelayDisable();
+    }
     
-    public void DelayDisable()
+    private void DelayDisable()
     {
         Invoke("DisableMissile", 0.5f);
     }
@@ -21,7 +26,7 @@ public class GoblinArcherArrow : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            other.transform.GetComponent<Creature>().TakeDamage(_damage, _damage);
+            other.transform.GetComponent<Creature>().TryGetDamage(_stat, this);
             DisableMissile();
         }
     }

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ForestGolem : Enemy
 {
-    [SerializeField] private BoxCollider _attackArea;
+    [SerializeField] private ShortAttack _shortAttackArea;
+    [SerializeField] private BoxCollider _attackCollider;
 
     /// <summary>
     /// 공격콤보 카운트
@@ -14,26 +15,30 @@ public class ForestGolem : Enemy
     protected override void OnEnable()
     {
         base.OnEnable();
-        _attackArea.enabled = false;
+        _attackCollider.enabled = false;
         _attackCount = -1;
     }
     
+    protected override void Start()
+    {
+        base.Start();
+        _shortAttackArea.SetStat(Stat);
+    }
     
     protected override void Attack()
     {
         _isAttack = true;
         _animator.SetInteger(Global.EnemyAttackInteger, ++_attackCount % Global.GolemMaxComboAttack);
-        Debug.Log(_attackCount);
     }
     
     public void ActiveAttackCollider()
     {
-        _attackArea.enabled = true;
+        _attackCollider.enabled = true;
     }
     
     public void InActiveAttackCollider()
     {
-        _attackArea.enabled = false;
+        _attackCollider.enabled = false;
         _isAttack = false;
     }
     

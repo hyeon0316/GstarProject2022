@@ -59,39 +59,56 @@ public abstract class Creature : MonoBehaviour
           Stat.Hp = Stat.MaxHp;
   }
   
+  
   /// <summary>
-  /// 
+  /// 공격을 받았을때
   /// </summary>
-  /// <param name="amount">상대방의 최종 데미지</param>
-  /// <param name="pureDamage">상대방의 순수 데미지</param>
-  public virtual void TakeDamage(int amount , int pureDamage)
+  public virtual void TryGetDamage(Stat stat, Attack attack)
   {
       if (!IsDead)
       {
-          int resultDamage = Mathf.Clamp((pureDamage - Stat.Defense) / 2, 0, 100) * amount / 100;
-          Stat.Hp -= resultDamage;
-          _floatingText.CreateFloatingText(resultDamage);
-
-          if (Stat.Hp <= 0)
+          if (IsHit(stat.HitPercent))
           {
-              Stat.Hp = 0;
-              Die();
+              TakeDamage(attack.CalculateDamage(stat), stat.Attack);
           }
       }
   }
-
-    public bool HitDamage(int hitPercent)
-    {
-        int n = hitPercent - Stat.Dodge + 10;
-        n = Math.Clamp(n, 0, 60);
-        double result = Math.Pow(0.91f, n);
-        result = result * -1;
-        result = (result + 1) * 100;
-        Debug.Log(result);
-        return Random.Range(0f, 100f) < result;
-    }
-
   
+
+ /// <summary>
+ /// 최종적으로 데미지를 받음
+ /// </summary>
+ /// <param name="amount">계산된 데미지</param>
+ /// <param name="pureDamage">순수 공격력</param>
+ private void TakeDamage(int amount, int pureDamage)
+ {
+     int resultDamage = Mathf.Clamp((pureDamage - Stat.Defense) / 2, 0, 100) * amount / 100;
+     Stat.Hp -= resultDamage;
+     _floatingText.CreateFloatingText(resultDamage);
+
+     if (Stat.Hp <= 0)
+     {
+         Stat.Hp = 0;
+         Die();
+     }
+ }
+ 
+
+  /// <summary>
+  /// 상대의 명중률과 자신의 회피율을 통해 데미지를 받아야 하는지에 대한 계산
+  /// </summary>
+  private bool IsHit(int hitPercent)
+  {
+      int n = hitPercent - Stat.Dodge + 10;
+      n = Math.Clamp(n, 0, 60);
+      double result = Math.Pow(0.91f, n);
+      result = result * -1;
+      result = (result + 1) * 100;
+      Debug.Log(result);
+      return Random.Range(0f, 100f) < result;
+  }
+
+
 
   protected virtual void Die()
   {

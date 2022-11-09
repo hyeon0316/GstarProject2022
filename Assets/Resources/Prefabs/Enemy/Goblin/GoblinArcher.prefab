@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9137215613299430220}
+  - component: {fileID: 322555127152198764}
   m_Layer: 0
   m_Name: FirePos
   m_TagString: Untagged
@@ -31,6 +32,18 @@ Transform:
   m_Father: {fileID: 7381289679935859209}
   m_RootOrder: 61
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &322555127152198764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379000617255898833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e70980f12114e42a004dbcc944b31b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1841536294697575419
 GameObject:
   m_ObjectHideFlags: 0
@@ -8326,7 +8339,7 @@ MonoBehaviour:
   _backDistance: 4
   _dissolve: {fileID: 3253584864013614747}
   _curEnemyType: 5
-  _attackPos: {fileID: 9137215613299430220}
+  _attackPos: {fileID: 322555127152198764}
 --- !u!1 &7379108647807369885
 GameObject:
   m_ObjectHideFlags: 0
