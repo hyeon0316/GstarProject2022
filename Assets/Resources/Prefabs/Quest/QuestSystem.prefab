@@ -3853,19 +3853,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 856253a98f118ab429fef865cfdb5a1e, type: 2}
   - {fileID: 11400000, guid: ae0c6991e8604a84881fed81b3aa29d5, type: 2}
   - {fileID: 11400000, guid: 9ea37a86837aa804c98547ec0dd4e9e5, type: 2}
-  - {fileID: 11400000, guid: d608487f6ed148043b083222f6566891, type: 2}
-  - {fileID: 11400000, guid: 262df04b382a2e94f8202075a6f0c899, type: 2}
-  - {fileID: 11400000, guid: 64b3ab6b52435764f90601282b13eb6d, type: 2}
-  - {fileID: 11400000, guid: 107255f08c36e6a4b8cc8a5289463b54, type: 2}
-  - {fileID: 11400000, guid: 3180a3db8a76afa49ae52791617aaaae, type: 2}
-  - {fileID: 11400000, guid: e15dcf21c58c0af4e8993b75026b2890, type: 2}
-  - {fileID: 11400000, guid: 5b7cc2a9130642749b49ab18530923e2, type: 2}
-  - {fileID: 11400000, guid: e9b9076975bb3ac42bba470f0618901d, type: 2}
-  - {fileID: 11400000, guid: 8b3983faf53a0004194060480ee00fa9, type: 2}
-  - {fileID: 11400000, guid: 17de9a9af9196e049b75e1254d2c172f, type: 2}
-  - {fileID: 11400000, guid: aab197dfafaa7744092d9ac412050cb2, type: 2}
-  - {fileID: 11400000, guid: 643e378efbe43914ab4bc1b73d78ff50, type: 2}
-  - {fileID: 11400000, guid: 7564e6dafe8259246a276ca2d4af8599, type: 2}
   _inventory: {fileID: 0}
   questUI: {fileID: 7475118085632985421}
   questInGameUI: {fileID: 3752776069293113883}
