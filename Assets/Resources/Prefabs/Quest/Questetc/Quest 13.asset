@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e3dfef0af10ad543888f1189d0779d1, type: 3}
+  m_Name: Quest 13
+  m_EditorClassIdentifier: 
+  state: 0
+  type: 0
+  ID: 1
+  Name: "\uC870\uC774\uC640 \uB300\uD654\uD558\uAE30"
+  Content: "\uB9C8\uC744\uC5D0\uC788\uB294 \uC870\uC774\uC640 \uB300\uD654\uD558\uAE30"
+  Target: "\uC870\uC774"
+  collectObjectives:
+    EnemyID: 
+    amount: 1
+    NpcId: 4
+  rewards:
+  - ItemReward: {fileID: 11400000, guid: 1e38e558293055340a5c944411fa96a1, type: 2}
+    ItemRewardCount: 1
+    EXPReward: 0
+  - ItemReward: {fileID: 11400000, guid: 42f4a438d56a7254b9ad1aad60b4eea0, type: 2}
+    ItemRewardCount: 1
+    EXPReward: 0
+  - ItemReward: {fileID: 11400000, guid: fa555c62d2f96004c94d68eaf63a2456, type: 2}
+    ItemRewardCount: 1
+    EXPReward: 0
+  - ItemReward: {fileID: 11400000, guid: 1068be4c640c46c42ae2b7ab98535c70, type: 2}
+    ItemRewardCount: 1
+    EXPReward: 0
+  - ItemReward: {fileID: 11400000, guid: 32c57a8e1f1102647aa9d4c3228aa21a, type: 2}
+    ItemRewardCount: 1
+    EXPReward: 0
+  - ItemReward: {fileID: 11400000, guid: b84493a96c752784fac6a237820ec988, type: 2}
+    ItemRewardCount: 1
+    EXPReward: 0

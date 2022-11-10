@@ -27,9 +27,23 @@ public class MapManager : Singleton<MapManager>
         switch (_id)
         {
             case 4:
-                return EnemyTransfom[1];
-            case 5:
                 return EnemyTransfom[0];
+            case 5:
+                return EnemyTransfom[1];
+            case 6:
+                return EnemyTransfom[2];
+            case 7:
+                return EnemyTransfom[3];
+            case 10:
+                return EnemyTransfom[4];
+            case 11:
+                return EnemyTransfom[5];
+            case 12:
+                return EnemyTransfom[6];
+            case 14:
+                return EnemyTransfom[6];
+            case 15:
+                return EnemyTransfom[6];
         }
         return null;
     }

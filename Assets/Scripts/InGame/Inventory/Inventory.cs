@@ -184,7 +184,10 @@ public class Inventory : MonoBehaviour
         _inventoryUI.SetInventoryReference(this);
         QuestManager.Instance.SetInventoryReference(this);
         _useSlotindex = USESTARTINDEX;
-        
+        Inven.SetActive(true);
+        Inven.SetActive(false);
+
+
     }
     
     public int Capacity { get; private set; }

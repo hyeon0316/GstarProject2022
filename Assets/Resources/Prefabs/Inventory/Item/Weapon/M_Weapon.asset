@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e8c40128476f1643b0705f724d4cb9a, type: 3}
-  m_Name: Item_Weapon_ 1
+  m_Name: M_Weapon
   m_EditorClassIdentifier: 
   _id: 0
-  _name: "\uC77C\uBC18 \uBB34\uAE30"
-  _tooltip: 
-  _iconSprite: {fileID: 21300000, guid: 79ce2650debce8c4099daf6d1c543fb1, type: 3}
-  _damage: 100
-  _hit: 20
-  _skillDamage: 20
-  _allDamage: 20
+  _name: "\uC624\uB798\uB41C \uCC45"
+  _tooltip: "\uC624\uB798\uB41C \uCC45"
+  _iconSprite: {fileID: 21300000, guid: 04058242e40867b41abf38deffebd3c1, type: 3}
+  _damage: 55
+  _hit: 30
+  _skillDamage: 50
+  _allDamage: 50
   _defense: 0
   _evasion: 0
   _allDefense: 0

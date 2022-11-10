@@ -23,6 +23,6 @@ MonoBehaviour:
     amount: 1
     NpcId: 101
   rewards:
-  - ItemReward: {fileID: 0}
-    ItemRewardCount: 0
+  - ItemReward: {fileID: 11400000, guid: 2337a0fbbc34d474ea0b1e3cbbe47393, type: 2}
+    ItemRewardCount: 200
     EXPReward: 0

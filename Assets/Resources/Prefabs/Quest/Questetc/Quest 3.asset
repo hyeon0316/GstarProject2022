@@ -15,9 +15,9 @@ MonoBehaviour:
   state: 0
   type: 0
   ID: 3
-  Name: "\uBCA8\uB77C\uC640 \uB300\uD654\uD558\uAE30"
-  Content: "\uB9C8\uC744\uC5D0\uC55E\uC5D0\uC788\uB294 \uBCA8\uB77C\uC640 \uB300\uD654\uD558\uAE30"
-  Target: "\uBCA8\uB77C"
+  Name: "\uB9B4\uB9AC\uC640 \uB300\uD654\uD558\uAE30"
+  Content: "\uB9C8\uC744\uC5D0\uC55E\uC5D0\uC788\uB294 \uB9B4\uB9AC\uC640 \uB300\uD654\uD558\uAE30"
+  Target: "\uB9B4\uB9AC"
   collectObjectives:
     EnemyID: 
     amount: 1
@@ -25,4 +25,4 @@ MonoBehaviour:
   rewards:
   - ItemReward: {fileID: 0}
     ItemRewardCount: 0
-    EXPReward: 0
+    EXPReward: 50

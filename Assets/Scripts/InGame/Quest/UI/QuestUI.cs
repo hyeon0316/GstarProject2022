@@ -7,7 +7,7 @@ public class QuestUI : MonoBehaviour
     public QuestSlotUI[] _questSlots;
     public void SetQuest(QuestData[] quest)
     {
-        for(int a = 0;a<_questSlots.Length;a++)
+        for(int a = 0;a< quest.Length;a++)
         {
             _questSlots[a].Name.text = quest[a].Name;
             _questSlots[a].questData = quest[a];

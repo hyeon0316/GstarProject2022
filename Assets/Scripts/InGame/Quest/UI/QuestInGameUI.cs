@@ -48,6 +48,7 @@ public class QuestInGameUI : MonoBehaviour
     }
     public void OnClickQuest()
     {
+        DataManager.Instance.Player.CancelAutoHunt();
         Transform _tr;
         if(questType)
         {

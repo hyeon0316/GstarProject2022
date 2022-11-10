@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016baed56023ed74d997b55775c77b05, type: 3}
+  m_Name: I_Armor
+  m_EditorClassIdentifier: 
+  _id: 0
+  _name: "\uC77C\uBC18 \uAC11\uC637"
+  _tooltip: "\uC77C\uBC18 \uAC11\uC637"
+  _iconSprite: {fileID: 21300000, guid: 94847737428d8964098e138853b46de6, type: 3}
+  _damage: 0
+  _hit: 0
+  _skillDamage: 0
+  _allDamage: 0
+  _defense: 8
+  _evasion: 8
+  _allDefense: 5
+  _hp: 100
+  _mp: 100
+  _postion: 0
+  _hpRe: 0
+  _mpRe: 0
+  _equType: 2

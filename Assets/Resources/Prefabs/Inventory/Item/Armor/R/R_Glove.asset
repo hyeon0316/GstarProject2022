@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 016baed56023ed74d997b55775c77b05, type: 3}
-  m_Name: Item_Armor_ 1
+  m_Name: R_Glove
   m_EditorClassIdentifier: 
-  _id: 1
-  _name: "\uC77C\uBC18 \uD5EC\uBA67"
-  _tooltip: 
-  _iconSprite: {fileID: 21300000, guid: 770d06e7b8bd291469fac94a44d23e7c, type: 3}
+  _id: 0
+  _name: "\uCCA0 \uC7A5\uAC11"
+  _tooltip: "\uCCA0 \uC7A5\uAC11"
+  _iconSprite: {fileID: 21300000, guid: 081b24f7f8230894599a78111a27afa2, type: 3}
   _damage: 0
   _hit: 0
   _skillDamage: 0
   _allDamage: 0
-  _defense: 100
-  _evasion: 2
-  _allDefense: 1
-  _hp: 50
-  _mp: 50
+  _defense: 15
+  _evasion: 8
+  _allDefense: 2
+  _hp: 200
+  _mp: 200
   _postion: 0
   _hpRe: 0
   _mpRe: 0
-  _equType: 1
+  _equType: 3

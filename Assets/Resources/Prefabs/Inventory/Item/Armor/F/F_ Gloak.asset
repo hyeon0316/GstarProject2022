@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 016baed56023ed74d997b55775c77b05, type: 3}
-  m_Name: Item_Armor_
+  m_Name: F_ Gloak
   m_EditorClassIdentifier: 
   _id: 22
-  _name: "\uC77C\uBC18 \uB9DD\uD1A0"
-  _tooltip: "\uC77C\uBC18 \uB9DD\uD1A0"
-  _iconSprite: {fileID: 21300000, guid: 0065adb9c4d7d7d4794f74603573705c, type: 3}
+  _name: "\uCCA0 \uB9DD\uD1A0"
+  _tooltip: "\uCCA0 \uB9DD\uD1A0"
+  _iconSprite: {fileID: 21300000, guid: 4122b0bdb659b2041ab1844c84fe13d3, type: 3}
   _damage: 0
   _hit: 0
   _skillDamage: 0
   _allDamage: 0
-  _defense: 50
-  _evasion: 10
+  _defense: 100
+  _evasion: 50
   _allDefense: 10
-  _hp: 10
-  _mp: 10
+  _hp: 200
+  _mp: 200
   _postion: 0
   _hpRe: 0
   _mpRe: 0

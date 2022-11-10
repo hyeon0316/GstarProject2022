@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e8c40128476f1643b0705f724d4cb9a, type: 3}
+  m_Name: R_Weapon
+  m_EditorClassIdentifier: 
+  _id: 0
+  _name: "\uAC15\uCCA0 \uCC45"
+  _tooltip: "\uAC15\uCCA0 \uCC45"
+  _iconSprite: {fileID: 21300000, guid: 17ec7626d17be4f44b945361bc214319, type: 3}
+  _damage: 25
+  _hit: 20
+  _skillDamage: 15
+  _allDamage: 15
+  _defense: 0
+  _evasion: 0
+  _allDefense: 0
+  _hp: 0
+  _mp: 0
+  _postion: 0
+  _hpRe: 0
+  _mpRe: 0
+  _equType: 0

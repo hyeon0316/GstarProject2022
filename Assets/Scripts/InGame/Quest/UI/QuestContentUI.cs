@@ -25,15 +25,16 @@ public class QuestContentUI : MonoBehaviour
         }
         else
         {
-            NeedObject.text = "@@@찾아가기";
+            NeedObject.text = data.Target+"찾아가기";
         }
-        
+
+        for (int i = 0; i < itemslots.Length; i++)
+        {
+            itemslots[i].gameObject.SetActive(false);
+        }
         if (data.rewards[0].ItemReward == null)
         {
-            for(int i=0;i<itemslots.Length;i++)
-            {
-                itemslots[i].gameObject.SetActive(false);
-            }
+            
         }
         else
         {
