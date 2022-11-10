@@ -115,6 +115,7 @@ public abstract class Player : Creature
     {
         if (!_isAutoHunt)
         {
+            IsAttack = false;
             _searchRadius *= _autoModeSearch;
             _isAutoHunt = true;
             _isNextPattern = true;
