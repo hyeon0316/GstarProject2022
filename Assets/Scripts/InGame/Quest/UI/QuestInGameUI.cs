@@ -38,7 +38,6 @@ public class QuestInGameUI : MonoBehaviour
         if (data.IsCompleteObjectives)
         {
             NeedObject.text = "¿Ï·á";
-            Debug.Log("dd");
             Fin.SetActive(true);
         }
     }

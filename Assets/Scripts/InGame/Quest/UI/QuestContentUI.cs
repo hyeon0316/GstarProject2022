@@ -27,7 +27,6 @@ public class QuestContentUI : MonoBehaviour
         {
             NeedObject.text = "@@@찾아가기";
         }
-        int expH;
         
         if (data.rewards[0].ItemReward == null)
         {

@@ -16,8 +16,8 @@ public class QuestManager : Singleton<QuestManager>
     // Start is called before the first frame update
     public void NextQuest()
     {
-        _mainId++;
         FinishQuest();
+        _mainId++;
         questInGameUI.UpdateUI(quests[_mainId]);
 
     }
