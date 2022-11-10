@@ -308,6 +308,7 @@ public abstract class Player : Creature
     {
         if (_moveCo != null)
         {
+            IsAttack = false;
             SetMoveAnim(0);
             _nav.isStopped = false;
             _nav.enabled = false;
