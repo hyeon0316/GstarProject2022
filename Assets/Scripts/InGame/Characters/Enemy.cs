@@ -48,6 +48,12 @@ public abstract class Enemy : Creature
     /// </summary>
     private bool _isWait; 
 
+    protected override void Awake()
+    {
+        base.Awake();
+        Stat = new Stat();
+    }
+    
     protected virtual void OnEnable()
     {
         Init();
@@ -66,12 +72,6 @@ public abstract class Enemy : Creature
         _isWait = true;
     }
 
-    protected override void Awake()
-    {
-        base.Awake();
-        Stat = new Stat();
-    }
-    
     
     protected virtual void Start()
     {
@@ -277,7 +277,8 @@ public abstract class Enemy : Creature
     {
         base.Die();
         CancelInvoke("SetRandomMove");
-        _nav.isStopped = true;
+        if(_nav.enabled)
+            _nav.isStopped = true;
         SpawnArea.GetComponent<EnemySpawnArea>().SpawnRandomEnemy();
         _animator.SetTrigger(Global.EnemyDeadTrigger);
         QuestManager.Instance.CheckEnemyQuest(_curEnemyType);

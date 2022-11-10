@@ -271,7 +271,7 @@ public abstract class Player : Creature
     {
         if (_attackRadius < Vector3.Distance(transform.position, target.position)) //타겟이 공격사거리 밖에있을때
         {
-            /*if (_searchRadius < Vector3.Distance(transform.position, target.position)) // 만약 그 사거리가 탐색범위 보다는 클 경우
+            if (_searchRadius < Vector3.Distance(transform.position, target.position)) // 만약 그 사거리가 탐색범위 보다는 클 경우
             {
                 if (target.gameObject.layer == LayerMask.NameToLayer("Enemy"))
                 {
@@ -283,10 +283,10 @@ public abstract class Player : Creature
                 }
             }
             else
-            {*/
-                //MoveTowardTarget(useActionType, target);
-            //}
-            MoveTowardTarget(useActionType, target);
+            {
+                MoveTowardTarget(useActionType, target);
+            }
+            //MoveTowardTarget(useActionType, target);
         }
         else //공격 사거리 안에 있을때
         {
@@ -307,6 +307,7 @@ public abstract class Player : Creature
     {
         if (_moveCo != null)
         {
+            SetMoveAnim(0);
             _nav.isStopped = false;
             _nav.enabled = false;
             StopCoroutine(_moveCo);
@@ -320,7 +321,8 @@ public abstract class Player : Creature
     protected IEnumerator MoveTowardTargetCo(UseActionType useActionType, Transform target)
     {
         _nav.enabled = true;
-        _nav.SetDestination(target.transform.position);
+        Debug.Log(target.transform.position);
+        Debug.Log(transform.position);
         SetMoveAnim(1);
         transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
         while (true)
@@ -334,6 +336,7 @@ public abstract class Player : Creature
                 _moveCo = null;
                 break;
             }
+            _nav.SetDestination(target.transform.position);
             yield return new WaitForFixedUpdate();
         }
     }
