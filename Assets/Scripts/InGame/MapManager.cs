@@ -47,4 +47,42 @@ public class MapManager : Singleton<MapManager>
         }
         return null;
     }
+    public Transform GetSpwan(int _id)
+    {
+        Debug.Log(_id);
+        switch (_id)
+        {
+            case 1:
+                return EnemyTransfom[0];
+            case 2:
+                return EnemyTransfom[0];
+            case 3:
+                return EnemyTransfom[0];
+            case 4:
+                return EnemyTransfom[1];
+            case 5:
+                return EnemyTransfom[1];
+            case 6:
+                return EnemyTransfom[2];
+            case 7:
+                return EnemyTransfom[2];
+            case 8:
+                return EnemyTransfom[0];
+            case 9:
+                return EnemyTransfom[3];
+            case 10:
+                return EnemyTransfom[3];
+            case 11:
+                return EnemyTransfom[9];
+            case 12:
+                return EnemyTransfom[4];
+            case 13:
+                return EnemyTransfom[0];
+            case 14:
+                return EnemyTransfom[4];
+            case 15:
+                return EnemyTransfom[4];
+        }
+        return null;
+    }
 }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   type: 0
-  ID: 1
+  ID: 9
   Name: "\uB8E8\uC774\uC2A4\uC640 \uB300\uD654\uD558\uAE30"
   Content: "\uC5B8\uB355\uC704 \uB8E8\uC774\uC2A4\uC640 \uB300\uD654\uD558\uAE30"
   Target: "\uB8E8\uC774\uC2A4"

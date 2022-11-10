@@ -44,6 +44,17 @@ public class QuestInGameUI : MonoBehaviour
     public void OnMoveSpawn()
     {
 
+        Transform _tr;
+        if (questType)
+        {
+            _tr = MapManager.Instance.GetSpwan(questNum);
+           // DataManager.Instance.Player.SetAutoQuest(_tr);
+        }
+        else
+        {
+            _tr = MapManager.Instance.GetSpwan(questNum);
+           // DataManager.Instance.Player.SetAutoQuest(_tr);
+        }
         OnClickQuest();
     }
     public void OnClickQuest()

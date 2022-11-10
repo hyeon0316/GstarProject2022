@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: M_Weapon
   m_EditorClassIdentifier: 
   _id: 0
-  _name: "\uC624\uB798\uB41C \uCC45"
-  _tooltip: "\uC624\uB798\uB41C \uCC45"
-  _iconSprite: {fileID: 21300000, guid: 04058242e40867b41abf38deffebd3c1, type: 3}
-  _damage: 55
-  _hit: 30
-  _skillDamage: 50
-  _allDamage: 50
+  _name: "\uC8FD\uC74C\uC758 \uCC45"
+  _tooltip: "\uC8FD\uC74C\uC758 \uCC45"
+  _iconSprite: {fileID: 21300000, guid: 0afe7c804e263c048bc841e9c8ac2695, type: 3}
+  _damage: 400
+  _hit: 100
+  _skillDamage: 120
+  _allDamage: 120
   _defense: 0
   _evasion: 0
   _allDefense: 0

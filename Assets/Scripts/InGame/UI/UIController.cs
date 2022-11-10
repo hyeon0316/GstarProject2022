@@ -9,6 +9,8 @@ public class UIController : MonoBehaviour
 
     [SerializeField] private GameObject _questWindow;
 
+    [SerializeField] private GameObject _storeWindow;
+
 
     public void ActiveInven()
     {
@@ -18,6 +20,10 @@ public class UIController : MonoBehaviour
     public void ActiveQuest()
     {
         _questWindow.SetActive(true);
+    }
+    public void ActiveStore()
+    {
+        _storeWindow.SetActive(true);
     }
 
 }
