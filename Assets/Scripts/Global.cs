@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public static class Global
 {
-    public const int LoadingTime = 5;
+    public const int LoadingTime = 3;
 
     /// <summary>
     /// 플레이어 애니메이션 관련

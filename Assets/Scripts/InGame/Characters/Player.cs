@@ -10,7 +10,7 @@ public abstract class Player : Creature
     /// <summary>
     /// 공격을 하고 있는 상태인지에 대한 bool값(연속터치 방지)
     /// </summary>
-    public bool IsAttack { get; set; }
+    public bool IsAttack { get;  set; }
 
     protected bool _isAutoHunt;
 
@@ -30,7 +30,7 @@ public abstract class Player : Creature
     [SerializeField] private VariableJoystick _joystick;
 
     [SerializeField] private Transform _cameraArm;
-
+    
     /// <summary>
     /// 다음단계의 기본공격이 가능한지에 대한 bool값
     /// </summary>
@@ -53,7 +53,12 @@ public abstract class Player : Creature
     /// 오토 모드일때 스킬들의 사용 간격을 나누기 위한 변수
     /// </summary>
     protected bool _isNextPattern;
-
+    
+    private Vector2 _cameraMovement;
+    [SerializeField] CameraRotate _rotateInput;
+    private float _cinemachineTargetX;
+    private float _cinemachineTargetY;
+    
     protected override void Awake()
     {
         base.Awake();
@@ -73,8 +78,10 @@ public abstract class Player : Creature
         {
             CheckInitCombo(); //코루틴 대신 사용
         }
-
         TouchGetTarget(); 
+        
+        _cameraMovement = -_rotateInput.PlayerJoystickOutputVector() * Time.deltaTime * 85f;
+        CameraRotation();
     }
 
     private void FixedUpdate()
@@ -82,6 +89,25 @@ public abstract class Player : Creature
         Move();
     }
 
+    private void CameraRotation()
+    {
+        _cinemachineTargetX += -_cameraMovement.x;
+        _cinemachineTargetY += _cameraMovement.y;
+
+        _cinemachineTargetX = CameraClampAngle(_cinemachineTargetX, float.MinValue, float.MaxValue);
+        _cinemachineTargetY = CameraClampAngle(_cinemachineTargetY, -30.0f, 70.0f);
+
+        _cameraArm.transform.rotation = Quaternion.Euler(_cinemachineTargetY + 0.0f, _cinemachineTargetX, 0.0f);
+    }
+    
+    private float CameraClampAngle(float angle, float angleMin, float angleMax)
+    {
+        if (angle < -360f) angle += 360f;
+        if (angle > 360f) angle -= 360f;
+
+        return Mathf.Clamp(angle, angleMin, angleMax);
+    }
+    
     private void Move()
     {
         if (!IsDead && !IsAttack)
@@ -95,7 +121,7 @@ public abstract class Player : Creature
             if (moveVec.sqrMagnitude == 0)
                 return;
 
-            Vector3 camAngle = _cameraArm.rotation.eulerAngles;
+            Vector3 camAngle = Camera.main.transform.rotation.eulerAngles;
             Vector3 camDirAngle = Quaternion.LookRotation(moveVec).eulerAngles;
             Vector3 resultAngle = Vector3.up * (camAngle.y + camDirAngle.y);
             transform.rotation = Quaternion.Euler(resultAngle);
@@ -217,6 +243,7 @@ public abstract class Player : Creature
         }
         else
         {
+            IsAttack = false;
             CancelAutoHunt();
         }
         
@@ -227,9 +254,10 @@ public abstract class Player : Creature
     /// </summary>
     public void SetAutoQuest(Transform target)
     {
+        _targets.Clear();
+        CancelAutoHunt(); //중간에 다른 행동을 하고 있었을때 캔슬
         if (!IsAttack && !IsDead)
         {
-            CancelAutoHunt(); //중간에 다른 행동을 하고 있었을때 캔슬
             if (target.gameObject.layer == LayerMask.NameToLayer("NPC")) //NPC일때
             {
                 ActionFromDistance(TalkNpc, target);
@@ -269,6 +297,7 @@ public abstract class Player : Creature
     /// </summary>
     protected void ActionFromDistance(UseActionType useActionType, Transform target)
     {
+        IsAttack = true;
         if (_attackRadius < Vector3.Distance(transform.position, target.position)) //타겟이 공격사거리 밖에있을때
         {
             if (_searchRadius < Vector3.Distance(transform.position, target.position)) // 만약 그 사거리가 탐색범위 보다는 클 경우
@@ -286,7 +315,6 @@ public abstract class Player : Creature
             {
                 MoveTowardTarget(useActionType, target);
             }
-            //MoveTowardTarget(useActionType, target);
         }
         else //공격 사거리 안에 있을때
         {

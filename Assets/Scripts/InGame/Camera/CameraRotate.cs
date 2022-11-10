@@ -14,7 +14,7 @@ public class CameraRotate : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     private bool _isPlayerTouchingPanel;
     private Touch _myTouch;
     private int _touchID;
-    
+
     private void FixedUpdate()
     {
         if (Input.touchCount > 0)
@@ -64,4 +64,6 @@ public class CameraRotate : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {
         OutputVectorValue(new Vector2(eventData.delta.normalized.x, eventData.delta.normalized.y));
     }
+    
+   
 }
