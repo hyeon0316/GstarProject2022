@@ -307,9 +307,9 @@ public abstract class Player : Creature
 
     private void StopMoveCo()
     {
+        IsAttack = false;
         if (_moveCo != null)
         {
-            IsAttack = false;
             SetMoveAnim(0);
             _nav.isStopped = false;
             _nav.enabled = false;
@@ -323,6 +323,17 @@ public abstract class Player : Creature
     /// </summary>
     protected IEnumerator MoveTowardTargetCo(UseActionType useActionType, Transform target)
     {
+        float goalRadius;
+
+        if (target.gameObject.layer == LayerMask.NameToLayer("NPC")) //NPC가 도착목표일 경우 좀더 가깝게 잡음
+        {
+            goalRadius = 2;
+        }
+        else
+        {
+            goalRadius = _attackRadius;
+        }
+        
         _nav.enabled = true;
         Debug.Log(target.transform.position);
         Debug.Log(transform.position);
@@ -330,7 +341,7 @@ public abstract class Player : Creature
         transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
         while (true)
         {
-            if (_attackRadius >= Vector3.Distance(transform.position, target.position)) //공격 사거리 안에 들어왔을때
+            if (goalRadius >= Vector3.Distance(transform.position, target.position)) //공격 사거리 안에 들어왔을때
             {
                 useActionType();
                 SetMoveAnim(0);
