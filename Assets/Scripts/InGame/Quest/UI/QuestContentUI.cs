@@ -6,11 +6,12 @@ using TMPro;
 
 public class QuestContentUI : MonoBehaviour
 {
-    public TextMeshProUGUI Name;
-    public TextMeshProUGUI Content;
-    public TextMeshProUGUI NeedObject;
-    public TextMeshProUGUI Reward1;
-    public TextMeshProUGUI Reward2;
+    [SerializeField] private TextMeshProUGUI Name;
+    [SerializeField] private TextMeshProUGUI Content;
+    [SerializeField] private TextMeshProUGUI NeedObject;
+    [SerializeField] private TextMeshProUGUI Reward1;
+    [SerializeField] private TextMeshProUGUI Reward2;
+    [SerializeField] private Image[] itemslots;
 
     public void UpdateUI(QuestData data)
     {
@@ -26,13 +27,25 @@ public class QuestContentUI : MonoBehaviour
         {
             NeedObject.text = "@@@찾아가기";
         }
+        int expH;
+        
         if (data.rewards[0].ItemReward == null)
         {
-            Reward1.text = "";
+            for(int i=0;i<itemslots.Length;i++)
+            {
+                itemslots[i].gameObject.SetActive(false);
+            }
         }
         else
         {
-            Reward1.text = "수상한 아이템";
+            for (int a = 0; a < data.rewards.Length; a++)
+            {
+                itemslots[a].gameObject.SetActive(true);
+            }
+            for (int a = 0; a < data.rewards.Length; a++)
+            {
+                itemslots[a].sprite = data.rewards[a].ItemReward.IconSprite;
+            }
         }
         int rewardresult=0;
         for (int a = 0; a < data.rewards.Length; a++)

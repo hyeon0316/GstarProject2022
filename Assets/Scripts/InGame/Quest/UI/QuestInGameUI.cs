@@ -18,14 +18,11 @@ public class QuestInGameUI : MonoBehaviour
     }
     public void UpdateUI(QuestData data)
     {
-        
-        if (data.IsCompleteObjectives)
-        {
-            Name.text = "완료";
-            Fin.SetActive(true);
-        }
+
         Name.text = data.Name;
-        if(data.type == QuestType.FindNpc)
+        
+        
+        if (data.type == QuestType.FindNpc)
         {
             questNum = data.collectObjectives.NpcId;
             NeedObject.text = data.Target + " 찾아가기 ";
@@ -37,6 +34,12 @@ public class QuestInGameUI : MonoBehaviour
             questNum = data.ID;
             NeedObject.text = data.Target + " 처치(" + data.collectObjectives.currentAmount + "/" + data.collectObjectives.amount + ")";
             questType = false;
+        }
+        if (data.IsCompleteObjectives)
+        {
+            NeedObject.text = "완료";
+            Debug.Log("dd");
+            Fin.SetActive(true);
         }
     }
     public void OnMoveSpawn()

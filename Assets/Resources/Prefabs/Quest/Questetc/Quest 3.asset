@@ -20,6 +20,9 @@ MonoBehaviour:
   Target: "\uBCA8\uB77C"
   collectObjectives:
     EnemyID: 
-    amount: 0
+    amount: 1
     NpcId: 2
-  rewards: []
+  rewards:
+  - ItemReward: {fileID: 0}
+    ItemRewardCount: 0
+    EXPReward: 0

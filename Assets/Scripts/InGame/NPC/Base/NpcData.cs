@@ -9,4 +9,9 @@ public class NpcData : MonoBehaviour
     public GameObject Questing;
     public void OnQeust() => Questing.SetActive(true);
     public void OffQeust() => Questing.SetActive(false);
+    [SerializeField]private EnemyHpbar _hp;
+    private void Awake()
+    {
+        _hp.SetNpc(Name);
+    }
 }

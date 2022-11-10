@@ -20,7 +20,7 @@ MonoBehaviour:
   Target: "\uBCA8\uB77C"
   collectObjectives:
     EnemyID: 
-    amount: 0
+    amount: 1
     NpcId: 1
   rewards:
   - ItemReward: {fileID: 11400000, guid: 45f0f69357e0b9c4297642d9bebb4c6f, type: 2}

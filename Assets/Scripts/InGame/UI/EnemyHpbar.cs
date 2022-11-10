@@ -19,8 +19,17 @@ public class EnemyHpbar : MonoBehaviour
         slider.value = _maxHp / _hp;
         Name.text = _name;
     }
+    public void SetNpc(string _name)
+    {
+        Name.text = _name;
+    }
     private void Update()
     {
+        if (_cam == null)
+        {
+            _cam = Camera.main;
+            gameObject.GetComponent<Canvas>().worldCamera = _cam;
+        }
         transform.rotation = Quaternion.LookRotation(transform.position - _cam.transform.position);
     }
 }
