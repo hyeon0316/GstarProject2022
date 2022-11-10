@@ -25,12 +25,6 @@ public class GoblinMormal : Enemy
         _animator.SetInteger(Global.EnemyStateInteger, 2);
     }
 
-    public override void DisableEnemy()
-    {
-        ObjectPoolManager.Instance.ReturnObject(PoolType.Goblin,this.gameObject);
-    }
-
-
     public void ActiveAttackCollider()
     {
         _attackCollider.enabled = true;

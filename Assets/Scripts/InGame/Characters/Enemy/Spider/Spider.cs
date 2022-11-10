@@ -7,13 +7,20 @@ using Object = System.Object;
 
 public class Spider : Enemy
 {
-    [SerializeField] private BoxCollider _attackArea;
+    [SerializeField] private ShortAttack _shortAttackArea;
+    [SerializeField] private BoxCollider _attackCollider;
 
 
     protected override void OnEnable()
     {
         base.OnEnable();
-        _attackArea.enabled = false;
+        _attackCollider.enabled = false;
+    }
+    
+    protected override void Start()
+    {
+        base.Start();
+        _shortAttackArea.SetStat(Stat);
     }
 
     protected override void Attack()
@@ -22,20 +29,14 @@ public class Spider : Enemy
         _animator.SetInteger(Global.EnemyStateInteger, 2);
     }
 
-    public override void DisableEnemy()
-    {
-        ObjectPoolManager.Instance.ReturnObject(PoolType.Spider,this.gameObject);
-    }
-
-
     public void ActiveAttackCollider()
     {
-        _attackArea.enabled = true;
+        _attackCollider.enabled = true;
     }
     
     public void InActiveAttackCollider()
     {
-        _attackArea.enabled = false;
+        _attackCollider.enabled = false;
         _isAttack = false;
     }
 }

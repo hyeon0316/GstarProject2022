@@ -52,18 +52,18 @@ public abstract class Player : Creature
     /// <summary>
     /// 오토 모드일때 스킬들의 사용 간격을 나누기 위한 변수
     /// </summary>
-    protected bool _isNextSkill;
+    protected bool _isNextPattern;
 
     protected override void Awake()
     {
         base.Awake();
         Stat = new Stat();
-        Stat.SetPlayerStat(_playerStatData);
         DataManager.Instance.Player = this;
     }
 
     protected virtual void Start()
     {
+        Stat.SetPlayerStat(_playerStatData);
         _nav.enabled = false; //충돌이 활성화 되기 때문에 꺼줌, 사용할때만 활성화
     }
 
@@ -118,7 +118,7 @@ public abstract class Player : Creature
         {
             _searchRadius *= _autoModeSearch;
             _isAutoHunt = true;
-            _isNextSkill = true;
+            _isNextPattern = true;
             ActiveAutoCancelButton(true);
         }
         else
@@ -201,7 +201,6 @@ public abstract class Player : Creature
         Collider[] colliders = Physics.OverlapSphere(transform.position, _searchRadius, LayerMask.GetMask("Enemy"));
 
         _targets.Clear();
-
         if (colliders.Length != 0)
         {
             var searchList = colliders.OrderBy(col => Vector3.Distance(transform.position, col.transform.position))
@@ -220,6 +219,7 @@ public abstract class Player : Creature
         {
             CancelAutoHunt();
         }
+        
     }
 
     /// <summary>
@@ -271,7 +271,7 @@ public abstract class Player : Creature
     {
         if (_attackRadius < Vector3.Distance(transform.position, target.position)) //타겟이 공격사거리 밖에있을때
         {
-            if (_searchRadius < Vector3.Distance(transform.position, target.position)) // 만약 그 사거리가 탐색범위 보다는 클 경우
+            /*if (_searchRadius < Vector3.Distance(transform.position, target.position)) // 만약 그 사거리가 탐색범위 보다는 클 경우
             {
                 if (target.gameObject.layer == LayerMask.NameToLayer("Enemy"))
                 {
@@ -283,9 +283,10 @@ public abstract class Player : Creature
                 }
             }
             else
-            {
-                MoveTowardTarget(useActionType, target);
-            }
+            {*/
+                //MoveTowardTarget(useActionType, target);
+            //}
+            MoveTowardTarget(useActionType, target);
         }
         else //공격 사거리 안에 있을때
         {
@@ -343,10 +344,13 @@ public abstract class Player : Creature
     /// </summary>
     private void NormalAttack()
     {
-        transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
+        if (_targets.Count != 0)
+        {
+            transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
+            IsAttack = true;
+            _canNextNormalAttack = false;
+        }
         _animator.SetInteger(Global.NormalAttackInteger, _comboCount++ % Global.MaxComboAttack);
-        IsAttack = true;
-        _canNextNormalAttack = false;
     }
 
 
@@ -368,7 +372,7 @@ public abstract class Player : Creature
     public void InitAttack()
     {
         IsAttack = false;
-        _isNextSkill = true;
+        _isNextPattern = true;
     }
 
     /// <summary>

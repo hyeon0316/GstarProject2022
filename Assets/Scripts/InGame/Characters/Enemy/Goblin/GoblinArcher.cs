@@ -24,9 +24,5 @@ public class GoblinArcher : Enemy
     {
         _attackPos.CreateProjectile(PoolType.GoblinArcherArrow, Stat);
     }
-
-    public override void DisableEnemy()
-    {
-        ObjectPoolManager.Instance.ReturnObject(PoolType.GoblinArcher,this.gameObject);
-    }
+    
 }

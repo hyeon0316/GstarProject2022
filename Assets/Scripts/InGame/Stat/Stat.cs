@@ -45,6 +45,8 @@ public class Stat
         ReduceDamage = playerStatData.ReduceDamage;
         MoveSpeed = playerStatData.MoveSpeed;
         Attack = playerStatData.Attack;
+        AllDamge = playerStatData.AllDamage;
+        SkillDamage = playerStatData.SkillDamage;
     }
 
     /// <summary>

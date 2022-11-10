@@ -28,7 +28,6 @@ public class WideAreaBarrageEffect : SkillAttack
          if(!_targets.ContainsKey(other))
             _targets.Add(other, TakeBarrageDamageCo(other.GetComponent<Creature>()));
          
-         Debug.Log($"들어옴{other.name}");
          
          StartCoroutine(_targets[other]);
       }

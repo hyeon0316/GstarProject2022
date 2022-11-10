@@ -25,8 +25,4 @@ public class FrightFly : Enemy
         _attackPos.CreateProjectile(PoolType.FrightFlyMissile, Stat);
     }
     
-    public override void DisableEnemy()
-    {
-        ObjectPoolManager.Instance.ReturnObject(PoolType.FrightFly,this.gameObject);
-    }
 }

@@ -549,7 +549,7 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 1
-        functionName: InitNormalAttack
+        functionName: InitAttack
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: b1e1895029c00bd4cb410f5baa42598f,
           type: 3}

@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c196318bbb5bf4983005703ecc5ea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 10
+  _curPoolType: 20
 --- !u!1 &490757578
 GameObject:
   m_ObjectHideFlags: 0
@@ -961,11 +961,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackRadius: 4.5
   _floatingText: {fileID: 6556677796353788244}
-  _spawnArea: {fileID: 0}
+  _enemyStatData: {fileID: 0}
   _backDistance: 4
   _dissolve: {fileID: 1688248241}
-  _curEnemyType: 0
-  _attackArea: {fileID: 366163801}
+  _curEnemyType: 10
+  _shortAttackArea: {fileID: 7273118537779664714}
+  _attackCollider: {fileID: 366163801}
 --- !u!54 &3389083359470081152
 Rigidbody:
   m_ObjectHideFlags: 0

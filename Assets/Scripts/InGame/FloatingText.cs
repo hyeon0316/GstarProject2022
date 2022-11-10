@@ -24,12 +24,12 @@ public class FloatingText : MonoBehaviour
    [SerializeField] private float _clearTime;
 
   
-   public void CreateFloatingText(int damage)
+   public void CreateFloatingText(string damage)
    {
       GameObject floating = ObjectPoolManager.Instance.GetObject(PoolType.DamageText);
       _clearTexts.Add(floating);
       floating.transform.position = transform.position;
-      floating.GetComponent<DamageText>().SetDamageText(damage,transform);
+      floating.GetComponent<DamageText>().SetDamageText(damage, transform);
       _clearTimer = _clearTime;
       _isTimer = true;
 
@@ -102,7 +102,6 @@ public class FloatingText : MonoBehaviour
          text.GetComponent<DamageText>().FadeOutText();
       }
       _clearTexts.Clear();
-      Debug.Log("페이드아웃");
    }
    
 }

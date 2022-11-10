@@ -1684,7 +1684,7 @@ MonoBehaviour:
   _enemyStatData: {fileID: 11400000, guid: 77f4b78afd1d60f43b28ea65feeca206, type: 2}
   _backDistance: 4
   _dissolve: {fileID: 8371870971638337822}
-  _curEnemyType: 1
+  _curEnemyType: 11
   _attackPos: {fileID: 4817715575962662620}
 --- !u!65 &704953269789647945
 BoxCollider:

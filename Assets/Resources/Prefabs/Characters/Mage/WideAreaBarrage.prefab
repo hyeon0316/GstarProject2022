@@ -24574,6 +24574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b526f091296315847b90ce21b4bb731a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _curPoolType: 2
   _percentDamage: 10
   _dealTime: 0.5
 --- !u!136 &7130384105156257005

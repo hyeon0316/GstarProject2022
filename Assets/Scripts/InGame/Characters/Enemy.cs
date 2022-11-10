@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
@@ -55,6 +56,8 @@ public abstract class Enemy : Creature
     protected override void Init()
     {
         base.Init();
+        _nav.enabled = false;
+        
         this.gameObject.layer = LayerMask.NameToLayer("Enemy");
         _isFollow = false;
         _isAttack = false;
@@ -62,18 +65,18 @@ public abstract class Enemy : Creature
         _isOutArea = false;
         _isWait = true;
     }
-    
+
     protected override void Awake()
     {
         base.Awake();
         Stat = new Stat();
-        Stat.SetEnemyStat(_enemyStatData);
     }
     
     
     protected virtual void Start()
     {
         _targets.Add(DataManager.Instance.Player.transform);
+        Stat.SetEnemyStat(_enemyStatData);
     }
 
     private void Update()
@@ -97,13 +100,12 @@ public abstract class Enemy : Creature
 
             if (_isWait)
             {
+                _nav.enabled = true;
                 SetRandomMove();
                 _isWait = false;
             }
         }
     }
-    
-    
 
     private void FixedUpdate()
     {
@@ -265,6 +267,7 @@ public abstract class Enemy : Creature
         base.TryGetDamage(stat, attack);
         if (!_isFollow && !_isGoBack) //피격 당했을 때, 되돌아 가는 중이 아닐 때 추적 시작
         {
+            _nav.enabled = true;
             CancelInvoke("SetRandomMove");
             _isFollow = true;
         }
@@ -273,17 +276,25 @@ public abstract class Enemy : Creature
     protected override void Die()
     {
         base.Die();
-        SpawnArea.GetComponent<EnemySpawnArea>().SpawnRandomEnemy();
+        CancelInvoke("SetRandomMove");
         _nav.isStopped = true;
+        SpawnArea.GetComponent<EnemySpawnArea>().SpawnRandomEnemy();
         _animator.SetTrigger(Global.EnemyDeadTrigger);
         QuestManager.Instance.CheckEnemyQuest(_curEnemyType);
-        DataManager.Instance.Player.Targets.Remove(this.transform);
+        if (DataManager.Instance.Player.Targets.Contains(this.transform))
+        {
+            DataManager.Instance.Player.Targets.Remove(this.transform);
+            Debug.Log("지워짐");
+        }
     }
 
     /// <summary>
     /// 죽었을때 풀링 반환
     /// </summary>
-    public abstract void DisableEnemy();
+    private void DisableEnemy()
+    {
+        ObjectPoolManager.Instance.ReturnObject(_curEnemyType,this.gameObject);
+    }
 
     public void ActiveDeadEffect()
     {

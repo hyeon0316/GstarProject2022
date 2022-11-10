@@ -14,10 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHp: 100
   MaxMp: 50
+  MaxPostion: 0
   RecoveryHp: 10
-  Defense: 10
+  RecoveryMp: 0
+  Defense: 0
   Dodge: 10
-  HitPercent: 0
   ReduceDamage: 10
   MoveSpeed: 10
-  Attack: 10
+  Attack: 100
+  SkillDamage: 100
+  AllDamage: 100
+  HitPercent: 100

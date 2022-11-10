@@ -18,7 +18,7 @@ public class WindAttack : SkillAttack
    public void DelayDisable()
    {
       StartCoroutine(MoveCo());
-      Invoke("DisableEffect", 7f);
+      Invoke("DisableObject", 7f);
    }
 
    private IEnumerator MoveCo()
@@ -43,8 +43,6 @@ public class WindAttack : SkillAttack
       {
          if (!_targets.ContainsKey(other))
             _targets.Add(other, TakeBarrageDamageCo(other.GetComponent<Creature>()));
-
-         Debug.Log($"들어옴{other.name}");
 
          StartCoroutine(_targets[other]);
       }

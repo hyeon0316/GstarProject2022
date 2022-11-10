@@ -14753,8 +14753,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07b7c99d1d16a1240a43098cf96b4158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _curPoolType: 7
   _missileSpeed: 0.05
-  _damage: 10
 --- !u!136 &-4475803445535926672
 CapsuleCollider:
   m_ObjectHideFlags: 0

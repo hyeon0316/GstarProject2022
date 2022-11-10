@@ -31,28 +31,30 @@ public class Mage : Player
     {
         base.Start();
         _useSkills[0] = UseWideAreaBarrage;
-        _useSkills[1] = ChainLightning;
+        _useSkills[1] = UseChainLightning;
         _useSkills[2] = UseBulletRain;
-        _useSkills[3] = WindAttack;
+        _useSkills[3] = UseWindAttack;
         _useSkills[4] = UseSpikeAttack;
     }
 
     protected override void Update()
     {
         base.Update();
-        if (_isAutoHunt)
+        if (_isAutoHunt && !IsDead)
         {
-            if (_isNextSkill)
+            if (_isNextPattern)
             {
                 SetPrioritySkill();
                 if (_autoSkill.Count == 0) //사용할 스킬이 없을때는 일반공격 사용
+                {
                     UseNormalAttack();
+                }
                 else
                 {
                     UseAutoSkill(_autoSkill.Dequeue());
                 }
 
-                _isNextSkill = false;
+                _isNextPattern = false;
             }
         }
     }
@@ -86,16 +88,19 @@ public class Mage : Player
     /// </summary>
     public void CreateNormalAttackMissile()
     {
-        var obj = ObjectPoolManager.Instance.GetObject(PoolType.NormalAttackMissile);
-        obj.transform.position = _normalAttackPos.position;
-        obj.transform.rotation = _normalAttackPos.rotation;
-        
-        obj.GetComponent<NormalAttackMissile>().DelayDisable();
+        if (_targets.Count != 0)
+        {
+            var obj = ObjectPoolManager.Instance.GetObject(PoolType.NormalAttackMissile);
+            obj.transform.position = _normalAttackPos.position;
+            obj.transform.rotation = _normalAttackPos.rotation;
+
+            obj.GetComponent<NormalAttackMissile>().DelayDisable();
+        }
     }
 
     public void UseSpikeAttack()
     {
-        if (!_skiilCoolDown[(int) SkillCoolType.SpikeAttack].IsCoolDown && !IsDead)
+        if (!_skiilCoolDown[(int) SkillCoolType.SpikeAttack].IsCoolDown && !IsAttack)
         {
             if (_targets.Count != 0)
             {
@@ -110,20 +115,26 @@ public class Mage : Player
 
     private void SpikeAttack()
     {
-        IsAttack = true;
-        Debug.Log("스파이크 어택");
-        _skiilCoolDown[(int)SkillCoolType.SpikeAttack].SetCoolDown();
-        transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
+        if (_targets.Count != 0)
+        {
+            IsAttack = true;
+            Debug.Log("스파이크 어택");
+            _skiilCoolDown[(int) SkillCoolType.SpikeAttack].SetCoolDown();
+            transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
+        }
         _animator.SetTrigger(Global.SpikeAttackTrigger);
     }
 
     public void CreateSpikeAttack()
     {
-        GameObject spike = ObjectPoolManager.Instance.GetObject(PoolType.VolcanicSpike);
-        spike.transform.position =
-            new Vector3(_targets[0].position.x, _targets[0].transform.position.y + spike.transform.position.y,
-                _targets[0].position.z);
-        spike.GetComponent<SpikeAttack>().DelayDisable();
+        if (_targets.Count != 0)
+        {
+            GameObject spike = ObjectPoolManager.Instance.GetObject(PoolType.VolcanicSpike);
+            spike.transform.position =
+                new Vector3(_targets[0].position.x, _targets[0].transform.position.y + spike.transform.position.y,
+                    _targets[0].position.z);
+            spike.GetComponent<SpikeAttack>().DelayDisable();
+        }
     }
     
     /// <summary>
@@ -131,7 +142,7 @@ public class Mage : Player
     /// </summary>
     public void UseBulletRain()
     {
-        if (!_skiilCoolDown[(int)SkillCoolType.BulletRain].IsCoolDown && !IsDead)
+        if (!_skiilCoolDown[(int)SkillCoolType.BulletRain].IsCoolDown && !IsAttack)
         {
             if (_targets.Count != 0)
             {
@@ -146,17 +157,20 @@ public class Mage : Player
 
     private void BulletRain()
     {
-        IsAttack = true;
-        Debug.Log("불렛 레인");
-        _skiilCoolDown[(int)SkillCoolType.BulletRain].SetCoolDown();
-        transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
+        if (_targets.Count != 0)
+        {
+            IsAttack = true;
+            Debug.Log("불렛 레인");
+            _skiilCoolDown[(int) SkillCoolType.BulletRain].SetCoolDown();
+            transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
+        }
         _animator.SetTrigger(Global.BulletRainTrigger);
-        Invoke("CreateBulletRainMissile",0.5f);
     }
 
     private void CreateBulletRainMissile()
     {
-        _bulletRain.CreateMissile(_targets[0]);
+        if(_targets.Count != 0)
+            _bulletRain.CreateMissile(_targets[0]);
     }
 
     /// <summary>
@@ -164,7 +178,7 @@ public class Mage : Player
     /// </summary>
     public void UseChainLightning()
     {
-        if (!_skiilCoolDown[(int)SkillCoolType.ChainLightning].IsCoolDown && !IsDead)
+        if (!_skiilCoolDown[(int)SkillCoolType.ChainLightning].IsCoolDown && !IsAttack)
         {
             if (_targets.Count != 0)
             {
@@ -179,16 +193,20 @@ public class Mage : Player
 
     private void ChainLightning()
     {
-        IsAttack = true;
-        Debug.Log("체인 라이트닝");
-        _skiilCoolDown[(int)SkillCoolType.ChainLightning].SetCoolDown();
-        transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
+        if (_targets.Count != 0)
+        {
+            IsAttack = true;
+            Debug.Log("체인 라이트닝");
+            _skiilCoolDown[(int) SkillCoolType.ChainLightning].SetCoolDown();
+            transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
+        }
         _animator.SetTrigger(Global.ChainLightningTrigger);
     }
     
     public void CreateChainLightningLine()
     {
-        _chainLightningLine.CreateLine();
+        if(_targets.Count != 0)
+            _chainLightningLine.CreateLine();
     }
 
     /// <summary>
@@ -196,7 +214,7 @@ public class Mage : Player
     /// </summary>
     public void UseWideAreaBarrage()
     {
-        if (!_skiilCoolDown[(int)SkillCoolType.WideAreaBarrage].IsCoolDown && !IsDead) 
+        if (!_skiilCoolDown[(int)SkillCoolType.WideAreaBarrage].IsCoolDown && !IsAttack) 
         {
             if (_targets.Count != 0)
             {
@@ -211,7 +229,7 @@ public class Mage : Player
 
     public void UseWindAttack()
     {
-        if (!_skiilCoolDown[(int)SkillCoolType.WideAreaBarrage].IsCoolDown && !IsDead) 
+        if (!_skiilCoolDown[(int)SkillCoolType.WindAttack].IsCoolDown && !IsAttack) 
         {
             if (_targets.Count != 0)
             {
@@ -226,39 +244,51 @@ public class Mage : Player
 
     public void CreateWindAttackEffect()
     {
-        var windAttack = ObjectPoolManager.Instance.GetObject(PoolType.WindAttackEffect);
-        windAttack.transform.position =
-            new Vector3(_targets[0].position.x, _targets[0].transform.position.y,
-                _targets[0].position.z);
-        windAttack.GetComponent<WindAttack>().DelayDisable();
+        if (_targets.Count != 0)
+        {
+            var windAttack = ObjectPoolManager.Instance.GetObject(PoolType.WindAttackEffect);
+            windAttack.transform.position =
+                new Vector3(_targets[0].position.x, _targets[0].transform.position.y,
+                    _targets[0].position.z);
+            windAttack.GetComponent<WindAttack>().DelayDisable();
+        }
     }
 
     private void WindAttack()
     {
-        Debug.Log("범위공격");
-        _skiilCoolDown[(int)SkillCoolType.WindAttack].SetCoolDown();
-        transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
+        if (_targets.Count != 0)
+        {
+            Debug.Log("바람범위공격");
+            IsAttack = true;
+            _skiilCoolDown[(int) SkillCoolType.WindAttack].SetCoolDown();
+            transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
+        }
         _animator.SetTrigger(Global.WindAttackTrigger);
-        IsAttack = true;
     }
 
     private void WideAreaBarrage()
     {
-        Debug.Log("범위공격");
-        _skiilCoolDown[(int)SkillCoolType.WideAreaBarrage].SetCoolDown();
-        IsAttack = true;
-        transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
+        if (_targets.Count != 0)
+        {
+            Debug.Log("범위공격");
+            _skiilCoolDown[(int) SkillCoolType.WideAreaBarrage].SetCoolDown();
+            IsAttack = true;
+            transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
+        }
         _animator.SetTrigger(Global.WideAreaBarrageTrigger);
     }
 
 
     public void CreateWideAreaBarrageEffect()
     {
-        var effect = ObjectPoolManager.Instance.GetObject(PoolType.WideAreaBarrage);
-        effect.transform.position =
-            new Vector3(_targets[0].position.x, _targets[0].transform.position.y + effect.transform.position.y,
-                _targets[0].position.z);
-        effect.GetComponent<WideAreaBarrageEffect>().DelayDisable();
+        if (_targets.Count != 0)
+        {
+            var effect = ObjectPoolManager.Instance.GetObject(PoolType.WideAreaBarrage);
+            effect.transform.position =
+                new Vector3(_targets[0].position.x, _targets[0].transform.position.y + effect.transform.position.y,
+                    _targets[0].position.z);
+            effect.GetComponent<WideAreaBarrageEffect>().DelayDisable();
+        }
     }
 
 

@@ -723,7 +723,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772104247054312053}
-  m_LocalRotation: {x: -0.15567322, y: 0.00000002629006, z: -0.000000014464941, w: 0.98780864}
+  m_LocalRotation: {x: -0.1556732, y: -0.0000000030631957, z: 0.0000000016853885,
+    w: 0.98780864}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2477,7 +2478,7 @@ MonoBehaviour:
   _floatingText: {fileID: 5538358463588271718}
   _playerStatData: {fileID: 11400000, guid: 42666cf634c81834a9d84db38413573a, type: 2}
   _searchRadius: 15
-  _autoModeSearch: 4
+  _autoModeSearch: 10
   _foots:
   - {fileID: 5399048132489101725}
   - {fileID: 9200201467067568477}
@@ -9734,7 +9735,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5271050110390637956}
-  m_LocalRotation: {x: -0.057579253, y: 0.000000014184515, z: -0.000000009739568,
+  m_LocalRotation: {x: -0.057579253, y: -0.0000000141845105, z: 0.000000009739566,
     w: 0.99834096}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -12450,7 +12451,6 @@ MonoBehaviour:
   _shotMaxCount: 20
   _interval: 0.05
   _shotCountEveryInterval: 1
-  _missileDamage: 5
 --- !u!1 &8252582247944921055
 GameObject:
   m_ObjectHideFlags: 0
@@ -12731,7 +12731,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 882947b60c794de44b01e75e51806542, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _percentDamage: 0
+  _curPoolType: 20
+  _percentDamage: 20
   _drawingSpeed: 5
   _keepTime: 4
   _chainRange: 8
@@ -13297,18 +13298,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3925762686990842294}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1471042681567532935 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2454793692038770225, guid: 6336ad2f943e9e8439f079547597c3eb,
-    type: 3}
-  m_PrefabInstance: {fileID: 3925762686990842294}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1471042681567532934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1784eff0984548749bc0d3d107bfbf94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &4942576602529242305
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13319,7 +13308,7 @@ PrefabInstance:
     - target: {fileID: 1279181220, guid: 01fa5d1bf87297940bb783a154e292f3, type: 3}
       propertyPath: inventory
       value: 
-      objectReference: {fileID: 1471042681567532935}
+      objectReference: {fileID: 0}
     - target: {fileID: 6942092660845023936, guid: 01fa5d1bf87297940bb783a154e292f3,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -13974,7 +13963,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _inventory
       value: 
-      objectReference: {fileID: 1471042681567532935}
+      objectReference: {fileID: 0}
     - target: {fileID: 7475118086603679014, guid: 62f39da0d1e90dd4e9bfdbf8c62b70fb,
         type: 3}
       propertyPath: m_Name

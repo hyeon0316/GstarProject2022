@@ -588,7 +588,7 @@ MonoBehaviour:
   _enemyStatData: {fileID: 11400000, guid: 0cbe933f0111fe048a23b7339edd77a7, type: 2}
   _backDistance: 4
   _dissolve: {fileID: 4985324608731852957}
-  _curEnemyType: 2
+  _curEnemyType: 13
   _shortAttackArea: {fileID: 6740750013352063671}
   _attackCollider: {fileID: 7614900765694103575}
 --- !u!54 &1592519062727725031

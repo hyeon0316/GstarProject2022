@@ -635,6 +635,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7993376667652896707, guid: 56324c19582cf5b46857e220e636d3fd,
+        type: 3}
+      propertyPath: _spawnEnemyDics.m_keys.Array.data[0]
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993376667652896707, guid: 56324c19582cf5b46857e220e636d3fd,
+        type: 3}
+      propertyPath: _spawnEnemyDics.m_values.Array.data[0]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993376667652896707, guid: 56324c19582cf5b46857e220e636d3fd,
+        type: 3}
+      propertyPath: _spawnEnemyDics.m_values.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7993376667652896708, guid: 56324c19582cf5b46857e220e636d3fd,
         type: 3}
       propertyPath: m_RootOrder

@@ -19,7 +19,7 @@ public class GoblinArcherArrow : NormalAttack
     
     private void DelayDisable()
     {
-        Invoke("DisableMissile", 0.5f);
+        Invoke("DisableObject", 0.5f);
     }
     
     private void OnTriggerEnter(Collider other) 
@@ -27,12 +27,9 @@ public class GoblinArcherArrow : NormalAttack
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             other.transform.GetComponent<Creature>().TryGetDamage(_stat, this);
-            DisableMissile();
+            DisableObject();
         }
     }
     
-    private void DisableMissile()
-    {
-        ObjectPoolManager.Instance.ReturnObject(PoolType.GoblinArcherArrow, this.gameObject);
-    }
+   
 }

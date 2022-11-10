@@ -46,8 +46,9 @@ public abstract class Creature : MonoBehaviour
   /// </summary>
   protected virtual void Init()
   {
+      IsDead = false;
       //Stat.Hp = Stat.MaxHp;
-      Debug.Log(Stat.Hp);
+      //Debug.Log(Stat.Hp);
       //todo: 그외 초기 설정값 적용
   }
 
@@ -84,7 +85,7 @@ public abstract class Creature : MonoBehaviour
  {
      int resultDamage = Mathf.Clamp((pureDamage - Stat.Defense) / 2, 0, 100) * amount / 100;
      Stat.Hp -= resultDamage;
-     _floatingText.CreateFloatingText(resultDamage);
+     _floatingText.CreateFloatingText(resultDamage.ToString());
 
      if (Stat.Hp <= 0)
      {
@@ -105,7 +106,17 @@ public abstract class Creature : MonoBehaviour
       result = result * -1;
       result = (result + 1) * 100;
       Debug.Log(result);
-      return Random.Range(0f, 100f) < result;
+
+      if (Random.Range(0f, 100f) < result)
+      {
+          return true;
+      }
+      else
+      {
+          _floatingText.CreateFloatingText("Miss");
+          return false;
+      }
+
   }
 
 

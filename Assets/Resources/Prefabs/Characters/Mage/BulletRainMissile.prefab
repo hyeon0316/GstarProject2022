@@ -4926,6 +4926,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ace464f37ecec45956be9b330b9a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _curPoolType: 3
+  _percentDamage: 20
 --- !u!136 &2439033431445352075
 CapsuleCollider:
   m_ObjectHideFlags: 0

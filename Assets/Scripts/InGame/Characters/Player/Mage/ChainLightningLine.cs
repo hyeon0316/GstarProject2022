@@ -155,7 +155,6 @@ public class ChainLightningLine : SkillAttack
     private void CloseLine()
     {
         _isDone = false;
-        DataManager.Instance.Player.Targets.Clear();
         _chainTargets.Clear();
         _lineRenderer.positionCount = 2;
         _lineRenderer.enabled = false;

@@ -41,13 +41,13 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     {
         Init(PoolType.NormalAttackMissile, 3);
         Init(PoolType.NormalAttackEffect, 3);
-        Init(PoolType.WideAreaBarrage, 1);
+        Init(PoolType.WideAreaBarrage, 3);
         Init(PoolType.BulletRainMissile, 10);
         Init(PoolType.BulletRainEffect, 10);
         Init(PoolType.DamageText, 10);
         Init(PoolType.SnowFootPrint, 5);
         Init(PoolType.FrightFlyMissile, 5);
-        Init(PoolType.WindAttackEffect, 1);
+        Init(PoolType.WindAttackEffect, 3);
         Init(PoolType.VolcanicSpike, 1);
         Init(PoolType.Spider, 5);
         Init(PoolType.FrightFly, 5);

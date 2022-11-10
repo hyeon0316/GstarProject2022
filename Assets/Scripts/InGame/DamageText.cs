@@ -41,9 +41,9 @@ public class DamageText : MonoBehaviour
         transform.position = new Vector3(_startPos.position.x, transform.position.y, _startPos.position.z);
     }
 
-    public void SetDamageText(int damage, Transform startPos)
+    public void SetDamageText(string damage, Transform startPos)
     {
-        _text.text = $"{damage}";
+        _text.text = damage;
         _text.alpha = 1;
         _startPos = startPos;
     }

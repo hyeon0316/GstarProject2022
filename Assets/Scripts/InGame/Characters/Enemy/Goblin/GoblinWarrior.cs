@@ -24,12 +24,6 @@ public class GoblinWarrior : Enemy
         _animator.SetInteger(Global.EnemyStateInteger, 2);
     }
 
-    public override void DisableEnemy()
-    {
-        ObjectPoolManager.Instance.ReturnObject(PoolType.GoblinWarrior,this.gameObject);
-    }
-
-
     public void ActiveAttackCollider()
     {
         _attackCollider.enabled = true;

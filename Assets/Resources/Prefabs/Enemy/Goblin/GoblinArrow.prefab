@@ -131,5 +131,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73820421c66908a4dad129b3cd5466f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _curPoolType: 18
   _missileSpeed: 0.05
-  _damage: 10
