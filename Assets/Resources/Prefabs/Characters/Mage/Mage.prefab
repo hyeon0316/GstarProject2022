@@ -297,7 +297,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 533736011943409279}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
   m_Name: 
@@ -723,7 +723,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772104247054312053}
-  m_LocalRotation: {x: -0.068883285, y: -0.000000007146959, z: 0.0000000047891406,
+  m_LocalRotation: {x: -0.068883285, y: 0.0000000071469595, z: -0.0000000047891406,
     w: 0.99762475}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -2485,7 +2485,6 @@ MonoBehaviour:
   _autoCancelButton: {fileID: 5305886761711391594}
   _joystick: {fileID: 1823814771810729742}
   _cameraArm: {fileID: 4087063987768068287}
-  _rotateInput: {fileID: 0}
   _skiilCoolDown:
   - {fileID: 6562556723852630916}
   - {fileID: 5864686673643646328}
@@ -9736,7 +9735,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5271050110390637956}
-  m_LocalRotation: {x: 0.029755563, y: 1.415005e-15, z: -3.332723e-15, w: 0.99955726}
+  m_LocalRotation: {x: 0.029755533, y: -0.000000023002558, z: 0.000000018948905, w: 0.99955726}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

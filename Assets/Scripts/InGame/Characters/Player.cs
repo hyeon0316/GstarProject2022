@@ -229,7 +229,7 @@ public abstract class Player : Creature
     {
         _targets.Clear();
         CancelAutoHunt(); //중간에 다른 행동을 하고 있었을때 캔슬
-        if (!IsAttack && !IsDead)
+        if (!IsDead)
         {
             if (target.gameObject.layer == LayerMask.NameToLayer("NPC")) //NPC일때
             {
