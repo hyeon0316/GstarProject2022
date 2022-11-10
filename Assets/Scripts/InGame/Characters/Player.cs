@@ -54,11 +54,6 @@ public abstract class Player : Creature
     /// </summary>
     protected bool _isNextPattern;
     
-    private Vector2 _cameraMovement;
-    [SerializeField] CameraRotate _rotateInput;
-    private float _cinemachineTargetX;
-    private float _cinemachineTargetY;
-    
     protected override void Awake()
     {
         base.Awake();
@@ -79,33 +74,11 @@ public abstract class Player : Creature
             CheckInitCombo(); //코루틴 대신 사용
         }
         TouchGetTarget(); 
-        
-        _cameraMovement = -_rotateInput.PlayerJoystickOutputVector() * Time.deltaTime * 85f;
-        CameraRotation();
     }
 
     private void FixedUpdate()
     {
         Move();
-    }
-
-    private void CameraRotation()
-    {
-        _cinemachineTargetX += -_cameraMovement.x;
-        _cinemachineTargetY += _cameraMovement.y;
-
-        _cinemachineTargetX = CameraClampAngle(_cinemachineTargetX, float.MinValue, float.MaxValue);
-        _cinemachineTargetY = CameraClampAngle(_cinemachineTargetY, -30.0f, 70.0f);
-
-        _cameraArm.transform.rotation = Quaternion.Euler(_cinemachineTargetY + 0.0f, _cinemachineTargetX, 0.0f);
-    }
-    
-    private float CameraClampAngle(float angle, float angleMin, float angleMax)
-    {
-        if (angle < -360f) angle += 360f;
-        if (angle > 360f) angle -= 360f;
-
-        return Mathf.Clamp(angle, angleMin, angleMax);
     }
     
     private void Move()
