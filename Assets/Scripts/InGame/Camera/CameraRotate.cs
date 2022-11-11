@@ -15,6 +15,8 @@ public class CameraRotate : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     private Touch _myTouch;
     private int _touchID;
 
+    private bool _isDragging;
+    
     private void FixedUpdate()
     {
         if (Input.touchCount > 0)
@@ -26,7 +28,7 @@ public class CameraRotate : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
                 {
                     if (_myTouch.fingerId == _touchID)
                     {
-                        if (_myTouch.phase != TouchPhase.Moved) // 터치드래그가 아닐때
+                        if (_myTouch.phase == TouchPhase.Stationary) // 터치했으나 마지막 프레임 변화가 없을때
                             OutputVectorValue(Vector2.zero);
                     }
                 }
@@ -49,7 +51,7 @@ public class CameraRotate : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     
     public void OnPointerDown(PointerEventData eventData)
     {
-        OnDrag(eventData);
+        //OnDrag(eventData);
         _touchID = _myTouch.fingerId;
         _isPlayerTouchingPanel = true;
     }
@@ -62,8 +64,8 @@ public class CameraRotate : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     public void OnDrag(PointerEventData eventData)
     {
+        Debug.Log("dragging");
         OutputVectorValue(new Vector2(eventData.delta.normalized.x, eventData.delta.normalized.y));
     }
-    
-   
+
 }
