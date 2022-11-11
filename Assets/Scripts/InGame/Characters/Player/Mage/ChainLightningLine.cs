@@ -30,6 +30,8 @@ public class ChainLightningLine : SkillAttack
     private Vector2[] _offsets;
     private int _animationOffsetIndex;
     private int _animationPingPongDirection = 1;
+
+    private bool _isMany; //타겟이 2명이상일때
     
     private void Awake()
     {
@@ -46,15 +48,33 @@ public class ChainLightningLine : SkillAttack
         if (_isDone)
         {
             _timer += Time.deltaTime;
-            if(_timer >= _keepTime || IsAllDead())
+            if(_timer >= _keepTime)
                 CloseLine();
-            
-            _lineRenderer.SetPosition(0, transform.position + Vector3.up);
+
+            KeepDrawing();
+            SelectOffset();
+        }
+    }
+
+    /// <summary>
+    /// 계속 그려줌
+    /// </summary>
+    private void KeepDrawing()
+    {
+        if (_isMany)
+        {
             for (int i = 0; i < _chainTargets.Count; i++)
             {
-                _lineRenderer.SetPosition(i + 1, _chainTargets[i].transform.position + Vector3.up);
+                _lineRenderer.SetPosition(i, _chainTargets[i].transform.position + Vector3.up);
             }
-            SelectOffset();
+        }
+        else
+        {
+            if (_chainTargets.Count != 0)
+            {
+                _lineRenderer.SetPosition(0, transform.position + Vector3.up);
+                _lineRenderer.SetPosition(1, _chainTargets[0].transform.position + Vector3.up);
+            }
         }
     }
 
@@ -64,9 +84,6 @@ public class ChainLightningLine : SkillAttack
         Stat playerStat = DataManager.Instance.Player.Stat;
         while (_timer < _keepTime)
         {
-            if (IsAllDead())
-                break;
-
             List<Transform> tempTargets = new List<Transform>();
             foreach (var t in _chainTargets) //깊은복사, foreach로 탐색 중 target이 사라졌을때 오류발생에 대한 방지
             {
@@ -85,31 +102,55 @@ public class ChainLightningLine : SkillAttack
         }
     }
 
-    private bool IsAllDead()
-    {
-        if (_chainTargets.Count != 0)
-            return false;
-        
-        return true;
-    }
-
     public void CreateLine()
     {
         _lineRenderer.enabled = true;
         _chainTargets.Add(DataManager.Instance.Player.Targets[0]);
         CheckRange(3);
         SetFromMaterialChange();
-        StartCoroutine(CreateLineCo());
+
+        StartCoroutine(_chainTargets.Count > 1 ? CreateLineCo() : CreateOneLineCo());
     }
 
     /// <summary>
-    /// 라인을 서서히 그려줌
+    /// 라인 연결을 한명만 할때 
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator CreateOneLineCo()
+    {
+        _isMany = false;
+        _lineRenderer.SetPosition(0, transform.position + Vector3.up);
+        
+        int duration = 1;
+        float time = 0;
+        while (true)
+        {
+            if (time >= duration)
+            {
+                break;
+            }
+            
+            time += Time.deltaTime * _drawingSpeed;
+            _lineRenderer.SetPosition(1, Vector3.Lerp(
+                transform.position + Vector3.up,
+                _chainTargets[0].transform.position + Vector3.up, Mathf.Clamp01(time)));
+            
+            SelectOffset();
+            yield return null;
+        }
+        _isDone = true;
+        StartCoroutine(TakeLightningDamage());
+    }
+
+    /// <summary>
+    /// 여러 적에게 라인을 서서히 연결
     /// </summary>
     private IEnumerator CreateLineCo()
     {
-        _lineRenderer.SetPosition(0, transform.position + Vector3.up);
+        _isMany = true;
+        _lineRenderer.SetPosition(0, _chainTargets[0].transform.position + Vector3.up);
         
-        int index = 0;
+        int index = 1;
         int duration = 1;
         float time = 0;
         while (true)
@@ -126,18 +167,10 @@ public class ChainLightningLine : SkillAttack
                 }
             }
             time += Time.deltaTime * _drawingSpeed;
-            if (index == 0)
-            {
-                _lineRenderer.SetPosition(index + 1, Vector3.Lerp(
-                    transform.position + Vector3.up, 
-                    _chainTargets[index].transform.position + Vector3.up, Mathf.Clamp01(time)));
-            }
-            else if(index == 1)
-            {
-                _lineRenderer.SetPosition(index + 1, Vector3.Lerp(
-                    _chainTargets[index - 1].transform.position + Vector3.up,
-                    _chainTargets[index].transform.position + Vector3.up, Mathf.Clamp01(time)));
-            }
+            _lineRenderer.SetPosition(index, Vector3.Lerp(
+                _chainTargets[index - 1].transform.position + Vector3.up,
+                _chainTargets[index].transform.position + Vector3.up, Mathf.Clamp01(time)));
+            
             SelectOffset();
             yield return null;
         }
