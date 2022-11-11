@@ -64,7 +64,6 @@ public class CameraRotate : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("dragging");
         OutputVectorValue(new Vector2(eventData.delta.normalized.x, eventData.delta.normalized.y));
     }
 
