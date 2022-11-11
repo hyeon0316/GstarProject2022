@@ -335,8 +335,6 @@ public abstract class Player : Creature
         }
         
         _nav.enabled = true;
-        Debug.Log(target.transform.position);
-        Debug.Log(transform.position);
         SetMoveAnim(1);
         transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
         while (true)
