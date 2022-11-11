@@ -11,6 +11,7 @@ public class QuestManager : Singleton<QuestManager>
     public QuestInGameUI questInGameUI;
     public TalkUI TalkUI;
     public TalkData TalkData;
+    public GameObject UI;
     private int _mainId;
 
     // Start is called before the first frame update
@@ -70,7 +71,7 @@ public class QuestManager : Singleton<QuestManager>
                 questInGameUI.UpdateUI(quests[_mainId]);
                 TalkUI.gameObject.SetActive(true);
                 TalkUI.SetText(TalkData.GetStr(_id));
-                
+                UI.gameObject.SetActive(false);
             }
         }
     }

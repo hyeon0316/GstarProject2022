@@ -39,6 +39,7 @@ public class TalkUI : MonoBehaviour
                 SetMsg(strs[strInt]);
             else
             {
+                QuestManager.Instance.UI.SetActive(true);
                 gameObject.SetActive(false);
             }
         }
