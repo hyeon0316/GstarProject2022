@@ -74,7 +74,6 @@ public abstract class Player : Creature
     {
         Stat.SetPlayerStat(_playerStatData);
         _nav.enabled = false; //충돌이 활성화 되기 때문에 꺼줌, 사용할때만 활성화
-        _fade.FadeInOut();
     }
 
     protected virtual void Update()
