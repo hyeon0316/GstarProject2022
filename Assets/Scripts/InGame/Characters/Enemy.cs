@@ -128,7 +128,7 @@ public abstract class Enemy : Creature
     /// </summary>
     public void ShowAppearance()
     {
-        _dissolve.FadeIn();
+        _dissolve.DissolveIn();
     }
     
     /// <summary>
@@ -310,7 +310,7 @@ public abstract class Enemy : Creature
 
     public void ActiveDeadEffect()
     {
-        _dissolve.FadeOut();
+        _dissolve.DissolveOut();
         Invoke("DisableEnemy", 1);
     }
 

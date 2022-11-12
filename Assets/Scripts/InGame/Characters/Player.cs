@@ -30,6 +30,10 @@ public abstract class Player : Creature
     [SerializeField] private VariableJoystick _joystick;
 
     [SerializeField] private Transform _cameraArm;
+
+    [SerializeField] private Fade _fade;
+
+    public Fade Fade => _fade;
     
     /// <summary>
     /// 다음단계의 기본공격이 가능한지에 대한 bool값
@@ -70,6 +74,7 @@ public abstract class Player : Creature
     {
         Stat.SetPlayerStat(_playerStatData);
         _nav.enabled = false; //충돌이 활성화 되기 때문에 꺼줌, 사용할때만 활성화
+        _fade.FadeInOut();
     }
 
     protected virtual void Update()
@@ -99,7 +104,7 @@ public abstract class Player : Creature
             if (moveVec.sqrMagnitude == 0)
                 return;
 
-            Vector3 camAngle = Camera.main.transform.rotation.eulerAngles;
+            Vector3 camAngle = _cameraArm.transform.rotation.eulerAngles;
             Vector3 camDirAngle = Quaternion.LookRotation(moveVec).eulerAngles;
             Vector3 resultAngle = Vector3.up * (camAngle.y + camDirAngle.y);
             transform.rotation = Quaternion.Euler(resultAngle);

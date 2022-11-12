@@ -17,7 +17,7 @@ public class Dissolve : MonoBehaviour
     /// <summary>
     /// 물체를 서서히 나타낸다.
     /// </summary>
-    public void FadeIn()
+    public void DissolveIn()
     {
         meshRenderer.material.SetFloat("_Cutoff", 1);
         meshRenderer.material.DOFloat(0, "_Cutoff", _doSpeed + 2);
@@ -26,7 +26,7 @@ public class Dissolve : MonoBehaviour
     /// <summary>
     /// 물체를 서서히 지운다.
     /// </summary>
-    public void FadeOut()
+    public void DissolveOut()
     {
         meshRenderer.material.DOFloat(1, "_Cutoff", _doSpeed);
     }
