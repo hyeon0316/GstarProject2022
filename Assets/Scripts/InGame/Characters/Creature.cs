@@ -21,7 +21,8 @@ public abstract class Creature : MonoBehaviour
   
   [Header("기본공격 범위")]
   [SerializeField] protected float _attackRadius; //실제 멈춰서서 공격하는 범위
-
+  
+  
   [SerializeField] protected FloatingText _floatingText;
   
   protected List<Transform> _targets = new List<Transform>(); //탐색된 적의 정보
@@ -46,7 +47,7 @@ public abstract class Creature : MonoBehaviour
   protected virtual void Init()
   {
       IsDead = false;
-      //Stat.Hp = Stat.MaxHp;
+      Stat.Hp = Stat.MaxHp;
       //Debug.Log(Stat.Hp);
       //todo: 그외 초기 설정값 적용
   }

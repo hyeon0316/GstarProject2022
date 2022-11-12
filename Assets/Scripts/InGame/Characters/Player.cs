@@ -53,6 +53,11 @@ public abstract class Player : Creature
     /// 오토 모드일때 스킬들의 사용 간격을 나누기 위한 변수
     /// </summary>
     protected bool _isNextPattern;
+
+    /// <summary>
+    /// 퀘스트를 자동 진행중인지 확인
+    /// </summary>
+    private bool _isQuest { get; set; }
     
     protected override void Awake()
     {
@@ -232,13 +237,15 @@ public abstract class Player : Creature
         CancelAutoHunt(); //중간에 다른 행동을 하고 있었을때 캔슬
         if (!IsDead)
         {
-            if (target.gameObject.layer == LayerMask.NameToLayer("NPC")) //NPC일때
+            if (!_isQuest)
             {
-                ActionFromDistance(TalkNpc, target);
+                ActionFromDistance(target.gameObject.layer == LayerMask.NameToLayer("NPC") ? TalkNpc : SetAutoHunt, target);
+                _isQuest = true;
             }
-            else //적 일때
+            else //퀘스트 자동진행 중에 한번더 클릭 될 경우 진행 취소
             {
-                ActionFromDistance(SetAutoHunt, target);
+                StopMoveCo();
+                _isQuest = false;
             }
         }
     }

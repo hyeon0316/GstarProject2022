@@ -55,7 +55,6 @@ public class Stat
     public void SetEnemyStat(EnemyStatData enemyStatData)
     {
         MaxHp = enemyStatData.MaxHp;
-        Hp = MaxHp;
         Defense = enemyStatData.Defense;
         Dodge = enemyStatData.Dodge;
         HitPercent = enemyStatData.HitPercent;

@@ -19,6 +19,11 @@ public abstract class Enemy : Creature
     [Header("스폰이나 사망때 사용 될 디졸브")]
     [SerializeField] private Dissolve _dissolve;
     
+    [Header("자신의 체력 바")]
+    [SerializeField] protected HpbarController _hpbar;
+
+    [SerializeField] private string _name;
+    
     /// <summary>
     /// 스폰 지점에서 나왔을때의 위치
     /// </summary>
@@ -52,6 +57,7 @@ public abstract class Enemy : Creature
     {
         base.Awake();
         Stat = new Stat();
+        Stat.SetEnemyStat(_enemyStatData);
     }
     
     protected virtual void OnEnable()
@@ -70,13 +76,14 @@ public abstract class Enemy : Creature
         _isGoBack = false;
         _isOutArea = false;
         _isWait = true;
+        
+        _hpbar.SetEnemyUI(Stat.MaxHp, _name);
     }
 
     
     protected virtual void Start()
     {
         _targets.Add(DataManager.Instance.Player.transform);
-        Stat.SetEnemyStat(_enemyStatData);
     }
 
     private void Update()
@@ -188,6 +195,7 @@ public abstract class Enemy : Creature
         _nav.SetDestination(RandomBackPos()); 
         _nav.isStopped = false;
         _isGoBack = true;
+        _hpbar.CloseHpBar();
         while (true)
         {
             if (_nav.remainingDistance <= 0.5f) //도착했을때
@@ -267,15 +275,19 @@ public abstract class Enemy : Creature
         base.TryGetDamage(stat, attack);
         if (!_isFollow && !_isGoBack) //피격 당했을 때, 되돌아 가는 중이 아닐 때 추적 시작
         {
+            _hpbar.ShowHpBar();
             _nav.enabled = true;
             CancelInvoke("SetRandomMove");
             _isFollow = true;
         }
+        
+        _hpbar.UpdateHpBar(Stat.Hp);
     }
 
     protected override void Die()
     {
         base.Die();
+        _hpbar.CloseHpBar();
         CancelInvoke("SetRandomMove");
         if(_nav.enabled)
             _nav.isStopped = true;
@@ -285,7 +297,6 @@ public abstract class Enemy : Creature
         if (DataManager.Instance.Player.Targets.Contains(this.transform))
         {
             DataManager.Instance.Player.Targets.Remove(this.transform);
-            Debug.Log("지워짐");
         }
     }
 
