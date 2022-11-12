@@ -33,8 +33,6 @@ public abstract class Player : Creature
 
     [SerializeField] private Fade _fade;
 
-    public Fade Fade => _fade;
-    
     /// <summary>
     /// 다음단계의 기본공격이 가능한지에 대한 bool값
     /// </summary>
