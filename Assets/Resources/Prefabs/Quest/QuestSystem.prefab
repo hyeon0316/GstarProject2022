@@ -1762,6 +1762,7 @@ MonoBehaviour:
   Name: {fileID: 3258667841528313608}
   NeedObject: {fileID: 6439667292429523114}
   Fin: {fileID: 6135714119496025749}
+  questing: {fileID: 2677874803102636320}
 --- !u!114 &756081824700417162
 MonoBehaviour:
   m_ObjectHideFlags: 0

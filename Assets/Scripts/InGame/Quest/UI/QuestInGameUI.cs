@@ -38,6 +38,8 @@ public class QuestInGameUI : MonoBehaviour
         }
         if (data.IsCompleteObjectives)
         {
+            DataManager.Instance.Player.IsQuest = false;
+            QuestManager.Instance.SetAniQuest(false);
             NeedObject.text = "¿Ï·á";
             Fin.SetActive(true);
         }
@@ -78,13 +80,12 @@ public class QuestInGameUI : MonoBehaviour
     }
     public void OnFin()
     {
-        DataManager.Instance.Player.IsQuest = false;
-        QuestManager.Instance.SetAniQuest(false);
+        
         QuestManager.Instance.NextQuest();
         Fin.SetActive(false);
     }
     public void QuestAni(bool _s)
     {
-        questing.SetBool(0, _s);
+        questing.SetBool("0", _s);
     }
 }
