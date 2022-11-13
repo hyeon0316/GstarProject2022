@@ -55,6 +55,7 @@ public class QuestInGameUI : MonoBehaviour
             _tr = MapManager.Instance.GetSpwan(questNum);
            // DataManager.Instance.Player.SetAutoQuest(_tr);
         }
+
         OnClickQuest();
     }
     public void OnClickQuest()
@@ -76,6 +77,7 @@ public class QuestInGameUI : MonoBehaviour
     }
     public void OnFin()
     {
+        DataManager.Instance.Player.IsQuest = false;
         QuestManager.Instance.NextQuest();
         Fin.SetActive(false);
     }
