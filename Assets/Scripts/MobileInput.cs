@@ -6,7 +6,6 @@ public class MobileInput : MonoBehaviour
 {
     private float _interval = 0.3f;
     private float _doubleClickedTime = -1.0f;
-    private bool _isDoubleClicked = false;
 
     // Update is called once per frame
     private void Update()

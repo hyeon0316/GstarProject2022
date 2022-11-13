@@ -67,6 +67,7 @@ public abstract class Enemy : Creature
 
     protected override void Init()
     {
+        Debug.Log("이닛");
         base.Init();
         _nav.enabled = false;
         
@@ -277,6 +278,7 @@ public abstract class Enemy : Creature
         {
             _hpbar.ShowHpBar();
             _nav.enabled = true;
+            _nav.isStopped = true;
             CancelInvoke("SetRandomMove");
             _isFollow = true;
         }

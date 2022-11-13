@@ -14,9 +14,6 @@ public class Mage : Player
         SpikeAttack
     }
     
-    [Header("스킬 쿨타임 모음")]
-    [SerializeField] private CoolDown[] _skiilCoolDown;
-    
     [Header("기본공격 발사체 위치")]
     [SerializeField] private Transform _normalAttackPos;
 
@@ -25,64 +22,16 @@ public class Mage : Player
     
     [Header("체인라이트닝 라인")] [SerializeField] private ChainLightningLine _chainLightningLine;
 
-    private UseActionType[] _useSkills = new UseActionType[5];
-
     protected override void Start()
     {
         base.Start();
-        _useSkills[0] = UseWideAreaBarrage;
-        _useSkills[1] = UseChainLightning;
-        _useSkills[2] = UseBulletRain;
-        _useSkills[3] = UseWindAttack;
-        _useSkills[4] = UseSpikeAttack;
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-        if (_isAutoHunt && !IsDead)
-        {
-            if (_isNextPattern)
-            {
-                SetPrioritySkill();
-                if (_autoSkill.Count == 0) //사용할 스킬이 없을때는 일반공격 사용
-                {
-                    UseNormalAttack();
-                }
-                else
-                {
-                    UseAutoSkill(_autoSkill.Dequeue());
-                }
-
-                _isNextPattern = false;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Queue에서 꺼낸 함수를 사용
-    /// </summary>
-    private void UseAutoSkill(UseActionType useActionType)
-    {
-        useActionType();
+        _useSkills.Add(UseWideAreaBarrage);
+        _useSkills.Add(UseChainLightning);
+        _useSkills.Add(UseBulletRain);
+        _useSkills.Add(UseWindAttack);
+        _useSkills.Add(UseSpikeAttack);
     }
     
-
-    /// <summary>
-    /// 오토모드때 우선적으로 사용할 스킬들을 셋팅
-    /// </summary>
-    private void SetPrioritySkill()
-    {
-        for (int i = 0; i < _useSkills.Length; i++)
-        {
-            if(_skiilCoolDown[i].IsCoolDown) //쿨다운 중인 스킬은 담지 않는다.
-                continue;
-            
-            if(!_autoSkill.Contains(_useSkills[i])) //중복 방지
-                _autoSkill.Enqueue(_useSkills[i]);
-        }
-    }
-
     /// <summary>
     /// 기본공격할때 지정 위치에 발사체 생성
     /// </summary>
@@ -93,8 +42,7 @@ public class Mage : Player
             var obj = ObjectPoolManager.Instance.GetObject(PoolType.NormalAttackMissile);
             obj.transform.position = _normalAttackPos.position;
             obj.transform.rotation = _normalAttackPos.rotation;
-
-            obj.GetComponent<NormalAttackMissile>().DelayDisable();
+            obj.GetComponent<NormalAttackMissile>().Init(_targets[0]);
         }
     }
 
@@ -121,8 +69,8 @@ public class Mage : Player
             Debug.Log("스파이크 어택");
             _skiilCoolDown[(int) SkillCoolType.SpikeAttack].SetCoolDown();
             transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
+            _animator.SetTrigger(Global.SpikeAttackTrigger);
         }
-        _animator.SetTrigger(Global.SpikeAttackTrigger);
     }
 
     public void CreateSpikeAttack()
@@ -163,8 +111,8 @@ public class Mage : Player
             Debug.Log("불렛 레인");
             _skiilCoolDown[(int) SkillCoolType.BulletRain].SetCoolDown();
             transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
+            _animator.SetTrigger(Global.BulletRainTrigger);
         }
-        _animator.SetTrigger(Global.BulletRainTrigger);
     }
 
     private void CreateBulletRainMissile()
@@ -199,8 +147,8 @@ public class Mage : Player
             Debug.Log("체인 라이트닝");
             _skiilCoolDown[(int) SkillCoolType.ChainLightning].SetCoolDown();
             transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
+            _animator.SetTrigger(Global.ChainLightningTrigger);
         }
-        _animator.SetTrigger(Global.ChainLightningTrigger);
     }
     
     public void CreateChainLightningLine()
@@ -258,8 +206,8 @@ public class Mage : Player
     {
         if (_targets.Count != 0)
         {
-            Debug.Log("바람범위공격");
             IsAttack = true;
+            Debug.Log("바람범위공격");
             _skiilCoolDown[(int) SkillCoolType.WindAttack].SetCoolDown();
             transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
         }
@@ -270,12 +218,12 @@ public class Mage : Player
     {
         if (_targets.Count != 0)
         {
+            IsAttack = true;
             Debug.Log("범위공격");
             _skiilCoolDown[(int) SkillCoolType.WideAreaBarrage].SetCoolDown();
-            IsAttack = true;
             transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
+            _animator.SetTrigger(Global.WideAreaBarrageTrigger);
         }
-        _animator.SetTrigger(Global.WideAreaBarrageTrigger);
     }
 
 

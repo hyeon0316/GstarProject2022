@@ -105,7 +105,6 @@ public abstract class Creature : MonoBehaviour
       double result = Math.Pow(0.91f, n);
       result = result * -1;
       result = (result + 1) * 100;
-      Debug.Log(result);
 
       if (Random.Range(0f, 100f) < result)
       {
@@ -113,7 +112,7 @@ public abstract class Creature : MonoBehaviour
       }
       else
       {
-          _floatingText.CreateFloatingText("Miss");
+          _floatingText.CreateFloatingText(Global.MissText);
           return false;
       }
 

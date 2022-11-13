@@ -14,7 +14,12 @@ public abstract class Player : Creature
 
     protected bool _isAutoHunt;
 
+    protected List<UseActionType> _useSkills = new List<UseActionType>();
+    
     private int _comboCount;
+    
+    [Header("스킬 쿨타임 모음")]
+    [SerializeField] protected CoolDown[] _skiilCoolDown;
     
     [Header("적 탐색 범위")]
     [SerializeField] protected float _searchRadius;
@@ -59,7 +64,7 @@ public abstract class Player : Creature
     /// <summary>
     /// 퀘스트를 자동 진행중인지 확인
     /// </summary>
-    private bool _isQuest { get; set; }
+    public bool IsQuest { get; set; }
     
     protected override void Awake()
     {
@@ -86,6 +91,60 @@ public abstract class Player : Creature
     private void FixedUpdate()
     {
         Move();
+    }
+    
+    /// <summary>
+    /// Queue에서 꺼낸 함수를 사용
+    /// </summary>
+    private void UseAutoSkill(UseActionType useActionType)
+    {
+        useActionType();
+    }
+    
+    /// <summary>
+    /// 오토모드때 우선적으로 사용할 스킬들을 셋팅
+    /// </summary>
+    private void SetPrioritySkill()
+    {
+        for (int i = 0; i < _useSkills.Count; i++)
+        {
+            if(_skiilCoolDown[i].IsCoolDown) //쿨다운 중인 스킬은 담지 않는다.
+                continue;
+            
+            if(!_autoSkill.Contains(_useSkills[i])) //중복 방지
+                _autoSkill.Enqueue(_useSkills[i]);
+        }
+    }
+
+    /// <summary>
+    /// 자동사냥 실행
+    /// </summary>
+    private IEnumerator AutoHuntCo()
+    {
+        WaitForSeconds delay = new WaitForSeconds(0.5f);
+        while (true)
+        {
+            if (!_isAutoHunt)
+                break;
+
+            if (!IsAttack)
+            {
+                SetPrioritySkill();
+                if (_autoSkill.Count == 0) //사용할 스킬이 없을때는 일반공격 사용
+                {
+                    UseNormalAttack();
+                }
+                else
+                {
+                    UseAutoSkill(_autoSkill.Dequeue());
+                }
+                yield return delay;
+            }
+            else
+            {
+                yield return null;
+            }
+        }
     }
     
     private void Move()
@@ -127,6 +186,7 @@ public abstract class Player : Creature
             _isAutoHunt = true;
             _isNextPattern = true;
             ActiveAutoCancelButton(true);
+            StartCoroutine(AutoHuntCo());
         }
         else
         {
@@ -148,6 +208,21 @@ public abstract class Player : Creature
             _autoSkill.Clear();
         }
         StopMoveCo();
+    }
+
+    /// <summary>
+    /// 터치를 연속적으로 했을때에 대한 방지기능
+    /// </summary>
+    public void TouchContinue()
+    {
+        if (_isAutoHunt)
+        {
+            CancelAutoHunt();
+        }
+        else
+        {
+            return;
+        }
     }
 
     /// <summary>
@@ -239,15 +314,15 @@ public abstract class Player : Creature
         CancelAutoHunt(); //중간에 다른 행동을 하고 있었을때 캔슬
         if (!IsDead)
         {
-            if (!_isQuest)
+            if (!IsQuest)
             {
-                ActionFromDistance(target.gameObject.layer == LayerMask.NameToLayer("NPC") ? TalkNpc : SetAutoHunt, target);
-                _isQuest = true;
+                QuestFromDistance(target.gameObject.layer == LayerMask.NameToLayer("NPC") ? TalkNpc : SetAutoHunt, target);
+                IsQuest = true;
             }
             else //퀘스트 자동진행 중에 한번더 클릭 될 경우 진행 취소
             {
                 StopMoveCo();
-                _isQuest = false;
+                IsQuest = false; 
             }
         }
     }
@@ -276,28 +351,21 @@ public abstract class Player : Creature
     }
 
     /// <summary>
+    /// 거리 상관없이 퀘스트 자동진행
+    /// </summary>
+    private void QuestFromDistance(UseActionType useActionType, Transform target)
+    {
+        MoveTowardTarget(useActionType, target);
+    }
+
+    /// <summary>
     /// 타겟(NPC or Enemy)과의 거리에 따른 행동패턴
     /// </summary>
     protected void ActionFromDistance(UseActionType useActionType, Transform target)
     {
-        IsAttack = true;
-        if (_attackRadius < Vector3.Distance(transform.position, target.position)) //타겟이 공격사거리 밖에있을때
+        if (Math.Pow(_attackRadius, 2) < (transform.position -target.position).sqrMagnitude) //타겟이 공격사거리 밖에있을때
         {
-            if (_searchRadius < Vector3.Distance(transform.position, target.position)) // 만약 그 사거리가 탐색범위 보다는 클 경우
-            {
-                if (target.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-                {
-                    CheckAttackRange(1, useActionType); //근처 적으로 다시 타겟팅
-                }
-                else //타겟이 Npc일때는 그대로 타겟을 향해 이동 후 함수 실행
-                {
-                    MoveTowardTarget(useActionType, target);
-                }
-            }
-            else
-            {
-                MoveTowardTarget(useActionType, target);
-            }
+            MoveTowardTarget(useActionType, target);
         }
         else //공격 사거리 안에 있을때
         {
@@ -346,6 +414,7 @@ public abstract class Player : Creature
         _nav.enabled = true;
         SetMoveAnim(1);
         transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
+        WaitForFixedUpdate delay = new WaitForFixedUpdate();
         while (true)
         {
             if (goalRadius >= Vector3.Distance(transform.position, target.position)) //공격 사거리 안에 들어왔을때
@@ -358,7 +427,7 @@ public abstract class Player : Creature
                 break;
             }
             _nav.SetDestination(target.transform.position);
-            yield return new WaitForFixedUpdate();
+            yield return delay;
         }
     }
 
@@ -370,11 +439,11 @@ public abstract class Player : Creature
     {
         if (_targets.Count != 0)
         {
-            transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
             IsAttack = true;
+            transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
+            _animator.SetInteger(Global.NormalAttackInteger, _comboCount++ % Global.MaxComboAttack);
             _canNextNormalAttack = false;
         }
-        _animator.SetInteger(Global.NormalAttackInteger, _comboCount++ % Global.MaxComboAttack);
     }
 
 
@@ -396,7 +465,6 @@ public abstract class Player : Creature
     public void InitAttack()
     {
         IsAttack = false;
-        _isNextPattern = true;
     }
 
     /// <summary>

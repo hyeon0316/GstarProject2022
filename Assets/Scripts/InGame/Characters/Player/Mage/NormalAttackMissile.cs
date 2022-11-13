@@ -8,26 +8,32 @@ public class NormalAttackMissile : NormalAttack
 {
    
    [SerializeField] private float _missileSpeed;
+   private Transform _target;
    
    private void FixedUpdate()
    {
-      transform.Translate(Vector3.forward * _missileSpeed);
+      MoveToTarget();
    }
 
-   public void DelayDisable()
+   private void MoveToTarget()
    {
-      Invoke("DisableObject", 0.5f);
-   }
-   
-
-   private void OnTriggerEnter(Collider other) 
-   {
-      if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+      if ((transform.position - _target.position).sqrMagnitude <= 1)
       {
-         other.transform.GetComponent<Creature>().TryGetDamage(DataManager.Instance.Player.Stat, this);
+         _target.transform.GetComponent<Creature>().TryGetDamage(DataManager.Instance.Player.Stat, this);
          CreateEffect();
          DisableObject();
+         return;
       }
+
+      var pos = _target.transform.position - transform.position;
+      transform.rotation = Quaternion.LookRotation(pos);
+      transform.Translate(Vector3.forward * _missileSpeed * Time.fixedDeltaTime);
+   }
+
+   public void Init(Transform target)
+   {
+      _target = target;
+      Invoke("DisableObject", 1f);
    }
 
    private void CreateEffect()

@@ -39,8 +39,8 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
 
     private void Awake()
     {
-        Init(PoolType.NormalAttackMissile, 3);
-        Init(PoolType.NormalAttackEffect, 3);
+        Init(PoolType.NormalAttackMissile, 4);
+        Init(PoolType.NormalAttackEffect, 4);
         Init(PoolType.WideAreaBarrage, 3);
         Init(PoolType.BulletRainMissile, 10);
         Init(PoolType.BulletRainEffect, 10);

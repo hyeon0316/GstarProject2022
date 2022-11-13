@@ -8,7 +8,9 @@ using UnityEngine;
 public static class Global
 {
     public const int LoadingTime = 3;
-
+    public const string MissText = "Miss";
+    
+    
     /// <summary>
     /// 플레이어 애니메이션 관련
     /// </summary>

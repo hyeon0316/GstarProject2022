@@ -536,7 +536,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5376167565593434837}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: CancelAutoHunt
+        m_MethodName: TouchContinue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -699,7 +699,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5376167565593434837}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: CancelAutoHunt
+        m_MethodName: TouchContinue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -734,7 +734,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _imageFill: {fileID: 7974684460000177718}
-  _coolDownMax: 3
+  _coolDownMax: 8
   _coolDownText: {fileID: 2132758837258913957}
 --- !u!1 &1680579702494954146
 GameObject:
@@ -2530,6 +2530,12 @@ MonoBehaviour:
   _attackRadius: 8
   _floatingText: {fileID: 5538358463588271718}
   _playerStatData: {fileID: 11400000, guid: 42666cf634c81834a9d84db38413573a, type: 2}
+  _skiilCoolDown:
+  - {fileID: 6562556723852630916}
+  - {fileID: 5864686673643646328}
+  - {fileID: 5687756692963838784}
+  - {fileID: 2784012815139658943}
+  - {fileID: 5355929533322928182}
   _searchRadius: 15
   _autoModeSearch: 10
   _foots:
@@ -2539,12 +2545,6 @@ MonoBehaviour:
   _joystick: {fileID: 1823814771810729742}
   _cameraArm: {fileID: 4087063987768068287}
   _fade: {fileID: 8934357582415225020}
-  _skiilCoolDown:
-  - {fileID: 6562556723852630916}
-  - {fileID: 5864686673643646328}
-  - {fileID: 5687756692963838784}
-  - {fileID: 2784012815139658943}
-  - {fileID: 5355929533322928182}
   _normalAttackPos: {fileID: 6310364584250092177}
   _bulletRain: {fileID: 7891702713259035445}
   _chainLightningLine: {fileID: 7655725701498427776}
@@ -10671,7 +10671,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5376167565593434837}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: CancelAutoHunt
+        m_MethodName: TouchContinue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10706,7 +10706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _imageFill: {fileID: 2416521552732510330}
-  _coolDownMax: 7
+  _coolDownMax: 12
   _coolDownText: {fileID: 3892770191093268142}
 --- !u!1 &6209503951777126266
 GameObject:
@@ -11363,7 +11363,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5376167565593434837}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: CancelAutoHunt
+        m_MethodName: TouchContinue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11397,8 +11397,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 305d027023594724b8ce74ad86f2ea3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _imageFill: {fileID: 1534378954908455964}
-  _coolDownMax: 3
+  _imageFill: {fileID: 8603063845647000657}
+  _coolDownMax: 5
   _coolDownText: {fileID: 4964563718276864637}
 --- !u!1 &7019027302647772833
 GameObject:
@@ -11524,7 +11524,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5376167565593434837}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: CancelAutoHunt
+        m_MethodName: TouchContinue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12385,7 +12385,7 @@ MonoBehaviour:
   _missileSpeed: 0.7
   _distanceFromStart: 6
   _distanceFromEnd: 5
-  _shotMaxCount: 20
+  _shotMaxCount: 15
   _interval: 0.05
   _shotCountEveryInterval: 1
 --- !u!1 &8206141211377415568
@@ -13167,7 +13167,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5376167565593434837}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: CancelAutoHunt
+        m_MethodName: TouchContinue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13202,7 +13202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _imageFill: {fileID: 1534378954908455964}
-  _coolDownMax: 5
+  _coolDownMax: 8
   _coolDownText: {fileID: 6381556345025387097}
 --- !u!1001 &3211938534433872313
 PrefabInstance:

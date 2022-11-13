@@ -8,6 +8,8 @@ public class BulletRainMissile : SkillAttack
 {
     private Vector3[] _bezierPoints = new Vector3[4];
 
+    private Transform _target;
+    
     private float _speed;
     private float _endTime = 0;
     private float _curTime = 0;
@@ -19,7 +21,7 @@ public class BulletRainMissile : SkillAttack
     {
         _curTime = 0;
         _speed = speed;
-        
+        _target = endTr;
         _endTime = Random.Range(0.8f, 1.0f); //도착 시간을 랜덤으로 설정
 
         _bezierPoints[0] = startTr.position; //시작 지점
@@ -31,12 +33,12 @@ public class BulletRainMissile : SkillAttack
                            (distanceFromStart * Random.Range(-1.0f, -0.8f) * startTr.forward); // Z (뒤 쪽만)
         
         // 도착 지점을 기준으로 랜덤 포인트 지정.
-        _bezierPoints[2] = endTr.position +
-                           (distanceFromEnd * Random.Range(-1.0f, 1.0f) * endTr.right) + // X (좌, 우 전체)
-                           (distanceFromEnd * Random.Range(-1.0f, 1.0f) * endTr.up) + // Y (위, 아래 전체)
-                           (distanceFromEnd * Random.Range(0.8f, 1.0f) * endTr.forward); // Z (앞 쪽만)
+        _bezierPoints[2] = _target.position +
+                           (distanceFromEnd * Random.Range(-1.0f, 1.0f) * _target.right) + // X (좌, 우 전체)
+                           (distanceFromEnd * Random.Range(-1.0f, 1.0f) * _target.up) + // Y (위, 아래 전체)
+                           (distanceFromEnd * Random.Range(0.8f, 1.0f) * _target.forward); // Z (앞 쪽만)
         
-        _bezierPoints[3] = endTr.position; // 도착 지점
+        _bezierPoints[3] = _target.position; // 도착 지점
 
         transform.position = _bezierPoints[0];
     }
@@ -45,6 +47,8 @@ public class BulletRainMissile : SkillAttack
     {
         if (_curTime > _endTime)
         {
+            _target.transform.GetComponent<Creature>().TryGetDamage(DataManager.Instance.Player.Stat, this);
+            CreateMissileEffect();
             DisableObject();
             return;
         }
@@ -78,16 +82,6 @@ public class BulletRainMissile : SkillAttack
         float bccd = Mathf.Lerp(bc, cd, time);
 
         return Mathf.Lerp(abbc, bccd, time);
-    }
-
-    private void OnTriggerEnter(Collider other) 
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-        {
-            other.transform.GetComponent<Creature>().TryGetDamage(DataManager.Instance.Player.Stat, this);
-            CreateMissileEffect();
-            DisableObject();
-        }
     }
 
     private void CreateMissileEffect()
