@@ -13,6 +13,7 @@ public class QuestManager : Singleton<QuestManager>
     public TalkData TalkData;
     public GameObject UI;
     private int _mainId;
+    public bool IsQuest { get; set; }
 
     // Start is called before the first frame update
     public void NextQuest()
@@ -87,4 +88,9 @@ public class QuestManager : Singleton<QuestManager>
     {
         _inventory = inventory;
     }
+    public void SetAniQuest(bool _s)
+    {
+        questInGameUI.QuestAni(_s);
+    }
+    
 }

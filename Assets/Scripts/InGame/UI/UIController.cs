@@ -11,6 +11,7 @@ public class UIController : MonoBehaviour
 
     [SerializeField] private GameObject _storeWindow;
 
+    [SerializeField] private GameObject _mapWindow;
 
     public void ActiveInven()
     {
@@ -24,6 +25,16 @@ public class UIController : MonoBehaviour
     public void ActiveStore()
     {
         _storeWindow.SetActive(true);
+    }
+
+    public void ActiveMap()
+    {
+        if (_mapWindow == null)
+        {
+            _mapWindow = GameObject.Find("Map").transform.Find("MapWindow").gameObject;
+            Debug.Log(_mapWindow);
+        }
+        _mapWindow.SetActive(true);
     }
 
 }

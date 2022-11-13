@@ -10,6 +10,7 @@ public class QuestInGameUI : MonoBehaviour
     public GameObject Fin;
     private int questNum;
     private bool questType;
+    public Animator questing;
     // Start is called before the first frame update
 
     private void Start()
@@ -78,7 +79,12 @@ public class QuestInGameUI : MonoBehaviour
     public void OnFin()
     {
         DataManager.Instance.Player.IsQuest = false;
+        QuestManager.Instance.SetAniQuest(false);
         QuestManager.Instance.NextQuest();
         Fin.SetActive(false);
+    }
+    public void QuestAni(bool _s)
+    {
+        questing.SetBool(0, _s);
     }
 }

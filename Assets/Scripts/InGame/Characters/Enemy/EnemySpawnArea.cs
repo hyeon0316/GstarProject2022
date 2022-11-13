@@ -14,7 +14,7 @@ public class EnemySpawnArea : MonoBehaviour
     [Header("스폰 될 적 종류와 수")] 
     [SerializeField] private SpawnEnemyDic _spawnEnemyDics;
     public string MapName;
-    public string EnemyName;
+    public string[] EnemyName;
     private BoxCollider _boxCollider;
 
     private void Awake()
