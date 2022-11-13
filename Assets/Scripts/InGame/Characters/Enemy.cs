@@ -69,7 +69,6 @@ public abstract class Enemy : Creature
     {
         Debug.Log("이닛");
         base.Init();
-        _nav.enabled = false;
         
         this.gameObject.layer = LayerMask.NameToLayer("Enemy");
         _isFollow = false;
@@ -158,6 +157,9 @@ public abstract class Enemy : Creature
         SetAnimations(3, 1, 1, 1,1,1);
         while (true)
         {
+            if (IsDead)
+                break;
+            
             if (_nav.remainingDistance <= 0.1f)
             {
                 Invoke("SetRandomMove", 1);
@@ -199,6 +201,9 @@ public abstract class Enemy : Creature
         _hpbar.CloseHpBar();
         while (true)
         {
+            if (IsDead) //도착하기 전에 죽게되는 경우
+                break;
+            
             if (_nav.remainingDistance <= 0.5f) //도착했을때
             {
                 if(_curEnemyType is PoolType.ForestGolem1 or PoolType.ForestGolem2 or  PoolType.ForestGolem3 or PoolType.SpecialGolem)
@@ -209,12 +214,6 @@ public abstract class Enemy : Creature
                 _nav.isStopped = true;
                 _isGoBack = false;
                 Stat.Hp = Stat.MaxHp; //복귀시 체력 전체회복
-                break;
-            }
-
-            if (IsDead) //도착하기 전에 죽게되는 경우
-            {
-                _nav.isStopped = true;
                 break;
             }
 
@@ -291,8 +290,12 @@ public abstract class Enemy : Creature
         base.Die();
         _hpbar.CloseHpBar();
         CancelInvoke("SetRandomMove");
-        if(_nav.enabled)
+        if (_nav.enabled)
+        {
             _nav.isStopped = true;
+            _nav.enabled = false;
+        }
+
         SpawnArea.GetComponent<EnemySpawnArea>().SpawnRandomEnemy();
         _animator.SetTrigger(Global.EnemyDeadTrigger);
         QuestManager.Instance.CheckEnemyQuest(_curEnemyType);
@@ -352,8 +355,11 @@ public abstract class Enemy : Creature
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("SpawnArea")) //스폰 지역에서 벗어났을때
         {
-            _isOutArea = true;
-            _outVector = transform.position;
+            if (_isFollow)
+            {
+                _isOutArea = true;
+                _outVector = transform.position;
+            }
         }
     }
     

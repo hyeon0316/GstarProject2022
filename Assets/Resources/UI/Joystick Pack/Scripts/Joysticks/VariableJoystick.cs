@@ -42,6 +42,7 @@ public class VariableJoystick : Joystick
         
         DataManager.Instance.Player.ActiveFootPrinters(true);
         DataManager.Instance.Player.CancelAutoHunt();
+        DataManager.Instance.Player.CancelAutoQuest();
     }
 
     public override void OnPointerUp(PointerEventData eventData)

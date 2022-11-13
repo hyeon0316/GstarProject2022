@@ -247,9 +247,9 @@ public abstract class Player : Creature
                     }
                 }
             }
-            else if (Input.touchCount > 0)
+            else if (Input.touchCount > 0) //Mobile
             {
-                if (Input.GetTouch(0).phase == TouchPhase.Began) //Mobile
+                if (Input.GetTouch(0).phase == TouchPhase.Began) 
                 {
                     RaycastHit hit;
                     Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
@@ -324,6 +324,7 @@ public abstract class Player : Creature
                 StopMoveCo();
                 IsQuest = false; 
             }
+            QuestManager.Instance.SetAniQuest(IsQuest);
         }
     }
 
@@ -479,7 +480,15 @@ public abstract class Player : Creature
             _canNextNormalAttack = false;
         }
     }
-    
+
+    public void CancelAutoQuest()
+    {
+        if (IsQuest)
+        {
+            IsQuest = false;
+            QuestManager.Instance.SetAniQuest(IsQuest);
+        }
+    }
 
     public void ActiveFootPrinters(bool active)
     {
