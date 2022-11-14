@@ -77,7 +77,7 @@ public abstract class Enemy : Creature
         _isAttack = false;
         _isGoBack = false;
         _isOutArea = false;
-        _isWait = true;
+        _isWait = !_isAggressive;
         
         _hpbar.SetEnemyUI(Stat.MaxHp, _name);
     }
@@ -285,9 +285,9 @@ public abstract class Enemy : Creature
     public override void TryGetDamage(Stat stat, Attack attack)
     {
         base.TryGetDamage(stat, attack);
+        _hpbar.ShowHpBar();
         if (!_isFollow && !_isGoBack) //피격 당했을 때, 되돌아 가는 중이 아닐 때 추적 시작
         {
-            _hpbar.ShowHpBar();
             _nav.enabled = true;
             _nav.isStopped = true;
             CancelInvoke("SetRandomMove");

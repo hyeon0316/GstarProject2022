@@ -9,6 +9,8 @@ public class Boss : Enemy
     
     [SerializeField] private LongAttack _rockPos;
 
+    [SerializeField] private HpbarController _bossHpBar;
+    
     /// <summary>
     /// 2번째 페이즈 진입시 공격 변경
     /// </summary>
@@ -37,12 +39,20 @@ public class Boss : Enemy
 
     public override void TryGetDamage(Stat stat, Attack attack)
     {
+        _bossHpBar.ShowHpBar();
         base.TryGetDamage(stat, attack);
 
         if (Stat.Hp <= Stat.MaxHp / 2 && _nextPatternState == 0)
             EntryNextPattern();
+        
+        _bossHpBar.UpdateHpBar(Stat.Hp);
     }
 
+    protected override void Die()
+    {
+        base.Die();
+        _bossHpBar.CloseHpBar();
+    }
     public void CreateRock()
     {
         _rockPos.CreateProjectile(PoolType.BossRock, Stat);

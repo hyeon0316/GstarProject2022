@@ -8,6 +8,8 @@ public class HpbarController : MonoBehaviour
     [SerializeField] private Slider slider;
     [SerializeField] private TextMeshProUGUI Name;
 
+    [SerializeField] private bool _isFixed;
+
     private Camera _cam;
     private void Awake()
     {
@@ -46,11 +48,16 @@ public class HpbarController : MonoBehaviour
     
     private void Update()
     {
-        if (_cam == null)
+        if(!_isFixed)
         {
-            _cam = Camera.main;
-            gameObject.GetComponent<Canvas>().worldCamera = _cam;
+            if (_cam == null)
+            {
+                _cam = Camera.main;
+                gameObject.GetComponent<Canvas>().worldCamera = _cam;
+            }
+
+            transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x,
+                _cam.transform.rotation.eulerAngles.y, transform.rotation.z));
         }
-        transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, _cam.transform.rotation.eulerAngles.y, transform.rotation.z));
     }
 }
