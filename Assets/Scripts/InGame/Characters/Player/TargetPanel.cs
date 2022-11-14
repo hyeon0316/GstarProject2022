@@ -43,11 +43,12 @@ public class TargetPanel : MonoBehaviour
     private IEnumerator UpdateTargetCo()
     {
         WaitForEndOfFrame delay = new WaitForEndOfFrame();
+        float distance = Mathf.Pow(DataManager.Instance.Player.SearchRadius, 2);
         Enemy target = _target.GetComponent<Enemy>();
         while (true)
         {
-            if (target.IsDead)
-            {
+            if (target.IsDead || (target.transform.position - DataManager.Instance.Player.transform.position).sqrMagnitude > distance) //적이 죽거나 일정이상 멀어졌을때
+            {   
                 _targetBox.SetActive(false);
                 break;
             }

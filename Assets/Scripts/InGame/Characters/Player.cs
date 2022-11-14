@@ -24,6 +24,8 @@ public abstract class Player : Creature
     [Header("적 탐색 범위")]
     [SerializeField] protected float _searchRadius;
 
+    public float SearchRadius => _searchRadius;
+
     [Header("오토모드일때 탐색 범위에 곱해지는 값")]
     [SerializeField] protected float _autoModeSearch;
 
