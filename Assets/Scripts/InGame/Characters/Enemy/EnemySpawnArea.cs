@@ -17,6 +17,15 @@ public class EnemySpawnArea : MonoBehaviour
     public string[] EnemyName;
     private BoxCollider _boxCollider;
 
+    
+    /// <summary>
+    /// 해당 스폰지점이 던전인지 아닌지
+    /// </summary>
+    [SerializeField] private bool _isDungeon;
+
+    private List<GameObject> _enemyList = new List<GameObject>();
+    
+
     private void Awake()
     {
         _boxCollider = GetComponent<BoxCollider>();
@@ -25,7 +34,8 @@ public class EnemySpawnArea : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        SpawnDicsEnemy();
+        if(!_isDungeon) 
+            SpawnDicsEnemy();
     }
     
     /// <summary>
@@ -43,6 +53,38 @@ public class EnemySpawnArea : MonoBehaviour
             }
         }
     }
+    
+    /// <summary>
+    /// 던전용 몹 생성
+    /// </summary>
+    public void SpawnDungeonEnemy()
+    {
+        foreach (var dic in _spawnEnemyDics)
+        {
+            for (int i = 0; i < _spawnEnemyDics[dic.Key]; i++)
+            {
+                GameObject enemyPrefab = ObjectPoolManager.Instance.GetObject(dic.Key);
+                _enemyList.Add(enemyPrefab);
+                Enemy enemy = enemyPrefab.GetComponent<Enemy>();
+                enemy.GetComponent<Enemy>().SpawnArea = _boxCollider;
+                //enemy.GetComponent<Enemy>().Stat.SetEnemyStat();
+                enemy.transform.position = RandomSpawnPos();
+            }
+        }
+    }
+
+    /// <summary>
+    /// 모든 적을 반환
+    /// </summary>
+    public void Init()
+    {
+        foreach (var enemy in _enemyList)
+        {
+            Enemy returnEnemy = enemy.GetComponent<Enemy>();
+            ObjectPoolManager.Instance.ReturnObject(returnEnemy.CurEnemyType, enemy);
+        }
+    }
+    
 
     /// <summary>
     /// 딕셔너리에 있는 적 종류 중 랜덤한 적을 스폰
