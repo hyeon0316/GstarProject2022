@@ -29,8 +29,10 @@ public class StoreUI : MonoBehaviour
 
     public void ButtonBuy()
     {
-        if (DataManager.Instance.Gold > BuyUI.BuyCount * BuyUI.Gold)
+        int result = BuyUI.BuyCount * BuyUI.Gold;
+        if (DataManager.Instance.Gold > result)
         {
+            DataManager.Instance.Gold -= result;
             inventory.Add(BuyUI.Item, BuyUI.BuyCount);
             BuyUI.ButtonCancel();
             Init();

@@ -1687,8 +1687,8 @@ MonoBehaviour:
   _dissolve: {fileID: 8371870971638337822}
   _hpbar: {fileID: 1905827912349013060}
   _name: "\uB3D9\uAD74 \uD574\uCDA9"
+  gold: 1000
   CurEnemyType: 11
-  _isAggressive: 0
   _attackPos: {fileID: 4817715575962662620}
 --- !u!65 &704953269789647945
 BoxCollider:

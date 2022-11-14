@@ -9,7 +9,7 @@ public class DungeonUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI Gold1;
     [SerializeField] private TextMeshProUGUI Gold2;
     [SerializeField] private TextMeshProUGUI Gold3;
-    [SerializeField] private EnemySpawnArea spawnArea;
+    private EnemySpawnArea spawnArea;
     private Transform _tr;
     public GameObject MapObj;
     
@@ -17,6 +17,7 @@ public class DungeonUI : MonoBehaviour
 
     private void Start()
     {
+        spawnArea = MapManager.Instance.DunArea;
         _tr = spawnArea.gameObject.transform;
     }
 

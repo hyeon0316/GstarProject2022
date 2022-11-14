@@ -23,7 +23,9 @@ public abstract class Enemy : Creature
     [SerializeField] protected HpbarController _hpbar;
 
     [SerializeField] private string _name;
-    
+
+    public int gold;
+
     /// <summary>
     /// 스폰 지점에서 나왔을때의 위치
     /// </summary>
@@ -311,6 +313,7 @@ public abstract class Enemy : Creature
         _animator.SetTrigger(Global.EnemyDeadTrigger);
         QuestManager.Instance.CheckEnemyQuest(CurEnemyType);
         DataManager.Instance.Player.DeleteTarget(transform);
+        DataManager.Instance.Gold += gold;
     }
 
     /// <summary>

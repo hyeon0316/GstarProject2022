@@ -6019,8 +6019,8 @@ MonoBehaviour:
   _dissolve: {fileID: 358205315225628133}
   _hpbar: {fileID: 3719756021471707263}
   _name: "\uACE0\uBE14\uB9B0 \uC804\uC0AC"
+  gold: 300
   CurEnemyType: 16
-  _isAggressive: 0
   _shortAttackArea: {fileID: 3527222834779777757}
   _attackCollider: {fileID: 6314126298980382096}
 --- !u!195 &6314126298134655476

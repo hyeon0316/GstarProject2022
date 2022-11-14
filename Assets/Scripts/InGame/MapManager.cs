@@ -8,7 +8,7 @@ public class MapManager : Singleton<MapManager>
     public Transform[] MapTransfom;
     public Transform[] EnemyTransfom;
     public GameObject dun;
-
+    public EnemySpawnArea DunArea;
     public NpcData TargetNpc { get; set; }
 
     public Transform GetNpcData(int _id)

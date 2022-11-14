@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14d080154dfa28942a95ad4ebadd9478, type: 3}
   m_Name: GoblinArcher
   m_EditorClassIdentifier: 
-  MaxHp: 100
-  Defense: 5
-  Dodge: 5
-  HitPercent: 100
+  MaxHp: 700
+  Defense: 500
+  Dodge: 150
+  HitPercent: 300
   ReduceDamage: 5
   MoveSpeed: 5
-  Attack: 30
+  Attack: 300

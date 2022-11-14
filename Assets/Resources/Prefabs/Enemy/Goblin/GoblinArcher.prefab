@@ -8341,8 +8341,8 @@ MonoBehaviour:
   _dissolve: {fileID: 3253584864013614747}
   _hpbar: {fileID: 6660576721954762141}
   _name: "\uACE0\uBE14\uB9B0 \uAD81\uC218"
+  gold: 300
   CurEnemyType: 17
-  _isAggressive: 0
   _attackPos: {fileID: 322555127152198764}
 --- !u!1 &7379108647807369885
 GameObject:

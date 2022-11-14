@@ -793,8 +793,8 @@ MonoBehaviour:
   _dissolve: {fileID: 5114559417783968056}
   _hpbar: {fileID: 2918396994774052614}
   _name: "\uAC80\uC740 \uACE8\uB818"
+  gold: 100
   CurEnemyType: 14
-  _isAggressive: 0
   _shortAttackArea: {fileID: 4747530407303869140}
   _attackCollider: {fileID: 3187980785814790563}
 --- !u!54 &7031741995507835054
