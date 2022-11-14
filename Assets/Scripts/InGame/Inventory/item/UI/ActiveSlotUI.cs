@@ -232,6 +232,7 @@ public class ActiveSlotUI : MonoBehaviour
     public void FadeInOut()
     {
         if(!PlayFade)
-            StartCoroutine("Fade");
+        { }
+           // StartCoroutine("Fade");
     }
 }

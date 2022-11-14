@@ -41,9 +41,9 @@ public class MapManager : Singleton<MapManager>
             case 12:
                 return EnemyTransfom[6];
             case 14:
-                return EnemyTransfom[6];
+                return EnemyTransfom[8];
             case 15:
-                return EnemyTransfom[6];
+                return EnemyTransfom[7];
         }
         return null;
     }
@@ -73,13 +73,13 @@ public class MapManager : Singleton<MapManager>
             case 10:
                 return MapTransfom[3];
             case 11:
-                return MapTransfom[9];
+                return MapTransfom[3];
             case 12:
                 return MapTransfom[4];
             case 13:
                 return MapTransfom[0];
             case 14:
-                return MapTransfom[4];
+                return MapTransfom[5];
             case 15:
                 return MapTransfom[4];
         }

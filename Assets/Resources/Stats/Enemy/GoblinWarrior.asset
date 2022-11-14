@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14d080154dfa28942a95ad4ebadd9478, type: 3}
   m_Name: GoblinWarrior
   m_EditorClassIdentifier: 
-  MaxHp: 700
-  Defense: 400
-  Dodge: 150
-  HitPercent: 300
+  MaxHp: 2000
+  Defense: 250
+  Dodge: 200
+  HitPercent: 400
   ReduceDamage: 5
   MoveSpeed: 5
-  Attack: 180
+  Attack: 550

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Spider 3
   m_EditorClassIdentifier: 
   MaxHp: 100
-  Defense: 5
+  Defense: 4
   Dodge: 5
   HitPercent: 100
   ReduceDamage: 5

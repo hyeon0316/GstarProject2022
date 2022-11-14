@@ -11,7 +11,7 @@ public class StoreUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DataManager.Instance.Gold = 1000000000;
+        DataManager.Instance.Gold = 10000;
         Init();
     }
     private void OnEnable()
@@ -32,7 +32,7 @@ public class StoreUI : MonoBehaviour
         int result = BuyUI.BuyCount * BuyUI.Gold;
         if (DataManager.Instance.Gold > result)
         {
-            DataManager.Instance.Gold -= result;
+            DataManager.Instance.SetGold(-result);
             inventory.Add(BuyUI.Item, BuyUI.BuyCount);
             BuyUI.ButtonCancel();
             Init();

@@ -310,7 +310,7 @@ public abstract class Enemy : Creature
         _animator.SetTrigger(Global.EnemyDeadTrigger);
         QuestManager.Instance.CheckEnemyQuest(CurEnemyType);
         DataManager.Instance.Player.DeleteTarget(transform);
-        DataManager.Instance.Gold += gold;
+        DataManager.Instance.SetGold(gold);
     }
 
     /// <summary>

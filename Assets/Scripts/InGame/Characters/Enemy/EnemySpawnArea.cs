@@ -69,9 +69,11 @@ public class EnemySpawnArea : MonoBehaviour
                 GameObject enemyPrefab = ObjectPoolManager.Instance.GetObject(dic.Key);
                 _enemyList.Add(enemyPrefab);
                 Enemy enemy = enemyPrefab.GetComponent<Enemy>();
-                enemy.GetComponent<Enemy>().SpawnArea = _boxCollider;
-                 enemy.GetComponent<Enemy>().Stat.SetEnemyStat(enemyStat[Difficulty]);
+                enemy.SpawnArea = _boxCollider;
+                enemy.Stat.SetEnemyStat(enemyStat[Difficulty]);
                 enemy.transform.position = RandomSpawnPos();
+                enemy.gold = enemy.gold * (Difficulty + 1);
+
             }
         }
     }

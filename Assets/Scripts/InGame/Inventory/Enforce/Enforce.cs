@@ -12,17 +12,17 @@ public class Enforce : MonoBehaviour
     
     public ItemData[] _slots;
 
-    private const int ATTACK = 3;
-    private const int HIT = 3;
+    private const int ATTACK = 6;
+    private const int HIT = 2;
     private const int SKILLD = 2;
     private const int ALLD = 2;
 
-    private const int DEF = 4;
-    private const int DODGE = 3;
+    private const int DEF = 2;
+    private const int DODGE = 2;
     private const int REDEF = 1;
 
-    private const int HP = 50;
-    private const int MP = 50;
+    private const int HP = 10;
+    private const int MP = 10;
     private const int POSTION = 100;
     private const int REHP = 5;
     private const int REMP = 3;

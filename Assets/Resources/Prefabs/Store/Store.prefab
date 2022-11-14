@@ -504,7 +504,7 @@ MonoBehaviour:
   Item: {fileID: 11400000, guid: 81666626c8fb8984f9af7300f50ee4c0, type: 2}
   BuyUI: {fileID: 6942092662808186501}
   HavePortion: 0
-  Gold: 1000
+  Gold: 80
 --- !u!114 &6206293018745366658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1069,7 +1069,7 @@ MonoBehaviour:
   Item: {fileID: 11400000, guid: aa56a7266be8c9e4baeaa981de87f784, type: 2}
   BuyUI: {fileID: 6942092662808186501}
   HavePortion: 0
-  Gold: 50
+  Gold: 200
 --- !u!114 &8864385153040097732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4577,7 +4577,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0.00018590869}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6942092662739554194

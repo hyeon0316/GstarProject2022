@@ -8,11 +8,13 @@ public class MapContentUI : MonoBehaviour
     [SerializeField] public TextMeshProUGUI Name;
     [SerializeField] private GameObject[] _obj;
     [SerializeField] private TextMeshProUGUI[] _text;
+    [SerializeField] private GameObject obj;
     public EnemySpawnArea[] enemyarea { get; set; }
     private EnemySpawnArea _selectArea;
     [SerializeField] private TextMeshProUGUI ContentText;
     public int SpwanIndex { get; set; }
     public Transform SpawnTransform { get; set; }
+    
     // Start is called before the first frame update
     // Update is called once per frame
     public void Awake()
@@ -58,17 +60,19 @@ public class MapContentUI : MonoBehaviour
 
     public void BtngoWalk()
     {
-        DataManager.Instance.Player.IsQuest = false;
-        QuestManager.Instance.SetAniQuest(false);
+        DataManager.Instance.Player.CancelAutoHunt();
         DataManager.Instance.Player.IsQuest = false;
         QuestManager.Instance.SetAniQuest(false);
         DataManager.Instance.Player.SetAutoQuest(_selectArea.gameObject.transform);
+        obj.SetActive(false);
     }
     public void BtngoSpwan()
     {
-        DataManager.Instance.Player.IsQuest = false;
-        QuestManager.Instance.SetAniQuest(false);
-        _selectArea = enemyarea[1];
-        SetContentText();
+        DataManager.Instance.Player.CancelAutoHunt();
+        Transform _tr;
+        _tr = MapManager.Instance.GetSpwan(SpwanIndex);
+        DataManager.Instance.Player.UseTeleport(_tr);
+        obj.SetActive(false);
+        Invoke("BtngoWalk", 2f);
     }
 }

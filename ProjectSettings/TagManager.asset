@@ -43,3 +43,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Gold
+    uniqueID: 3679806977
+    locked: 0

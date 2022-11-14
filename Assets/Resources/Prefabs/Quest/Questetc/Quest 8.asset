@@ -15,13 +15,13 @@ MonoBehaviour:
   state: 0
   type: 0
   ID: 8
-  Name: "\uBCA8\uB77C\uC640 \uB300\uD654\uD558\uAE30"
-  Content: "\uB9C8\uC744\uC5D0\uC788\uB294 \uBCA8\uB77C\uC640 \uB300\uD654\uD558\uAE30"
-  Target: "\uBCA8\uB77C"
+  Name: "\uB8E8\uCE58\uC640 \uB300\uD654\uD558\uAE30"
+  Content: "\uB9C8\uC744\uC5D0\uC788\uB294 \uB8E8\uCE58\uC640 \uB300\uD654\uD558\uAE30"
+  Target: "\uB8E8\uCE58"
   collectObjectives:
     EnemyID: 
     amount: 1
-    NpcId: 1
+    NpcId: 5
   rewards:
   - ItemReward: {fileID: 11400000, guid: 86f5a64d5cba4b843a0f4680f28c9ec4, type: 2}
     ItemRewardCount: 1
