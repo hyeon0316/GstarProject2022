@@ -34,6 +34,7 @@ public static class Global
     public const string EnemyDeadTrigger = "Dead";
     public const string EnemyStateInteger = "State";
     public const string EnemyAttackInteger = "Attack";
+    public const string EnemyNextPattern = "NextPattern";
 
     public const int GolemMaxComboAttack = 3;
 

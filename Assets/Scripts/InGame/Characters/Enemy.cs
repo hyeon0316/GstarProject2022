@@ -39,7 +39,7 @@ public abstract class Enemy : Creature
     /// </summary>
     private bool _isGoBack; 
     
-    public PoolType _curEnemyType;
+    public PoolType CurEnemyType;
     
     /// <summary>
     /// 플레이어를 추적해야 하는지에 대한 변수
@@ -67,10 +67,9 @@ public abstract class Enemy : Creature
 
     protected override void Init()
     {
-        Debug.Log("이닛");
         base.Init();
         
-        this.gameObject.layer = LayerMask.NameToLayer("Enemy");
+        _dissolve.gameObject.layer = LayerMask.NameToLayer("Enemy");
         _isFollow = false;
         _isAttack = false;
         _isGoBack = false;
@@ -87,6 +86,24 @@ public abstract class Enemy : Creature
     }
 
     private void Update()
+    {
+        WaitPattern();
+    }
+    
+
+    private void FixedUpdate()
+    {
+        if (!IsDead)
+        {
+            DoPattern();
+            FreezeVelocity();
+        }
+    }
+
+    /// <summary>
+    /// 공격받기 전 대기모드 상태의 패턴
+    /// </summary>
+    private void WaitPattern()
     {
         if (!IsDead)
         {
@@ -114,15 +131,6 @@ public abstract class Enemy : Creature
         }
     }
 
-    private void FixedUpdate()
-    {
-        if (!IsDead)
-        {
-            DoPattern();
-            FreezeVelocity();
-        }
-    }
-
     /// <summary>
     /// 스폰될때 모습을 서서히 나타냄
     /// </summary>
@@ -141,7 +149,7 @@ public abstract class Enemy : Creature
         {
             case 1:
                 _nav.isStopped = true;
-                SetAnimations(0, 0, 0, 0,0,0);
+                SetAnimations(0, 0, 0, 0,0,0,0);
                 Invoke("SetRandomMove", Random.Range(3, 7));
                 break;
             case 2:
@@ -154,7 +162,7 @@ public abstract class Enemy : Creature
     {
         _nav.isStopped = false;
         _nav.SetDestination(RandomBackPos());
-        SetAnimations(3, 1, 1, 1,1,1);
+        SetAnimations(3, 1, 1, 1,1,1,1);
         while (true)
         {
             if (IsDead)
@@ -163,7 +171,7 @@ public abstract class Enemy : Creature
             if (_nav.remainingDistance <= 0.1f)
             {
                 Invoke("SetRandomMove", 1);
-                SetAnimations(0, 0, 0, 0,0,0);
+                SetAnimations(0, 0, 0, 0,0,0,0);
                 break;
             }
             yield return null;
@@ -206,18 +214,19 @@ public abstract class Enemy : Creature
             
             if (_nav.remainingDistance <= 0.5f) //도착했을때
             {
-                if(_curEnemyType is PoolType.ForestGolem1 or PoolType.ForestGolem2 or  PoolType.ForestGolem3 or PoolType.SpecialGolem)
+                if(CurEnemyType is PoolType.ForestGolem1 or PoolType.ForestGolem2 or  PoolType.ForestGolem3 or PoolType.SpecialGolem)
                     _animator.SetInteger(Global.EnemyAttackInteger, -1);
 
-                SetAnimations(0, 0, 0, 0,0,0);
+                SetAnimations(0, 0, 0, 0,0,0,0);
                 _isWait = true;
                 _nav.isStopped = true;
                 _isGoBack = false;
-                Stat.Hp = Stat.MaxHp; //복귀시 체력 전체회복
+                if(CurEnemyType != PoolType.Boss)
+                    Stat.Hp = Stat.MaxHp; //복귀시 체력 전체회복
                 break;
             }
 
-            SetAnimations(3, 0, 1, 1,1,1);
+            SetAnimations(3, 0, 1, 1,1,1,1);
             yield return null;
         }
     }
@@ -240,13 +249,13 @@ public abstract class Enemy : Creature
                 transform.LookAt(_targets[0]);
                 if (_attackRadius < Vector3.Distance(transform.position, _targets[0].position)) //타겟이 공격사거리 밖에있을때
                 {
-                    SetAnimations(1, 1, 1, 1,1,1);
+                    SetAnimations(1, 1, 1, 1,1,1,1);
                     _nav.isStopped = false;
                     _nav.SetDestination(_targets[0].transform.position);
                 }
                 else
                 {
-                    SetAnimations(0, 0, 0, 0,0,0);
+                    SetAnimations(0, 0, 0, 0,0,0,0);
                     _nav.isStopped = true;
                     Attack();
                 }
@@ -284,6 +293,7 @@ public abstract class Enemy : Creature
         
         _hpbar.UpdateHpBar(Stat.Hp);
     }
+    
 
     protected override void Die()
     {
@@ -293,16 +303,13 @@ public abstract class Enemy : Creature
         if (_nav.enabled)
         {
             _nav.isStopped = true;
-            _nav.enabled = false;
         }
 
+        _dissolve.gameObject.layer = LayerMask.NameToLayer("Enemy");
         SpawnArea.GetComponent<EnemySpawnArea>().SpawnRandomEnemy();
         _animator.SetTrigger(Global.EnemyDeadTrigger);
-        QuestManager.Instance.CheckEnemyQuest(_curEnemyType);
-        if (DataManager.Instance.Player.Targets.Contains(this.transform))
-        {
-            DataManager.Instance.Player.Targets.Remove(this.transform);
-        }
+        QuestManager.Instance.CheckEnemyQuest(CurEnemyType);
+        DataManager.Instance.Player.DeleteTarget(transform);
     }
 
     /// <summary>
@@ -310,7 +317,8 @@ public abstract class Enemy : Creature
     /// </summary>
     private void DisableEnemy()
     {
-        ObjectPoolManager.Instance.ReturnObject(_curEnemyType,this.gameObject);
+        _nav.enabled = false;
+        ObjectPoolManager.Instance.ReturnObject(CurEnemyType,this.gameObject);
     }
 
     public void ActiveDeadEffect()
@@ -322,9 +330,9 @@ public abstract class Enemy : Creature
     /// <summary>
     /// 각 적 타입마다 애니메이션 셋팅
     /// </summary>
-    private void SetAnimations(int spider, int frightFly, int forestGolem, int specialGolem, int goblinWarrior, int goblinArcher)
+    private void SetAnimations(int spider, int frightFly, int forestGolem, int specialGolem, int goblinWarrior, int goblinArcher, int boss)
     {
-        switch (_curEnemyType)
+        switch (CurEnemyType)
         {
             case PoolType.Spider:
                 _animator.SetInteger(Global.EnemyStateInteger,spider);
@@ -345,7 +353,10 @@ public abstract class Enemy : Creature
                 _animator.SetInteger(Global.EnemyStateInteger,goblinWarrior);
                 break;
             case PoolType.GoblinArcher:
-                _animator.SetInteger(Global.EnemyStateInteger,goblinWarrior);
+                _animator.SetInteger(Global.EnemyStateInteger,goblinArcher);
+                break;
+            case PoolType.Boss:
+                _animator.SetInteger(Global.EnemyStateInteger,boss);
                 break;
         }
     }

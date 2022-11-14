@@ -472,7 +472,7 @@ GameObject:
   - component: {fileID: 358205315225628138}
   - component: {fileID: 360429161530001486}
   - component: {fileID: 358205315225628133}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Chr_Dungeon_GoblinWarriorMale_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6019,7 +6019,7 @@ MonoBehaviour:
   _dissolve: {fileID: 358205315225628133}
   _hpbar: {fileID: 3719756021471707263}
   _name: "\uACE0\uBE14\uB9B0 \uC804\uC0AC"
-  _curEnemyType: 16
+  CurEnemyType: 16
   _shortAttackArea: {fileID: 3527222834779777757}
   _attackCollider: {fileID: 6314126298980382096}
 --- !u!195 &6314126298134655476
@@ -8825,7 +8825,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6314126297751261178}
   - component: {fileID: 6314126297751261173}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: TextFloating
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8876,7 +8876,7 @@ GameObject:
   - component: {fileID: 6314126298980382097}
   - component: {fileID: 6314126298980382096}
   - component: {fileID: 3527222834779777757}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: AttackCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8923,7 +8923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c196318bbb5bf4983005703ecc5ea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _curPoolType: 20
+  _curPoolType: 21
 --- !u!1001 &3452857457161020727
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8945,6 +8945,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMin.x
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327452664930989, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2050327452723782985, guid: c3b014ff09d730748a56964788a89fda,
         type: 3}
@@ -9063,7 +9068,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2050327452723782989, guid: c3b014ff09d730748a56964788a89fda,
         type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327452723782989, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454248010693, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454371709872, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2050327454423428683, guid: c3b014ff09d730748a56964788a89fda,
@@ -9075,6 +9095,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454423428684, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454544034429, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454690440182, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454698389593, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3b014ff09d730748a56964788a89fda, type: 3}

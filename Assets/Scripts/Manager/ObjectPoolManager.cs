@@ -28,6 +28,8 @@ public enum PoolType
     GoblinArcher,
     GoblinArcherArrow,
     Goblin,
+    Boss,
+    BossRock,
     None
 }
 
@@ -59,6 +61,8 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         Init(PoolType.GoblinArcher, 20);
         Init(PoolType.GoblinArcherArrow, 20);
         Init(PoolType.Goblin, 5);
+        Init(PoolType.Boss, 1);
+        Init(PoolType.BossRock, 1);
     }
 
     /// <summary>

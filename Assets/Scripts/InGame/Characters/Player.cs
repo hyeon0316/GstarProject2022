@@ -38,6 +38,8 @@ public abstract class Player : Creature
 
     [SerializeField] private Fade _fade;
 
+    [SerializeField] private TargetPanel _targetPanel;
+
     /// <summary>
     /// 다음단계의 기본공격이 가능한지에 대한 bool값
     /// </summary>
@@ -243,6 +245,7 @@ public abstract class Player : Creature
                     {
                         _targets.Clear();
                         _targets.Add(hit.transform);
+                        _targetPanel.SetTargetBox(_targets[0]);
                         Debug.Log(hit.transform.gameObject.name);
                     }
                 }
@@ -260,6 +263,7 @@ public abstract class Player : Creature
                         {
                             _targets.Clear();
                             _targets.Add(hit.transform);
+                            _targetPanel.SetTargetBox(_targets[0]);
                             Debug.Log(hit.transform.gameObject.name);
                         }
                     }
@@ -500,9 +504,15 @@ public abstract class Player : Creature
 
     protected override void Die()
     {
-        //todo: 플레이어가 죽었을때 처리(페이드인 아웃 ->마을 부활, 체력 회복 등)
         base.Die();
         _animator.SetTrigger(Global.DeadTrigger);
+        //todo: 플레이어가 죽었을때 처리 애니메이션 뒤에 넣어주는게 좋을듯(페이드인 아웃 ->마을 부활, 체력 회복 등)
+    }
+
+    public void DeleteTarget(Transform target)
+    {
+        if (_targets.Contains(target))
+            _targets.Remove(target);
     }
     
     /// <summary>

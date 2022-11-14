@@ -38,7 +38,7 @@ public class BulletRainMissile : SkillAttack
                            (distanceFromEnd * Random.Range(-1.0f, 1.0f) * _target.up) + // Y (위, 아래 전체)
                            (distanceFromEnd * Random.Range(0.8f, 1.0f) * _target.forward); // Z (앞 쪽만)
         
-        _bezierPoints[3] = _target.position; // 도착 지점
+        _bezierPoints[3] = _target.position + new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)); // 도착 지점
 
         transform.position = _bezierPoints[0];
     }

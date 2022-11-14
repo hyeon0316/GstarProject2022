@@ -124,7 +124,6 @@ public abstract class Creature : MonoBehaviour
   {
       _floatingText.ClearText();
       IsDead = true;
-      this.gameObject.layer = LayerMask.NameToLayer("Dead");
   }
 
 }

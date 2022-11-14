@@ -18,6 +18,9 @@ public class LongAttack : MonoBehaviour
             case PoolType.GoblinArcherArrow:
                 projectile.GetComponent<GoblinArcherArrow>().SetStat(stat);
                 break;
+            case PoolType.BossRock:
+                projectile.GetComponent<Rock>().SetStat(stat);
+                break;
         }
     }
 }

@@ -16,7 +16,7 @@ public class CameraRotate : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     private int _touchID;
 
     private bool _isDragging;
-    
+
     private void FixedUpdate()
     {
         if (Input.touchCount > 0)
@@ -51,7 +51,6 @@ public class CameraRotate : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     
     public void OnPointerDown(PointerEventData eventData)
     {
-        //OnDrag(eventData);
         _touchID = _myTouch.fingerId;
         _isPlayerTouchingPanel = true;
     }

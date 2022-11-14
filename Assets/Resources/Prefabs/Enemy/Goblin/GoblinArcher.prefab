@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6571863021184394690}
   - component: {fileID: 5818865632818515310}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: TextFloating
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8341,7 +8341,7 @@ MonoBehaviour:
   _dissolve: {fileID: 3253584864013614747}
   _hpbar: {fileID: 6660576721954762141}
   _name: "\uACE0\uBE14\uB9B0 \uAD81\uC218"
-  _curEnemyType: 17
+  CurEnemyType: 17
   _attackPos: {fileID: 322555127152198764}
 --- !u!1 &7379108647807369885
 GameObject:
@@ -8783,7 +8783,7 @@ GameObject:
   - component: {fileID: 7381429167240325929}
   - component: {fileID: 7461162225109770495}
   - component: {fileID: 3253584864013614747}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Chr_Dungeon_GoblinWarriorFemale_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8930,6 +8930,11 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2050327452664930989, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2050327452723782985, guid: c3b014ff09d730748a56964788a89fda,
         type: 3}
       propertyPath: m_Pivot.x
@@ -9047,7 +9052,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2050327452723782989, guid: c3b014ff09d730748a56964788a89fda,
         type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327452723782989, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454248010693, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454371709872, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2050327454423428683, guid: c3b014ff09d730748a56964788a89fda,
@@ -9059,6 +9079,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454423428684, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454544034429, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454690440182, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454698389593, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3b014ff09d730748a56964788a89fda, type: 3}

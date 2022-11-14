@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1397698792}
   - component: {fileID: 1397698793}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: TextFloating
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1687,7 +1687,7 @@ MonoBehaviour:
   _dissolve: {fileID: 8371870971638337822}
   _hpbar: {fileID: 1905827912349013060}
   _name: "\uB3D9\uAD74 \uD574\uCDA9"
-  _curEnemyType: 11
+  CurEnemyType: 11
   _attackPos: {fileID: 4817715575962662620}
 --- !u!65 &704953269789647945
 BoxCollider:
@@ -2630,7 +2630,7 @@ GameObject:
   - component: {fileID: 4513350362091110}
   - component: {fileID: 137713385450466654}
   - component: {fileID: 8371870971638337822}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Polygonal Frightfly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2767,7 +2767,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3977212842452078532}
   - component: {fileID: 4817715575962662620}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: AttackPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2822,6 +2822,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMin.x
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327452664930989, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2050327452723782985, guid: c3b014ff09d730748a56964788a89fda,
         type: 3}
@@ -2940,7 +2945,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2050327452723782989, guid: c3b014ff09d730748a56964788a89fda,
         type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327452723782989, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454248010693, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454371709872, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2050327454423428683, guid: c3b014ff09d730748a56964788a89fda,
@@ -2952,6 +2972,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454423428684, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454544034429, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454690440182, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454698389593, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3b014ff09d730748a56964788a89fda, type: 3}
