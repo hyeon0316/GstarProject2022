@@ -48,9 +48,6 @@ public abstract class Enemy : Creature
     
     protected bool _isAttack;
 
-    [Header("선제 공격 몬스터 인지 아닌지")]
-    [SerializeField] private bool _isAggressive;
-
     /// <summary>
     /// 플레이어가 공격하지 않았을때 상태
     /// </summary>
@@ -73,26 +70,15 @@ public abstract class Enemy : Creature
         base.Init();
         
         this.gameObject.layer = LayerMask.NameToLayer("Enemy"); 
-        _isFollow = _isAggressive;
+        _isFollow = false;
         _isAttack = false;
         _isGoBack = false;
         _isOutArea = false;
-        _isWait = !_isAggressive;
+        _isWait = true;
         
         _hpbar.SetEnemyUI(Stat.MaxHp, _name);
-
-        if (_isAggressive)
-        {
-            Invoke("DelayNavOn", 1);
-        }
     }
 
-    private void DelayNavOn()
-    {
-        _nav.enabled = true;
-        _nav.isStopped = true;
-    }
-    
     protected virtual void Start()
     {
         _targets.Add(DataManager.Instance.Player.transform);
