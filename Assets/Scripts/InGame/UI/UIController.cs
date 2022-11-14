@@ -36,5 +36,8 @@ public class UIController : MonoBehaviour
         }
         _mapWindow.SetActive(true);
     }
-
+    public void ActiveDungeon()
+    {
+        MapManager.Instance.dun.SetActive(true);
+    }
 }

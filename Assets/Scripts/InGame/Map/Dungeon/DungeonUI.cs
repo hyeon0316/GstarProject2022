@@ -51,4 +51,8 @@ public class DungeonUI : MonoBehaviour
        DataManager.Instance.Player.UseTeleport(_tr);
         MapObj.SetActive(false);
     }
+    public void BtnExit()
+    {
+        MapObj.SetActive(false);
+    }
 }

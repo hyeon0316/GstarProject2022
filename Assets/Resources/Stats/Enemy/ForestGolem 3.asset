@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14d080154dfa28942a95ad4ebadd9478, type: 3}
   m_Name: ForestGolem 3
   m_EditorClassIdentifier: 
-  MaxHp: 100
-  Defense: 5
-  Dodge: 5
+  MaxHp: 400
+  Defense: 70
+  Dodge: 80
   HitPercent: 100
   ReduceDamage: 5
   MoveSpeed: 5
-  Attack: 30
+  Attack: 120
