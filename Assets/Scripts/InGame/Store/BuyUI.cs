@@ -23,10 +23,13 @@ public class BuyUI : MonoBehaviour
         Item = _slot.Item;
         if (Item is PortionItemData uItem)
         {
-            Debug.Log("dd");
             canPortion = DataManager.Instance.Player.Stat.MaxPostion - _slot.HavePortion;
             if (canPortion <= 0)
                 canPortion = 0;
+        }
+        else
+        {
+            canPortion = 1999;
         }
         MaxCount.text = canPortion.ToString();
         Icon.sprite = _slot.Icon.sprite;

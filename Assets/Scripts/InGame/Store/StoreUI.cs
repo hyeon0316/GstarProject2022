@@ -11,8 +11,17 @@ public class StoreUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DataManager.Instance.Gold = 1000000000;
+        Init();
+    }
+    private void OnEnable()
+    {
+        Init();
+    }
+    public void Init()
+    {
         BuyUI.gameObject.SetActive(false);
-        for (int i=0;i<_slots.Length; i++)
+        for (int i = 0; i < _slots.Length; i++)
         {
             _slots[i].SetCount(inventory.HavePostion());
         }
@@ -20,7 +29,12 @@ public class StoreUI : MonoBehaviour
 
     public void ButtonBuy()
     {
-        inventory.Add(BuyUI.Item, BuyUI.BuyCount);
+        if (DataManager.Instance.Gold > BuyUI.BuyCount * BuyUI.Gold)
+        {
+            inventory.Add(BuyUI.Item, BuyUI.BuyCount);
+            BuyUI.ButtonCancel();
+            Init();
+        }
     }
     public void ButtonExit()
     {

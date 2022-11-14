@@ -12062,8 +12062,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6595814375386801852}
-  m_LocalRotation: {x: -0.10002223, y: -0.0000000033508891, z: 0.000000002096734,
-    w: 0.9949852}
+  m_LocalRotation: {x: -0.10002221, y: 0.00000002213445, z: -0.000000013850075, w: 0.9949852}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -12788,7 +12787,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7124411518503348933}
-  m_LocalRotation: {x: 0.22745691, y: -0.000000029275304, z: 0.00000000683811, w: 0.9737882}
+  m_LocalRotation: {x: 0.22745693, y: 0.000000029275304, z: -0.0000000068381105, w: 0.9737882}
   m_LocalPosition: {x: 0, y: 3.58, z: -4}
   m_LocalScale: {x: 1, y: 0.9999998, z: 0.9999998}
   m_ConstrainProportionsScale: 0
@@ -17142,6 +17141,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6336ad2f943e9e8439f079547597c3eb, type: 3}
+--- !u!114 &1149885835036212715 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4147299921516840029, guid: 6336ad2f943e9e8439f079547597c3eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 3925762686990842294}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1784eff0984548749bc0d3d107bfbf94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1471042680610002709 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2454793690877587107, guid: 6336ad2f943e9e8439f079547597c3eb,
@@ -17164,7 +17175,7 @@ PrefabInstance:
     - target: {fileID: 1279181220, guid: 01fa5d1bf87297940bb783a154e292f3, type: 3}
       propertyPath: inventory
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1149885835036212715}
     - target: {fileID: 6942092660845023936, guid: 01fa5d1bf87297940bb783a154e292f3,
         type: 3}
       propertyPath: m_AnchorMax.x

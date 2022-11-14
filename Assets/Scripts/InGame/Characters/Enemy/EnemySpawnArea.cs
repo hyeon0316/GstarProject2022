@@ -11,14 +11,18 @@ public class SpawnEnemyDic : SerializableDictionary<PoolType, int>{}
 
 public class EnemySpawnArea : MonoBehaviour
 {
-    [Header("스폰 될 적 종류와 수")] 
+    [Header("스폰 될 적 종류와 수")]
     [SerializeField] private SpawnEnemyDic _spawnEnemyDics;
+    [SerializeField] private EnemyStatData[] enemyStat;
     public string MapName;
     public string[] EnemyName;
     private BoxCollider _boxCollider;
+    public int Difficulty{ get; set; }
 
-    
-   
+
+
+
+
     /// [Header("해당 스폰지점이 던전인지 아닌지")]
     [SerializeField] private bool _isDungeon;
 
@@ -66,7 +70,7 @@ public class EnemySpawnArea : MonoBehaviour
                 _enemyList.Add(enemyPrefab);
                 Enemy enemy = enemyPrefab.GetComponent<Enemy>();
                 enemy.GetComponent<Enemy>().SpawnArea = _boxCollider;
-                //enemy.GetComponent<Enemy>().Stat.SetEnemyStat();
+                 enemy.GetComponent<Enemy>().Stat.SetEnemyStat(enemyStat[Difficulty]);
                 enemy.transform.position = RandomSpawnPos();
             }
         }

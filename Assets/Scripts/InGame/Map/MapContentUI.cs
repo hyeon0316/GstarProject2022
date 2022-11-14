@@ -12,6 +12,7 @@ public class MapContentUI : MonoBehaviour
     private EnemySpawnArea _selectArea;
     [SerializeField] private TextMeshProUGUI ContentText;
     public int SpwanIndex { get; set; }
+    public Transform SpawnTransform { get; set; }
     // Start is called before the first frame update
     // Update is called once per frame
     public void Awake()
@@ -40,7 +41,7 @@ public class MapContentUI : MonoBehaviour
         string str = "";
         for(int i=0;i<_selectArea.EnemyName.Length;i++)
         {
-            str = i+"."+_selectArea.EnemyName[i] + "\n";
+            str += i+1 +"."+_selectArea.EnemyName[i] + "\n";
         }
         ContentText.text = str;
     }
@@ -58,10 +59,15 @@ public class MapContentUI : MonoBehaviour
     public void BtngoWalk()
     {
         DataManager.Instance.Player.IsQuest = false;
+        QuestManager.Instance.SetAniQuest(false);
+        DataManager.Instance.Player.IsQuest = false;
+        QuestManager.Instance.SetAniQuest(false);
         DataManager.Instance.Player.SetAutoQuest(_selectArea.gameObject.transform);
     }
     public void BtngoSpwan()
     {
+        DataManager.Instance.Player.IsQuest = false;
+        QuestManager.Instance.SetAniQuest(false);
         _selectArea = enemyarea[1];
         SetContentText();
     }

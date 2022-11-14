@@ -47,6 +47,7 @@ public class Stat
         Attack = playerStatData.Attack;
         AllDamge = playerStatData.AllDamage;
         SkillDamage = playerStatData.SkillDamage;
+        MaxPostion = playerStatData.MaxPostion;
     }
 
     /// <summary>

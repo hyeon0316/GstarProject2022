@@ -22,7 +22,6 @@ public class StoreSlotUI : MonoBehaviour
     }
     public void SetCount(int _portionCount)
     {
-        
         HavePortion = _portionCount;
         MaxCount.text = _portionCount + "/" + DataManager.Instance.Player.Stat.MaxPostion;
     }

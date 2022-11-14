@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHp: 10000
   MaxMp: 50
-  MaxPostion: 0
+  MaxPostion: 1000
   RecoveryHp: 10
   RecoveryMp: 0
   Defense: 0

@@ -7,6 +7,7 @@ public class MapManager : Singleton<MapManager>
     public Transform[] NpcTransForm;
     public Transform[] MapTransfom;
     public Transform[] EnemyTransfom;
+    public GameObject dun;
 
     public NpcData TargetNpc { get; set; }
 
@@ -23,7 +24,6 @@ public class MapManager : Singleton<MapManager>
     }
     public Transform GetEnemySpwan(int _id)
     {
-        Debug.Log(_id);
         switch (_id)
         {
             case 4:
@@ -53,35 +53,35 @@ public class MapManager : Singleton<MapManager>
         switch (_id)
         {
             case 1:
-                return EnemyTransfom[0];
+                return MapTransfom[0];
             case 2:
-                return EnemyTransfom[0];
+                return MapTransfom[0];
             case 3:
-                return EnemyTransfom[0];
+                return MapTransfom[0];
             case 4:
-                return EnemyTransfom[1];
+                return MapTransfom[1];
             case 5:
-                return EnemyTransfom[1];
+                return MapTransfom[1];
             case 6:
-                return EnemyTransfom[2];
+                return MapTransfom[2];
             case 7:
-                return EnemyTransfom[2];
+                return MapTransfom[2];
             case 8:
-                return EnemyTransfom[0];
+                return MapTransfom[0];
             case 9:
-                return EnemyTransfom[3];
+                return MapTransfom[3];
             case 10:
-                return EnemyTransfom[3];
+                return MapTransfom[3];
             case 11:
-                return EnemyTransfom[9];
+                return MapTransfom[9];
             case 12:
-                return EnemyTransfom[4];
+                return MapTransfom[4];
             case 13:
-                return EnemyTransfom[0];
+                return MapTransfom[0];
             case 14:
-                return EnemyTransfom[4];
+                return MapTransfom[4];
             case 15:
-                return EnemyTransfom[4];
+                return MapTransfom[4];
         }
         return null;
     }

@@ -9,6 +9,7 @@ public class QuestInGameUI : MonoBehaviour
     public TextMeshProUGUI NeedObject;
     public GameObject Fin;
     private int questNum;
+    private int questIndex;
     private bool questType;
     public Animator questing;
     // Start is called before the first frame update
@@ -26,6 +27,7 @@ public class QuestInGameUI : MonoBehaviour
         if (data.type == QuestType.FindNpc)
         {
             questNum = data.collectObjectives.NpcId;
+            questIndex = data.ID;
             NeedObject.text = data.Target + " 찾아가기 ";
             questType = true;
         }
@@ -33,6 +35,7 @@ public class QuestInGameUI : MonoBehaviour
         {
 
             questNum = data.ID;
+            questIndex = data.ID;
             NeedObject.text = data.Target + " 처치(" + data.collectObjectives.currentAmount + "/" + data.collectObjectives.amount + ")";
             questType = false;
         }
@@ -46,20 +49,21 @@ public class QuestInGameUI : MonoBehaviour
     }
     public void OnMoveSpawn()
     {
-
+       
+        DataManager.Instance.Player.CancelAutoHunt();
         Transform _tr;
         if (questType)
         {
-            _tr = MapManager.Instance.GetSpwan(questNum);
-           // DataManager.Instance.Player.SetAutoQuest(_tr);
+            _tr = MapManager.Instance.GetSpwan(questIndex);
+           DataManager.Instance.Player.UseTeleport(_tr);
         }
         else
         {
-            _tr = MapManager.Instance.GetSpwan(questNum);
-           // DataManager.Instance.Player.SetAutoQuest(_tr);
+            _tr = MapManager.Instance.GetSpwan(questIndex);
+            DataManager.Instance.Player.UseTeleport(_tr);
         }
-
-        OnClickQuest();
+        Debug.Log(_tr.gameObject.name);
+        Invoke("OnClickQuest", 2f);
     }
     public void OnClickQuest()
     {
