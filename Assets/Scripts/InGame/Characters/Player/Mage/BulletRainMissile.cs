@@ -22,7 +22,7 @@ public class BulletRainMissile : SkillAttack
         _curTime = 0;
         _speed = speed;
         _target = endTr;
-        _endTime = Random.Range(0.8f, 1.0f); //도착 시간을 랜덤으로 설정
+        _endTime = Random.Range(0.6f, 0.8f); //도착 시간을 랜덤으로 설정
 
         _bezierPoints[0] = startTr.position; //시작 지점
 
@@ -38,7 +38,7 @@ public class BulletRainMissile : SkillAttack
                            (distanceFromEnd * Random.Range(-1.0f, 1.0f) * _target.up) + // Y (위, 아래 전체)
                            (distanceFromEnd * Random.Range(0.8f, 1.0f) * _target.forward); // Z (앞 쪽만)
         
-        _bezierPoints[3] = _target.position + new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)); // 도착 지점
+        //_bezierPoints[3] = _target.position + new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)); // 도착 지점
 
         transform.position = _bezierPoints[0];
     }
@@ -47,18 +47,34 @@ public class BulletRainMissile : SkillAttack
     {
         if (_curTime > _endTime)
         {
-            _target.transform.GetComponent<Creature>().TryGetDamage(DataManager.Instance.Player.Stat, this);
-            CreateMissileEffect();
-            DisableObject();
+            StartCoroutine(MoveToTarget());
+            
             return;
         }
 
         _curTime += Time.deltaTime * _speed;
 
         transform.position = new Vector3(
-            CubicBezierCurve(_bezierPoints[0].x, _bezierPoints[1].x, _bezierPoints[2].x, _bezierPoints[3].x),
-            CubicBezierCurve(_bezierPoints[0].y, _bezierPoints[1].y, _bezierPoints[2].y, _bezierPoints[3].y),
-            CubicBezierCurve(_bezierPoints[0].z, _bezierPoints[1].z, _bezierPoints[2].z, _bezierPoints[3].z));
+            CubicBezierCurve(_bezierPoints[0].x, _bezierPoints[1].x, _bezierPoints[2].x),
+            CubicBezierCurve(_bezierPoints[0].y, _bezierPoints[1].y, _bezierPoints[2].y),
+            CubicBezierCurve(_bezierPoints[0].z, _bezierPoints[1].z, _bezierPoints[2].z));
+    }
+
+    private IEnumerator MoveToTarget()
+    {
+        while (true)
+        {
+            if ((transform.position - _target.position).sqrMagnitude < 1)
+            {
+                _target.transform.GetComponent<Creature>().TryGetDamage(DataManager.Instance.Player.Stat, this);
+                CreateMissileEffect();
+                DisableObject();
+                break;
+            }
+
+            transform.position = Vector3.Lerp(transform.position, _target.transform.position, Time.deltaTime);
+            yield return null;
+        }
     }
 
     /// <summary>
@@ -69,19 +85,16 @@ public class BulletRainMissile : SkillAttack
     /// <param name="c">도착 위치까지 얼마나 꺾일 지 정하는 위치</param>
     /// <param name="d">도착 위치</param>
     /// <returns></returns>
-    private float CubicBezierCurve(float a, float b, float c, float d)
+    private float CubicBezierCurve(float a, float b, float c)
     {
         float time = _curTime / _endTime;
 
         //방정식 표현
         float ab = Mathf.Lerp(a, b, time);
         float bc = Mathf.Lerp(b, c, time);
-        float cd = Mathf.Lerp(c, d, time);
 
-        float abbc = Mathf.Lerp(ab, bc, time);
-        float bccd = Mathf.Lerp(bc, cd, time);
 
-        return Mathf.Lerp(abbc, bccd, time);
+        return Mathf.Lerp(ab, bc, time);
     }
 
     private void CreateMissileEffect()
