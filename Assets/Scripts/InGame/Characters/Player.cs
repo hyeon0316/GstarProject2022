@@ -188,6 +188,7 @@ public abstract class Player : Creature
 
     private void Teleport()
     {
+        CancelAutoHunt();
         transform.parent.position = _movePos.position;
     }
     
