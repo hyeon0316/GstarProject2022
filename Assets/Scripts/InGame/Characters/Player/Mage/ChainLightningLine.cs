@@ -80,8 +80,7 @@ public class ChainLightningLine : SkillAttack
 
     private IEnumerator TakeLightningDamage()
     {
-        int count = 0;
-        Stat playerStat = DataManager.Instance.Player.Stat;
+        WaitForSeconds delay = new WaitForSeconds(1f);
         while (_timer < _keepTime)
         {
             List<Transform> tempTargets = new List<Transform>();
@@ -98,7 +97,7 @@ public class ChainLightningLine : SkillAttack
                 }
             }
 
-            yield return new WaitForSeconds(0.5f);
+            yield return delay;
         }
     }
 
