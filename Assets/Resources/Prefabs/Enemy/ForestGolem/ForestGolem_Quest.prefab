@@ -584,13 +584,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdc2e085ab61bea41b43fcfb32646049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hpbar: {fileID: 88569413033132156}
   _attackRadius: 4.5
   _floatingText: {fileID: 6365570017788743136}
   _enemyStatData: {fileID: 11400000, guid: 48c210d586e17e44286ee46e09fc6c25, type: 2}
   _backDistance: 4
   _dissolve: {fileID: 92350409642906580}
-  _hpbar: {fileID: 88569413033132156}
-  _name: "\uC6B0\uB450\uBA38\uB9AC \uACE8\uB818"
+  _name: "\uC800\uC8FC\uBC1B \uACE8\uB818"
   gold: 5000
   CurEnemyType: 14
   _shortAttackArea: {fileID: 5776265260556135110}

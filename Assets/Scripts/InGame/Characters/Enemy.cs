@@ -19,9 +19,6 @@ public abstract class Enemy : Creature
     [Header("스폰이나 사망때 사용 될 디졸브")]
     [SerializeField] private Dissolve _dissolve;
     
-    [Header("자신의 체력 바")]
-    [SerializeField] protected HpbarController _hpbar;
-
     [SerializeField] private string _name;
 
     public int gold;
@@ -78,7 +75,7 @@ public abstract class Enemy : Creature
         _isOutArea = false;
         _isWait = true;
         
-        _hpbar.SetEnemyUI(Stat.MaxHp, _name);
+        _hpbar.SetHpBar(Stat.MaxHp, _name);
     }
 
     protected virtual void Start()

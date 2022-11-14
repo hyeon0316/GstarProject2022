@@ -42,6 +42,9 @@ public abstract class Player : Creature
 
     [SerializeField] private TargetPanel _targetPanel;
 
+    [SerializeField] private GameObject _deadCanvas;
+    [SerializeField] private GameObject _respawnButton;
+
     /// <summary>
     /// 다음단계의 기본공격이 가능한지에 대한 bool값
     /// </summary>
@@ -55,7 +58,7 @@ public abstract class Player : Creature
     /// <summary>
     /// 어떤 코루틴을 stop할것인지 알기 위한 할당 변수
     /// </summary>
-    protected IEnumerator _moveCo;
+    private IEnumerator _moveCo;
 
     protected delegate void UseActionType();
     protected Queue<UseActionType> _autoSkill = new Queue<UseActionType>();
@@ -82,6 +85,7 @@ public abstract class Player : Creature
     {
         Stat.SetPlayerStat(_playerStatData);
         _nav.enabled = false; //충돌이 활성화 되기 때문에 꺼줌, 사용할때만 활성화
+        _hpbar.SetHpBar(Stat.MaxHp, $"{Stat.Hp} / {Stat.MaxHp}");
     }
 
     protected virtual void Update()
@@ -180,6 +184,17 @@ public abstract class Player : Creature
     }
 
     /// <summary>
+    /// 마을 귀환 버튼
+    /// </summary>
+    public void UseTownTeleport()
+    {
+        _targets.Clear();
+        CancelAutoHunt();
+        CancelAutoQuest();
+        UseTeleport(MapManager.Instance.GetSpwan(1));
+    }
+
+    /// <summary>
     /// 순간이동
     /// </summary>
     public void UseTeleport(Transform movePos)
@@ -192,6 +207,12 @@ public abstract class Player : Creature
     {
         CancelAutoHunt();
         transform.position = _movePos.position;
+    }
+    
+    private void Teleport(Transform movePos)
+    {
+        CancelAutoHunt();
+        transform.position = movePos.position;
     }
     
     /// <summary>
@@ -519,12 +540,48 @@ public abstract class Player : Creature
         }
     }
 
+    public override void TryGetDamage(Stat stat, Attack attack)
+    {
+        base.TryGetDamage(stat, attack);
+        _hpbar.UpdateHpBar(Stat.Hp, $"{Stat.Hp} / {Stat.MaxHp}");
+    }
+
     protected override void Die()
     {
         base.Die();
         _animator.SetTrigger(Global.DeadTrigger);
-        //todo: 플레이어가 죽었을때 처리 애니메이션 뒤에 넣어주는게 좋을듯(페이드인 아웃 ->마을 부활, 체력 회복 등)
+        _fade.FadeIn();
+        _deadCanvas.SetActive(true);
+        Invoke("SetRespawnButton", 1.5f);
     }
+
+    private void SetRespawnButton()
+    {
+        _respawnButton.SetActive(true);
+    }
+
+    /// <summary>
+    /// 사망 이후 리스폰 처리
+    /// </summary>
+    public void Respawn()
+    {
+        Init();
+    }
+
+    protected override void Init()
+    {
+        base.Init();
+        _targets.Clear();
+        this.gameObject.layer = LayerMask.NameToLayer("Player");
+        _respawnButton.SetActive(false);
+        _deadCanvas.SetActive(false);
+        MapManager.Instance.DunArea.Init();//던전에서 죽었을 경우
+        Teleport(MapManager.Instance.GetSpwan(1));
+        _hpbar.UpdateHpBar(Stat.Hp, $"{Stat.Hp} / {Stat.MaxHp}");
+        _fade.FadeOut();
+        
+    }
+
 
     public void DeleteTarget(Transform target)
     {

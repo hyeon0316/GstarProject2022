@@ -13,6 +13,8 @@ public class UIController : MonoBehaviour
 
     [SerializeField] private GameObject _mapWindow;
 
+    [SerializeField] private GameObject _townTeleportWindow;
+
     public void ActiveInven()
     {
         _inventoryWindow.SetActive(true);

@@ -38,20 +38,24 @@ public class Fade : MonoBehaviour
         action();
         yield return null;
         FadeOut();
-        yield return delay;
-        _image.raycastTarget = false;
     }
     
     
-    private void FadeIn()
+    public void FadeIn()
     {
         _image.DOFade(1, _doTime);
         _image.raycastTarget = true;
     }
 
-    private void FadeOut()
+    public void FadeOut()
     {
         _image.DOFade(0, _doTime);
+        Invoke("DelayActiveRaycast", _doTime);
+    }
+
+    private void DelayActiveRaycast()
+    {
+        _image.raycastTarget = false;
     }
     
 }

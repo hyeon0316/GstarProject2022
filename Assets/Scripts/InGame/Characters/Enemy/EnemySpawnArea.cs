@@ -86,6 +86,7 @@ public class EnemySpawnArea : MonoBehaviour
             Enemy returnEnemy = enemy.GetComponent<Enemy>();
             ObjectPoolManager.Instance.ReturnObject(returnEnemy.CurEnemyType, enemy);
         }
+        _enemyList.Clear();
     }
     
 

@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+
+/// <summary>
+/// 모든 HpBar에 관련한 컨트롤러
+/// </summary>
 public class HpbarController : MonoBehaviour
 {
     [SerializeField] private Slider slider;
     [SerializeField] private TextMeshProUGUI Name;
 
+    [Header("화면에 고정 될 것인지 캐릭터 위에 띄울 것인지 결정")]
     [SerializeField] private bool _isFixed;
 
     private Camera _cam;
@@ -17,14 +22,14 @@ public class HpbarController : MonoBehaviour
         gameObject.GetComponent<Canvas>().worldCamera = _cam;
     }
 
-    public void SetEnemyUI(int maxHp, string name)
+    public void SetHpBar(int maxHp, string name)
     {
         slider.maxValue = maxHp;
         slider.value = slider.maxValue;
         Name.text = name;
     }
     
-    public void SetEnemyUI(int maxHp)
+    public void SetHpBar(int maxHp)
     {
         slider.maxValue = maxHp;
         slider.value = slider.maxValue;
@@ -33,6 +38,15 @@ public class HpbarController : MonoBehaviour
     public void UpdateHpBar(int amount)
     {
         slider.value = amount;
+    }
+
+    /// <summary>
+    /// 플레이어 체력바 업데이트
+    /// </summary>
+    public void UpdateHpBar(int amount, string hpText)
+    {
+        slider.value = amount;
+        Name.text = hpText;
     }
 
     public void ShowHpBar()

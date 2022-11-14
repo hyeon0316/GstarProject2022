@@ -19,6 +19,9 @@ public abstract class Creature : MonoBehaviour
   protected Animator _animator;
   protected NavMeshAgent _nav;
   
+  [Header("자신의 체력 바")]
+  [SerializeField] protected HpbarController _hpbar;
+  
   [Header("기본공격 범위")]
   [SerializeField] protected float _attackRadius; //실제 멈춰서서 공격하는 범위
   
@@ -29,7 +32,7 @@ public abstract class Creature : MonoBehaviour
 
   public List<Transform> Targets => _targets;
 
-  public bool IsDead { get; private set; }
+  public bool IsDead { get; protected set; }
   
   protected Rigidbody _rigid;
   
@@ -48,8 +51,6 @@ public abstract class Creature : MonoBehaviour
   {
       IsDead = false;
       Stat.Hp = Stat.MaxHp;
-      //Debug.Log(Stat.Hp);
-      //todo: 그외 초기 설정값 적용
   }
 
   public void Heal(int amount)

@@ -27,7 +27,7 @@ public class Boss : Enemy
     {
         base.Start();
         _shortAttackArea.SetStat(Stat);
-        _bossHpBar.SetEnemyUI(Stat.MaxHp);
+        _bossHpBar.SetHpBar(Stat.MaxHp);
     }
 
     protected override void Attack()
