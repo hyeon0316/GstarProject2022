@@ -80,6 +80,12 @@ public abstract class Enemy : Creature
         _isWait = !_isAggressive;
         
         _hpbar.SetEnemyUI(Stat.MaxHp, _name);
+
+        if (_isAggressive)
+        {
+            _nav.enabled = true;
+            _nav.isStopped = true;
+        }
     }
 
     
