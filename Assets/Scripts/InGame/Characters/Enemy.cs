@@ -83,11 +83,15 @@ public abstract class Enemy : Creature
 
         if (_isAggressive)
         {
-            _nav.enabled = true;
-            _nav.isStopped = true;
+            Invoke("DelayNavOn", 1);
         }
     }
 
+    private void DelayNavOn()
+    {
+        _nav.enabled = true;
+        _nav.isStopped = true;
+    }
     
     protected virtual void Start()
     {

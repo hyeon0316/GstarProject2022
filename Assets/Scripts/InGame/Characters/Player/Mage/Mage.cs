@@ -79,8 +79,7 @@ public class Mage : Player
         {
             GameObject spike = ObjectPoolManager.Instance.GetObject(PoolType.VolcanicSpike);
             spike.transform.position =
-                new Vector3(_targets[0].position.x, _targets[0].transform.position.y + spike.transform.position.y,
-                    _targets[0].position.z);
+                new Vector3(_targets[0].position.x, _targets[0].transform.position.y, _targets[0].position.z);
             spike.GetComponent<SpikeAttack>().DelayDisable();
         }
     }
@@ -196,8 +195,7 @@ public class Mage : Player
         {
             var windAttack = ObjectPoolManager.Instance.GetObject(PoolType.WindAttackEffect);
             windAttack.transform.position =
-                new Vector3(_targets[0].position.x, _targets[0].transform.position.y,
-                    _targets[0].position.z);
+                new Vector3(_targets[0].position.x, _targets[0].transform.position.y, _targets[0].position.z);
             windAttack.GetComponent<WindAttack>().DelayDisable();
         }
     }
@@ -232,8 +230,7 @@ public class Mage : Player
         if (_targets.Count != 0)
         {
             var effect = ObjectPoolManager.Instance.GetObject(PoolType.WideAreaBarrage);
-            effect.transform.position =
-                new Vector3(_targets[0].position.x, _targets[0].transform.position.y + effect.transform.position.y,
+            effect.transform.position = new Vector3(_targets[0].position.x, _targets[0].transform.position.y,
                     _targets[0].position.z);
             effect.GetComponent<WideAreaBarrageEffect>().DelayDisable();
         }
