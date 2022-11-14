@@ -72,7 +72,7 @@ public abstract class Enemy : Creature
     {
         base.Init();
         
-        _dissolve.gameObject.layer = LayerMask.NameToLayer("Enemy");
+        this.gameObject.layer = LayerMask.NameToLayer("Enemy"); 
         _isFollow = _isAggressive;
         _isAttack = false;
         _isGoBack = false;
@@ -290,8 +290,8 @@ public abstract class Enemy : Creature
 
     public override void TryGetDamage(Stat stat, Attack attack)
     {
-        base.TryGetDamage(stat, attack);
         _hpbar.ShowHpBar();
+        base.TryGetDamage(stat, attack);
         if (!_isFollow && !_isGoBack) //피격 당했을 때, 되돌아 가는 중이 아닐 때 추적 시작
         {
             _nav.enabled = true;
@@ -306,8 +306,8 @@ public abstract class Enemy : Creature
 
     protected override void Die()
     {
-        base.Die();
         _hpbar.CloseHpBar();
+        base.Die();
         CancelInvoke("SetRandomMove");
         if (_nav.enabled)
         {

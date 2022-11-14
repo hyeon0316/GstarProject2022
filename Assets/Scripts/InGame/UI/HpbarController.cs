@@ -23,6 +23,12 @@ public class HpbarController : MonoBehaviour
         slider.value = slider.maxValue;
         Name.text = name;
     }
+    
+    public void SetEnemyUI(int maxHp)
+    {
+        slider.maxValue = maxHp;
+        slider.value = slider.maxValue;
+    }
 
     public void UpdateHpBar(int amount)
     {
@@ -37,8 +43,7 @@ public class HpbarController : MonoBehaviour
 
     public void CloseHpBar()
     {
-        if (gameObject.activeSelf)
-            gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
     
     public void SetNpc(string name)

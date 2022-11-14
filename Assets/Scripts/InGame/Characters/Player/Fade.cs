@@ -21,20 +21,24 @@ public class Fade : MonoBehaviour
         _image.raycastTarget = false;
     }
 
-    public void FadeInOut()
+    public void FadeInOut(Action action)
     {
-        StartCoroutine(FadeCo());
+        StartCoroutine(FadeCo(action));
     }
 
     /// <summary>
     /// 장면 전환시 사용
     /// </summary>
-    private IEnumerator FadeCo()
+    private IEnumerator FadeCo(Action action)
     {
+        WaitForSeconds delay = new WaitForSeconds(_doTime);
+        
         FadeIn();
-        yield return new WaitForSeconds(_doTime);
+        yield return delay;
+        action();
+        yield return null;
         FadeOut();
-        yield return new WaitForSeconds(_doTime);
+        yield return delay;
         _image.raycastTarget = false;
     }
     

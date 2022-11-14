@@ -57,16 +57,17 @@ public abstract class Player : Creature
 
     protected delegate void UseActionType();
     protected Queue<UseActionType> _autoSkill = new Queue<UseActionType>();
-    
-    /// <summary>
-    /// 오토 모드일때 스킬들의 사용 간격을 나누기 위한 변수
-    /// </summary>
-    protected bool _isNextPattern;
+
 
     /// <summary>
     /// 퀘스트를 자동 진행중인지 확인
     /// </summary>
     public bool IsQuest { get; set; }
+
+    /// <summary>
+    /// 순간이동 좌표
+    /// </summary>
+    private Transform _movePos;
     
     protected override void Awake()
     {
@@ -175,6 +176,20 @@ public abstract class Player : Creature
     {
         _animator.SetFloat(Global.MoveBlend, blend);
     }
+
+    /// <summary>
+    /// 순간이동
+    /// </summary>
+    public void UseTeleport(Transform movePos)
+    {
+        _movePos = movePos;
+        _fade.FadeInOut(Teleport);
+    }
+
+    private void Teleport()
+    {
+        transform.parent.position = _movePos.position;
+    }
     
     /// <summary>
     /// 버튼을 눌렀을때 실행될 자동사냥 모드 셋팅
@@ -186,7 +201,6 @@ public abstract class Player : Creature
             IsAttack = false;
             _searchRadius *= _autoModeSearch;
             _isAutoHunt = true;
-            _isNextPattern = true;
             ActiveAutoCancelButton(true);
             StartCoroutine(AutoHuntCo());
         }
