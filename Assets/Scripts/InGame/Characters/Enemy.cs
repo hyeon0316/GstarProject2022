@@ -290,7 +290,9 @@ public abstract class Enemy : Creature
 
     public override void TryGetDamage(Stat stat, Attack attack)
     {
-        _hpbar.ShowHpBar();
+        if(!IsDead)
+            _hpbar.ShowHpBar();
+        
         base.TryGetDamage(stat, attack);
         if (!_isFollow && !_isGoBack) //피격 당했을 때, 되돌아 가는 중이 아닐 때 추적 시작
         {

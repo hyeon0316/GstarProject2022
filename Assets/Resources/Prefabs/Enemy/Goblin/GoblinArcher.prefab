@@ -8342,6 +8342,7 @@ MonoBehaviour:
   _hpbar: {fileID: 6660576721954762141}
   _name: "\uACE0\uBE14\uB9B0 \uAD81\uC218"
   CurEnemyType: 17
+  _isAggressive: 0
   _attackPos: {fileID: 322555127152198764}
 --- !u!1 &7379108647807369885
 GameObject:
@@ -9094,6 +9095,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454698389591, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_text
+      value: "\uACE0\uBE14\uB9B0 \uAD81\uC218"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454698389591, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454698389591, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2050327454698389593, guid: c3b014ff09d730748a56964788a89fda,
         type: 3}

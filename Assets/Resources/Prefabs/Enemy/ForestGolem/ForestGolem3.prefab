@@ -794,6 +794,7 @@ MonoBehaviour:
   _hpbar: {fileID: 2918396994774052614}
   _name: "\uAC80\uC740 \uACE8\uB818"
   CurEnemyType: 14
+  _isAggressive: 0
   _shortAttackArea: {fileID: 4747530407303869140}
   _attackCollider: {fileID: 3187980785814790563}
 --- !u!54 &7031741995507835054
@@ -1920,6 +1921,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454698389591, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454698389591, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 2050327454698389593, guid: c3b014ff09d730748a56964788a89fda,
         type: 3}

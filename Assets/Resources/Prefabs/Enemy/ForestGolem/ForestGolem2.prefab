@@ -592,6 +592,7 @@ MonoBehaviour:
   _hpbar: {fileID: 5650170313839728253}
   _name: "\uD30C\uB780 \uACE8\uB818"
   CurEnemyType: 13
+  _isAggressive: 0
   _shortAttackArea: {fileID: 6740750013352063671}
   _attackCollider: {fileID: 7614900765694103575}
 --- !u!54 &1592519062727725031
@@ -1898,6 +1899,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454698389591, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_text
+      value: "\uD30C\uB780 \uACE8\uB818"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454698389591, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454698389591, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 2050327454698389593, guid: c3b014ff09d730748a56964788a89fda,
         type: 3}

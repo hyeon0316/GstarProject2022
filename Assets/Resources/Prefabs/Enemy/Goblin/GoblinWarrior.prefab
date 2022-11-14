@@ -6020,6 +6020,7 @@ MonoBehaviour:
   _hpbar: {fileID: 3719756021471707263}
   _name: "\uACE0\uBE14\uB9B0 \uC804\uC0AC"
   CurEnemyType: 16
+  _isAggressive: 0
   _shortAttackArea: {fileID: 3527222834779777757}
   _attackCollider: {fileID: 6314126298980382096}
 --- !u!195 &6314126298134655476
@@ -9110,6 +9111,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454698389591, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050327454698389591, guid: c3b014ff09d730748a56964788a89fda,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2050327454698389593, guid: c3b014ff09d730748a56964788a89fda,
         type: 3}

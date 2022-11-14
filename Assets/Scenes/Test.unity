@@ -520,7 +520,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 16375
+    m_Bits: 147447
   m_RenderingLayerMask: 1
   m_Lightmapping: 1
   m_LightShadowCasterMode: 0
@@ -648,12 +648,12 @@ PrefabInstance:
     - target: {fileID: 7993376667652896707, guid: 56324c19582cf5b46857e220e636d3fd,
         type: 3}
       propertyPath: _spawnEnemyDics.m_keys.Array.data[0]
-      value: 20
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 7993376667652896707, guid: 56324c19582cf5b46857e220e636d3fd,
         type: 3}
       propertyPath: _spawnEnemyDics.m_keys.Array.data[1]
-      value: 10
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7993376667652896707, guid: 56324c19582cf5b46857e220e636d3fd,
         type: 3}
@@ -663,7 +663,7 @@ PrefabInstance:
     - target: {fileID: 7993376667652896707, guid: 56324c19582cf5b46857e220e636d3fd,
         type: 3}
       propertyPath: _spawnEnemyDics.m_values.Array.data[1]
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7993376667652896708, guid: 56324c19582cf5b46857e220e636d3fd,
         type: 3}
