@@ -13,7 +13,7 @@ public class PortionItem : CountableItem, IUsableItem
 
     public bool Use()
     {
-        DataManager.Instance.Player.Stat.Hp += PortionItemData.Value;
+        DataManager.Instance.Player.Heal(PortionItemData.Value);
         Amount--;
 
         return true;
