@@ -32,6 +32,11 @@ public class ChainLightningLine : SkillAttack
     private int _animationPingPongDirection = 1;
 
     private bool _isMany; //타겟이 2명이상일때
+
+    /// <summary>
+    /// 체인 라이트닝을 이미 사용중인지
+    /// </summary>
+    private bool _isUsed;
     
     private void Awake()
     {
@@ -80,24 +85,30 @@ public class ChainLightningLine : SkillAttack
 
     private IEnumerator TakeLightningDamage()
     {
-        WaitForSeconds delay = new WaitForSeconds(1f);
-        while (_timer < _keepTime)
+        if (!_isUsed)
         {
-            List<Transform> tempTargets = new List<Transform>();
-            foreach (var t in _chainTargets) //깊은복사, foreach로 탐색 중 target이 사라졌을때 오류발생에 대한 방지
+            _isUsed = true;
+            WaitForSeconds delay = new WaitForSeconds(1f);
+            while (_timer < _keepTime)
             {
-                tempTargets.Add(t);
-            }
-            
-            foreach (var target in tempTargets)
-            {
-                if (target.TryGetComponent(out Creature enemy))
+                List<Transform> tempTargets = new List<Transform>();
+                foreach (var t in _chainTargets) //깊은복사, foreach로 탐색 중 target이 사라졌을때 오류발생에 대한 방지
                 {
-                    enemy.TryGetDamage(DataManager.Instance.Player.Stat, this);
+                    tempTargets.Add(t);
                 }
+
+                foreach (var target in tempTargets)
+                {
+                    if (target.TryGetComponent(out Creature enemy))
+                    {
+                        enemy.TryGetDamage(DataManager.Instance.Player.Stat, this);
+                    }
+                }
+
+                yield return delay;
             }
 
-            yield return delay;
+            _isUsed = false;
         }
     }
 
