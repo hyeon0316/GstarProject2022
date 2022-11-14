@@ -85,6 +85,7 @@ public class ChainLightningLine : SkillAttack
 
     private IEnumerator TakeLightningDamage()
     {
+        Debug.Log("tstsdgdwsg");
         if (!_isUsed)
         {
             _isUsed = true;
