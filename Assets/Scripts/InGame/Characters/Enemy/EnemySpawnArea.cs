@@ -18,9 +18,8 @@ public class EnemySpawnArea : MonoBehaviour
     private BoxCollider _boxCollider;
 
     
-    /// <summary>
-    /// 해당 스폰지점이 던전인지 아닌지
-    /// </summary>
+   
+    /// [Header("해당 스폰지점이 던전인지 아닌지")]
     [SerializeField] private bool _isDungeon;
 
     private List<GameObject> _enemyList = new List<GameObject>();

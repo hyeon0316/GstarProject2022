@@ -48,6 +48,9 @@ public abstract class Enemy : Creature
     
     protected bool _isAttack;
 
+    [Header("선제 공격 몬스터 인지 아닌지")]
+    [SerializeField] private bool _isAggressive;
+
     /// <summary>
     /// 플레이어가 공격하지 않았을때 상태
     /// </summary>
@@ -70,7 +73,7 @@ public abstract class Enemy : Creature
         base.Init();
         
         _dissolve.gameObject.layer = LayerMask.NameToLayer("Enemy");
-        _isFollow = false;
+        _isFollow = _isAggressive;
         _isAttack = false;
         _isGoBack = false;
         _isOutArea = false;
