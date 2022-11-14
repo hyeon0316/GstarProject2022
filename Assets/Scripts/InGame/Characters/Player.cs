@@ -85,7 +85,7 @@ public abstract class Player : Creature
     {
         Stat.SetPlayerStat(_playerStatData);
         _nav.enabled = false; //충돌이 활성화 되기 때문에 꺼줌, 사용할때만 활성화
-        _hpbar.SetHpBar(Stat.MaxHp, $"{Stat.Hp} / {Stat.MaxHp}");
+        UpdateHpBar();
     }
 
     protected virtual void Update()
@@ -543,7 +543,7 @@ public abstract class Player : Creature
     public override void TryGetDamage(Stat stat, Attack attack)
     {
         base.TryGetDamage(stat, attack);
-        _hpbar.UpdateHpBar(Stat.Hp, $"{Stat.Hp} / {Stat.MaxHp}");
+        UpdateHpBar();
     }
 
     protected override void Die()
@@ -577,9 +577,14 @@ public abstract class Player : Creature
         _deadCanvas.SetActive(false);
         MapManager.Instance.DunArea.Init();//던전에서 죽었을 경우
         Teleport(MapManager.Instance.GetSpwan(1));
-        _hpbar.UpdateHpBar(Stat.Hp, $"{Stat.Hp} / {Stat.MaxHp}");
+        UpdateHpBar();
         _fade.FadeOut();
         
+    }
+
+    public void UpdateHpBar()
+    {
+        _hpbar.UpdateHpBar(Stat.Hp, $"{Stat.Hp} / {Stat.MaxHp}");
     }
 
 

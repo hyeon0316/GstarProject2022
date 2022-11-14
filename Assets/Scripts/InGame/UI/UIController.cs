@@ -29,6 +29,11 @@ public class UIController : MonoBehaviour
         _storeWindow.SetActive(true);
     }
 
+    public void ActiveTownTeleportWindow(bool isActive)
+    {
+        _townTeleportWindow.SetActive(isActive);
+    }
+
     public void ActiveMap()
     {
         if (_mapWindow == null)
