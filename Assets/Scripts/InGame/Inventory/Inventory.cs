@@ -31,12 +31,13 @@ public class Inventory : MonoBehaviour
 
     public int USESTARTINDEX = 90;
     public int _useSlotindex;
-
+    [SerializeField] private UsePortion usePortion; 
     private int _activeSlotNum;
     public GameObject InvenUI;
     public GameObject StatUI;
     public EnforceUI enforceUI;
     public GameObject Inven;
+    private int portionIndex;
     public void ButtonEnforce()
     {
         if (enforceUI.gameObject.activeSelf)
@@ -220,6 +221,11 @@ public class Inventory : MonoBehaviour
                         CountableItem ci = _items[index] as CountableItem;
                         amount = ci.AddAmountAndGetExcess(amount);
 
+                        if (_items[index] is PortionItem _portion)
+                        {
+                            portionIndex = index;
+                            usePortion.SetPortion(_portion.Amount);
+                        }
                         UpdateSlot(index);
                     }
                 }
@@ -245,7 +251,11 @@ public class Inventory : MonoBehaviour
 
                         // 남은 개수 계산
                         amount = (amount > ciData.MaxAmount) ? (amount - ciData.MaxAmount) : 0;
-
+                        if(_items[index] is PortionItem _portion)
+                        {
+                            portionIndex = index;
+                            usePortion.SetPortion(_portion.Amount);
+                        }
                         UpdateSlot(index);
                     }
                 }
@@ -324,9 +334,13 @@ public class Inventory : MonoBehaviour
         {
             // 아이템 사용
             bool succeeded = uItem.Use();
-                
+            
             if (succeeded)
             {
+                if (_items[index] is CountableItem ciData)
+                {
+                    usePortion.SetPortion(ciData.Amount);
+                }
                 UpdateSlot(index);
             }
         }
@@ -368,6 +382,7 @@ public class Inventory : MonoBehaviour
         DataManager.Instance.Player.Stat.MaxPostion += _stat.MaxPostion;
         DataManager.Instance.Player.Stat.RecoveryHp += _stat.RecoveryHp;
         DataManager.Instance.Player.Stat.RecoveryMp += _stat.RecoveryMp;
+        DataManager.Instance.Player.UpdateHpBar();
 
     }
     public void UnEquPlayerStat(ItemStat _stat)
@@ -387,6 +402,7 @@ public class Inventory : MonoBehaviour
         DataManager.Instance.Player.Stat.MaxPostion += _stat.MaxPostion;
         DataManager.Instance.Player.Stat.RecoveryHp += _stat.RecoveryHp;
         DataManager.Instance.Player.Stat.RecoveryMp += _stat.RecoveryMp;
+        DataManager.Instance.Player.UpdateHpBar();
 
     }
     public void Equip(Item _item)
@@ -549,5 +565,11 @@ public class Inventory : MonoBehaviour
     public void ExitButton()
     {
         Inven.gameObject.SetActive(false);
+    }
+
+    public void UsePortion()
+    {
+        Use(portionIndex);
+        Debug.Log(portionIndex);
     }
 }

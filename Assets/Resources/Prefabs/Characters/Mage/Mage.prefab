@@ -2120,7 +2120,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 53d1c180cec97204f9851789a8e59ca4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 772cb8912e383894b9f430542bd19abc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2196,7 +2196,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2500
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -13293,6 +13293,7 @@ GameObject:
   - component: {fileID: 5851110606581162353}
   - component: {fileID: 7058136203355130664}
   - component: {fileID: 8261498974371486535}
+  - component: {fileID: 5759362956144888925}
   m_Layer: 5
   m_Name: PotionBtn
   m_TagString: Untagged
@@ -13404,21 +13405,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5376167565593434837}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: TouchContinue
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 5376167565593434837}
-        m_TargetAssemblyTypeName: Mage, Assembly-CSharp
-        m_MethodName: UseSpikeAttack
+      - m_Target: {fileID: 5759362956144888925}
+        m_TargetAssemblyTypeName: UsePortion, Assembly-CSharp
+        m_MethodName: BtnUse
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13443,6 +13432,20 @@ MonoBehaviour:
   _imageFill: {fileID: 3497806733130991168}
   _coolDownMax: 5
   _coolDownText: {fileID: 7970394258769955954}
+--- !u!114 &5759362956144888925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6187366304747111406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d9850c9392d3ff48a2360ba2e52b1e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  count: {fileID: 7310219716446252606}
+  inventory: {fileID: 1149885835036212715}
 --- !u!1 &6209503951777126266
 GameObject:
   m_ObjectHideFlags: 0
@@ -13980,7 +13983,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6595814375386801852}
-  m_LocalRotation: {x: -0.10002223, y: -0.0000000033508891, z: 0.000000002096734,
+  m_LocalRotation: {x: -0.10002223, y: 0.0000000033508891, z: -0.000000002096734,
     w: 0.9949852}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -15078,7 +15081,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7124411518503348933}
-  m_LocalRotation: {x: 0.22745691, y: -0.000000029275304, z: 0.00000000683811, w: 0.9737882}
+  m_LocalRotation: {x: 0.22745691, y: 0.000000029275304, z: -0.00000000683811, w: 0.9737882}
   m_LocalPosition: {x: 0, y: 3.58, z: -4}
   m_LocalScale: {x: 1, y: 0.9999998, z: 0.9999998}
   m_ConstrainProportionsScale: 0
@@ -19668,6 +19671,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -75
       objectReference: {fileID: 0}
+    - target: {fileID: 4147299921516840029, guid: 6336ad2f943e9e8439f079547597c3eb,
+        type: 3}
+      propertyPath: usePortion
+      value: 
+      objectReference: {fileID: 5759362956144888925}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6336ad2f943e9e8439f079547597c3eb, type: 3}
 --- !u!114 &1149885835036212715 stripped

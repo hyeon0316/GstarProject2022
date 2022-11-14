@@ -9,7 +9,7 @@ public class SkillAttack : Attack
 
     public override int CalculateDamage(Stat stat)
     {
-        int resultDamage = (int)(stat.Attack * (_percentDamage * stat.SkillDamage * stat.AllDamge) / Mathf.Pow(100,3) * Random.Range(0.8f, 1f));
+        int resultDamage = (int)(stat.Attack * (_percentDamage * stat.SkillDamage * stat.AllDamge) / Mathf.Pow(100,3) * Random.Range(0.8f, 1.1f));
         // 최종 데미지 = 플레이어공격력 * _percentDamage * 스킬데미지% * 모든데미지% * 80%~100%
         
         return resultDamage;

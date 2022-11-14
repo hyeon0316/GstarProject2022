@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14d080154dfa28942a95ad4ebadd9478, type: 3}
   m_Name: SpecialGolem
   m_EditorClassIdentifier: 
-  MaxHp: 5000
+  MaxHp: 15000
   Defense: 400
   Dodge: 380
   HitPercent: 600
   ReduceDamage: 5
   MoveSpeed: 5
-  Attack: 700
+  Attack: 1200

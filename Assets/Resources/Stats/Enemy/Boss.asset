@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14d080154dfa28942a95ad4ebadd9478, type: 3}
   m_Name: Boss
   m_EditorClassIdentifier: 
-  MaxHp: 10000
+  MaxHp: 50000
   Defense: 600
   Dodge: 600
   HitPercent: 600
-  ReduceDamage: 5
+  ReduceDamage: 150
   MoveSpeed: 5
-  Attack: 1000
+  Attack: 2000
