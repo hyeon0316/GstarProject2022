@@ -7,19 +7,26 @@ public class UsePortion : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI count;
     [SerializeField] private Inventory inventory;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    
+    [Header("포션 쿨타임")] [SerializeField] protected CoolDown _potionCoolDown;
+
+    public CoolDown PotionCoolDown => _potionCoolDown;
+   
 
     public void SetPortion(int i)
     {
         count.text = i.ToString();
     }
 
-    public void BtnUse()
+    public void UsePotion()
     {
-        inventory.UsePortion();
+        if (!_potionCoolDown.IsCoolDown)
+        {
+            if (count.text != "0")
+            {
+                inventory.UsePortion();
+                _potionCoolDown.SetCoolDown();
+            }
+        }
     }
 }

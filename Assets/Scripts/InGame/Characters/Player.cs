@@ -20,6 +20,8 @@ public abstract class Player : Creature
     
     [Header("스킬 쿨타임 모음")]
     [SerializeField] protected CoolDown[] _skiilCoolDown;
+
+    [SerializeField] protected UsePortion _portion;
     
     [Header("적 탐색 범위")]
     [SerializeField] protected float _searchRadius;
@@ -85,7 +87,7 @@ public abstract class Player : Creature
     {
         Stat.SetPlayerStat(_playerStatData);
         _nav.enabled = false; //충돌이 활성화 되기 때문에 꺼줌, 사용할때만 활성화
-        UpdateHpBar();
+        _hpbar.SetHpBar(Stat.MaxHp, $"{Stat.Hp} / {Stat.MaxHp}");
     }
 
     protected virtual void Update()
@@ -136,6 +138,9 @@ public abstract class Player : Creature
             if (!_isAutoHunt)
                 break;
 
+            if(Stat.Hp <= Stat.MaxHp * Global._potionUseCondition)
+                _portion.UsePotion();
+            
             if (!IsAttack)
             {
                 SetPrioritySkill();
@@ -178,6 +183,7 @@ public abstract class Player : Creature
         }
     }
 
+    
     public void SetMoveAnim(float blend)
     {
         _animator.SetFloat(Global.MoveBlend, blend);
@@ -581,12 +587,6 @@ public abstract class Player : Creature
         _fade.FadeOut();
         
     }
-
-    public void UpdateHpBar()
-    {
-        _hpbar.UpdateHpBar(Stat.Hp, $"{Stat.Hp} / {Stat.MaxHp}");
-    }
-
 
     public void DeleteTarget(Transform target)
     {

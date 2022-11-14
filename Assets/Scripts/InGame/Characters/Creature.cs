@@ -51,14 +51,22 @@ public abstract class Creature : MonoBehaviour
   {
       IsDead = false;
       Stat.Hp = Stat.MaxHp;
+      UpdateHpBar();
   }
 
+  public void UpdateHpBar()
+  {
+      _hpbar.UpdateHpBar(Stat.Hp, $"{Stat.Hp} / {Stat.MaxHp}", Stat.MaxHp);
+  }
+  
   public void Heal(int amount)
   {
       Stat.Hp += amount;
 
-      if (Stat.MaxHp > Stat.Hp)
+      if (Stat.MaxHp < Stat.Hp)
           Stat.Hp = Stat.MaxHp;
+      
+      UpdateHpBar();
   }
   
   

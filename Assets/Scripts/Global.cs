@@ -9,7 +9,7 @@ public static class Global
 {
     public const int LoadingTime = 3;
     public const string MissText = "Miss";
-    
+    public const float _potionUseCondition = 0.7f;
     
     /// <summary>
     /// 플레이어 애니메이션 관련

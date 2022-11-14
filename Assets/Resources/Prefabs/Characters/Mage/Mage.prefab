@@ -2085,7 +2085,7 @@ RectTransform:
   m_Children:
   - {fileID: 753289739214060386}
   m_Father: {fileID: 736811943511728080}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4543,6 +4543,7 @@ MonoBehaviour:
   - {fileID: 5687756692963838784}
   - {fileID: 2784012815139658943}
   - {fileID: 5355929533322928182}
+  _portion: {fileID: 5759362956144888925}
   _searchRadius: 15
   _autoModeSearch: 10
   _foots:
@@ -11456,7 +11457,7 @@ RectTransform:
   m_Children:
   - {fileID: 4560655249655443046}
   m_Father: {fileID: 736811943511728080}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -13313,8 +13314,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5239973070086849869}
   - {fileID: 3843184557561781173}
+  - {fileID: 5239973070086849869}
   m_Father: {fileID: 7019027303919083495}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13407,7 +13408,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5759362956144888925}
         m_TargetAssemblyTypeName: UsePortion, Assembly-CSharp
-        m_MethodName: BtnUse
+        m_MethodName: UsePotion
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13430,7 +13431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _imageFill: {fileID: 3497806733130991168}
-  _coolDownMax: 5
+  _coolDownMax: 2
   _coolDownText: {fileID: 7970394258769955954}
 --- !u!114 &5759362956144888925
 MonoBehaviour:
@@ -13446,6 +13447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   count: {fileID: 7310219716446252606}
   inventory: {fileID: 1149885835036212715}
+  _potionCoolDown: {fileID: 8261498974371486535}
 --- !u!1 &6209503951777126266
 GameObject:
   m_ObjectHideFlags: 0

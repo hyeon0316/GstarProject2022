@@ -43,9 +43,10 @@ public class HpbarController : MonoBehaviour
     /// <summary>
     /// 플레이어 체력바 업데이트
     /// </summary>
-    public void UpdateHpBar(int amount, string hpText)
+    public void UpdateHpBar(int value, string hpText, int maxHp)
     {
-        slider.value = amount;
+        slider.maxValue = maxHp;
+        slider.value = value;
         Name.text = hpText;
     }
 
