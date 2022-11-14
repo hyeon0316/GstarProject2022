@@ -17,6 +17,12 @@ public class DataManager : Singleton<DataManager>
         Gold += _a;
         GoldObj.GoldText.text = Gold.ToString() ;
     }
-    
-    
+
+    private void Start()
+    {
+        Gold = 10000;
+        SetGold(0);
+    }
+
+
 }

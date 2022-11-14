@@ -177,6 +177,7 @@ public class Inventory : MonoBehaviour
 
     private void Awake()
     {
+        
         _items = new Item[_maxCapacity];
         _equ = new Item[_equCount];
         Capacity = _maxCapacity;

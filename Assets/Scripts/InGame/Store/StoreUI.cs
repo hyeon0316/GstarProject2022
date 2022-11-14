@@ -11,7 +11,7 @@ public class StoreUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DataManager.Instance.Gold = 10000;
+        
         Init();
     }
     private void OnEnable()
