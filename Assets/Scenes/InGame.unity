@@ -83880,6 +83880,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 64584122, guid: 706743f4552fda54d825e6244a0057a6, type: 3}
+      propertyPath: enemySpawns.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 64584122, guid: 706743f4552fda54d825e6244a0057a6, type: 3}
       propertyPath: NpcTransForm.Array.size
       value: 6
       objectReference: {fileID: 0}
@@ -83911,6 +83915,22 @@ PrefabInstance:
       propertyPath: MapTransfom.Array.data[5]
       value: 
       objectReference: {fileID: 1713382231}
+    - target: {fileID: 64584122, guid: 706743f4552fda54d825e6244a0057a6, type: 3}
+      propertyPath: enemySpawns.Array.data[0]
+      value: 
+      objectReference: {fileID: 736400196}
+    - target: {fileID: 64584122, guid: 706743f4552fda54d825e6244a0057a6, type: 3}
+      propertyPath: enemySpawns.Array.data[1]
+      value: 
+      objectReference: {fileID: 955686518}
+    - target: {fileID: 64584122, guid: 706743f4552fda54d825e6244a0057a6, type: 3}
+      propertyPath: enemySpawns.Array.data[2]
+      value: 
+      objectReference: {fileID: 1838511450}
+    - target: {fileID: 64584122, guid: 706743f4552fda54d825e6244a0057a6, type: 3}
+      propertyPath: enemySpawns.Array.data[3]
+      value: 
+      objectReference: {fileID: 1369300344}
     - target: {fileID: 64584122, guid: 706743f4552fda54d825e6244a0057a6, type: 3}
       propertyPath: NpcTransForm.Array.data[0]
       value: 

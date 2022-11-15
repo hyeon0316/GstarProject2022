@@ -10,6 +10,7 @@ public class MapManager : Singleton<MapManager>
     public GameObject dun;
     public EnemySpawnArea DunArea;
     public NpcData TargetNpc { get; set; }
+    public EnemySpawnController[] enemySpawns;
 
     public Transform GetNpcData(int _id)
     {
@@ -49,6 +50,10 @@ public class MapManager : Singleton<MapManager>
     }
     public Transform GetSpwan(int _id)
     {
+        for (int i = 0; i < enemySpawns.Length; i++)
+        {
+            enemySpawns[i].InActiveSpawnArea();
+        }
         Debug.Log(_id);
         switch (_id)
         {
