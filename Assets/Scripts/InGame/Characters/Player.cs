@@ -196,9 +196,6 @@ public abstract class Player : Creature
     /// </summary>
     public void UseTownTeleport()
     {
-        _targets.Clear();
-        CancelAutoHunt();
-        CancelAutoQuest();
         UseTeleport(MapManager.Instance.GetSpwan(1));
     }
 
@@ -213,13 +210,13 @@ public abstract class Player : Creature
 
     private void Teleport()
     {
-        CancelAutoHunt();
+        TouchContinue();
         transform.position = _movePos.position;
     }
     
     private void Teleport(Transform movePos)
     {
-        CancelAutoHunt();
+        TouchContinue();
         transform.position = movePos.position;
     }
     
@@ -228,16 +225,15 @@ public abstract class Player : Creature
     /// </summary>
     public void SetAutoHunt()
     {
-        CancelAutoQuest();
         if (!_isAutoHunt)
         {
+            CancelAutoQuest();
             IsAttack = false;
             _searchRadius *= _autoModeSearch;
             _isAutoHunt = true;
             ActiveAutoCancelButton(true);
             StartCoroutine(AutoHuntCo());
             _autoActiveEffect.SetActive(true);
-            //todo: 이미지 활성화
         }
         else
         {
@@ -267,11 +263,13 @@ public abstract class Player : Creature
     /// </summary>
     public void TouchContinue()
     {
+        CancelAutoQuest();
+        
         if (_isAutoHunt)
         {
             CancelAutoHunt();
         }
-        else
+        else if(!_isAutoHunt)
         {
             return;
         }
@@ -364,12 +362,11 @@ public abstract class Player : Creature
     /// </summary>
     public void SetAutoQuest(Transform target)
     {
-        _targets.Clear();
-        CancelAutoHunt(); //중간에 다른 행동을 하고 있었을때 캔슬
         if (!IsDead)
         {
             if (!IsQuest)
             {
+                CancelAutoHunt(); //중간에 다른 행동을 하고 있었을때 캔슬
                 QuestFromDistance(target.gameObject.layer == LayerMask.NameToLayer("NPC") ? TalkNpc : SetAutoHunt, target);
                 IsQuest = true;
             }
@@ -440,6 +437,7 @@ public abstract class Player : Creature
     private void StopMoveCo()
     {
         IsAttack = false;
+        _targets.Clear();
         if (_moveCo != null)
         {
             SetMoveAnim(0);
@@ -535,7 +533,7 @@ public abstract class Player : Creature
         }
     }
 
-    public void CancelAutoQuest()
+    private void CancelAutoQuest()
     {
         if (IsQuest)
         {
@@ -593,7 +591,6 @@ public abstract class Player : Creature
         Teleport(MapManager.Instance.GetSpwan(1));
         UpdateHpBar();
         _fade.FadeOut();
-        
     }
 
     public void DeleteTarget(Transform target)
@@ -609,4 +606,18 @@ public abstract class Player : Creature
     {
         _autoCancelButton.SetActive(isActive);
     }
+
+    /// <summary>
+    /// 피해 면역인 무적 상태로 변경
+    /// </summary>
+    public void SetInvincibility(bool isActive)
+    {
+        if(isActive)
+            this.gameObject.layer = LayerMask.NameToLayer("Invincibility");
+        else
+        {
+            this.gameObject.layer = LayerMask.NameToLayer("Player");
+        }
+    }
+
 }

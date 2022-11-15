@@ -123,7 +123,6 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
             var newObj = CreateNewObject(poolType);
             newObj.SetActive(true);
             newObj.transform.SetParent(null);
-            Debug.LogError("새로 생성");
             return newObj;
         }
     }

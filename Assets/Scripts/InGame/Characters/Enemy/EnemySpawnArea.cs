@@ -19,28 +19,32 @@ public class EnemySpawnArea : MonoBehaviour
     private BoxCollider _boxCollider;
     public int Difficulty{ get; set; }
 
-
-
-
-
-    /// [Header("해당 스폰지점이 던전인지 아닌지")]
+    [Header("해당 스폰지점이 던전인지 아닌지")]
     [SerializeField] private bool _isDungeon;
 
+    /// <summary>
+    /// 해당 스폰 지역에 있는 적들
+    /// </summary>
     private List<GameObject> _enemyList = new List<GameObject>();
-    
 
     private void Awake()
     {
         _boxCollider = GetComponent<BoxCollider>();
     }
 
-    // Start is called before the first frame update
-    private void Start()
+    private void OnEnable()
     {
         if(!_isDungeon) 
             SpawnDicsEnemy();
+        else
+            SpawnDungeonEnemy();
     }
-    
+
+    private void OnDisable()
+    {
+        Init();
+    }
+
     /// <summary>
     /// 딕셔너리에 저장된 적들을 생성
     /// </summary>
@@ -51,6 +55,7 @@ public class EnemySpawnArea : MonoBehaviour
             for (int i = 0; i < _spawnEnemyDics[dic.Key]; i++)
             {
                 GameObject enemy = ObjectPoolManager.Instance.GetObject(dic.Key);
+                _enemyList.Add(enemy);
                 enemy.GetComponent<Enemy>().SpawnArea = _boxCollider;
                 enemy.transform.position = RandomSpawnPos();
             }
@@ -81,7 +86,7 @@ public class EnemySpawnArea : MonoBehaviour
     }
 
     /// <summary>
-    /// 모든 적을 반환
+    /// 모든 적을 반환(던전)
     /// </summary>
     public void Init()
     {
@@ -92,22 +97,31 @@ public class EnemySpawnArea : MonoBehaviour
         }
         _enemyList.Clear();
     }
-    
+
 
     /// <summary>
-    /// 딕셔너리에 있는 적 종류 중 랜덤한 적을 스폰
+    /// 자신을 반환하고 딕셔너리에 있는 적 종류 중 랜덤한 적을 스폰
     /// </summary>
-    public void SpawnRandomEnemy()
+    public void SpawnRandomEnemy(GameObject returnEnemy)
     {
+        _enemyList.Remove(returnEnemy);
+        
         int index = Random.Range(0, _spawnEnemyDics.Count);
         KeyValuePair<PoolType, int> randomDic = _spawnEnemyDics.ElementAt(index);
-        GameObject enemy = ObjectPoolManager.Instance.GetObject(randomDic.Key);
+        
+        GameObject enemyPrefab = ObjectPoolManager.Instance.GetObject(randomDic.Key);
+        _enemyList.Add(enemyPrefab);
+        Enemy enemy = enemyPrefab.GetComponent<Enemy>();
         enemy.GetComponent<Enemy>().SpawnArea = _boxCollider;
-        enemy.GetComponent<Enemy>().ShowAppearance();
+        if (_isDungeon)
+        {
+            enemy.GetComponent<Enemy>().SetStat(enemyStat[Difficulty]);
+        }
+        enemy.ShowAppearance();
         enemy.transform.position = RandomSpawnPos();
     }
-    
-    
+
+
     /// <summary>
     /// 적들이 스폰지점 안의 범위에서 랜덤위치 생성
     /// </summary>

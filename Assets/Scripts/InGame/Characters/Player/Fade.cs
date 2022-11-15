@@ -45,10 +45,12 @@ public class Fade : MonoBehaviour
     {
         _image.DOFade(1, _doTime);
         _image.raycastTarget = true;
+        DataManager.Instance.Player.SetInvincibility(true);
     }
 
     public void FadeOut()
     {
+        DataManager.Instance.Player.SetInvincibility(false);
         _image.DOFade(0, _doTime);
         Invoke("DelayActiveRaycast", _doTime);
     }

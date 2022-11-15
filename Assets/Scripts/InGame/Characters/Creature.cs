@@ -18,7 +18,7 @@ public abstract class Creature : MonoBehaviour
 
   protected Animator _animator;
   protected NavMeshAgent _nav;
-  
+
   [Header("자신의 체력 바")]
   [SerializeField] protected HpbarController _hpbar;
   
@@ -41,6 +41,12 @@ public abstract class Creature : MonoBehaviour
       _animator = GetComponent<Animator>();
       _nav = GetComponent<NavMeshAgent>();
       _rigid = GetComponent<Rigidbody>();
+  }
+
+  protected virtual void OnDisable()
+  {
+      IsDead = true;
+      _floatingText.ClearText();
   }
 
 

@@ -68,6 +68,15 @@ public abstract class Enemy : Creature
         Init();
     }
 
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        _nav.enabled = false;
+        CancelInvoke("SetRandomMove");
+        StopCoroutine(BackToArea());
+        StopCoroutine(NextMoveCo());
+    }
+
     protected override void Init()
     {
         base.Init();
@@ -114,13 +123,6 @@ public abstract class Enemy : Creature
                 if (_backDistance < Vector3.Distance(transform.position, _outVector)) //일정 거리 이상 스폰지역 밖으로 나왔을때
                 {
                     StartCoroutine(BackToArea());
-                }
-                else //추적하던 적이 사라졌을때
-                {
-                    if (IsNullPlayer())
-                    {
-                        StartCoroutine(BackToArea());
-                    }
                 }
             }
 
@@ -264,20 +266,7 @@ public abstract class Enemy : Creature
             }
         }
     }
-
-    /// <summary>
-    /// 플레이어가 없는지 체크
-    /// </summary>
-    private bool IsNullPlayer()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, _attackRadius * 6, LayerMask.GetMask("Player"));
-        if (colliders.Length == 0)
-        {
-            return true;
-        }
-
-        return false;
-    }
+    
     protected abstract void Attack();
     
 
@@ -310,7 +299,7 @@ public abstract class Enemy : Creature
         }
 
         _dissolve.gameObject.layer = LayerMask.NameToLayer("Enemy");
-        SpawnArea.GetComponent<EnemySpawnArea>().SpawnRandomEnemy();
+        SpawnArea.GetComponent<EnemySpawnArea>().SpawnRandomEnemy(this.gameObject);
         _animator.SetTrigger(Global.EnemyDeadTrigger);
         QuestManager.Instance.CheckEnemyQuest(CurEnemyType);
         DataManager.Instance.Player.DeleteTarget(transform);

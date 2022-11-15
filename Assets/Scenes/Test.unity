@@ -648,12 +648,12 @@ PrefabInstance:
     - target: {fileID: 7993376667652896707, guid: 56324c19582cf5b46857e220e636d3fd,
         type: 3}
       propertyPath: _spawnEnemyDics.m_keys.Array.data[0]
-      value: 17
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7993376667652896707, guid: 56324c19582cf5b46857e220e636d3fd,
         type: 3}
       propertyPath: _spawnEnemyDics.m_keys.Array.data[1]
-      value: 16
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7993376667652896707, guid: 56324c19582cf5b46857e220e636d3fd,
         type: 3}
@@ -734,6 +734,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemySpawnArea
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993376667652896710, guid: 56324c19582cf5b46857e220e636d3fd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56324c19582cf5b46857e220e636d3fd, type: 3}
