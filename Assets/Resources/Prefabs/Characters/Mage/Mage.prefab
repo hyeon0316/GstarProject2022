@@ -12516,7 +12516,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -96.099976, y: 479}
+  m_AnchoredPosition: {x: -96.1001, y: 479}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &5083253418059471285
@@ -12866,7 +12866,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -96.1, y: 344.00003}
+  m_AnchoredPosition: {x: -96.1001, y: 344}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &1413964489003381273
@@ -15322,7 +15322,17 @@ MonoBehaviour:
   - {fileID: 7688670089323900446}
   bgmAudio: {fileID: 8732620226751396377}
   playerAudio: {fileID: 7054547381126968628}
-  effectSounds: []
+  effectSounds:
+  - Enum: 2
+    clip: {fileID: 8300000, guid: d0d725699e77fdd4899dd30101c4adf6, type: 3}
+  - Enum: 3
+    clip: {fileID: 8300000, guid: b4c489661c89a9e458a8761cd9802231, type: 3}
+  - Enum: 4
+    clip: {fileID: 8300000, guid: cb255b99a89a80f4097a36e862ebb33b, type: 3}
+  - Enum: 5
+    clip: {fileID: 8300000, guid: 8e2b182f154017a4c86554d89ec50ea6, type: 3}
+  - Enum: 6
+    clip: {fileID: 8300000, guid: 17999ef34708727428cdf85d26815748, type: 3}
   playerSounds:
   - Enum: 0
     clip: {fileID: 8300000, guid: 3eedf733065c42f448aea1487b769bda, type: 3}
@@ -15340,6 +15350,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 468ed777983b657489b7e544a5844e2f, type: 3}
   bgmClips:
   - {fileID: 8300000, guid: 7bd219d81c0bc2f419c31092fa26b8f4, type: 3}
+  - {fileID: 8300000, guid: f65020941dfb1a740b6107bd410b7604, type: 3}
+  - {fileID: 8300000, guid: ea3e21f42cb72ce49a0a10032a036d46, type: 3}
 --- !u!82 &404710758762513626
 AudioSource:
   m_ObjectHideFlags: 0

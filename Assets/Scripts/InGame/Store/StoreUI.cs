@@ -34,8 +34,10 @@ public class StoreUI : MonoBehaviour
         {
             DataManager.Instance.SetGold(-result);
             inventory.Add(BuyUI.Item, BuyUI.BuyCount);
+            SoundManager.Instance.EffectPlay(EffectSoundType.money);
             BuyUI.ButtonCancel();
             Init();
+
         }
     }
     public void ButtonExit()

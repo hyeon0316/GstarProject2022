@@ -46,7 +46,8 @@ public class DungeonUI : MonoBehaviour
     }
     public void SpawnC()
     {
-       DataManager.Instance.Player.UseTeleport(_tr);
+        SoundManager.Instance.BgmPlay(1);
+        DataManager.Instance.Player.UseTeleport(_tr);
         MapObj.SetActive(false);
     }
     public void BtnExit()

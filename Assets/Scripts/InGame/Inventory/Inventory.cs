@@ -76,6 +76,7 @@ public class Inventory : MonoBehaviour
                     EquPlayerStat(_data);
                     _activeESlot.UpdateEnforceStat(_data, _enforce.EnforceNum[_activeSlotNum]);
                     enforceUI.gameObject.SetActive(false);
+                    SoundManager.Instance.EffectPlay(EffectSoundType.enforce);
                     _activeESlot.FadeInOut();
                 }
 
@@ -104,6 +105,7 @@ public class Inventory : MonoBehaviour
                     EquPlayerStat(_data);
                     _activeESlot.UpdateEnforceStat(_data, _enforce.EnforceNum[_activeSlotNum]);
                     enforceUI.gameObject.SetActive(false);
+                    SoundManager.Instance.EffectPlay(EffectSoundType.enforce);
                     _activeESlot.FadeInOut();
                 }
             }
@@ -362,13 +364,15 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void UnEquip(int index)
+    public void UnEquip(int index,bool f = true)
     {
         if (!IsValidIndex(index)) return;
         if (_equ[index] == null) return;
 
         if (_equ[index] is EquipmentItem _uItem)
         {
+            if(f)
+                SoundManager.Instance.EffectPlay(EffectSoundType.equip);
             Add(_equ[index].Data);
             UnEquPlayerStat(_uItem.EquipmentData.Stat);
             EquRemove(index);
@@ -420,10 +424,11 @@ public class Inventory : MonoBehaviour
         int _slotNum;
         if (_item is EquipmentItem _uItem)
         {
+            SoundManager.Instance.EffectPlay(EffectSoundType.equip);
             _slotNum = _uItem.EquipmentData.EquType;
             if (!CheckEquSlot(_slotNum))
             {
-                UnEquip(_slotNum);
+                UnEquip(_slotNum,false);
             }
             _equ[_slotNum] = _item;
             EquPlayerStat(_uItem.EquipmentData.Stat);

@@ -54,7 +54,8 @@ public class MapManager : Singleton<MapManager>
         {
             enemySpawns[i].InActiveSpawnArea();
         }
-        Debug.Log(_id);
+       
+        SoundManager.Instance.BgmPlay(2);
         switch (_id)
         {
             case 1:

@@ -41,6 +41,7 @@ public class QuestInGameUI : MonoBehaviour
         }
         if (data.IsCompleteObjectives)
         {
+            SoundManager.Instance.EffectPlay(EffectSoundType.questfin);
             DataManager.Instance.Player.IsQuest = false;
             QuestManager.Instance.SetAniQuest(false);
             NeedObject.text = "완료";
@@ -85,7 +86,7 @@ public class QuestInGameUI : MonoBehaviour
     }
     public void OnFin()
     {
-        
+        SoundManager.Instance.EffectPlay(EffectSoundType.queststart);
         QuestManager.Instance.NextQuest();
         Fin.SetActive(false);
     }

@@ -5,7 +5,12 @@ using UnityEngine;
 public enum EffectSoundType
 {
     hi,
-    h
+    h,
+    equip,
+    money,
+    questfin,
+    queststart,
+    enforce
 }
 
 public enum PlayerSoundType
@@ -103,9 +108,18 @@ public class SoundManager : Singleton<SoundManager>
         }
         Debug.Log(PlayerSound + "사운드X");
     }
+    /// <summary>
+    /// 0 로비 1 던전 2시티
+    /// </summary>
     public void BgmPlay(int index)
     {
-        bgmAudio.clip = bgmClips[index];
-        bgmAudio.Play();
+        if (bgmAudio.isPlaying && bgmAudio.clip == bgmClips[index])
+        {
+        }
+        else
+        {
+            bgmAudio.clip = bgmClips[index];
+            bgmAudio.Play();
+        }
     }
 }
