@@ -228,6 +228,7 @@ public abstract class Player : Creature
     /// </summary>
     public void SetAutoHunt()
     {
+        CancelAutoQuest();
         if (!_isAutoHunt)
         {
             IsAttack = false;
@@ -538,6 +539,7 @@ public abstract class Player : Creature
     {
         if (IsQuest)
         {
+            StopMoveCo();
             IsQuest = false;
             QuestManager.Instance.SetAniQuest(IsQuest);
         }
@@ -563,6 +565,7 @@ public abstract class Player : Creature
         _animator.SetTrigger(Global.DeadTrigger);
         _fade.FadeIn();
         _deadCanvas.SetActive(true);
+        UIManager.Instance.CloseAll();
         Invoke("SetRespawnButton", 1.5f);
     }
 

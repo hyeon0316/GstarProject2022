@@ -28,7 +28,7 @@ public class QuestInGameUI : MonoBehaviour
         {
             questNum = data.collectObjectives.NpcId;
             questIndex = data.ID;
-            NeedObject.text = data.Target + " ã�ư��� ";
+            NeedObject.text = data.Target + " 찾아가기 ";
             questType = true;
         }
         else
@@ -36,14 +36,14 @@ public class QuestInGameUI : MonoBehaviour
 
             questNum = data.ID;
             questIndex = data.ID;
-            NeedObject.text = data.Target + " óġ(" + data.collectObjectives.currentAmount + "/" + data.collectObjectives.amount + ")";
+            NeedObject.text = data.Target + " 처치(" + data.collectObjectives.currentAmount + "/" + data.collectObjectives.amount + ")";
             questType = false;
         }
         if (data.IsCompleteObjectives)
         {
             DataManager.Instance.Player.IsQuest = false;
             QuestManager.Instance.SetAniQuest(false);
-            NeedObject.text = "�Ϸ�";
+            NeedObject.text = "완료";
             Fin.SetActive(true);
         }
     }
