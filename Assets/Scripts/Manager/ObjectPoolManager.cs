@@ -53,14 +53,14 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         Init(PoolType.VolcanicSpike, 1);
         Init(PoolType.Spider, 15);
         Init(PoolType.FrightFly, 15);
-        Init(PoolType.ForestGolem1, 20);
-        Init(PoolType.ForestGolem2, 20);
-        Init(PoolType.ForestGolem3, 20);
+        Init(PoolType.ForestGolem1, 40);
+        Init(PoolType.ForestGolem2, 40);
+        Init(PoolType.ForestGolem3, 40);
         Init(PoolType.SpecialGolem, 1);
-        Init(PoolType.GoblinWarrior, 20);
-        Init(PoolType.GoblinArcher, 20);
+        Init(PoolType.GoblinWarrior, 25);
+        Init(PoolType.GoblinArcher, 25);
         Init(PoolType.GoblinArcherArrow, 20);
-        Init(PoolType.Goblin, 5);
+        Init(PoolType.Goblin, 25);
         Init(PoolType.Boss, 1);
         Init(PoolType.BossRock, 1);
     }

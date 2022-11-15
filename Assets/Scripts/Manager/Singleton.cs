@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         {
             lock (_lock) //Thread Safe
             {
-                if (_instance == null)
+                if (_instance == null && Time.timeScale != 0)
                 {
                     // 인스턴스 존재 여부 확인
                     _instance = (T) FindObjectOfType(typeof(T));
@@ -33,5 +34,10 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 return _instance;
             }
         }
+    }
+
+    private void OnApplicationQuit()
+    {
+        Time.timeScale = 0;
     }
 }

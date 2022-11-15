@@ -42,7 +42,8 @@ public class EnemySpawnArea : MonoBehaviour
 
     private void OnDisable()
     {
-        Init();
+        if(Time.timeScale != 0)
+            Init();
     }
 
     /// <summary>
