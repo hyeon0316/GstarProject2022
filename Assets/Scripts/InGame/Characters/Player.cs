@@ -47,6 +47,8 @@ public abstract class Player : Creature
     [SerializeField] private GameObject _deadCanvas;
     [SerializeField] private GameObject _respawnButton;
 
+    [SerializeField] private GameObject _autoActiveEffect;
+
     /// <summary>
     /// 다음단계의 기본공격이 가능한지에 대한 bool값
     /// </summary>
@@ -233,6 +235,8 @@ public abstract class Player : Creature
             _isAutoHunt = true;
             ActiveAutoCancelButton(true);
             StartCoroutine(AutoHuntCo());
+            _autoActiveEffect.SetActive(true);
+            //todo: 이미지 활성화
         }
         else
         {
@@ -247,6 +251,7 @@ public abstract class Player : Creature
     {
         if (_isAutoHunt)
         {
+            _autoActiveEffect.SetActive(false);
             SetMoveAnim(0);
             ActiveAutoCancelButton(false);
             _searchRadius /= _autoModeSearch;
