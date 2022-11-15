@@ -16,7 +16,7 @@ public class EnemySpawnController : MonoBehaviour
         }
     }
     
-    private void InActiveSpawnArea()
+    public void InActiveSpawnArea()
     {
         foreach (var spawn in _spawns)
         {
