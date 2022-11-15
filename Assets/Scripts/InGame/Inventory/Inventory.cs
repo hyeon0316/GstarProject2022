@@ -31,13 +31,22 @@ public class Inventory : MonoBehaviour
 
     public int USESTARTINDEX = 90;
     public int _useSlotindex;
-    [SerializeField] private UsePortion usePortion; 
+    [SerializeField] private UsePortion usePortion;
     private int _activeSlotNum;
     public GameObject InvenUI;
     public GameObject StatUI;
     public EnforceUI enforceUI;
     public GameObject Inven;
     private int portionIndex;
+
+
+    private void Start()
+    {
+
+        DataManager.Instance.Gold = 10000;
+        DataManager.Instance.SetGold(0);
+    }
+
     public void ButtonEnforce()
     {
         if (enforceUI.gameObject.activeSelf)
@@ -73,9 +82,9 @@ public class Inventory : MonoBehaviour
             }
             else
             {
-                if(SetEnforceUI(101))
+                if (SetEnforceUI(101))
                 {
-                    for(int i = 0; i < _items.Length; i++)
+                    for (int i = 0; i < _items.Length; i++)
                     {
                         if (_items[i] != null)
                         {
@@ -113,7 +122,7 @@ public class Inventory : MonoBehaviour
     }
     public int HavePostion()
     {
-        int HavePostion=0;
+        int HavePostion = 0;
 
         for (int i = 0; i < _items.Length; i++)
         {
@@ -161,7 +170,7 @@ public class Inventory : MonoBehaviour
     }
     public int GetItemAmout(int _id)
     {
-        for(int i=0;i<_items.Length;i++)
+        for (int i = 0; i < _items.Length; i++)
         {
             if (_items[i] != null)
             {
@@ -177,7 +186,7 @@ public class Inventory : MonoBehaviour
 
     private void Awake()
     {
-        
+
         _items = new Item[_maxCapacity];
         _equ = new Item[_equCount];
         Capacity = _maxCapacity;
@@ -191,7 +200,7 @@ public class Inventory : MonoBehaviour
 
 
     }
-    
+
     public int Capacity { get; private set; }
     public int ECapacity { get; private set; }
 
@@ -252,7 +261,7 @@ public class Inventory : MonoBehaviour
 
                         // 남은 개수 계산
                         amount = (amount > ciData.MaxAmount) ? (amount - ciData.MaxAmount) : 0;
-                        if(_items[index] is PortionItem _portion)
+                        if (_items[index] is PortionItem _portion)
                         {
                             portionIndex = index;
                             usePortion.SetPortion(_portion.Amount);
@@ -309,7 +318,7 @@ public class Inventory : MonoBehaviour
     {
         _activeSlotNum = index;
         _activeESlot.UpdateUI(_equ[index]);
-        _activeESlot.UpdateEnforceStat(_enforce.GetStat(index),_enforce.EnforceNum[index]);
+        _activeESlot.UpdateEnforceStat(_enforce.GetStat(index), _enforce.EnforceNum[index]);
         enforceUI.gameObject.SetActive(false);
     }
     public void ShowActiveISlot(int index)
@@ -335,7 +344,7 @@ public class Inventory : MonoBehaviour
         {
             // 아이템 사용
             bool succeeded = uItem.Use();
-            
+
             if (succeeded)
             {
                 if (_items[index] is CountableItem ciData)
@@ -352,7 +361,7 @@ public class Inventory : MonoBehaviour
             Remove(index);
         }
     }
-    
+
     public void UnEquip(int index)
     {
         if (!IsValidIndex(index)) return;
@@ -551,7 +560,7 @@ public class Inventory : MonoBehaviour
         _equ[index] = null;
         _equipmentUI.RemoveItem(index);
     }
-    
+
 
     public void InvenButton()
     {
