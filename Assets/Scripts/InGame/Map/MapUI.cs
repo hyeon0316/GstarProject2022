@@ -51,7 +51,7 @@ public class MapUI : MonoBehaviour
         mapContentUI.SpawnTransform = MapManager.Instance.GetSpwan(4);
         mapContentUI.Name.text = "°ñ·½ ¹«´ý";
         mapContentUI.SetContentUI();
-        mapContentUI.SpwanIndex = 13;
+        mapContentUI.SpwanIndex = 12;
     }
     public void ExitBtn()
     {

@@ -64,6 +64,7 @@ public class MapContentUI : MonoBehaviour
         DataManager.Instance.Player.IsQuest = false;
         QuestManager.Instance.SetAniQuest(false);
         DataManager.Instance.Player.SetAutoQuest(_selectArea.gameObject.transform);
+        QuestManager.Instance.SetAniQuest(false);
         obj.SetActive(false);
     }
     public void BtngoSpwan()

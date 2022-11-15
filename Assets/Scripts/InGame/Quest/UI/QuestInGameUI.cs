@@ -62,11 +62,11 @@ public class QuestInGameUI : MonoBehaviour
             _tr = MapManager.Instance.GetSpwan(questIndex);
             DataManager.Instance.Player.UseTeleport(_tr);
         }
-        Debug.Log(_tr.gameObject.name);
         Invoke("OnClickQuest", 2f);
     }
     public void OnClickQuest()
     {
+        
         DataManager.Instance.Player.CancelAutoHunt();
         Transform _tr;
         if(questType)
