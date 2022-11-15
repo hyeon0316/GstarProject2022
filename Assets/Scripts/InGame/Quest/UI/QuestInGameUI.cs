@@ -66,21 +66,22 @@ public class QuestInGameUI : MonoBehaviour
     }
     public void OnClickQuest()
     {
-        
-        DataManager.Instance.Player.CancelAutoHunt();
-        Transform _tr;
-        if(questType)
+        if (DataManager.Instance.Player.gameObject.transform.position.y > 50)
         {
-            _tr = MapManager.Instance.GetNpcData(questNum);
-            DataManager.Instance.Player.SetAutoQuest(_tr);
-            MapManager.Instance.TargetNpc = _tr.GetComponent<NpcData>();
+            DataManager.Instance.Player.CancelAutoHunt();
+            Transform _tr;
+            if (questType)
+            {
+                _tr = MapManager.Instance.GetNpcData(questNum);
+                DataManager.Instance.Player.SetAutoQuest(_tr);
+                MapManager.Instance.TargetNpc = _tr.GetComponent<NpcData>();
+            }
+            else
+            {
+                _tr = MapManager.Instance.GetEnemySpwan(questNum);
+                DataManager.Instance.Player.SetAutoQuest(_tr);
+            }
         }
-        else
-        {
-            _tr = MapManager.Instance.GetEnemySpwan(questNum);
-            DataManager.Instance.Player.SetAutoQuest(_tr);
-        }
-        
     }
     public void OnFin()
     {
