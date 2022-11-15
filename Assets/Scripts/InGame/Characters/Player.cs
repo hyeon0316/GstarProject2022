@@ -620,4 +620,20 @@ public abstract class Player : Creature
         }
     }
 
+
+    /*private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Spawn"))
+        {
+            Debug.Log("들어감");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Spawn"))
+        {
+            Debug.Log("나감");
+        }
+    }*/
 }
