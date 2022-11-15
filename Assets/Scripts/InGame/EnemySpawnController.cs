@@ -28,6 +28,7 @@ public class EnemySpawnController : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            Debug.Log("들어옴");
             ActiveSpawnArea();
         }
     }
@@ -36,6 +37,7 @@ public class EnemySpawnController : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            Debug.Log("나감");
             InActiveSpawnArea();
         }
     }

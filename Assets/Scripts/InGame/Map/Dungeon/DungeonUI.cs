@@ -42,10 +42,7 @@ public class DungeonUI : MonoBehaviour
     }
     public void SetSpwan()
     {
-        spawnArea.Init();
         spawnArea.Difficulty = dunIndex;
-        spawnArea.SpawnDungeonEnemy();
-       
     }
     public void SpawnC()
     {
