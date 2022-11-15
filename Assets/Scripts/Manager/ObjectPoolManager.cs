@@ -51,8 +51,8 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         Init(PoolType.FrightFlyMissile, 5);
         Init(PoolType.WindAttackEffect, 3);
         Init(PoolType.VolcanicSpike, 1);
-        Init(PoolType.Spider, 10);
-        Init(PoolType.FrightFly, 10);
+        Init(PoolType.Spider, 15);
+        Init(PoolType.FrightFly, 15);
         Init(PoolType.ForestGolem1, 20);
         Init(PoolType.ForestGolem2, 20);
         Init(PoolType.ForestGolem3, 20);
@@ -123,6 +123,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
             var newObj = CreateNewObject(poolType);
             newObj.SetActive(true);
             newObj.transform.SetParent(null);
+            Debug.LogError("새로 생성");
             return newObj;
         }
     }
