@@ -70,7 +70,9 @@ public class EnemySpawnArea : MonoBehaviour
                 _enemyList.Add(enemyPrefab);
                 Enemy enemy = enemyPrefab.GetComponent<Enemy>();
                 enemy.SpawnArea = _boxCollider;
-                enemy.Stat.SetEnemyStat(enemyStat[Difficulty]);
+                
+                enemy.SetStat(enemyStat[Difficulty]);
+                Debug.Log(enemy.gameObject.name + "/" + enemy.Stat.Attack);
                 enemy.transform.position = RandomSpawnPos();
                 enemy.gold = enemy.gold * (Difficulty + 1);
 
@@ -86,7 +88,7 @@ public class EnemySpawnArea : MonoBehaviour
         foreach (var enemy in _enemyList)
         {
             Enemy returnEnemy = enemy.GetComponent<Enemy>();
-            ObjectPoolManager.Instance.ReturnObject(returnEnemy.CurEnemyType, enemy);
+            ObjectPoolManager.Instance.ReturnObject(returnEnemy.CurEnemyType, enemy.gameObject);
         }
         _enemyList.Clear();
     }

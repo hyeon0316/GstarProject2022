@@ -27,8 +27,8 @@ MonoBehaviour:
     ItemRewardCount: 200
     EXPReward: 0
   - ItemReward: {fileID: 11400000, guid: 81666626c8fb8984f9af7300f50ee4c0, type: 2}
-    ItemRewardCount: 40
+    ItemRewardCount: 59
     EXPReward: 0
   - ItemReward: {fileID: 11400000, guid: aa56a7266be8c9e4baeaa981de87f784, type: 2}
-    ItemRewardCount: 10
+    ItemRewardCount: 21
     EXPReward: 0

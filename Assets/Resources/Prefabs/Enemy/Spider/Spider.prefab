@@ -960,12 +960,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9463e2ddf0d9c8249911a90fe3cdb6fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hpbar: {fileID: 2160096185084869984}
   _attackRadius: 4.5
   _floatingText: {fileID: 6556677796353788244}
-  _enemyStatData: {fileID: 11400000, guid: a866f938e53bcfe40943120f0b3341e9, type: 2}
+  _enemyStatData: {fileID: 11400000, guid: 77f4b78afd1d60f43b28ea65feeca206, type: 2}
   _backDistance: 4
   _dissolve: {fileID: 1688248241}
-  _hpbar: {fileID: 2160096185084869984}
   _name: "\uB3D9\uAD74\uAC70\uBBF8"
   gold: 1000
   CurEnemyType: 10

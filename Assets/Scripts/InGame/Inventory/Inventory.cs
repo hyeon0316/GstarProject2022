@@ -580,6 +580,5 @@ public class Inventory : MonoBehaviour
     public void UsePortion()
     {
         Use(portionIndex);
-        Debug.Log(portionIndex);
     }
 }

@@ -58,7 +58,11 @@ public abstract class Enemy : Creature
         Stat = new Stat();
         Stat.SetEnemyStat(_enemyStatData);
     }
-    
+    public void SetStat(EnemyStatData enemyStatData)
+    {
+        _enemyStatData = enemyStatData;
+        Stat.SetEnemyStat(_enemyStatData);
+    }
     protected virtual void OnEnable()
     {
         Init();
