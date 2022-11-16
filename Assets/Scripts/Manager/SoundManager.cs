@@ -16,7 +16,7 @@ public enum EffectSoundType
     WideArea,
     WideAreaHit,
     WindAttack,
-    
+    NormalAttack
 }
 
 public enum PlayerSoundType

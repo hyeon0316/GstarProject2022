@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// BulletRain의 발사체 생성기
@@ -20,9 +22,27 @@ public class BulletRain : MonoBehaviour
    [SerializeField] private float _interval = 0.15f;
    [SerializeField] private int _shotCountEveryInterval = 2; // 한번에 몇 개씩 발사할건지.
 
+   private AudioSource _audioSource;
+
+   private void Awake()
+   {
+      _audioSource = GetComponent<AudioSource>();
+   }
+
    public void CreateMissile(Transform target)
    {
       StartCoroutine(CreateMissileCo(target));
+      StartCoroutine(SetRandomSound(6));
+   }
+
+   private IEnumerator SetRandomSound(int maxCount)
+   {
+      WaitForSeconds delay = new WaitForSeconds(0.05f);
+      for (int i = 0; i < maxCount; i++)
+      {
+         SoundManager.Instance.EffectPlay(_audioSource, EffectSoundType.BulletRain);
+         yield return delay;
+      }
    }
    
    private IEnumerator CreateMissileCo(Transform target)

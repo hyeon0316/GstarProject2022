@@ -6,8 +6,16 @@ using Random = UnityEngine.Random;
 
 public class SpikeAttack : SkillAttack
 {
+   private AudioSource _audioSource;
+
+   private void Awake()
+   {
+      _audioSource = GetComponent<AudioSource>();
+   }
+
    public void DelayDisable()
    {
+      SoundManager.Instance.EffectPlay(_audioSource, EffectSoundType.SpikeAttack);
       Invoke("DisableObject", 3f);
    }
    

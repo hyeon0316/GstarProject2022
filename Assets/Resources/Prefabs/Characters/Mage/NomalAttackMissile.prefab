@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4866859738511908}
-  - component: {fileID: 114254603991072542}
   - component: {fileID: -2504927933119062497}
   m_Layer: 0
   m_Name: NomalAttackMissile
@@ -36,23 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114254603991072542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1006269644436722}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aa5c1e37409a9344a344c0468db383d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabSound: {fileID: 1297775994297274, guid: 42f4d35ea48960f4cbadc373e47bdc4d,
-    type: 3}
-  destroyWhenDone: 1
-  soundPrefabIsChild: 0
-  pitchRandomMultiplier: 1.2
 --- !u!114 &-2504927933119062497
 MonoBehaviour:
   m_ObjectHideFlags: 0

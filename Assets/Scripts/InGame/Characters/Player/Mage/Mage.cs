@@ -39,6 +39,7 @@ public class Mage : Player
     {
         if (_targets.Count != 0)
         {
+            SoundManager.Instance.PlayerPlay(PlayerSoundType.NormalAttack);
             var obj = ObjectPoolManager.Instance.GetObject(PoolType.NormalAttackMissile);
             obj.transform.position = _normalAttackPos.position;
             obj.transform.rotation = _normalAttackPos.rotation;
@@ -65,6 +66,7 @@ public class Mage : Player
     {
         if (_targets.Count != 0)
         {
+            SoundManager.Instance.PlayerPlay(PlayerSoundType.Attak2);
             IsAttack = true;
             Debug.Log("스파이크 어택");
             _skiilCoolDown[(int) SkillCoolType.SpikeAttack].SetCoolDown();
@@ -106,6 +108,7 @@ public class Mage : Player
     {
         if (_targets.Count != 0)
         {
+            SoundManager.Instance.PlayerPlay(PlayerSoundType.Attak3);
             IsAttack = true;
             Debug.Log("불렛 레인");
             _skiilCoolDown[(int) SkillCoolType.BulletRain].SetCoolDown();
@@ -142,6 +145,7 @@ public class Mage : Player
     {
         if (_targets.Count != 0)
         {
+            SoundManager.Instance.PlayerPlay(PlayerSoundType.Jump1);
             IsAttack = true;
             Debug.Log("체인 라이트닝");
             _skiilCoolDown[(int) SkillCoolType.ChainLightning].SetCoolDown();
@@ -204,6 +208,7 @@ public class Mage : Player
     {
         if (_targets.Count != 0)
         {
+            SoundManager.Instance.PlayerPlay(PlayerSoundType.Jump2);
             IsAttack = true;
             Debug.Log("바람범위공격");
             _skiilCoolDown[(int) SkillCoolType.WindAttack].SetCoolDown();
@@ -216,6 +221,7 @@ public class Mage : Player
     {
         if (_targets.Count != 0)
         {
+            SoundManager.Instance.PlayerPlay(PlayerSoundType.Jump3);
             IsAttack = true;
             Debug.Log("범위공격");
             _skiilCoolDown[(int) SkillCoolType.WideAreaBarrage].SetCoolDown();

@@ -492,6 +492,7 @@ public abstract class Player : Creature
     {
         if (_targets.Count != 0)
         {
+            SoundManager.Instance.PlayerPlay(PlayerSoundType.Attak1);
             IsAttack = true;
             transform.LookAt(new Vector3(_targets[0].position.x, transform.position.y, _targets[0].position.z));
             _animator.SetInteger(Global.NormalAttackInteger, _comboCount++ % Global.MaxComboAttack);
@@ -560,6 +561,7 @@ public abstract class Player : Creature
     protected override void Die()
     {
         base.Die();
+        SoundManager.Instance.PlayerPlay(PlayerSoundType.Die);
         _animator.SetTrigger(Global.DeadTrigger);
         _fade.FadeIn();
         _deadCanvas.SetActive(true);

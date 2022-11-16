@@ -13,7 +13,7 @@ public class BulletRainMissile : SkillAttack
     private float _speed;
     private float _endTime = 0;
     private float _curTime = 0;
-    
+
     /// <summary>
     /// 미사일의 초기값 설정
     /// </summary>

@@ -19,6 +19,7 @@ public class CinemachineInputFeeder : MonoBehaviour
     private void Start()
     {
         CinemachineCore.GetInputAxis = GetInputAxis;
+        SoundManager.Instance.BgmPlay(2);
     }
     
     private float GetInputAxis(string axisName)
