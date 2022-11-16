@@ -441,7 +441,7 @@ public abstract class Player : Creature
         if (_moveCo != null)
         {
             SetMoveAnim(0);
-            _nav.isStopped = false;
+            _nav.isStopped = true;
             _nav.enabled = false;
             StopCoroutine(_moveCo);
             _moveCo = null;
