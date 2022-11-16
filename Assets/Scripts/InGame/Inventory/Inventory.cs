@@ -64,6 +64,8 @@ public class Inventory : MonoBehaviour
                             {
                                 CountableItem asCount = _items[i] as CountableItem;
                                 asCount.SetAmount(asCount.Amount - _enforce.EnforceNum[_activeSlotNum] * 2);
+                                if (asCount.IsEmpty)
+                                    Remove(i);
                                 UpdateSlot(i);
                             }
                         }
@@ -93,8 +95,9 @@ public class Inventory : MonoBehaviour
                             {
                                 CountableItem asCount = _items[i] as CountableItem;
                                 asCount.SetAmount(asCount.Amount - _enforce.EnforceNum[_activeSlotNum] * 2);
-                                if(asCount.Amount == 0)
-                                    
+                                if (asCount.IsEmpty)
+                                    Remove(i);
+
                                 UpdateSlot(i);
                             }
                         }
@@ -145,7 +148,7 @@ public class Inventory : MonoBehaviour
     private bool SetEnforceUI(int _id)
     {
         int NeedObj = _enforce.EnforceNum[_activeSlotNum] * 2;
-        if (GetItemSlot(102) != null)
+        if (GetItemSlot(_id) != null)
         {
             enforceUI.gameObject.SetActive(true);
             enforceUI.Item = GetItemSlot(_id);

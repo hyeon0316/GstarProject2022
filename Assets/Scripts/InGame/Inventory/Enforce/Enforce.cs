@@ -52,7 +52,7 @@ public class Enforce : MonoBehaviour
         if (_num == 20)
             return 5;
         int _ran;
-        _ran = Random.Range(0, 100);
+        _ran = Random.Range(0, 20);
         if (_num < 5 )
         {
             if (_ran < 70)

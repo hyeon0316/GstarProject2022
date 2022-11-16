@@ -290,6 +290,7 @@ public abstract class Enemy : Creature
 
     protected override void Die()
     {
+        Debug.Log(_enemyStatData.name);
         _hpbar.CloseHpBar();
         base.Die();
         CancelInvoke("SetRandomMove");

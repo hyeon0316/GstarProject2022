@@ -18,4 +18,4 @@ MonoBehaviour:
   HitPercent: 500
   ReduceDamage: 5
   MoveSpeed: 5
-  Attack: 600
+  Attack: 500
