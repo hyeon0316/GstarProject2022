@@ -71,19 +71,23 @@ public class Enforce : MonoBehaviour
         }
         else if(_num <15)
         {
-            if (_ran < 20)
+            if (_ran < 30)
                 return 1;
-            else
-                return 2;
-        }
-        else
-        {
-            if (_ran < 15)
-                return 1;
-            if (_ran < 80)
+            else if (_ran < 90)
                 return 2;
             else
                 return 3;
+        }
+        else
+        {
+            if (_ran < 20)
+                return 1;
+            if (_ran < 85)
+                return 2;
+            if (_ran < 99)
+                return 3;
+            else
+                return 4;
         }
     }
     

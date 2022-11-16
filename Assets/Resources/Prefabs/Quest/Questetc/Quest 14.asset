@@ -19,7 +19,7 @@ MonoBehaviour:
   Content: "\uD018\uC2A4\uD2B8 \uBCF4\uC2A4 \uCC98\uCE58\uD558\uAE30"
   Target: "\uD018\uC2A4\uD2B8 \uBCF4\uC2A4"
   collectObjectives:
-    EnemyID: 11000000
+    EnemyID: 0f000000
     amount: 1
     NpcId: 0
   rewards:

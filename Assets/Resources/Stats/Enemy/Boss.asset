@@ -15,7 +15,7 @@ MonoBehaviour:
   MaxHp: 50000
   Defense: 600
   Dodge: 600
-  HitPercent: 600
-  ReduceDamage: 150
+  HitPercent: 1000
+  ReduceDamage: 30
   MoveSpeed: 5
-  Attack: 2000
+  Attack: 1221
