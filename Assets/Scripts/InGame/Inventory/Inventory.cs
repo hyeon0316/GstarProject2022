@@ -38,6 +38,8 @@ public class Inventory : MonoBehaviour
     public EnforceUI enforceUI;
     public GameObject Inven;
     private int portionIndex;
+    [SerializeField]
+    private GameObject per;
 
 
     private void Start()
@@ -46,7 +48,14 @@ public class Inventory : MonoBehaviour
         DataManager.Instance.Gold = 10000;
         DataManager.Instance.SetGold(0);
     }
-
+    public void BtnPerExit()
+    {
+        per.SetActive(false);
+    }
+    public void BtnPerOpen()
+    {
+        per.SetActive(true);
+    }
     public void ButtonEnforce()
     {
         if (enforceUI.gameObject.activeSelf)
