@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -9,6 +10,8 @@ public class WindAttack : SkillAttack
 
    [Header("데미지가 적용되기 까지 시간")] 
    [SerializeField] private float _dealTime;
+
+
 
    /// <summary>
    /// 적들이 장판안에 들어올때 각 적마다의 정보와 데미지 발생을 위함과 장판에 나갔을때 데미지 발생을 중단하기 위한 데이터 저장 변수

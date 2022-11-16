@@ -7,6 +7,8 @@ using Random = UnityEngine.Random;
 
 public class ChainLightningLine : SkillAttack
 {
+    private AudioSource _audioSource;
+    
     [SerializeField] private float _drawingSpeed;
     
     private LineRenderer _lineRenderer;
@@ -41,6 +43,7 @@ public class ChainLightningLine : SkillAttack
     private void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -102,6 +105,7 @@ public class ChainLightningLine : SkillAttack
                     if (target.TryGetComponent(out Creature enemy))
                     {
                         enemy.TryGetDamage(DataManager.Instance.Player.Stat, this);
+                        SoundManager.Instance.EffectPlay(_audioSource, EffectSoundType.ChainLightning);
                     }
                 }
 

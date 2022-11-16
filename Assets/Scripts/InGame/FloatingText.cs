@@ -99,7 +99,10 @@ public class FloatingText : MonoBehaviour
    {
       foreach (var text in _clearTexts)
       {
-         text.GetComponent<DamageText>().FadeOutText();
+         if (Time.timeScale != 0)
+         {
+            text.GetComponent<DamageText>().FadeOutText();
+         }
       }
       _clearTexts.Clear();
    }
