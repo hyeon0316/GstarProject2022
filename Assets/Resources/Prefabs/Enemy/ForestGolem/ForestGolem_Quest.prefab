@@ -592,7 +592,7 @@ MonoBehaviour:
   _dissolve: {fileID: 92350409642906580}
   _name: "\uC800\uC8FC\uBC1B \uACE8\uB818"
   gold: 5000
-  CurEnemyType: 14
+  CurEnemyType: 15
   _shortAttackArea: {fileID: 5776265260556135110}
   _attackCollider: {fileID: 1488851792876784474}
 --- !u!54 &2841475575142811872
