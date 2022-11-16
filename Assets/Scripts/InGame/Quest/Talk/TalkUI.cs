@@ -20,10 +20,7 @@ public class TalkUI : MonoBehaviour
         Name.text = _str[0];
         strInt = 1;
         isAnim = false;
-        Debug.Log(_str[1]);
         SetMsg(_str[1]);
-
-
     }
     public void OnsButton()
     {
@@ -50,7 +47,7 @@ public class TalkUI : MonoBehaviour
     {
         if (isAnim)
         {
-            CancelInvoke();//½ÇÇàÁßÀÌ´ø InvokeÇÔ¼ö Äµ½½
+            CancelInvoke();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ Invokeï¿½Ô¼ï¿½ Äµï¿½ï¿½
             EffectEnd();
         }
         else
@@ -59,14 +56,14 @@ public class TalkUI : MonoBehaviour
             EffectStart();
         }
     }
-    void EffectStart()//´ëÈ­Ã¢ÀÇ ÅØ½ºÆ®°¡ ÇÑ±ÛÀÚ¾¿ Ãâ·Â
+    void EffectStart()//ï¿½ï¿½È­Ã¢ï¿½ï¿½ ï¿½Ø½ï¿½Æ®ï¿½ï¿½ ï¿½Ñ±ï¿½ï¿½Ú¾ï¿½ ï¿½ï¿½ï¿½
     {
         isAnim = true;
         Talktext.text= "";
         index = 0;
         Invoke("Effecting", 0.05f);
     }
-    void Effecting()//ÅØ½ºÆ® Ãâ·Â ÁøÇà Áß
+    void Effecting()//ï¿½Ø½ï¿½Æ® ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
     {
         if (Talktext.text == targetMsg)
         {
@@ -75,9 +72,9 @@ public class TalkUI : MonoBehaviour
         }
         Talktext.text += targetMsg[index];
         index++;
-        Invoke("Effecting", 0.05f);//Àç±ÍÇÔ¼ö
+        Invoke("Effecting", 0.05f);//ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½
     }
-    void EffectEnd()//ÅØ½ºÆ® ¸ðµÎ Ãâ·Â
+    void EffectEnd()//ï¿½Ø½ï¿½Æ® ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     {
         Talktext.text = targetMsg;
         isAnim = false;

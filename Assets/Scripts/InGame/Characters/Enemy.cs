@@ -91,8 +91,6 @@ public abstract class Enemy : Creature
         _isWait = true;
        
         _hpbar.SetHpBar(Stat.MaxHp, _name);
-        if(CurEnemyType == PoolType.Spider || CurEnemyType == PoolType.FrightFly)
-            Debug.Log(Stat.Hp + "/" + Stat.MaxHp);
     }
 
     protected virtual void Start()
@@ -294,7 +292,6 @@ public abstract class Enemy : Creature
 
     protected override void Die()
     {
-        Debug.Log(_enemyStatData.name);
         _hpbar.CloseHpBar();
         base.Die();
         CancelInvoke("SetRandomMove");

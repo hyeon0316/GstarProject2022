@@ -470,15 +470,18 @@ public abstract class Player : Creature
         WaitForFixedUpdate delay = new WaitForFixedUpdate();
         while (true)
         {
-            if (goalRadius >= Vector3.Distance(transform.position, target.position)) //공격 사거리 안에 들어왔을때
+            if (!_nav.enabled)
+                break;
+            
+            if (Math.Pow(goalRadius, 2) >= (transform.position - target.position).sqrMagnitude) //공격 사거리 안에 들어왔을때
             {
                 useActionType();
                 SetMoveAnim(0);
-                _nav.isStopped = true;
                 _nav.enabled = false;
                 _moveCo = null;
                 break;
             }
+
             _nav.SetDestination(target.transform.position);
             yield return delay;
         }
@@ -623,19 +626,5 @@ public abstract class Player : Creature
     }
 
 
-    /*private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Spawn"))
-        {
-            Debug.Log("들어감");
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Spawn"))
-        {
-            Debug.Log("나감");
-        }
-    }*/
+  
 }
