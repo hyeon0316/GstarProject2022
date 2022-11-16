@@ -53,7 +53,6 @@ public class MapManager : Singleton<MapManager>
         for (int i = 0; i < enemySpawns.Length; i++)
         {
             enemySpawns[i].InActiveSpawnArea();
-            
         }
        
         SoundManager.Instance.BgmPlay(2);
