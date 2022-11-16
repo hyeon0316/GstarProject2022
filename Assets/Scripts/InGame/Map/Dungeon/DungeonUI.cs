@@ -23,29 +23,29 @@ public class DungeonUI : MonoBehaviour
 
     public void BtnEasy()
     {
-        SpawnC();
         dunIndex = 0;
-        Invoke("SetSpwan", 2f);
+        SpawnC();
+       
+        
 
     }
     public void BtnNormal()
     {
-        SpawnC();
         dunIndex = 1;
-        Invoke("SetSpwan", 2f);
+        SpawnC();
+        
+        
     }
     public void BtnHard()
     {
-        SpawnC();
         dunIndex = 2;
-        Invoke("SetSpwan", 2f);
-    }
-    public void SetSpwan()
-    {
-        spawnArea.Difficulty = dunIndex;
+        SpawnC();
+        
+        
     }
     public void SpawnC()
     {
+        spawnArea.Difficulty = dunIndex;
         SoundManager.Instance.BgmPlay(1);
         DataManager.Instance.Player.UseTeleport(_tr);
         MapObj.SetActive(false);

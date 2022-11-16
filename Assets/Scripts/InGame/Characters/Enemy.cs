@@ -62,6 +62,7 @@ public abstract class Enemy : Creature
     {
         _enemyStatData = enemyStatData;
         Stat.SetEnemyStat(_enemyStatData);
+        Stat.Hp = Stat.MaxHp;
     }
     protected virtual void OnEnable()
     {
@@ -79,6 +80,7 @@ public abstract class Enemy : Creature
 
     protected override void Init()
     {
+        Stat.SetEnemyStat(_enemyStatData);
         base.Init();
         
         this.gameObject.layer = LayerMask.NameToLayer("Enemy"); 
@@ -87,8 +89,10 @@ public abstract class Enemy : Creature
         _isGoBack = false;
         _isOutArea = false;
         _isWait = true;
-        
+       
         _hpbar.SetHpBar(Stat.MaxHp, _name);
+        if(CurEnemyType == PoolType.Spider || CurEnemyType == PoolType.FrightFly)
+            Debug.Log(Stat.Hp + "/" + Stat.MaxHp);
     }
 
     protected virtual void Start()

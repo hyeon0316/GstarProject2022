@@ -967,7 +967,7 @@ MonoBehaviour:
   _backDistance: 4
   _dissolve: {fileID: 1688248241}
   _name: "\uB3D9\uAD74\uAC70\uBBF8"
-  gold: 1000
+  gold: 1500
   CurEnemyType: 10
   _shortAttackArea: {fileID: 7273118537779664714}
   _attackCollider: {fileID: 366163801}
