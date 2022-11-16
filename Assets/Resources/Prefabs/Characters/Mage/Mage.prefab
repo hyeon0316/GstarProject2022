@@ -15323,15 +15323,27 @@ MonoBehaviour:
   bgmAudio: {fileID: 8732620226751396377}
   playerAudio: {fileID: 7054547381126968628}
   effectSounds:
-  - Enum: 2
+  - Enum: 0
     clip: {fileID: 8300000, guid: d0d725699e77fdd4899dd30101c4adf6, type: 3}
-  - Enum: 3
+  - Enum: 1
     clip: {fileID: 8300000, guid: b4c489661c89a9e458a8761cd9802231, type: 3}
-  - Enum: 4
+  - Enum: 2
     clip: {fileID: 8300000, guid: cb255b99a89a80f4097a36e862ebb33b, type: 3}
-  - Enum: 5
+  - Enum: 3
     clip: {fileID: 8300000, guid: 8e2b182f154017a4c86554d89ec50ea6, type: 3}
+  - Enum: 5
+    clip: {fileID: 8300000, guid: b037e56a2b2a07b44b25c15cb3f51faf, type: 3}
   - Enum: 6
+    clip: {fileID: 8300000, guid: c7ddbbbbd17402840ab2c4022ecc6e85, type: 3}
+  - Enum: 7
+    clip: {fileID: 8300000, guid: 83652173f6f7427478ce3d208bb2e3e4, type: 3}
+  - Enum: 8
+    clip: {fileID: 8300000, guid: 5b75e7b23ab8e14408c4a39ff46664a1, type: 3}
+  - Enum: 9
+    clip: {fileID: 8300000, guid: 19543bb9833d32646ae80f11f0e05ae1, type: 3}
+  - Enum: 10
+    clip: {fileID: 8300000, guid: 92e9f48902ee6a2438770a6b959c4d20, type: 3}
+  - Enum: 4
     clip: {fileID: 8300000, guid: 17999ef34708727428cdf85d26815748, type: 3}
   playerSounds:
   - Enum: 0
@@ -15348,6 +15360,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 8263b54ae943fdf479f8de44480c8d7b, type: 3}
   - Enum: 6
     clip: {fileID: 8300000, guid: 468ed777983b657489b7e544a5844e2f, type: 3}
+  - Enum: 7
+    clip: {fileID: 8300000, guid: 4a6cf205b91fbf645b0717d830f6a533, type: 3}
   bgmClips:
   - {fileID: 8300000, guid: 7bd219d81c0bc2f419c31092fa26b8f4, type: 3}
   - {fileID: 8300000, guid: f65020941dfb1a740b6107bd410b7604, type: 3}

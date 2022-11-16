@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14d080154dfa28942a95ad4ebadd9478, type: 3}
   m_Name: FrightFly 2
   m_EditorClassIdentifier: 
-  MaxHp: 1000
+  MaxHp: 550
   Defense: 200
   Dodge: 5
   HitPercent: 300

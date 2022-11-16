@@ -4,13 +4,19 @@ using UnityEngine;
 
 public enum EffectSoundType
 {
-    hi,
-    h,
     equip,
     money,
     questfin,
     queststart,
-    enforce
+    enforce,
+    BulletRain,
+    BulletRainHit,
+    ChainLightning,
+    SpikeAttack,
+    WideArea,
+    WideAreaHit,
+    WindAttack,
+    
 }
 
 public enum PlayerSoundType
@@ -21,7 +27,8 @@ public enum PlayerSoundType
     Jump1,
     Jump2,
     Jump3,
-    Die
+    Die,
+    NormalAttack
 }
 [System.Serializable]
 public class EffectSound

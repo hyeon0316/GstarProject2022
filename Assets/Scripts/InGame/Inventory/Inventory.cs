@@ -93,6 +93,8 @@ public class Inventory : MonoBehaviour
                             {
                                 CountableItem asCount = _items[i] as CountableItem;
                                 asCount.SetAmount(asCount.Amount - _enforce.EnforceNum[_activeSlotNum] * 2);
+                                if(asCount.Amount == 0)
+                                    
                                 UpdateSlot(i);
                             }
                         }
@@ -154,7 +156,7 @@ public class Inventory : MonoBehaviour
             enforceUI.gameObject.SetActive(true);
             enforceUI.SetSlot();
         }
-        return GetItemAmout(_id) > NeedObj;
+        return GetItemAmout(_id) >= NeedObj;
     }
     public Item GetItemSlot(int _id)
     {
