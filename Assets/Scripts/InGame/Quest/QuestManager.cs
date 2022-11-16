@@ -25,7 +25,7 @@ public class QuestManager : Singleton<QuestManager>
     }
     void Start()
     {
-        _mainId = 13;
+        _mainId = 0;
         Init();
         for(int i=0;i< quests.Length;i++)
         {
@@ -35,7 +35,7 @@ public class QuestManager : Singleton<QuestManager>
     private void Init()
     {
         questUI.SetQuest(quests);
-        questInGameUI.UpdateUI(quests[13]);
+        questInGameUI.UpdateUI(quests[0]);
     }
     public void InGameQuestUI()
     {
