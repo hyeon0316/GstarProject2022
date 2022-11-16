@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+    using UnityEngine.UI;
 
 public enum EffectSoundType
 {
@@ -61,6 +62,26 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] private EffectSound[] effectSounds;
     [SerializeField] private PlayerSound[] playerSounds;
     [SerializeField] private AudioClip[] bgmClips;
+
+
+    public void SetBGMSetting(float sliderVal)
+    {
+        bgmAudio.volume = sliderVal;
+        Debug.Log(sliderVal);
+    }
+    public void SetPlayerSetting(float sliderVal)
+    {
+        playerAudio.volume = sliderVal;
+        Debug.Log(sliderVal);
+    }
+    public void SetEffectSetting(float sliderVal)
+    {
+        for (int i = 0; i < effectAudios.Length; i++)
+        {
+            effectAudios[i].volume = sliderVal;
+        }
+        Debug.Log(sliderVal);
+    }
     /// <summary>
     /// 3D EffectSound 재생 (자신이 AudioSOurce를 가지고 있을 경우)
     /// </summary>

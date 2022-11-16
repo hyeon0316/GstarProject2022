@@ -17,6 +17,8 @@ public class UIManager : Singleton<UIManager>
 
     [SerializeField] private GameObject _inventoryRedDot;
 
+    [SerializeField] private GameObject _SoundSettingWindow;
+
     public void SetInvenRedDot(bool _b)
     {
         _inventoryRedDot.SetActive(_b);
@@ -28,6 +30,10 @@ public class UIManager : Singleton<UIManager>
         if(isActive)
             SetInvenRedDot(false);
         _inventoryWindow.SetActive(isActive);
+    }
+    public void ActiveSetting(bool isActive)
+    {
+        _SoundSettingWindow.SetActive(isActive);
     }
 
     public void ActiveQuest(bool isActive)
@@ -69,5 +75,6 @@ public class UIManager : Singleton<UIManager>
         ActiveQuest(false);
         ActiveMap(false);
         ActiveTownTeleportWindow(false);
+        ActiveSetting(false);
     }
 }
