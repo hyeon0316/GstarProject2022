@@ -10,12 +10,21 @@ public class Boss : Enemy
     [SerializeField] private LongAttack _rockPos;
 
     [SerializeField] private HpbarController _bossHpBar;
+
+    private AudioSource _audioSource;
     
     /// <summary>
     /// 2번째 페이즈 진입시 공격 변경
     /// </summary>
     private int _nextPatternState;
-    
+
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _audioSource = GetComponent<AudioSource>();
+    }
+
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -32,10 +41,21 @@ public class Boss : Enemy
 
     protected override void Attack()
     {
+        SoundManager.Instance.EffectPlay(_audioSource, EffectSoundType.BossAttack);
         _isAttack = true;
         int attackState = 2 + _nextPatternState;
         int randomPattern = Random.Range(0, 1 + _nextPatternState);
-        _animator.SetInteger(Global.EnemyStateInteger, randomPattern == 0 ? attackState : 4);
+
+        if (randomPattern == 0)
+        {
+            _animator.SetInteger(Global.EnemyStateInteger, attackState);
+            SoundManager.Instance.EffectPlay(_audioSource, EffectSoundType.BossAttack);
+        }
+        else
+        {
+            _animator.SetInteger(Global.EnemyStateInteger, 4);
+            SoundManager.Instance.EffectPlay(_audioSource, EffectSoundType.BossThrowing);
+        }
     }
 
     public override void TryGetDamage(Stat stat, Attack attack)
@@ -53,6 +73,7 @@ public class Boss : Enemy
     {
         base.Die();
         _bossHpBar.CloseHpBar();
+        SoundManager.Instance.EffectPlay(_audioSource, EffectSoundType.BossDie);
     }
     public void CreateRock()
     {
@@ -61,6 +82,7 @@ public class Boss : Enemy
     
     private void EntryNextPattern()
     {
+        SoundManager.Instance.EffectPlay(_audioSource, EffectSoundType.BossRoar);
         _nextPatternState++;
         _animator.SetTrigger(Global.EnemyNextPattern);
         _attackCollider.enabled = false;

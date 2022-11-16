@@ -15349,6 +15349,14 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 4a6cf205b91fbf645b0717d830f6a533, type: 3}
   - Enum: 11
     clip: {fileID: 8300000, guid: bdb48a308ec7852438df97aa5675ae83, type: 3}
+  - Enum: 13
+    clip: {fileID: 8300000, guid: bcc9cd7f7d5a1114c8fa921f64bc3e30, type: 3}
+  - Enum: 14
+    clip: {fileID: 8300000, guid: 5e20770cb50b0a34ba7df96be447b4c5, type: 3}
+  - Enum: 15
+    clip: {fileID: 8300000, guid: b2223454a94529543993f125928934eb, type: 3}
+  - Enum: 16
+    clip: {fileID: 8300000, guid: 5796b86d9701b9f4aaee55eb49df5bfb, type: 3}
   playerSounds:
   - Enum: 0
     clip: {fileID: 8300000, guid: 3eedf733065c42f448aea1487b769bda, type: 3}

@@ -16,7 +16,11 @@ public enum EffectSoundType
     WideArea,
     WideAreaHit,
     WindAttack,
-    NormalAttack
+    NormalAttack,
+    BossAttack,
+    BossThrowing,
+    BossRoar,
+    BossDie
 }
 
 public enum PlayerSoundType
