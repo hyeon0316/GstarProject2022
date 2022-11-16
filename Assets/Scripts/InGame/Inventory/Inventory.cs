@@ -214,7 +214,7 @@ public class Inventory : MonoBehaviour
     public int Add(ItemData itemData, int amount = 1)
     {
         int index;
-
+        UIManager.Instance.SetInvenRedDot(true);
         // 1. 수량이 있는 아이템
         if (itemData is CountableItemData ciData)
         {

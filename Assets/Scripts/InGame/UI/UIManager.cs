@@ -15,8 +15,16 @@ public class UIManager : Singleton<UIManager>
 
     [SerializeField] private GameObject _townTeleportWindow;
 
+    [SerializeField] private GameObject _inventoryRedDot;
+
+    public void SetInvenRedDot(bool _b)
+    {
+        _inventoryRedDot.SetActive(_b);
+    }
+
     public void ActiveInven(bool isActive)
     {
+        SetInvenRedDot(false);
         _inventoryWindow.SetActive(isActive);
     }
 
