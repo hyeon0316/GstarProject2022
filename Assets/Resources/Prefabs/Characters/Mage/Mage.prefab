@@ -4479,7 +4479,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &5894468044405472696
 MonoBehaviour:
@@ -20692,6 +20692,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2454793691435541002, guid: 6336ad2f943e9e8439f079547597c3eb,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4147299921516840029, guid: 6336ad2f943e9e8439f079547597c3eb,
         type: 3}
       propertyPath: usePortion
@@ -20854,6 +20859,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6942092661029588673, guid: 01fa5d1bf87297940bb783a154e292f3,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6942092661029588732, guid: 01fa5d1bf87297940bb783a154e292f3,
         type: 3}
       propertyPath: m_Name
@@ -20930,6 +20940,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 833554127810365579}
     m_Modifications:
+    - target: {fileID: 7475118086088207913, guid: 62f39da0d1e90dd4e9bfdbf8c62b70fb,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7475118086603679008, guid: 62f39da0d1e90dd4e9bfdbf8c62b70fb,
         type: 3}
       propertyPath: UI

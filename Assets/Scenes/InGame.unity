@@ -74520,6 +74520,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dun
       objectReference: {fileID: 0}
+    - target: {fileID: 7041029560470643204, guid: f985ef3e1a07ce74ca8c180567a55744,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7041029560470643205, guid: f985ef3e1a07ce74ca8c180567a55744,
         type: 3}
       propertyPath: m_Pivot.x
@@ -79834,6 +79839,11 @@ PrefabInstance:
       propertyPath: q2_2.Array.data[1]
       value: 
       objectReference: {fileID: 2136111554}
+    - target: {fileID: 7478787436400983392, guid: 706743f4552fda54d825e6244a0057a6,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7478787436400983393, guid: 706743f4552fda54d825e6244a0057a6,
         type: 3}
       propertyPath: m_Pivot.x
