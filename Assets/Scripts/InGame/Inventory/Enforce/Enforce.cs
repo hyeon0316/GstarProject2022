@@ -52,7 +52,7 @@ public class Enforce : MonoBehaviour
         if (_num == 20)
             return 5;
         int _ran;
-        _ran = Random.Range(0, 20);
+        _ran = Random.Range(0, 100);
         if (_num < 5 )
         {
             if (_ran < 70)
@@ -64,32 +64,26 @@ public class Enforce : MonoBehaviour
         {
             if (_ran < 50)
                 return 1;
-            else if (_ran < 80)
+            else
             {
                 return 2;
             }
-            else
-                return 3;
         }
         else if(_num <15)
         {
-            if (_ran < 30)
+            if (_ran < 20)
+                return 1;
+            else
+                return 2;
+        }
+        else
+        {
+            if (_ran < 15)
                 return 1;
             if (_ran < 80)
                 return 2;
             else
                 return 3;
-        }
-        else
-        {
-            if (_ran < 20)
-                return 1;
-            if (_ran < 70)
-                return 2;
-            if (_ran < 90)
-                return 3;
-            else
-                return 4;
         }
     }
     
@@ -156,10 +150,10 @@ public class Enforce : MonoBehaviour
         if (CheckZero(_stat.MaxMp))
             _stat.MaxMp += _num * MP* _enforce;
 
-        /* 포션 개수
-        if (CheckZero(_stat.Max))
+        
+        if (CheckZero(_stat.MaxPostion))
             _stat.HitPercent += _num * POSTION;
-        */
+        
 
         if (CheckZero(_stat.RecoveryHp))
             _stat.RecoveryHp += _num * REHP;

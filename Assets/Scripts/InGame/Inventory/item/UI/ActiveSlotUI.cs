@@ -214,7 +214,7 @@ public class ActiveSlotUI : MonoBehaviour
         while (percent < 1)
         {
             currentTime += Time.deltaTime;
-            percent = currentTime / 1.5f;
+            percent = currentTime / 1f;
 
             Color color = EnforceStat.color;
             color.a = Mathf.Lerp(0f, 1f, percent);
@@ -233,6 +233,6 @@ public class ActiveSlotUI : MonoBehaviour
     {
         if(!PlayFade)
         { }
-           // StartCoroutine("Fade");
+           StartCoroutine("Fade");
     }
 }
