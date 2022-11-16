@@ -15,7 +15,7 @@ public class DamageText : MonoBehaviour
     [SerializeField] private float _alphaSpeed;
     [SerializeField] private float _disableTime;
 
-    private Transform _cameraArm;
+    private Camera _camera;
 
     private Transform _startPos;
 
@@ -26,7 +26,7 @@ public class DamageText : MonoBehaviour
 
     private void Start()
     {
-        _cameraArm = FindObjectOfType<Camera>().transform;
+        _camera = Camera.main;
     }
 
     private void Update()
@@ -37,7 +37,7 @@ public class DamageText : MonoBehaviour
 
     private void UpdateTransform()
     {
-        transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, _cameraArm.rotation.eulerAngles.y, transform.rotation.z));
+        transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, _camera.transform.rotation.eulerAngles.y, transform.rotation.z));
         transform.position = new Vector3(_startPos.position.x, transform.position.y, _startPos.position.z);
     }
 
