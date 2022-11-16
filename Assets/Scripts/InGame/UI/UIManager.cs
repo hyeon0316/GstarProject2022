@@ -24,7 +24,9 @@ public class UIManager : Singleton<UIManager>
 
     public void ActiveInven(bool isActive)
     {
-        SetInvenRedDot(false);
+
+        if(isActive)
+            SetInvenRedDot(false);
         _inventoryWindow.SetActive(isActive);
     }
 

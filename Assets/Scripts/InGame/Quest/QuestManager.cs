@@ -72,6 +72,7 @@ public class QuestManager : Singleton<QuestManager>
                 questInGameUI.UpdateUI(quests[_mainId]);
                 TalkUI.gameObject.SetActive(true);
                 TalkUI.SetText(TalkData.GetStr(_id));
+                UIManager.Instance.CloseAll();
                 UI.gameObject.SetActive(false);
             }
         }
