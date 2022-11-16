@@ -32,7 +32,8 @@ public enum PlayerSoundType
     Jump2,
     Jump3,
     Die,
-    NormalAttack
+    NormalAttack,
+    Drink
 }
 [System.Serializable]
 public class EffectSound

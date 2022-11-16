@@ -351,7 +351,7 @@ public class Inventory : MonoBehaviour
         {
             // 아이템 사용
             bool succeeded = uItem.Use();
-
+            SoundManager.Instance.PlayerPlay(PlayerSoundType.Drink);
             if (succeeded)
             {
                 if (_items[index] is CountableItem ciData)
