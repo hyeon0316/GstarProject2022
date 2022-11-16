@@ -1592,7 +1592,11 @@ MonoBehaviour:
   q2_2:
   - {fileID: 0}
   - {fileID: 0}
-  _targetBoxs: []
+  _targetBoxs:
+  - {fileID: 2622501601312176760}
+  - {fileID: 3472702395231408850}
+  - {fileID: 7621977018910728024}
+  - {fileID: 4898046478923054885}
 --- !u!114 &764748133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1808,7 +1812,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1110.1, y: 485.49}
+  m_AnchoredPosition: {x: -1080.1, y: 463.1}
   m_SizeDelta: {x: 119.8291, y: 109.021}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8386294440382629120
@@ -3328,7 +3332,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 7478787437101432328}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0
+  m_Size: 0.6759041
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3367,7 +3371,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0.6759041}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
