@@ -280,10 +280,13 @@ public abstract class Enemy : Creature
         base.TryGetDamage(stat, attack);
         if (!_isFollow && !_isGoBack) //피격 당했을 때, 되돌아 가는 중이 아닐 때 추적 시작
         {
-            _nav.enabled = true;
-            _nav.isStopped = true;
-            CancelInvoke("SetRandomMove");
-            _isFollow = true;
+            if ((transform.position - _targets[0].position).sqrMagnitude < 64) //던전에서 플레이어가 나갔을때 던전 몹이 플레이어를 찾지 못하는 경우 방지
+            {
+                _nav.enabled = true;
+                _nav.isStopped = true;
+                CancelInvoke("SetRandomMove");
+                _isFollow = true;
+            }
         }
         
         _hpbar.UpdateHpBar(Stat.Hp);
