@@ -2,22 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TargetPanel : MonoBehaviour
 {
     [SerializeField] private GameObject _targetBoxPrefab;
-    private Camera _camera;
+    [SerializeField] private Camera _camera;
 
     private Transform _target;
 
     private GameObject _targetBox;
 
     private IEnumerator _setTargetCo;
-    
-    private void Awake()
-    {
-        _camera = Camera.main;
-    }
 
     private void Start()
     {
@@ -36,6 +32,7 @@ public class TargetPanel : MonoBehaviour
         
         _target = target;
         _targetBox.SetActive(true);
+        
         _setTargetCo = UpdateTargetCo();
         StartCoroutine(_setTargetCo);
     }
@@ -47,15 +44,14 @@ public class TargetPanel : MonoBehaviour
         Enemy target = _target.GetComponent<Enemy>();
         while (true)
         {
-            if (target.IsDead || (target.transform.position - DataManager.Instance.Player.transform.position).sqrMagnitude > distance) //적이 죽거나 일정이상 멀어졌을때
+            if (target.IsDead || (_target.transform.position - DataManager.Instance.Player.transform.position).sqrMagnitude > distance) //적이 죽거나 일정이상 멀어졌을때
             {   
                 _targetBox.SetActive(false);
                 break;
             }
 
             Vector3 screenPosition = GetScreenPosition(_camera, _target.transform.position);
-            screenPosition.z = 0;
-            _targetBox.transform.position = screenPosition + new Vector3(0,50,0);
+            _targetBox.transform.position = screenPosition + new Vector3(0, 50, 0);
             yield return delay;
         }
        

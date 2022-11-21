@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TMPro;
 
 public abstract class Player : Creature
 {
@@ -77,7 +78,7 @@ public abstract class Player : Creature
     /// 순간이동 좌표
     /// </summary>
     private Transform _movePos;
-    
+
     protected override void Awake()
     {
         base.Awake();
@@ -275,6 +276,8 @@ public abstract class Player : Creature
         }
     }
 
+    public TextMeshProUGUI DebugText;
+    
     /// <summary>
     /// 직접 선택하여 타겟지정
     /// </summary>
@@ -282,38 +285,19 @@ public abstract class Player : Creature
     {
         if (!_isAutoHunt)
         {
-            if (Input.GetMouseButtonDown(0)) //PC
+            
+            if (Input.GetMouseButtonDown(0)) 
             {
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                if (Physics.Raycast(ray.origin, ray.direction, out hit, 1000, LayerMask.GetMask("Enemy")))
+                if (Physics.Raycast(ray, out hit, 1000, LayerMask.GetMask("Enemy")))
                 {
-                    if (_searchRadius > Vector3.Distance(transform.position, hit.transform.position))
+                    if (Math.Pow(_searchRadius, 2) > (transform.position - hit.transform.position).sqrMagnitude)
                     {
                         _targets.Clear();
                         _targets.Add(hit.transform);
                         _targetPanel.SetTargetBox(_targets[0]);
-                        Debug.Log(hit.transform.gameObject.name);
-                    }
-                }
-            }
-            else if (Input.touchCount > 0) //Mobile
-            {
-                if (Input.GetTouch(0).phase == TouchPhase.Began) 
-                {
-                    RaycastHit hit;
-                    Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-
-                    if (Physics.Raycast(ray.origin, ray.direction, out hit, 1000, LayerMask.GetMask("Enemy")))
-                    {
-                        if (_searchRadius > Vector3.Distance(transform.position, hit.transform.position))
-                        {
-                            _targets.Clear();
-                            _targets.Add(hit.transform);
-                            _targetPanel.SetTargetBox(_targets[0]);
-                            Debug.Log(hit.transform.gameObject.name);
-                        }
                     }
                 }
             }
