@@ -272,12 +272,10 @@ public abstract class Player : Creature
         }
         else if(!_isAutoHunt)
         {
-            return;
+            StopMoveCo();
         }
     }
 
-    public TextMeshProUGUI DebugText;
-    
     /// <summary>
     /// 직접 선택하여 타겟지정
     /// </summary>
@@ -285,7 +283,6 @@ public abstract class Player : Creature
     {
         if (!_isAutoHunt)
         {
-            
             if (Input.GetMouseButtonDown(0)) 
             {
                 RaycastHit hit;
